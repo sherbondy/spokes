@@ -1,0 +1,31 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    line-height: 1.5;
+}
+
+html {
+    color: #000;
+}
+
+#map {
+    width: 100%;
+    height: auto;
+}
+
+#questions {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    list-style: none;
+    background: #fff;
+
+    li {
+        float: left;
+
+        a {
+            display: block;
+            padding: 8px 16px;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+!!! 5
+%html
+  %head
+    %link{rel:"stylesheet", type:"text/css", href:"/css/style.css"}
+    %title Spokes: Biking Across America, Summer 2013
+  %body
+    %header
+      %h1 Spokes
+      %ul#questions
+        - ["who", "what", "when", "where", "why"].each do |question|
+          %li.question
+            %a{href: "##{question}"}= question
+
+    #who
+      %h2 Who
+      %p We are #{@team.count} undergraduates at MIT who are passionate about education:
+      %ul
+        - @team.each do |person|
+          %li
+            %h3= person[:name]
+
+    #what
+      %h2 What
+      %p We're biking across the United States.
+
+    #when
+      %h2 When
+      %p This summer, from <em>June 6</em> through <em>August 26</em>
+
+    #where
+      %h2 Where
+      %p Here's a map outlining our route:
+      %img#map{src:"/img/map.jpg"}
