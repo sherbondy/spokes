@@ -1,44 +1,38 @@
-!!! 5
-%html
-  %head
-    %link{rel:"stylesheet", type:"text/css", href:"/css/style.css"}
-    %title Spokes: Biking Across America, Summer 2013
-  %body
-    %header
-      %h1 Spokes
-      %ul#questions
-        - ["who", "what", "when", "where", "why", "how"].each do |question|
-          %li.question
-            %a{href: "##{question}"}= question
+%header
+  %h1 Spokes
+  %ul#questions
+    - ["who", "what", "when", "where", "why", "how"].each do |question|
+      %li.question
+        %a{href: "##{question}"}= question
 
-    #who
-      %h2 Who Are You?
-      %p We are #{@team.count} undergraduates at MIT who are passionate about education:
-      %ul
-        - @team.each do |person|
-          %li
-            %h3= person[:name]
+#who
+  %h2 Who Are You?
+  %p We are #{@team.count} undergraduates at MIT who are passionate about education:
+  %ul
+    - @team.each do |person|
+      %li
+        %h3= person[:name]
 
-    #what
-      %h2 What Are You Doing?
-      %p We're biking across the United States.
+#what
+  %h2 What Are You Doing?
+  %p We're biking across the United States.
 
-    #when
-      %h2 When?
-      %p This summer, from <time datetime="2013-06-09">June 9</time> through <time datetime="2013-08-30">August 30</time>
+#when
+  %h2 When?
+  %p This summer, from <time datetime="2013-06-09">June 9</time> through <time datetime="2013-08-30">August 30</time>
 
-    #where
-      %h2 Where Are You Going?
-      %p Here's a map outlining our route:
-      %img#map{src:"/img/map.jpg"}
-      %p Which means we'll get to explore these states: ...
+#where
+  %h2 Where Are You Going?
+  %p Here's a map outlining our route:
+  %img#map{src:"/img/map.jpg"}
+  %p Which means we'll get to explore these states: ...
 
-    #why
-      %h2 Why Are You Doing This?
-      %p We're crazy.
+#why
+  %h2 Why Are You Doing This?
+  %p We're crazy.
 
-    #how
-      %h2 How Can I Help?
-      %p We are looking for sponsors. And towns to visit.
-      %p You can help by spreading the word! And joining the conversation.
-      %p Follow our journey on the blog.
+#how
+  %h2 How Can I Help?
+  %p We are looking for sponsors. And towns to visit.
+  %p You can help by spreading the word! And joining the conversation.
+  %p Follow our journey on the blog.
