@@ -12,7 +12,8 @@
          :auto-reload? true}
 
   :profiles
-  {:dev {:dependencies [[ring-mock "0.1.3"]]}}
+  {:dev {:dependencies [[ring-mock "0.1.3"]
+                        [ring-serve "0.1.2"]]}}
 
   :hooks [leiningen.cljsbuild]
 

@@ -2,7 +2,8 @@
   (:use compojure.core)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
-            [spokes.views :refer [home show-cljs]]))
+            [ring.middleware.reload :as reload]
+            [spokes.views :refer [home]]))
 
 (def team
   [{:name "Daesun Yim"},
@@ -22,9 +23,21 @@
 
 (defroutes app-routes
   (GET "/" [] (home team))
-  (GET "/cljs/:file" [file] (show-cljs file))
   (route/resources "/")
   (route/not-found "Not Found"))
 
+;; get rid of wrap-reload in production
 (def app
-  (handler/site app-routes))
+  (-> (handler/site app-routes)
+      (reload/wrap-reload)))
+
+;; For interactive development, evaluate these:
+;; (use 'ring.adapter.jetty)
+;; (defonce server (run-jetty #'app {:port 8080 :join? false}))
+
+;; To stop the server, just do:
+;; (.stop server)
+;; (.start server)
+
+;; NOTE: ;; #'app is just sugar for (var app)
+

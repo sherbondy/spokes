@@ -6,7 +6,8 @@
 (defn layout [& body]
   (html5
    [:head
-    (include-css "css/style.css")
+    [:title "Spokes: Biking Across America,Summer 2013"]
+    (include-css "/css/style.css")
     (include-js "/js/main.js")]
    [:body
     body]))
@@ -28,7 +29,7 @@
         [:a {:href (str "#" question)} question]])]]
 
    (q "who" "are you"
-      [:p "We are " (count team) " undergraduates at MIT who are passionate"
+      [:p "We are " (count team) " undergraduates at MIT who are passionate "
        "about education:"]
 
       [:ul
@@ -65,8 +66,3 @@
        "And joining the conversation. "
        "Follow our journey on the blog."]
       )))
-
-
-(defn show-cljs [file]
-  (let [contents (slurp (str "src-cljs/spokes/" file))]
-    (layout contents)))
