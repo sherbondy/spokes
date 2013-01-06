@@ -6,11 +6,13 @@
 (defn layout [& body]
   (html5
    [:head
+    [:meta {:charset "utf-8"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
     (include-css "/css/style.css")
-    (include-js "/js/main.js")]
+    (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    (include-js "/js/main.js")
    [:body
-    body]))
+    body]]))
 
 (defn q [question title & body]
   [:div {:id question}
@@ -20,6 +22,8 @@
 
 (defn home [team]
   (layout
+   [:canvas#canvas]
+
    [:header
     [:h1 "Spokes"]
 
@@ -28,41 +32,42 @@
        [:li.question
         [:a {:href (str "#" question)} question]])]]
 
-   (q "who" "are you"
-      [:p "We are " (count team) " undergraduates at MIT who are passionate "
-       "about education:"]
+   [:div#content
+    (q "who" "are you"
+       [:p "We are " (count team) " undergraduates at MIT who are passionate "
+        "about education:"]
 
-      [:ul
-       (for [person team]
-         [:li [:h3 (:name person)]])])
+       [:ul
+        (for [person team]
+          [:li [:h3 (:name person)]])])
 
-   (q "what" "are you doing"
-      [:p "We're biking across the United States."])
+    (q "what" "are you doing"
+       [:p "We're biking across the United States."])
 
-   (q "when" nil
-      [:p "This summer, from " [:time {:datetime "2013-06-09"} "June 9"]
-       " through " [:time {:datetime "2013-08-30"} "August 30."]])
+    (q "when" nil
+       [:p "This summer, from " [:time {:datetime "2013-06-09"} "June 9"]
+        " through " [:time {:datetime "2013-08-30"} "August 30."]])
 
-   (q "where" "are you going"
-      [:p "Here's a map outlining our planned route:"]
-      ;; replace with the real, interactive map
-      [:img {:src "/img/map.jpg" :width "50%"}]
+    (q "where" "are you going"
+       [:p "Here's a map outlining our planned route:"]
+       ;; replace with the real, interactive map
+       [:img {:src "/img/map.jpg" :height "240px"}]
 
-      [:p "Which means we'll get to explore the following states:"]
-      [:ol
-       ;; these are made up
-       (for [[state eta] [["California" 0] ["Nevada" 5] ["Utah" 10]
-                          ["Colorado" 15] ["Kansas" 20] ["Missouri" 25]
-                          ["Ohio" 30] ["Kentucky" 35] ["Virginia" 40]]]
-         [:li state])])
+       [:p "Which means we'll get to explore the following states:"]
+       [:ol
+        ;; these are made up
+        (for [[state eta] [["California" 0] ["Nevada" 5] ["Utah" 10]
+                           ["Colorado" 15] ["Kansas" 20] ["Missouri" 25]
+                           ["Ohio" 30] ["Kentucky" 35] ["Virginia" 40]]]
+          [:li state])])
 
-   (q "why" "are you doing this"
-      [:p "We're crazy."])
+    (q "why" "are you doing this"
+       [:p "We're crazy."])
 
-   (q "how" "can I help"
-      [:p "We are looking for sponsors. "
-       "And suggestions for towns to visit along the way. "
-       "You can definitely help by spreading the word! "
-       "And joining the conversation. "
-       "Follow our journey on the blog."]
-      )))
+    (q "how" "can I help"
+       [:p "We are looking for sponsors. "
+        "And suggestions for towns to visit along the way. "
+        "You can definitely help by spreading the word! "
+        "And joining the conversation. "
+        "Follow our journey on the blog."]
+       )]))

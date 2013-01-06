@@ -5,27 +5,56 @@
 }
 
 html {
-    color: #000;
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 120px;
+    background-color: rgba(180,200,240,1.0);
+
+    #questions {
+        float: right;
+        list-style: none;
+        background: #fff;
+
+        li {
+            float: left;
+
+            a {
+                display: block;
+                padding: 8px 16px;
+            }
+        }
+    }
+}
+
+#canvas {
+    top: 0px;
+    left: 0px;
+    background-color: rgba(255,255,255,0);
+    position: absolute;
+}
+
+#content {
+    background-image: url('/img/grass-64.png');
+    width: 50%;
+    padding: 0 25%;
+    margin-top: 120px;
+
+    & > div {
+        background-color: rgba(255,255,255,0.5);
+        padding: 32px;
+
+        & > h2 {
+            background-color: rgb(255,255,255);
+        }
+    }
 }
 
 #map {
     width: 100%;
     height: auto;
-}
-
-#questions {
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    list-style: none;
-    background: #fff;
-
-    li {
-        float: left;
-
-        a {
-            display: block;
-            padding: 8px 16px;
-        }
-    }
 }

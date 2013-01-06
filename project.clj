@@ -4,8 +4,7 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [compojure "1.1.3"]
                  [hiccup "1.0.2"]
-                 ;[jayq "2.0.0"]
-                 ]
+                 [jayq "0.2.0"]]
   :plugins [[lein-ring "0.7.5"]
             [lein-cljsbuild "0.2.10"]]
   :ring {:handler spokes.handler/app
