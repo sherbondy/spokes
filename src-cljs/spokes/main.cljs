@@ -23,13 +23,20 @@
       (doseq [attr ["height" "width"]]
         (.attr $elem attr (.attr $doc attr))))))
 
-(defn tlbl [$elem]
+(defn bounding-box [$elem]
   (let [offset (.offset $elem)
         height (.height $elem)
-        top (.-top offset)
-        left (.-left offset)]
-    [[left top]
-     [left (+ top height)]]))
+        width  (.width $elem)
+        top    (.-top offset)
+        left   (.-left offset)
+        right  (+ left width)
+        bottom (+ top height)]
+    [[left top]     [right top]
+     [right bottom] [left bottom]]))
+
+(defn tlbl [$elem]
+  (let [[tl _ _ bl] (bounding-box $elem)]
+    [tl bl]))
 
 (defn x-shift [n [x y]]
   [(+ x n) y])
@@ -54,26 +61,29 @@
                          [prop (aget ctx (camel-name prop))])
                        props))))
 
+(defn get-road-points []
+ (let [q-pts      (mapcat #(tlbl ($ (str "#" % " h2")))
+                          ["who" "what" "when" "where" "why" "how"])
+       road-right (map (partial x-shift -32) q-pts)
+       road-left  (reverse (map (partial x-shift -112) road-right))]
+   (concat road-right road-left)))
+
 (jm/ready
  ;; comment this out in production
- (repl/connect "http://localhost:9000/repl")
+ ;; (repl/connect "http://localhost:9000/repl")
 
  (let [$canvas ($ "#canvas")
        fit-canvas-fn (fit-document $canvas)]
    (.resize ($ js/window) fit-canvas-fn)
-   (fit-canvas-fn))
+   (fit-canvas-fn)
 
- (let [q-pts      (mapcat #(tlbl ($ (str "#" % " h2")))
-                          ["who" "what" "when" "where" "why" "how"])
-       road-right (map (partial x-shift -32) q-pts)
-       road-left  (reverse (map (partial x-shift -112) road-right))
-       road-pts   (concat road-right road-left)]
-   (log road-pts)
+   (let [ctx      (.getContext (first $canvas) "2d")
+         road-pts (get-road-points)]
 
-   (let [ctx (.getContext (first ($ "#canvas")) "2d")]
+     (log road-pts)
+
      (cm/with-ctx-props ctx {:fill-style "rgb(20,20,20)"
                              :stroke-width 3}
-
        (cm/with-path ctx
          (doseq [[x y] road-pts]
            (.lineTo ctx x y)))
@@ -83,7 +93,6 @@
      (doseq [[x y] road-pts]
        (.beginPath ctx)
        (.arc ctx x y 5 0 (* Math.PI 2))
-       (.fill ctx))
-     ))
+       (.fill ctx))))
  
  (log "Testing..." "one, two, three"))
