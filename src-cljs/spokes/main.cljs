@@ -2,7 +2,8 @@
   (:require [clojure.string :as str]
             [clojure.browser.repl :as repl]
             [jayq.core :as jq :refer [$ css]])
-  (:require-macros [jayq.macros :as jm]))
+  (:require-macros [jayq.macros :as jm]
+                   [spokes.canvas-macros :as cm]))
 
 (defn log [& messages]
   (.log js/console (apply str messages)))
@@ -16,11 +17,11 @@
 ;; (once the application is already compiled).
 ;; Then, from Emacs: M-x nrepl, and specify port 9000.
 
-(defn resize-canvas []
-  (let [$canvas ($ "#canvas")
-        $doc ($ js/document)]
-    (doseq [attr ["height" "width"]]
-      (.attr $canvas attr (.attr $doc attr)))))
+(defn fit-document [$elem]
+  (fn []
+    (let [$doc ($ js/document)]
+      (doseq [attr ["height" "width"]]
+        (.attr $elem attr (.attr $doc attr))))))
 
 (defn tlbl [$elem]
   (let [offset (.offset $elem)
@@ -33,12 +34,34 @@
 (defn x-shift [n [x y]]
   [(+ x n) y])
 
-(jm/ready 
+(defn camel-name 
+  "Convert :fill-style to \"fillStyle\""
+  [kw]
+  (let [nom (name kw)
+        split-nom (str/split nom #"\-")]
+    (apply str (cons (first split-nom) 
+                     (map str/capitalize (rest split-nom))))))
+
+(defn set-ctx-props! [ctx prop-map]
+  (doseq [[attr value] prop-map]
+    (aset ctx (camel-name attr) value)))
+
+(defn get-ctx-props [ctx props]
+  (cond
+   (map? props)     (get-ctx-props ctx (keys props))
+   (keyword? props) (get-ctx-props ctx [props])
+   :else (into {} (map (fn [prop] 
+                         [prop (aget ctx (camel-name prop))])
+                       props))))
+
+(jm/ready
  ;; comment this out in production
  (repl/connect "http://localhost:9000/repl")
 
- (.resize ($ js/window) resize-canvas)
- (resize-canvas)
+ (let [$canvas ($ "#canvas")
+       fit-canvas-fn (fit-document $canvas)]
+   (.resize ($ js/window) fit-canvas-fn)
+   (fit-canvas-fn))
 
  (let [q-pts      (mapcat #(tlbl ($ (str "#" % " h2")))
                           ["who" "what" "when" "where" "why" "how"])
@@ -48,14 +71,13 @@
    (log road-pts)
 
    (let [ctx (.getContext (first ($ "#canvas")) "2d")]
-     (set! (.-fillStyle ctx) "rgb(20,20,20)")
-     (set! (.-strokeWidth ctx) 4)
+     (cm/with-ctx-props ctx {:fill-style "rgb(20,20,20)"
+                             :stroke-width 3}
 
-     (.beginPath ctx)
-     (doseq [[x y] road-pts]
-       (.lineTo ctx x y))
-     (.closePath ctx)
-     (.fill ctx)
+       (cm/with-path ctx
+         (doseq [[x y] road-pts]
+           (.lineTo ctx x y)))
+       (.fill ctx))
 
      (set! (.-fillStyle ctx) "rgb(255,0,0)")
      (doseq [[x y] road-pts]
