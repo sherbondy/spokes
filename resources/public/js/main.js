@@ -31066,21 +31066,21 @@ spokes.main.log = function() {
   return log
 }();
 spokes.main.fit_document = function fit_document($elem) {
-  return function() {
-    var $doc = jayq.core.$.call(null, document);
-    var G__2928 = cljs.core.seq.call(null, cljs.core.PersistentVector.fromArray(["height", "width"], true));
-    while(true) {
-      if(G__2928) {
-        var attr = cljs.core.first.call(null, G__2928);
-        $elem.attr(attr, $doc.attr(attr));
-        var G__2929 = cljs.core.next.call(null, G__2928);
-        G__2928 = G__2929;
-        continue
-      }else {
-        return null
-      }
-      break
+  spokes.main.log.call(null, "resizing canvas");
+  var $doc = jayq.core.$.call(null, document);
+  var G__2928 = cljs.core.seq.call(null, cljs.core.PersistentVector.fromArray(["height", "width"], true));
+  while(true) {
+    if(G__2928) {
+      var attr = cljs.core.first.call(null, G__2928);
+      $elem.attr(attr, 0);
+      $elem.attr(attr, $doc.attr(attr));
+      var G__2929 = cljs.core.next.call(null, G__2928);
+      G__2928 = G__2929;
+      continue
+    }else {
+      return null
     }
+    break
   }
 };
 spokes.main.bounding_box = function bounding_box($elem) {
@@ -31146,59 +31146,16 @@ spokes.main.get_ctx_props = function get_ctx_props(ctx, props) {
     }
   }
 };
-spokes.main.get_road_points = function get_road_points() {
-  var q_pts = cljs.core.mapcat.call(null, function(p1__2940_SHARP_) {
-    return spokes.main.tlbl.call(null, jayq.core.$.call(null, [cljs.core.str("#"), cljs.core.str(p1__2940_SHARP_), cljs.core.str(" h2")].join("")))
-  }, cljs.core.PersistentVector.fromArray(["who", "what", "when", "where", "why", "how"], true));
-  var road_right = cljs.core.map.call(null, cljs.core.partial.call(null, spokes.main.x_shift, -32), q_pts);
-  var road_left = cljs.core.reverse.call(null, cljs.core.map.call(null, cljs.core.partial.call(null, spokes.main.x_shift, -112), road_right));
-  return cljs.core.concat.call(null, road_right, road_left)
+spokes.main.draw_scene = function draw_scene($canvas) {
+  return null
 };
 jayq.core.document_ready.call(null, function() {
-  var $canvas_2945 = jayq.core.$.call(null, "#canvas");
-  var fit_canvas_fn_2946 = spokes.main.fit_document.call(null, $canvas_2945);
-  jayq.core.$.call(null, window).resize(fit_canvas_fn_2946);
-  fit_canvas_fn_2946.call(null);
-  var ctx_2947 = cljs.core.first.call(null, $canvas_2945).getContext("2d");
-  var road_pts_2948 = spokes.main.get_road_points.call(null);
-  spokes.main.log.call(null, road_pts_2948);
-  var starting_props__2904__auto___2949 = spokes.main.get_ctx_props.call(null, ctx_2947, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style", "\ufdd0'stroke-width"], {"\ufdd0'fill-style":"rgb(20,20,20)", "\ufdd0'stroke-width":3}));
-  spokes.main.set_ctx_props_BANG_.call(null, ctx_2947, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style", "\ufdd0'stroke-width"], {"\ufdd0'fill-style":"rgb(20,20,20)", "\ufdd0'stroke-width":3}));
-  var ctx__2898__auto___2950 = ctx_2947;
-  ctx__2898__auto___2950.beginPath();
-  var G__2941_2951 = cljs.core.seq.call(null, road_pts_2948);
-  while(true) {
-    if(G__2941_2951) {
-      var vec__2942_2952 = cljs.core.first.call(null, G__2941_2951);
-      var x_2953 = cljs.core.nth.call(null, vec__2942_2952, 0, null);
-      var y_2954 = cljs.core.nth.call(null, vec__2942_2952, 1, null);
-      ctx_2947.lineTo(x_2953, y_2954);
-      var G__2955 = cljs.core.next.call(null, G__2941_2951);
-      G__2941_2951 = G__2955;
-      continue
-    }else {
-    }
-    break
-  }
-  ctx__2898__auto___2950.closePath();
-  ctx_2947.fill();
-  spokes.main.set_ctx_props_BANG_.call(null, ctx_2947, starting_props__2904__auto___2949);
-  ctx_2947.fillStyle = "rgb(255,0,0)";
-  var G__2943_2956 = cljs.core.seq.call(null, road_pts_2948);
-  while(true) {
-    if(G__2943_2956) {
-      var vec__2944_2957 = cljs.core.first.call(null, G__2943_2956);
-      var x_2958 = cljs.core.nth.call(null, vec__2944_2957, 0, null);
-      var y_2959 = cljs.core.nth.call(null, vec__2944_2957, 1, null);
-      ctx_2947.beginPath();
-      ctx_2947.arc(x_2958, y_2959, 5, 0, Math.PI * 2);
-      ctx_2947.fill();
-      var G__2960 = cljs.core.next.call(null, G__2943_2956);
-      G__2943_2956 = G__2960;
-      continue
-    }else {
-    }
-    break
-  }
+  var $canvas_2940 = jayq.core.$.call(null, "#canvas");
+  var fit_canvas_fn_2941 = function() {
+    spokes.main.fit_document.call(null, $canvas_2940);
+    return spokes.main.draw_scene.call(null, $canvas_2940)
+  };
+  jayq.core.$.call(null, window).resize(fit_canvas_fn_2941);
+  fit_canvas_fn_2941.call(null);
   return spokes.main.log.call(null, "Testing...", "one, two, three")
 });

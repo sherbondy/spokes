@@ -1,7 +1,27 @@
 (ns spokes.views
   (:require [clojure.string :as str]
             [hiccup.core :refer [html]]
-            [hiccup.page :refer [html5 include-css include-js]]))
+            [hiccup.page :refer [html5 include-css include-js]])
+  (:use [hiccup.def :only [defhtml]]))
+
+(defn font
+  ([name] (font name nil))
+  ([name weights] (font name weights []))
+  ([name weights styles]
+     (let [styled-weights 
+           (for [weight weights style (conj styles "")]
+             (str weight style))]
+       (str (str/replace name " " "+") 
+            (if weights
+              (str ":" (str/join "," styled-weights)))))))
+
+(defn fonts [& args]
+  (map #(apply font %) args))
+
+(defhtml font-link [& faces]
+  [:link {:rel "stylesheet" :type "text/css"
+          :href (str "http://fonts.googleapis.com/css?family="
+                     (str/join "|" (apply fonts faces)))}])
 
 (defn layout [& body]
   (html5
@@ -11,6 +31,8 @@
     (include-css "/css/style.css")
     (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
     (include-js "/js/main.js")
+    (font-link ["Lato" [400 700] ["italic"]]
+               ["Signika" [400 600 700]])
    [:body
     body]]))
 
@@ -30,7 +52,7 @@
     [:ul#questions
      (for [question ["who", "what", "when", "where", "why", "how"]]
        [:li.question
-        [:a {:href (str "#" question)} question]])]]
+        [:h4 [:a {:href (str "#" question)} question]]])]]
 
    [:div#content
     (q "who" "are you"
@@ -39,7 +61,7 @@
 
        [:ul
         (for [person team]
-          [:li [:h3 (:name person)]])])
+          [:li [:h5 (:name person)]])])
 
     (q "what" "are you doing"
        [:p "We're biking across the United States."])
@@ -51,7 +73,7 @@
     (q "where" "are you going"
        [:p "Here's a map outlining our planned route:"]
        ;; replace with the real, interactive map
-       [:img {:src "/img/map.jpg" :height "240px"}]
+       [:img.map {:src "/img/map.jpg"}]
 
        [:p "Which means we'll get to explore the following states:"]
        [:ol

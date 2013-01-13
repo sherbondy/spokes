@@ -18,10 +18,11 @@
 ;; Then, from Emacs: M-x nrepl, and specify port 9000.
 
 (defn fit-document [$elem]
-  (fn []
-    (let [$doc ($ js/document)]
-      (doseq [attr ["height" "width"]]
-        (.attr $elem attr (.attr $doc attr))))))
+  (log "resizing canvas")
+  (let [$doc ($ js/document)]
+    (doseq [attr ["height" "width"]]
+      (.attr $elem attr 0) ;; elem could impact document size
+      (.attr $elem attr (.attr $doc attr)))))
 
 (defn bounding-box [$elem]
   (let [offset (.offset $elem)
@@ -41,7 +42,7 @@
 (defn x-shift [n [x y]]
   [(+ x n) y])
 
-(defn camel-name 
+(defn camel-name
   "Convert :fill-style to \"fillStyle\""
   [kw]
   (let [nom (name kw)
@@ -61,38 +62,17 @@
                          [prop (aget ctx (camel-name prop))])
                        props))))
 
-(defn get-road-points []
- (let [q-pts      (mapcat #(tlbl ($ (str "#" % " h2")))
-                          ["who" "what" "when" "where" "why" "how"])
-       road-right (map (partial x-shift -32) q-pts)
-       road-left  (reverse (map (partial x-shift -112) road-right))]
-   (concat road-right road-left)))
+(defn draw-scene [$canvas]
+  )
 
 (jm/ready
  ;; comment this out in production
  ;; (repl/connect "http://localhost:9000/repl")
 
  (let [$canvas ($ "#canvas")
-       fit-canvas-fn (fit-document $canvas)]
+       fit-canvas-fn #(do (fit-document $canvas)
+                          (draw-scene $canvas))]
    (.resize ($ js/window) fit-canvas-fn)
-   (fit-canvas-fn)
-
-   (let [ctx      (.getContext (first $canvas) "2d")
-         road-pts (get-road-points)]
-
-     (log road-pts)
-
-     (cm/with-ctx-props ctx {:fill-style "rgb(20,20,20)"
-                             :stroke-width 3}
-       (cm/with-path ctx
-         (doseq [[x y] road-pts]
-           (.lineTo ctx x y)))
-       (.fill ctx))
-
-     (set! (.-fillStyle ctx) "rgb(255,0,0)")
-     (doseq [[x y] road-pts]
-       (.beginPath ctx)
-       (.arc ctx x y 5 0 (* Math.PI 2))
-       (.fill ctx))))
+   (fit-canvas-fn))
  
  (log "Testing..." "one, two, three"))

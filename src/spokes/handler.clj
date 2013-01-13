@@ -6,20 +6,19 @@
             [spokes.views :refer [home]]))
 
 (def team
-  [{:name "Daesun Yim"},
-   {:name "Jeff Prouty"},
-   {:name "Alisha Lussiez"},
-   {:name "Bruno Faviero"},
-   {:name "Phillip Daniel"},
-   {:name "Cathie Yun"},
-   {:name "Ethan Sherbondy"},
-   {:name "Turner Bohlen"},
-   {:name "Nathan Kit Kennedy"},
-   {:name "Claire O'Connell"},
-   {:name "Chase Lambert"},
-   {:name "Natasha Balwit"},
-   {:name "Sophie Geoghan"},
-   {:name "Manny Singh"}])
+  [{:name "Natasha Balwit"}
+   {:name "Turner Bohlen"}
+   {:name "Phillip Daniel"} 
+   {:name "Bruno Faviero"}
+   {:name "Sophie Geoghan"}
+   {:name "Nathan Kit Kennedy"}
+   {:name "Claire O'Connell"}
+   {:name "Jeff Prouty"}
+   {:name "Ethan Sherbondy"}
+   {:name "Manny Singh"}
+   {:name "Cathie Yun"}])
+
+(sort-by :name team)
 
 (defroutes app-routes
   (GET "/" [] (home team))
