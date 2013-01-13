@@ -23,32 +23,51 @@ h3 { font-size: 24px; }
 h4 { font-size: 20px; }
 h5 { font-size: 18px; }
 
-$header-height: 480px;
+$header-height: 440px;
+$sky-blue: rgb(180,200,240);
 
 header {
     position: absolute;
     z-index: 1;
     top: 0px;
     left: 0px;
-    width: 100%;
+    width:100%;
     height: $header-height;
-    background-color: rgba(180,200,240,1.0);
+    background-color: $sky-blue;
 
     #questions {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 16px;
+        right: 16px;
         list-style: none;
         background: #fff;
+        border-radius: 16px;
 
         li {
             float: left;
 
             a {
+                position: relative;
                 display: block;
                 padding: 8px 16px;
+                color: darken($sky-blue, 20);
+                text-decoration: none;
+                
+                &:hover {
+                    color: darken($sky-blue, 30);
+                }
+                &:active {
+                    top: 1px;
+                }
             }
         }
+    }
+    
+    h1 {
+        background: #fff;
+        border-radius: 0 0 16px 0;
+        display: inline;
+        padding: 16px;
     }
 }
 
@@ -72,16 +91,35 @@ header {
     margin: 0px auto;
 }
 
+.blog {
+    position: relative;
+    margin-top: 16px;
+    background: #fff;
+    padding: 4px 16px;
+    border-radius: 16px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #000;
+
+    &:hover {
+        color: darken($sky-blue, 20);
+    }
+    
+    &:active {
+        top: 1px;
+    }
+}
+
 #content {
     max-width: 720px;
     padding: 32px;
     margin: $header-height auto 32px;
+    background-color: rgba(255,255,255,0.5);
     position: relative;
     z-index: 1;
 
     & > div {
-        background-color: rgba(255,255,255,0.5);
-        padding: 32px;
+        padding: 16px 32px;
 
         & > ul, & > ol {
             margin-left: 16px;

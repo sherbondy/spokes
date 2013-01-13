@@ -56,3 +56,6 @@ Theme ideas:
   - Sun is dominant on page. Position of sun matches actual time of day sunrise/set preditions based on where we are (Boston until the trip begins...)
   - The WHEEL for "Who", with team members as the spokes :D
 
+Have MULTIPLE bikes, one for each question.
+
+Sponsors float around in the cloud.

@@ -60,11 +60,11 @@
    [:div#content
     (q "who" "are you"
        [:p "We are " (count team) " undergraduates at MIT who are passionate "
-        "about education:"]
+        "about education."]
 
-       [:ul
-        (for [person team]
-          [:li [:h5 (:name person)]])])
+       (comment [:ul
+                 (for [person team]
+                   [:li [:h5 (:name person)]])]))
 
     (q "what" "are you doing"
        [:p "We're biking across the United States."])
@@ -94,5 +94,6 @@
         "And suggestions for towns to visit along the way. "
         "You can definitely help by spreading the word! "
         "And joining the conversation. "
-        "Follow our journey on the blog."]
+        "Follow our journey on the "
+        [:a.blog {:href "http://spokesmit.tumblr.com"} "blog"]]
        )]))

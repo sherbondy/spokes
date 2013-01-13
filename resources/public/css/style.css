@@ -32,24 +32,37 @@ header {
   top: 0px;
   left: 0px;
   width: 100%;
-  height: 480px;
+  height: 440px;
   background-color: #b4c8f0; }
   header #questions {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 16px;
+    right: 16px;
     list-style: none;
-    background: #fff; }
+    background: #fff;
+    border-radius: 16px; }
     header #questions li {
       float: left; }
       header #questions li a {
+        position: relative;
         display: block;
-        padding: 8px 16px; }
+        padding: 8px 16px;
+        color: #5f8adf;
+        text-decoration: none; }
+        header #questions li a:hover {
+          color: #346ad6; }
+        header #questions li a:active {
+          top: 1px; }
+  header h1 {
+    background: #fff;
+    border-radius: 0 0 16px 0;
+    display: inline;
+    padding: 16px; }
 
 #canvas {
   position: absolute;
   z-index: 0;
-  height: 480px;
+  height: 440px;
   top: 0px;
   left: 0px;
   background-color: rgba(255, 255, 255, 0); }
@@ -63,15 +76,29 @@ header {
   clear: both;
   margin: 0px auto; }
 
+.blog {
+  position: relative;
+  margin-top: 16px;
+  background: #fff;
+  padding: 4px 16px;
+  border-radius: 16px;
+  font-size: 18px;
+  text-decoration: none;
+  color: #000; }
+  .blog:hover {
+    color: #5f8adf; }
+  .blog:active {
+    top: 1px; }
+
 #content {
   max-width: 720px;
   padding: 32px;
-  margin: 480px auto 32px;
+  margin: 440px auto 32px;
+  background-color: rgba(255, 255, 255, 0.5);
   position: relative;
   z-index: 1; }
   #content > div {
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 32px; }
+    padding: 16px 32px; }
     #content > div > ul, #content > div > ol {
       margin-left: 16px; }
     #content > div > h2 em {
