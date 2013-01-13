@@ -14,6 +14,10 @@ To start a web server for the application, run:
 
     lein ring server
 
+To play around, do:
+
+   lein repl
+
 ## License
 
 Copyright © 2013 Ethan Sherbondy and the Spokes Team
@@ -37,9 +41,10 @@ Goals:
 
 
 Setup:
-  - Sinatra for now. Rails if we start to feel like we're reinventing the wheel.
+  - Simple Compojure server. Could honestly just generate
+    static pages for most of the site.
   - SASS (SCSS) for stylesheet sanity.
-  - HAML
+  - Hiccup for templates. Would be happy to try Enlive too.
 
 Typefaces:
   - A nice cursive script for the logo?
