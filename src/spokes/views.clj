@@ -52,7 +52,9 @@
     [:ul#questions
      (for [question ["who", "what", "when", "where", "why", "how"]]
        [:li.question
-        [:h4 [:a {:href (str "#" question)} question]]])]]
+        [:h4 [:a {:href (str "#" question)} question]]])]
+    
+    [:embed#bike {:src "/img/bike-svg.svg" :type "image/svg+xml"}]]
 
    [:div#content
     (q "who" "are you"

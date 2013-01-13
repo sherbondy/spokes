@@ -26,6 +26,8 @@ h5 { font-size: 18px; }
 $header-height: 480px;
 
 header {
+    position: absolute;
+    z-index: 1;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -33,7 +35,9 @@ header {
     background-color: rgba(180,200,240,1.0);
 
     #questions {
-        float: right;
+        position: absolute;
+        top: 0;
+        right: 0;
         list-style: none;
         background: #fff;
 
@@ -49,11 +53,12 @@ header {
 }
 
 #canvas {
+    position: absolute;
+    z-index: 0;
+    height: $header-height;
     top: 0px;
     left: 0px;
     background-color: rgba(255,255,255,0);
-    position: absolute;
-    z-index: 0;
 }
 
 .map {
@@ -61,10 +66,16 @@ header {
     height: auto;
 }
 
+#bike {
+    display: block;
+    clear: both;
+    margin: 0px auto;
+}
+
 #content {
     max-width: 720px;
     padding: 32px;
-    margin: 0px auto;
+    margin: $header-height auto 32px;
     position: relative;
     z-index: 1;
 
@@ -72,7 +83,7 @@ header {
         background-color: rgba(255,255,255,0.5);
         padding: 32px;
 
-        & > ul {
+        & > ul, & > ol {
             margin-left: 16px;
         }
 
