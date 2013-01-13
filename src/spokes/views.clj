@@ -28,11 +28,12 @@
    [:head
     [:meta {:charset "utf-8"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
-    (include-css "/css/style.css")
-    (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
-    (include-js "/js/main.js")
+
     (font-link ["Lato" [400 700] ["italic"]]
                ["Signika" [400 600 700]])
+    (include-css "/css/style.css")
+    (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+                "/js/main.js")
    [:body
     body]]))
 

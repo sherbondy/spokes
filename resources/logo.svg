@@ -23,8 +23,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="373.65498"
-     inkscape:cy="531.68599"
+     inkscape:cx="354.35357"
+     inkscape:cy="558.11508"
      inkscape:document-units="px"
      inkscape:current-layer="g2986"
      showgrid="false"
@@ -43,7 +43,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -135,6 +135,42 @@
          inkscape:export-ydpi="271.92001"><tspan
            id="tspan3908"
            style="font-family:baumans;-inkscape-font-specification:baumans">s</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         x="340.29514"
+         y="481.12091"
+         id="text3064"
+         sodipodi:linespacing="125%"
+         transform="translate(-300.32433,-434.3107)"><tspan
+           sodipodi:role="line"
+           id="tspan3066"
+           x="340.29514"
+           y="481.12091" /></text>
+      <text
+         xml:space="preserve"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         x="333.98169"
+         y="474.55493"
+         id="text3068"
+         sodipodi:linespacing="125%"
+         transform="translate(-300.32433,-434.3107)"><tspan
+           sodipodi:role="line"
+           id="tspan3070"
+           x="333.98169"
+           y="474.55493">helmet</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         x="172.231"
+         y="442.73514"
+         id="text3072"
+         sodipodi:linespacing="125%"
+         transform="translate(-300.32433,-434.3107)"><tspan
+           sodipodi:role="line"
+           id="tspan3074"
+           x="172.231"
+           y="442.73514">tilt</tspan></text>
     </g>
   </g>
 </svg>

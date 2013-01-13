@@ -5,7 +5,7 @@
                  [compojure "1.1.3"]
                  [hiccup "1.0.2"]
                  [jayq "0.2.0"]]
-  :plugins [[lein-ring "0.7.5"]
+  :plugins [[lein-ring "0.8.0"]
             [lein-cljsbuild "0.2.10"]]
   :ring {:handler spokes.handler/app
          :auto-reload? true}
