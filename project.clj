@@ -4,9 +4,14 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [compojure "1.1.3"]
                  [hiccup "1.0.2"]
+                 ;cljs
                  [jayq "0.2.0"]]
-  :plugins [[lein-ring "0.8.0"]
-            [lein-cljsbuild "0.2.10"]]
+
+  :plugins [[lein-ring "0.8.0"
+             :exclusions [org.clojure/clojure]]
+            [lein-cljsbuild "0.2.10"
+             :exclusions [org.clojure/clojure]]]
+
   :ring {:handler spokes.handler/app
          :auto-reload? true}
 

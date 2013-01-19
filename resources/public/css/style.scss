@@ -118,6 +118,10 @@ header {
     position: relative;
     z-index: 1;
 
+    & p {
+        margin-bottom: 16px;
+    }
+
     & > div {
         padding: 16px 32px;
 

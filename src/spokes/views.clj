@@ -74,11 +74,12 @@
         " through " [:time {:datetime "2013-08-30"} "August 30."]])
 
     (q "where" "are you going"
-       [:p "Here's a map outlining our planned route:"]
-       ;; replace with the real, interactive map
-       [:img.map {:src "/img/map.jpg"}]
-
+       [:p "We'll be biking from San Francisco on the Western Express "
+        "trail, then taking the Trans America trail to Washington D.C. "
+        "Time allowing, we'll also try heading up the east coast "
+        "to get back to Cambridge, Massachusetts in time for the fall semester."]
        [:p "Which means we'll get to explore the following states:"]
+
        [:ol
         ;; these are made up
         (for [[state eta] [["California" 0] ["Nevada" 5] ["Utah" 10]
