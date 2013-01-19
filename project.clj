@@ -2,8 +2,11 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.4.0"]
+
                  [compojure "1.1.3"]
                  [hiccup "1.0.2"]
+                 [ring/ring-devel "1.1.6"]
+
                  ;cljs
                  [jayq "0.2.0"]]
 
