@@ -79,29 +79,13 @@
       (.setMap (@markers key) nil)
       (swap! markers dissoc key))))
 
-(defn symbols-watcher [k r o n]
-  (u/log "reset symbols"))
-
-(defn trails-watcher [k r o n]
-  (u/log "reset trails")
-  (letfn [(filter-fn [[k v]] (contains? n (:trail v)))]
-    (reset! filtered-data
-            (set (map first (filter filter-fn (gps-data)))))))
-
-(defn init-map [$elem & [opts]]
-  (set! *gmap* (google.maps.Map. (aget $elem 0)
-                                 (or opts default-options)))
-  (set! *gps-response* (read-string (.text ($ "#gps-data"))))
-
-  (u/log "adding the watchers...")
-  (add-watch filtered-data :data-watcher data-watcher)
-  (reset! filtered-data (set (keys (gps-data))))
-
-  (add-watch symbols :symbols-watcher symbols-watcher)
-  (reset! symbols (:symbols *gps-response*))
-
-  (add-watch trails :trails-watcher trails-watcher)
-  (reset! trails (set (map :abbr (:trails *gps-response*)))))
+(defn filter-watcher [k r o n]
+  (let [new-trails @trails
+        new-symbols @symbols]
+    (letfn [(filter-fn [[k v]] (and (contains? new-trails  (:trail v))
+                                    (contains? new-symbols (:sym v))))]
+      (reset! filtered-data
+              (set (map first (filter filter-fn (gps-data))))))))
 
 (defn checked-set
   "A set of checked input element values"
@@ -115,6 +99,22 @@
 (defn symbol-inputs [] ($ "#symbols input"))
 (defn toggle-symbols []
   (reset! symbols (checked-set (symbol-inputs))))
+
+(defn init-map [$elem & [opts]]
+  (set! *gmap* (google.maps.Map. (aget $elem 0)
+                                 (or opts default-options)))
+  (set! *gps-response* (read-string (.text ($ "#gps-data"))))
+
+  (u/log "adding the watchers...")
+  (add-watch filtered-data :data-watcher data-watcher)
+
+  (reset! symbols (checked-set (symbol-inputs)))
+  (reset! trails (checked-set (trail-inputs)))
+  (add-watch symbols :symbols-watcher filter-watcher)
+  (add-watch trails :trails-watcher filter-watcher)
+
+  (reset! filtered-data (set (keys (gps-data)))))
+
 
 (defn initialize []
   (init-map ($ "#map"))
