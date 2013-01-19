@@ -28,7 +28,7 @@
                          :exclusions [commons-io
                                       commons-codec]]]}}
 
-;;  :hooks [leiningen.cljsbuild]
+  :hooks [leiningen.cljsbuild]
 
   :cljsbuild
   {:builds
