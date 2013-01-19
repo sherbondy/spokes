@@ -71,7 +71,13 @@
     [:h1 "Our Route"]
     [:p "GPS Data from " 
      [:a {:href "https://www.adventurecycling.org"}
-      "Adventure Cycling"] "."]]
+      "Adventure Cycling"] "."]
+
+    [:h2 "Locations within a "
+     [:input {:type "text" :id "radius" :name "radius" :placeholder "10"}]
+     " mile radius:"]
+    [:div#nearby]]
+
    [:script#gps-data {:type "text/edn"} gps/edn-data]))
 
 

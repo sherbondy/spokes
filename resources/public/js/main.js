@@ -31105,25 +31105,25 @@ spokes.map.make_marker = function make_marker(options) {
   return new google.maps.Marker(cljs.core.clj__GT_js.call(null, options))
 };
 spokes.map.map_marker = function() {
-  var map_marker__delegate = function(map, coords, title, p__34210) {
-    var vec__34212 = p__34210;
-    var opts = cljs.core.nth.call(null, vec__34212, 0, null);
+  var map_marker__delegate = function(map, coords, title, p__46546) {
+    var vec__46548 = p__46546;
+    var opts = cljs.core.nth.call(null, vec__46548, 0, null);
     return spokes.map.make_marker.call(null, cljs.core.merge.call(null, opts, cljs.core.ObjMap.fromObject(["\ufdd0'position", "\ufdd0'map", "\ufdd0'title"], {"\ufdd0'position":coords, "\ufdd0'map":map, "\ufdd0'title":title})))
   };
   var map_marker = function(map, coords, title, var_args) {
-    var p__34210 = null;
+    var p__46546 = null;
     if(goog.isDef(var_args)) {
-      p__34210 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 3), 0)
+      p__46546 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 3), 0)
     }
-    return map_marker__delegate.call(this, map, coords, title, p__34210)
+    return map_marker__delegate.call(this, map, coords, title, p__46546)
   };
   map_marker.cljs$lang$maxFixedArity = 3;
-  map_marker.cljs$lang$applyTo = function(arglist__34213) {
-    var map = cljs.core.first(arglist__34213);
-    var coords = cljs.core.first(cljs.core.next(arglist__34213));
-    var title = cljs.core.first(cljs.core.next(cljs.core.next(arglist__34213)));
-    var p__34210 = cljs.core.rest(cljs.core.next(cljs.core.next(arglist__34213)));
-    return map_marker__delegate(map, coords, title, p__34210)
+  map_marker.cljs$lang$applyTo = function(arglist__46549) {
+    var map = cljs.core.first(arglist__46549);
+    var coords = cljs.core.first(cljs.core.next(arglist__46549));
+    var title = cljs.core.first(cljs.core.next(cljs.core.next(arglist__46549)));
+    var p__46546 = cljs.core.rest(cljs.core.next(cljs.core.next(arglist__46549)));
+    return map_marker__delegate(map, coords, title, p__46546)
   };
   map_marker.cljs$lang$arity$variadic = map_marker__delegate;
   return map_marker
@@ -31153,6 +31153,7 @@ spokes.map.markers = cljs.core.atom.call(null, cljs.core.ObjMap.EMPTY);
 spokes.map.symbols = cljs.core.atom.call(null, cljs.core.PersistentHashSet.EMPTY);
 spokes.map.trails = cljs.core.atom.call(null, cljs.core.PersistentHashSet.EMPTY);
 spokes.map.filtered_data = cljs.core.atom.call(null, cljs.core.PersistentHashSet.EMPTY);
+spokes.map.user_geo = cljs.core.atom.call(null, cljs.core.ObjMap.fromObject(["\ufdd0'lat", "\ufdd0'lng"], {"\ufdd0'lat":null, "\ufdd0'lng":null}));
 spokes.map.gps_data = function gps_data() {
   return(new cljs.core.Keyword("\ufdd0'data")).call(null, spokes.map._STAR_gps_response_STAR_)
 };
@@ -31162,39 +31163,58 @@ spokes.map.all_locations = function all_locations() {
 spokes.map.gps_item = function gps_item(key) {
   return cljs.core._lookup.call(null, spokes.map.gps_data.call(null), key, null)
 };
+spokes.map.icon_for_trail = function icon_for_trail(trail) {
+  return[cljs.core.str("/img/"), cljs.core.str(function() {
+    var pred__46553 = cljs.core._EQ_;
+    var expr__46554 = trail;
+    if(pred__46553.call(null, "WE", expr__46554)) {
+      return"blue_MarkerW"
+    }else {
+      if(pred__46553.call(null, "TA", expr__46554)) {
+        return"orange_MarkerT"
+      }else {
+        if(pred__46553.call(null, "AC", expr__46554)) {
+          return"darkgreen_MarkerA"
+        }else {
+          throw new Error([cljs.core.str("No matching clause: "), cljs.core.str(expr__46554)].join(""));
+        }
+      }
+    }
+  }()), cljs.core.str(".png")].join("")
+};
 spokes.map.marker_val = function marker_val(loc_id) {
   var loc_map = spokes.map.gps_item.call(null, loc_id);
   var coords = spokes.map.lat_lng.call(null, (new cljs.core.Keyword("\ufdd0'lat")).call(null, loc_map), (new cljs.core.Keyword("\ufdd0'lon")).call(null, loc_map));
-  var marker = spokes.map.map_marker.call(null, spokes.map._STAR_gmap_STAR_, coords, (new cljs.core.Keyword("\ufdd0'desc")).call(null, loc_map));
+  var marker = spokes.map.map_marker.call(null, spokes.map._STAR_gmap_STAR_, coords, (new cljs.core.Keyword("\ufdd0'desc")).call(null, loc_map), cljs.core.ObjMap.fromObject(["\ufdd0'icon"], {"\ufdd0'icon":spokes.map.icon_for_trail.call(null, (new cljs.core.Keyword("\ufdd0'trail")).call(null, loc_map))}));
   return marker
 };
 spokes.map.data_watcher = function data_watcher(k, r, o, n) {
-  var G__34216_34218 = cljs.core.seq.call(null, n);
+  var G__46558_46560 = cljs.core.seq.call(null, n);
   while(true) {
-    if(G__34216_34218) {
-      var key_34219 = cljs.core.first.call(null, G__34216_34218);
-      if(!cljs.core.contains_QMARK_.call(null, o, key_34219)) {
-        cljs.core.swap_BANG_.call(null, spokes.map.markers, cljs.core.assoc, key_34219, spokes.map.marker_val.call(null, key_34219))
+    if(G__46558_46560) {
+      var key_46561 = cljs.core.first.call(null, G__46558_46560);
+      if(!cljs.core.contains_QMARK_.call(null, o, key_46561)) {
+        cljs.core.swap_BANG_.call(null, spokes.map.markers, cljs.core.assoc, key_46561, spokes.map.marker_val.call(null, key_46561))
       }else {
       }
-      var G__34220 = cljs.core.next.call(null, G__34216_34218);
-      G__34216_34218 = G__34220;
+      var G__46562 = cljs.core.next.call(null, G__46558_46560);
+      G__46558_46560 = G__46562;
       continue
     }else {
     }
     break
   }
-  var G__34217 = cljs.core.seq.call(null, o);
+  var G__46559 = cljs.core.seq.call(null, o);
   while(true) {
-    if(G__34217) {
-      var key = cljs.core.first.call(null, G__34217);
+    if(G__46559) {
+      var key = cljs.core.first.call(null, G__46559);
       if(cljs.core.contains_QMARK_.call(null, n, key)) {
       }else {
         cljs.core.deref.call(null, spokes.map.markers).call(null, key).setMap(null);
         cljs.core.swap_BANG_.call(null, spokes.map.markers, cljs.core.dissoc, key)
       }
-      var G__34221 = cljs.core.next.call(null, G__34217);
-      G__34217 = G__34221;
+      var G__46563 = cljs.core.next.call(null, G__46559);
+      G__46559 = G__46563;
       continue
     }else {
       return null
@@ -31202,21 +31222,24 @@ spokes.map.data_watcher = function data_watcher(k, r, o, n) {
     break
   }
 };
+spokes.map.filter_fn = function filter_fn(p__46564) {
+  var vec__46566 = p__46564;
+  var k = cljs.core.nth.call(null, vec__46566, 0, null);
+  var v = cljs.core.nth.call(null, vec__46566, 1, null);
+  var trail_set = cljs.core.deref.call(null, spokes.map.trails);
+  var symbol_set = cljs.core.deref.call(null, spokes.map.symbols);
+  var and__3822__auto__ = cljs.core.contains_QMARK_.call(null, trail_set, (new cljs.core.Keyword("\ufdd0'trail")).call(null, v));
+  if(and__3822__auto__) {
+    return cljs.core.contains_QMARK_.call(null, symbol_set, (new cljs.core.Keyword("\ufdd0'sym")).call(null, v))
+  }else {
+    return and__3822__auto__
+  }
+};
 spokes.map.filter_watcher = function filter_watcher(k, r, o, n) {
-  var new_trails = cljs.core.deref.call(null, spokes.map.trails);
-  var new_symbols = cljs.core.deref.call(null, spokes.map.symbols);
-  var filter_fn = function filter_fn(p__34225) {
-    var vec__34227 = p__34225;
-    var k__$1 = cljs.core.nth.call(null, vec__34227, 0, null);
-    var v = cljs.core.nth.call(null, vec__34227, 1, null);
-    var and__3822__auto__ = cljs.core.contains_QMARK_.call(null, new_trails, (new cljs.core.Keyword("\ufdd0'trail")).call(null, v));
-    if(and__3822__auto__) {
-      return cljs.core.contains_QMARK_.call(null, new_symbols, (new cljs.core.Keyword("\ufdd0'sym")).call(null, v))
-    }else {
-      return and__3822__auto__
-    }
-  };
-  return cljs.core.reset_BANG_.call(null, spokes.map.filtered_data, cljs.core.set.call(null, cljs.core.map.call(null, cljs.core.first, cljs.core.filter.call(null, filter_fn, spokes.map.gps_data.call(null)))))
+  return cljs.core.reset_BANG_.call(null, spokes.map.filtered_data, cljs.core.set.call(null, cljs.core.map.call(null, cljs.core.first, cljs.core.filter.call(null, spokes.map.filter_fn, spokes.map.gps_data.call(null)))))
+};
+spokes.map.geo_watcher = function geo_watcher(k, r, o, n) {
+  return null
 };
 spokes.map.checked_set = function checked_set(inputs) {
   return cljs.core.set.call(null, cljs.core.map.call(null, jayq.core.val, cljs.core.vec.call(null, inputs.filter(":checked"))))
@@ -31234,9 +31257,9 @@ spokes.map.toggle_symbols = function toggle_symbols() {
   return cljs.core.reset_BANG_.call(null, spokes.map.symbols, spokes.map.checked_set.call(null, spokes.map.symbol_inputs.call(null)))
 };
 spokes.map.init_map = function() {
-  var init_map__delegate = function($elem, p__34228) {
-    var vec__34230 = p__34228;
-    var opts = cljs.core.nth.call(null, vec__34230, 0, null);
+  var init_map__delegate = function($elem, p__46567) {
+    var vec__46569 = p__46567;
+    var opts = cljs.core.nth.call(null, vec__46569, 0, null);
     spokes.map._STAR_gmap_STAR_ = new google.maps.Map($elem[0], function() {
       var or__3824__auto__ = opts;
       if(cljs.core.truth_(or__3824__auto__)) {
@@ -31246,32 +31269,46 @@ spokes.map.init_map = function() {
       }
     }());
     spokes.map._STAR_gps_response_STAR_ = cljs.reader.read_string.call(null, jayq.core.$.call(null, "#gps-data").text());
-    spokes.util.log.call(null, "adding the watchers...");
-    cljs.core.add_watch.call(null, spokes.map.filtered_data, "\ufdd0'data-watcher", spokes.map.data_watcher);
     cljs.core.reset_BANG_.call(null, spokes.map.symbols, spokes.map.checked_set.call(null, spokes.map.symbol_inputs.call(null)));
     cljs.core.reset_BANG_.call(null, spokes.map.trails, spokes.map.checked_set.call(null, spokes.map.trail_inputs.call(null)));
+    spokes.util.log.call(null, "adding the watchers...");
+    cljs.core.add_watch.call(null, spokes.map.filtered_data, "\ufdd0'data-watcher", spokes.map.data_watcher);
     cljs.core.add_watch.call(null, spokes.map.symbols, "\ufdd0'symbols-watcher", spokes.map.filter_watcher);
     cljs.core.add_watch.call(null, spokes.map.trails, "\ufdd0'trails-watcher", spokes.map.filter_watcher);
+    cljs.core.add_watch.call(null, spokes.map.user_geo, "\ufdd0'geo-watcher", spokes.map.geo_watcher);
     return cljs.core.reset_BANG_.call(null, spokes.map.filtered_data, cljs.core.set.call(null, cljs.core.keys.call(null, spokes.map.gps_data.call(null))))
   };
   var init_map = function($elem, var_args) {
-    var p__34228 = null;
+    var p__46567 = null;
     if(goog.isDef(var_args)) {
-      p__34228 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 1), 0)
+      p__46567 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 1), 0)
     }
-    return init_map__delegate.call(this, $elem, p__34228)
+    return init_map__delegate.call(this, $elem, p__46567)
   };
   init_map.cljs$lang$maxFixedArity = 1;
-  init_map.cljs$lang$applyTo = function(arglist__34231) {
-    var $elem = cljs.core.first(arglist__34231);
-    var p__34228 = cljs.core.rest(arglist__34231);
-    return init_map__delegate($elem, p__34228)
+  init_map.cljs$lang$applyTo = function(arglist__46570) {
+    var $elem = cljs.core.first(arglist__46570);
+    var p__46567 = cljs.core.rest(arglist__46570);
+    return init_map__delegate($elem, p__46567)
   };
   init_map.cljs$lang$arity$variadic = init_map__delegate;
   return init_map
 }();
+spokes.map.geolocation = navigator.geolocation;
+spokes.map.get_user_location = function get_user_location() {
+  if(cljs.core.truth_(spokes.map.geolocation)) {
+    return spokes.map.geolocation.getCurrentPosition(function(pos) {
+      var coords = pos.coords;
+      spokes.util.log.call(null, coords);
+      return cljs.core.reset_BANG_.call(null, spokes.map.user_geo, cljs.core.ObjMap.fromObject(["\ufdd0'lat", "\ufdd0'lon"], {"\ufdd0'lat":coords.longitude, "\ufdd0'lon":coords.latitude}))
+    })
+  }else {
+    return null
+  }
+};
 spokes.map.initialize = function initialize() {
   spokes.map.init_map.call(null, jayq.core.$.call(null, "#map"));
+  spokes.map.get_user_location.call(null);
   spokes.map.trail_inputs.call(null).change(spokes.map.toggle_trails);
   return spokes.map.symbol_inputs.call(null).change(spokes.map.toggle_symbols)
 };
@@ -31280,18 +31317,18 @@ spokes.map.law_of_cos = function law_of_cos(lat1, lon1, lat2, lon2) {
   return spokes.map.r_earth * Math.acos.call(null, Math.sin.call(null, lat1) * Math.sin.call(null, lat2) + Math.cos.call(null, lat1) * Math.cos.call(null, lat2) * Math.cos.call(null, lon2 - lon1))
 };
 spokes.map.nearby_resource = function nearby_resource(sym, lat, lon, mi_radius) {
-  return cljs.core.filter.call(null, function(p1__34232_SHARP_) {
-    var and__3822__auto__ = cljs.core._EQ_.call(null, sym, (new cljs.core.Keyword("\ufdd0'sym")).call(null, p1__34232_SHARP_));
+  return cljs.core.filter.call(null, function(p1__46571_SHARP_) {
+    var and__3822__auto__ = cljs.core._EQ_.call(null, sym, (new cljs.core.Keyword("\ufdd0'sym")).call(null, p1__46571_SHARP_));
     if(and__3822__auto__) {
-      return mi_radius > spokes.map.law_of_cos.call(null, lat, lon, (new cljs.core.Keyword("\ufdd0'lat-r")).call(null, p1__34232_SHARP_), (new cljs.core.Keyword("\ufdd0'lon-r")).call(null, p1__34232_SHARP_))
+      return mi_radius > spokes.map.law_of_cos.call(null, lat, lon, (new cljs.core.Keyword("\ufdd0'lat-r")).call(null, p1__46571_SHARP_), (new cljs.core.Keyword("\ufdd0'lon-r")).call(null, p1__46571_SHARP_))
     }else {
       return and__3822__auto__
     }
   }, spokes.map.all_locations)
 };
 spokes.map.filter_sym = function filter_sym(sym) {
-  return cljs.core.filter.call(null, function(p1__34233_SHARP_) {
-    return cljs.core._EQ_.call(null, sym, (new cljs.core.Keyword("\ufdd0'sym")).call(null, p1__34233_SHARP_))
+  return cljs.core.filter.call(null, function(p1__46572_SHARP_) {
+    return cljs.core._EQ_.call(null, sym, (new cljs.core.Keyword("\ufdd0'sym")).call(null, p1__46572_SHARP_))
   }, spokes.map.all_locations)
 };
 goog.provide("spokes.main");

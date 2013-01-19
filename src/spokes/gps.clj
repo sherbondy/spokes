@@ -8,7 +8,7 @@
 (def trails {:we 4 :ta 12 :ac 7})
 
 (def trail-list [{:name "Western Express" :abbr "WE"}
-                 {:name "TransAmerica"    :abbr "TA"}
+                 {:name "Trans America"    :abbr "TA"}
                  {:name "Atlantic Coast"  :abbr "AC"}])
 
 (defn pad-zero [n]

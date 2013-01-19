@@ -52,6 +52,8 @@
 (def trails (atom #{}))
 ;; a set of location ids
 (def filtered-data (atom #{}))
+;; the user's geolocation
+(def user-geo (atom {:lat nil :lng nil}))
 
 (defn gps-data [] (:data *gps-response*))
 
@@ -61,10 +63,17 @@
 (defn gps-item [key]
   (get (gps-data) key))
 
+(defn icon-for-trail [trail]
+  (str "/img/" (condp = trail
+                 "WE" "blue_MarkerW"
+                 "TA" "orange_MarkerT"
+                 "AC" "darkgreen_MarkerA") ".png"))
+
 (defn marker-val [loc-id]
   (let [loc-map (gps-item loc-id)
         coords  (lat-lng (:lat loc-map) (:lon loc-map))
-        marker  (map-marker *gmap* coords (:desc loc-map))]
+        marker  (map-marker *gmap* coords (:desc loc-map)
+                            {:icon (icon-for-trail (:trail loc-map))})]
     marker))
 
 ;; auto add/remove markers from the map when the atom changes
@@ -79,13 +88,17 @@
       (.setMap (@markers key) nil)
       (swap! markers dissoc key))))
 
+(defn filter-fn [[k v]]
+  (let [trail-set  @trails
+        symbol-set @symbols]
+    (and (contains? trail-set  (:trail v))
+         (contains? symbol-set (:sym v)))))
+
 (defn filter-watcher [k r o n]
-  (let [new-trails @trails
-        new-symbols @symbols]
-    (letfn [(filter-fn [[k v]] (and (contains? new-trails  (:trail v))
-                                    (contains? new-symbols (:sym v))))]
-      (reset! filtered-data
-              (set (map first (filter filter-fn (gps-data))))))))
+  (reset! filtered-data
+          (set (map first (filter filter-fn (gps-data))))))
+
+(defn geo-watcher [k r o n])
 
 (defn checked-set
   "A set of checked input element values"
@@ -105,19 +118,32 @@
                                  (or opts default-options)))
   (set! *gps-response* (read-string (.text ($ "#gps-data"))))
 
-  (u/log "adding the watchers...")
-  (add-watch filtered-data :data-watcher data-watcher)
-
   (reset! symbols (checked-set (symbol-inputs)))
   (reset! trails (checked-set (trail-inputs)))
+
+  (u/log "adding the watchers...")
+  (add-watch filtered-data :data-watcher data-watcher)
   (add-watch symbols :symbols-watcher filter-watcher)
   (add-watch trails :trails-watcher filter-watcher)
+  (add-watch user-geo :geo-watcher geo-watcher)
 
   (reset! filtered-data (set (keys (gps-data)))))
 
+(def geolocation (.-geolocation js/navigator))
+
+(defn get-user-location []
+  (if geolocation
+    (.getCurrentPosition geolocation
+      (fn [pos]
+        (let [coords (.-coords pos)]
+          (u/log coords)
+          (reset! user-geo {:lat (.-longitude coords)
+                            :lon (.-latitude coords)}))))))
 
 (defn initialize []
   (init-map ($ "#map"))
+
+  (get-user-location)
 
   (.change (trail-inputs) toggle-trails)
   (.change (symbol-inputs) toggle-symbols))
