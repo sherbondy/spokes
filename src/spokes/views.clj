@@ -1,7 +1,9 @@
 (ns spokes.views
   (:require [clojure.string :as str]
+            [environ.core :refer [env]]
             [hiccup.core :refer [html]]
-            [hiccup.page :refer [html5 include-css include-js]])
+            [hiccup.page :refer [html5 include-css include-js]]
+            [spokes.gps :as gps])
   (:use [hiccup.def :only [defhtml]]))
 
 (defn font
@@ -33,9 +35,23 @@
                ["Signika" [400 600 700]])
     (include-css "/css/style.css")
     (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+                (str "//maps.googleapis.com/maps/api/js?key=" 
+                     (env :google-maps-key) "&sensor=false")
                 "/js/main.js")
    [:body
     body]]))
+
+
+(defn route []
+  (layout
+   [:div#map]
+   [:div#content
+    [:h1 "Our Route"]
+    [:p "GPS Data from " 
+     [:a {:href "https://www.adventurecycling.org"}
+      "Adventure Cycling"] "."]]
+   [:script#gps-data {:type "text/edn"} gps/edn-data]))
+
 
 (defn q [question title & body]
   [:div {:id question}

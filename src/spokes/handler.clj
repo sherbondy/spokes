@@ -3,7 +3,7 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [ring.middleware.reload :as reload]
-            [spokes.views :refer [home]]))
+            [spokes.views :refer [home route]]))
 
 (def team
   [{:name "Natasha Balwit"}
@@ -18,10 +18,9 @@
    {:name "Manny Singh"}
    {:name "Cathie Yun"}])
 
-(sort-by :name team)
-
 (defroutes app-routes
   (GET "/" [] (home team))
+  (GET "/route" [] (route))
   (route/resources "/")
   (route/not-found "Not Found"))
 

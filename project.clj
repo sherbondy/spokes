@@ -6,6 +6,7 @@
 
                  [compojure "1.1.3"
                   :exclusions [ring/ring-core]]
+                 [environ "0.3.0"]
                  [hiccup "1.0.2"]
                  [ring/ring-devel "1.1.6"
                   :exclusions [clj-stacktrace]]
@@ -13,7 +14,7 @@
                  [com.cemerick/pomegranate "0.0.13"]
 
                  ;cljs
-                 [jayq "0.2.0"]]
+                 [jayq "2.0.0"]]
 
   :plugins [[lein-ring "0.8.0"
              :exclusions [org.clojure/clojure]]

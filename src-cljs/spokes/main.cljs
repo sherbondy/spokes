@@ -1,7 +1,9 @@
 (ns spokes.main
   (:require [clojure.string :as str]
             [clojure.browser.repl :as repl]
-            [jayq.core :as jq :refer [$ css]])
+            [jayq.core :as jq :refer [$ css]]
+            [spokes.map :as sm]
+            [spokes.util :as u])
   (:require-macros [jayq.macros :as jm]
                    [spokes.canvas-macros :as cm]))
 
@@ -74,5 +76,7 @@
                           (draw-scene $canvas))]
    (.resize ($ js/window) fit-canvas-fn)
    (fit-canvas-fn))
- 
- (log "Testing..." "one, two, three"))
+
+ (when (u/exists? "#map")
+   (u/log "initializing the map..")
+   (sm/initialize)))

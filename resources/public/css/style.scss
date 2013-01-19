@@ -80,6 +80,15 @@ header {
     background-color: rgba(255,255,255,0);
 }
 
+#map {
+    top: 0;
+    left: 50%;
+    position: absolute;
+    margin: 0 0 0 -360px;
+    width: 720px;
+    height: $header-height;
+}
+
 .map {
     width: 100%;
     height: auto;

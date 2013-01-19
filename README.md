@@ -55,6 +55,13 @@ Theme ideas:
   - Mountains, and a road running through the page, with animated bikes zipping by randomly.
   - Sun is dominant on page. Position of sun matches actual time of day sunrise/set preditions based on where we are (Boston until the trip begins...)
   - The WHEEL for "Who", with team members as the spokes :D
+  
+Map:
+  - Show our current location
+  - Store route offline using LocalStorage API
+  - Filter by type of waypoint, e.g. Lodgings, Restrooms, Campgrounds
+  - Show nearby waypoints based on current location
+  - Filter by section of trail, e.g. Western Express
 
 Have MULTIPLE bikes, one for each question.
 
