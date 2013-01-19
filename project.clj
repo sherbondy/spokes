@@ -8,8 +8,6 @@
                   :exclusions [ring/ring-core]]
                  [environ "0.3.0"]
                  [hiccup "1.0.2"]
-                 [ring/ring-devel "1.1.6"
-                  :exclusions [clj-stacktrace]]
 
                  [com.cemerick/pomegranate "0.0.13"]
 
@@ -25,10 +23,9 @@
          :auto-reload? true}
 
   :profiles
-  {:dev {:dependencies [[ring-mock "0.1.3"]
-                        [ring-serve "0.1.2"]]}}
+  {:dev {:dependencies [[ring-mock "0.1.3"]]}}
 
-  :hooks [leiningen.cljsbuild]
+;;  :hooks [leiningen.cljsbuild]
 
   :cljsbuild
   {:builds

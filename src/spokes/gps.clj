@@ -67,5 +67,5 @@
 
 (def edn-data
   {:symbols wp-symbols
-   :trails  trai-list
+   :trails  trail-list
    :data    all-locations})
