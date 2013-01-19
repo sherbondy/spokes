@@ -9,8 +9,6 @@
                  [environ "0.3.0"]
                  [hiccup "1.0.2"]
 
-                 [com.cemerick/pomegranate "0.0.13"]
-
                  ;cljs
                  [jayq "2.0.0"]]
 
@@ -20,10 +18,14 @@
              :exclusions [org.clojure/clojure]]]
 
   :ring {:handler spokes.handler/app
-         :auto-reload? true}
+         :auto-reload? true
+         :port 8000}
 
   :profiles
-  {:dev {:dependencies [[ring-mock "0.1.3"]]}}
+  {:dev {:dependencies [[ring-mock "0.1.3"]
+                        [com.cemerick/pomegranate "0.0.13"
+                         :exclusions [commons-io
+                                      commons-codec]]]}}
 
 ;;  :hooks [leiningen.cljsbuild]
 

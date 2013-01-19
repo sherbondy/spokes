@@ -10,7 +10,6 @@
    {:name "Turner Bohlen"}
    {:name "Phillip Daniel"} 
    {:name "Bruno Faviero"}
-   {:name "Sophie Geoghan"}
    {:name "Nathan Kit Kennedy"}
    {:name "Claire O'Connell"}
    {:name "Jeff Prouty"}
@@ -31,7 +30,7 @@
 
 ;; For interactive development, evaluate these:
 ;; (use 'ring.adapter.jetty)
-;; (defonce server (run-jetty #'app {:port 8080 :join? false}))
+;; (defonce server (run-jetty #'app {:port 8000 :join? false}))
 
 ;; To stop the server, just do:
 ;; (.stop server)
