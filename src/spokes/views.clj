@@ -41,10 +41,32 @@
    [:body
     body]]))
 
+(defn hyphenate [name]
+  (str/lower-case (-> name 
+                      (str/replace #"\s+" "-")
+                      (str/replace #"[\(\)]" ""))))
+
+(defn checkbox-div [name label & [value]]
+  [:div
+   [:label {:for name} label]
+   [:input {:type "checkbox" :checked "checked"
+            :name name :id name :value (or value name)}]])
 
 (defn route []
   (layout
    [:div#map]
+
+   [:div#trails
+    [:h3 "Trails"]
+    (for [trail gps/trail-list]
+      (checkbox-div (:abbr trail) (:name trail)))]
+
+   [:div#symbols
+    [:h3 "Locations"]
+    (for [symbol gps/wp-symbols]
+      (let [name (hyphenate symbol)]
+        (checkbox-div name symbol symbol)))]
+
    [:div#content
     [:h1 "Our Route"]
     [:p "GPS Data from " 

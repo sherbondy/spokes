@@ -40,43 +40,111 @@
             :zoom 4
             :mapTypeId google.maps.MapTypeId.ROADMAP}))
 
+
+
 (def ^:dynamic *gmap* nil)
-(def ^:dynamic *gps-data* nil)
+(def ^:dynamic *gps-response* nil)
 ;; a hash-map keyed by location id
 (def markers (atom {}))
+;; Waypoint, Campground, etc, toggle-able
+(def symbols (atom #{}))
+;; Trails, toggle-able
+(def trails (atom #{}))
 ;; a set of location ids
 (def filtered-data (atom #{}))
 
-(defn gps-item [key]
-  (get (:data *gps-data*) key))
+(defn gps-data [] (:data *gps-response*))
 
-(defn marker-hash [loc-id]
+(defn all-locations []
+  (vals (gps-data)))
+
+(defn gps-item [key]
+  (get (gps-data) key))
+
+(defn marker-val [loc-id]
   (let [loc-map (gps-item loc-id)
         coords  (lat-lng (:lat loc-map) (:lon loc-map))
         marker  (map-marker *gmap* coords (:desc loc-map))]
-    {loc-id marker}))
+    marker))
 
 ;; auto add/remove markers from the map when the atom changes
 ; k r o n = key, reference, old state, new state
 (defn data-watcher [k r o n]
   (doseq [key n]
     (if-not (contains? o key)
-      (swap! markers assoc key (marker-hash key))))
+      (swap! markers assoc key (marker-val key))))
 
   (doseq [key o]
     (when-not (contains? n key)
-      (.setMap (@markers o) nil)
+      (.setMap (@markers key) nil)
       (swap! markers dissoc key))))
+
+(defn symbols-watcher [k r o n]
+  (u/log "reset symbols"))
+
+(defn trails-watcher [k r o n]
+  (u/log "reset trails")
+  (letfn [(filter-fn [[k v]] (contains? n (:trail v)))]
+    (reset! filtered-data
+            (set (map first (filter filter-fn (gps-data)))))))
 
 (defn init-map [$elem & [opts]]
   (set! *gmap* (google.maps.Map. (aget $elem 0)
                                  (or opts default-options)))
-  (set! *gps-data* (read-string (.text ($ "#gps-data"))))
+  (set! *gps-response* (read-string (.text ($ "#gps-data"))))
 
-  (u/log "adding the watcher..")
+  (u/log "adding the watchers...")
   (add-watch filtered-data :data-watcher data-watcher)
-  (reset! filtered-data (set (keys (:data *gps-data*)))))
+  (reset! filtered-data (set (keys (gps-data))))
+
+  (add-watch symbols :symbols-watcher symbols-watcher)
+  (reset! symbols (:symbols *gps-response*))
+
+  (add-watch trails :trails-watcher trails-watcher)
+  (reset! trails (set (map :abbr (:trails *gps-response*)))))
+
+(defn checked-set
+  "A set of checked input element values"
+  [inputs]
+  (set (map jq/val (vec (.filter inputs ":checked")))))
+
+(defn trail-inputs [] ($ "#trails input"))
+(defn toggle-trails []
+  (reset! trails (checked-set (trail-inputs))))
+
+(defn symbol-inputs [] ($ "#symbols input"))
+(defn toggle-symbols []
+  (reset! symbols (checked-set (symbol-inputs))))
 
 (defn initialize []
-  (u/log "initializing")
-  (init-map ($ "#map")))
+  (init-map ($ "#map"))
+
+  (.change (trail-inputs) toggle-trails)
+  (.change (symbol-inputs) toggle-symbols))
+
+
+;; in mi
+(def r-earth 3959.0)
+
+(defn law-of-cos [lat1 lon1 lat2 lon2]
+  (* r-earth
+     (Math/acos (+ (* (Math/sin lat1) (Math/sin lat2))
+                   (* (Math/cos lat1) (Math/cos lat2)
+                      (Math/cos (- lon2 lon1)))))))
+
+;; sym = the type of resource, eg :Bathroom
+(defn nearby-resource [sym lat lon mi-radius]
+  (filter #(and (= sym (:sym %))
+                (> mi-radius
+                   (law-of-cos lat lon (:lat-r %) (:lon-r %))))
+          all-locations))
+
+;; (count (nearby-resource "Lodging" (Math/toRadians 37.775) (Math/toRadians -122.418) 10))
+
+(defn filter-sym [sym] 
+  (filter #(= sym (:sym %)) all-locations))
+
+;; (def bathrooms (filter-sym "Restroom"))
+;; (count bathrooms)
+;; (def campgrounds (filter-sym "Campground"))
+;; (count campgrounds)

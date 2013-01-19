@@ -12,7 +12,7 @@
   (js/setTimeout func ms))
 
 (defn log [v]
-  (.log js/console v))
+  (.log js/console (clj->js v)))
 
 (defn exists? [$sel]
   (not= (.-length ($ $sel)) 0))

@@ -7,6 +7,10 @@
 ;; [trail count] pairs
 (def trails {:we 4 :ta 12 :ac 7})
 
+(def trail-list [{:name "Western Express" :abbr "WE"}
+                 {:name "TransAmerica"    :abbr "TA"}
+                 {:name "Atlantic Coast"  :abbr "AC"}])
+
 (defn pad-zero [n]
   (str (if (< n 10) "0") n))
 
@@ -63,33 +67,5 @@
 
 (def edn-data
   {:symbols wp-symbols
-   :trails [{:name "Western Express" :abbr "WE"}
-            {:name "TransAmerica"    :abbr "TA"}
-            {:name "Atlantic Coast"  :abbr "AC"}]
-   :data all-locations})
-
-;; in mi
-(def r-earth (float 3959))
-
-(defn law-of-cos [^Float lat1 ^Float lon1 ^Float lat2 ^Float lon2]
-  (* r-earth
-     (Math/acos (+ (* (Math/sin lat1) (Math/sin lat2))
-                   (* (Math/cos lat1) (Math/cos lat2)
-                      (Math/cos (- lon2 lon1)))))))
-
-;; sym = the type of resource, eg :Bathroom
-(defn nearby-resource [sym lat lon mi-radius]
-  (filter #(and (= sym (:sym %))
-                (> mi-radius
-                   (law-of-cos lat lon (:lat-r %) (:lon-r %))))
-          (vals all-locations)))
-
-;; (count (nearby-resource "Lodging" (Math/toRadians 37.775) (Math/toRadians -122.418) 10))
-
-(defn filter-sym [sym] 
-  (filter #(= sym (:sym %)) (vals all-locations)))
-
-;; (def bathrooms (filter-sym "Restroom"))
-;; (count bathrooms)
-;; (def campgrounds (filter-sym "Campground"))
-;; (count campgrounds)
+   :trails  trai-list
+   :data    all-locations})
