@@ -4,8 +4,7 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.clojure/data.zip "0.1.1"]
 
-                 [compojure "1.1.3"
-                  :exclusions [ring/ring-core]]
+                 [compojure "1.1.3"]
                  [environ "0.3.0"]
                  [hiccup "1.0.2"]
 
@@ -23,6 +22,7 @@
 
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.3"]
+                        [ring/ring-devel "1.1.0"]
                         [com.cemerick/pomegranate "0.0.13"
                          :exclusions [commons-io
                                       commons-codec]]]}}

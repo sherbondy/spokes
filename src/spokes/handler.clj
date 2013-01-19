@@ -2,7 +2,8 @@
   (:use compojure.core)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
-            [ring.middleware.reload :as reload]
+            [environ.core :refer [env]]
+            [ring.adapter.jetty :as ring]
             [spokes.views :refer [home route]]))
 
 (def team
@@ -25,16 +26,26 @@
 
 ;; get rid of wrap-reload in production
 (def app
-  (-> (handler/site app-routes)
-      (reload/wrap-reload)))
+  (-> (handler/site app-routes)))
+
+
+(defn start [port]
+  (ring/run-jetty (var app)
+                  {:port (or port 8000) :join? false}))
+
+(defn -main
+  ([] (-main 8000))
+  ([port]
+     (let [port (or (env :port) port)]
+       (start (cond 
+               (string? port) (Integer/parseInt port)
+               :else port)))))
 
 ;; For interactive development, evaluate these:
-;; (use 'ring.adapter.jetty)
-;; (defonce server (run-jetty #'app {:port 8000 :join? false}))
+;; (require '[ring.middleware.reload :as reload])
+;; (def app (-> app (reload/wrap-reload)))
+;; (defonce server (start 8000))
 
 ;; To stop the server, just do:
 ;; (.stop server)
 ;; (.start server)
-
-;; NOTE: ;; #'app is just sugar for (var app)
-
