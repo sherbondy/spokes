@@ -80,6 +80,8 @@
 (def user-geo (atom {:lat nil :lng nil}))
 ;; the radius of nearby locations to search (in mi)
 (def radius (atom nil))
+;; a map of {location-id distance} pairs
+(def distances (atom {}))
 
 (defn gps-data [] (:data @gps-response))
 
@@ -109,6 +111,31 @@
                              {:icon (icon-for-trail (:trail loc-info))})]
     marker))
 
+(defn float-str [num places]
+  (let [[l r] (str/split (str num) ".")]
+    (str l "." (subs r 0 places))))
+
+(defn nearby-template [results]
+  [:ol
+   (for [val results]
+     [:li 
+      [:h4 (str (:desc val) " (" 
+                (float-str (:distance val) 2) " mi)")]
+      [:div [:strong "Category:"] " " (:sym val)]
+      [:div [:strong "Geolocation:"] " " 
+       (str [(:lat val) (:lon val)])]])])
+
+(defn render-nearby [keys]
+  (let [$nearby   ($ "#nearby")
+        key-count (count keys)]
+    (if (< key-count 100)
+      (let [results (map #(assoc (get (gps-data) %)
+                            :distance (get @distances %)) keys)]
+        (.html $nearby
+               (template/node (nearby-template 
+                               (sort-by :distance results)))))
+      (.html $nearby (str "Too many (" key-count ") results to display. "
+                          "Please try a smaller radius.")))))
 
 ;; auto add/remove markers from the map when the atom changes
 ; k r o n = key, reference, old state, new state
@@ -117,30 +144,36 @@
     (if-not (contains? o key)
       (let [marker (get @markers key)]
         (.setMap marker @gmap))))
+
   ;; never delete markers, just take them off the map
   (doseq [key (difference o n)]
     (.setMap (get @markers key) nil))
   
-  (if (< (count n) 100)
-    (u/log "could display")))
+  (render-nearby n))
 
 (defn filter-fn [[k v]]
   (let [trail-set  @trails
         symbol-set @symbols
         mi-radius  @radius
-        lat        (:lat @user-geo)
-        lon        (:lon @user-geo)
-        no-loc?    (some true? (map nil? [mi-radius lat lon]))]
+        dists      @distances
+        no-loc?    (some true? (map nil? [mi-radius (first dists)]))]
     (and (contains? trail-set  (:trail v))
          (contains? symbol-set (:sym v))
          (if no-loc?
            true
-           (nearby? lat lon mi-radius v)))))
+           (> mi-radius (k dists))))))
 
 (defn filter-watcher [k r o n]
-  (u/log (str @user-geo @radius))
   (reset! filtered-data 
           (set (map first (filter filter-fn (gps-data))))))
+
+(defn update-distances [k r o n]
+  (let [lat (:lat n)
+        lon (:lon n)]
+    (reset! distances
+            (apply merge
+                   (for [[k v] (gps-data)]
+                     {k (law-of-cos lat lon (:lat-r v) (:lon-r v))})))))
 
 (defn checked-set
   "A set of checked input element values"
@@ -149,12 +182,10 @@
 
 (defn symbol-inputs [] ($ "#symbols input"))
 (defn toggle-symbols []
-  (u/log "toggling symbols")
   (reset! symbols (checked-set (symbol-inputs))))
 
 (defn trail-inputs [] ($ "#trails input"))
 (defn toggle-trails []
-  (u/log "toggling trails")
   (reset! trails (checked-set (trail-inputs))))
 
 (defn init-data []
@@ -164,10 +195,10 @@
   (toggle-symbols)
   (toggle-trails)
 
-  (u/log "adding the watchers...")
   (add-watch filtered-data :data data-watcher)
+  (add-watch user-geo :geo update-distances)
   (doseq [[kw atm] {:symbols symbols :trails trails 
-                    :radius  radius  :geo    user-geo}]
+                    :radius  radius  :dists  distances}]
     (add-watch atm kw filter-watcher))
 
   (reset! markers (apply merge (for [[k _] (gps-data)] 
@@ -180,6 +211,7 @@
                                  (or opts default-options))))
 
 (defn get-user-location []
+  (u/log "getting location")
   (if nav-geo
     (.getCurrentPosition nav-geo
       (fn [pos]
@@ -191,12 +223,13 @@
                    :lon (deg-to-rad lon)})
 
           (map-marker @gmap (lat-lng lat lon)
-                      "Your Current Location"))))))
+                      "Your Current Location"))))
+    (u/log "geolocation not supported")))
 
 (defn update-radius [e]
   (let [val   (.val ($ "#radius"))
         new-r (js/parseInt val)]
-    (if (number? new-r)
+    (if (and (number? new-r) (> new-r 0))
       (if (not= new-r @radius) (reset! radius new-r))
       (reset! radius nil))))
 
