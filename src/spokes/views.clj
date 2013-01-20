@@ -125,13 +125,14 @@
         "trail, then taking the Trans America trail to Washington D.C. "
         "Time allowing, we'll also try heading up the east coast "
         "to get back to Cambridge, Massachusetts in time for the fall semester."]
-       [:p "Which means we'll get to explore the following states:"]
+       [:p "Which means we'll get to explore, at a minimum, the following states:"]
 
        [:ol
         ;; these are made up
         (for [[state eta] [["California" 0] ["Nevada" 5] ["Utah" 10]
                            ["Colorado" 15] ["Kansas" 20] ["Missouri" 25]
-                           ["Ohio" 30] ["Kentucky" 35] ["Virginia" 40]]]
+                           ["Ohio" 30] ["Kentucky" 35] ["Virginia" 40]
+                           ["Maryland" 45]]]
           [:li state])])
 
     (q "why" "are you doing this"
