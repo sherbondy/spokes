@@ -4,6 +4,10 @@
             [clojure.xml :as xml]
             [clojure.zip :as zip]))
 
+;; Obviously, I shouldn't be doing this xml processing
+;; for every request. Do it once, then grab pre-processed
+;; version.
+
 ;; [trail count] pairs
 (def trails {:we 4 :ta 12 :ac 7})
 
@@ -36,26 +40,30 @@
 (defn route-fname [trail i]
   (str "resources/gps/" trail (pad-zero i) ".gpx"))
 
-(defn get-route [trail route-file]
+(defn get-route [trail route-file filter-fn]
   (let [route-xml (xml/parse route-file)
         route-z   (zip/xml-zip route-xml)]
-    (apply merge (map (partial useful-info trail)
-                      (all-z-waypoints route-z)))))
+    (into {}
+          (filter filter-fn
+                  (map (partial useful-info trail)
+                       (all-z-waypoints route-z))))))
 
-(defn get-routes [trail file-count]
+(defn get-routes [trail file-count filter-fn]
   (apply merge
          (for [i (range 1 (inc file-count))]
            (let [route-file (route-fname trail i)]
-             (get-route trail route-file)))))
+             (get-route trail route-file filter-fn)))))
 
-(defn kw-routes [kw]
+(defn kw-routes [kw & [filter-fn]]
   (get-routes (str/upper-case (name kw))
-              (kw trails)))
+              (kw trails)
+              (or filter-fn identity)))
 
 ;; should probably maintain a sorted order by longitude
-(def we (kw-routes :we))
-(def ta (kw-routes :ta))
-(def ac (kw-routes :ac))
+(def fval (comp first vals))
+(def we (kw-routes :we (fn [m] (< (:lon (fval m)) -104))))
+(def ta (kw-routes :ta (fn [m] (> (:lon (fval m)) -105))))
+(def ac (kw-routes :ac (fn [m] (> (:lat (fval m)) 37))))
 
 (def all-locations 
   (merge we ta ac))
@@ -69,3 +77,13 @@
   {:symbols wp-symbols
    :trails  trail-list
    :data    all-locations})
+
+(def data-file "resources/public/route-data.edn")
+
+(defn spit-edn-data []
+  (spit data-file edn-data))
+
+;; (spit-edn-data)
+
+(defn slurp-edn-data []
+  (slurp data-file))

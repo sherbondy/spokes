@@ -80,21 +80,41 @@ header {
     background-color: rgba(255,255,255,0);
 }
 
+$map-width: 720px + 2*32px;
+
 #map {
     top: 0;
     left: 50%;
     position: absolute;
-    margin: 0 0 0 -360px;
-    width: 752px;
+    margin: 0 0 0 -1*$map-width/2;
+    width: $map-width;
     height: $header-height;
 }
 
 #trails, #symbols {
     position: absolute;
     top: 16px;
-    width: 200px;
+    width: 180px;
     background: rgba(255,255,255,0.5);
     padding: 8px;
+
+    .toggle {
+        display: block;
+        position: relative;
+        background: #fff;
+        color: #000;
+        text-decoration: none;
+        padding: 4px 8px;
+        text-align: center;
+
+        &:hover {
+            background: #000;
+            color: #fff;
+        }
+        &:active {
+            top: 1px;
+        }
+    }
 
     & > div {
         overflow: hidden;
@@ -104,7 +124,7 @@ header {
             background: #fff;
         }
         
-        input, label {
+        input, label, a {
             padding: 4px;
         }
 
@@ -115,7 +135,7 @@ header {
 
         label {
             float: left;
-            width: 160px;
+            width: 140px;
         }
     }
 }
@@ -128,6 +148,12 @@ header {
     right: 16px;
 }
 
+h2 #radius {
+    font-size: inherit;
+    font-family: mono;
+    width: 2em;
+    text-align: center;
+}
 
 
 .map {

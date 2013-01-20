@@ -11,6 +11,7 @@
                  [ring/ring-jetty-adapter "1.1.0"]
 
                  ;cljs
+                 [prismatic/dommy "0.0.1"]
                  [jayq "2.0.0"]]
 
   :plugins [[lein-ring "0.8.0"

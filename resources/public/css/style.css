@@ -71,34 +71,53 @@ header {
   top: 0;
   left: 50%;
   position: absolute;
-  margin: 0 0 0 -360px;
-  width: 752px;
+  margin: 0 0 0 -392px;
+  width: 784px;
   height: 440px; }
 
 #trails, #symbols {
   position: absolute;
   top: 16px;
-  width: 200px;
+  width: 180px;
   background: rgba(255, 255, 255, 0.5);
   padding: 8px; }
+  #trails .toggle, #symbols .toggle {
+    display: block;
+    position: relative;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    padding: 4px 8px;
+    text-align: center; }
+    #trails .toggle:hover, #symbols .toggle:hover {
+      background: #000;
+      color: #fff; }
+    #trails .toggle:active, #symbols .toggle:active {
+      top: 1px; }
   #trails > div, #symbols > div {
     overflow: hidden; }
     #trails > div:hover, #symbols > div:hover {
       background: #fff; }
-    #trails > div input, #trails > div label, #symbols > div input, #symbols > div label {
+    #trails > div input, #trails > div label, #trails > div a, #symbols > div input, #symbols > div label, #symbols > div a {
       padding: 4px; }
     #trails > div input[type="checkbox"], #symbols > div input[type="checkbox"] {
       margin: 10px 8px 0 0;
       float: right; }
     #trails > div label, #symbols > div label {
       float: left;
-      width: 160px; }
+      width: 140px; }
 
 #trails {
   left: 16px; }
 
 #symbols {
   right: 16px; }
+
+h2 #radius {
+  font-size: inherit;
+  font-family: mono;
+  width: 2em;
+  text-align: center; }
 
 .map {
   width: 100%;

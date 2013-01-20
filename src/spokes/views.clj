@@ -58,11 +58,13 @@
 
    [:div#trails
     [:h3 "Trails"]
+    [:a.toggle {:href "#"} "Toggle All"]
     (for [trail gps/trail-list]
       (checkbox-div (:abbr trail) (:name trail)))]
 
    [:div#symbols
     [:h3 "Locations"]
+    [:a.toggle {:href "#"} "Toggle All"]
     (for [symbol gps/wp-symbols]
       (let [name (hyphenate symbol)]
         (checkbox-div name symbol symbol)))]
@@ -74,7 +76,8 @@
       "Adventure Cycling"] "."]
 
     [:h2 "Locations within a "
-     [:input {:type "text" :id "radius" :name "radius" :placeholder "10"}]
+     [:input {:type "text" :maxlength "2" :placeholder "10"
+              :id "radius" :name "radius"}]
      " mile radius:"]
     [:div#nearby]]
 
