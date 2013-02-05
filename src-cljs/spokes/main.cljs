@@ -23,6 +23,7 @@
 (defn log [& messages]
   (.log js/console (apply str messages)))
 
+
 ;; Tips (for the terminal):
 ;;> lein cljsbuild auto
 ;; To compile all cljs files into JavaScript
@@ -31,12 +32,10 @@
 ;; To start up an interactive cljs repl (once the script is compiled).
 ;; But piggieback (nREPL) works better
 
-(defn fit-document [$elem]
+(defn fit [$elem $doc]
   (log "resizing canvas")
-  (let [$doc ($ js/document)]
-    (doseq [attr ["height" "width"]]
-      (.attr $elem attr 0) ;; elem could impact document size
-      (.attr $elem attr (.attr $doc attr)))))
+  (.attr $elem "width"  (.width $doc))
+  (.attr $elem "height" (.height $doc)))
 
 (defn bounding-box [$elem]
   (let [offset (.offset $elem)
@@ -76,18 +75,71 @@
                          [prop (aget ctx (camel-name prop))])
                        props))))
 
-(defn draw-scene [$canvas]
-  )
+(defn wh [elem]
+  [(.-width elem)
+   (.-height elem)])
+
+(defn center-xy 
+  "Return (top left) x, y, width, and height of child centered inside parent.
+   Does not actually relocate child."
+  [child parent]
+  (let [[cw ch] (wh child)
+        [pw ph] (wh parent)]
+    [(/ (- pw cw) 2)
+     (/ (- ph cw) 2)
+     cw
+     ch]))
+
+(defn draw-bike-frame [ctx canvas next-draw-fn]
+  (let [bike-img (js/Image.)]
+    (set! (.-onload bike-img)
+          (fn []
+            (let [[x y w h] (center-xy bike-img canvas)]
+              (.drawImage ctx bike-img x y)
+              (log "Drew bike frame")
+              (next-draw-fn ctx x y w h))))
+    (set! (.-src bike-img) "/img/bike-frame.png")))
+
+(defn draw-wheel [ctx x y d]
+  (let [r (/ d 2)]
+    (cm/with-path ctx
+      (.arc ctx x y d 0 (* 2 Math/PI) true)
+      (.stroke ctx))))
+
+(defn draw-wheels [ctx x y w h]
+  (log "drawing wheels now")
+  (let [d  90
+        x1 (+ x 10)
+        x2 (+ x 350)
+        wheel-y (+ y h (* -1 (/ d 2)))]
+    (cm/with-ctx-props ctx {:line-width 20}
+      (draw-wheel ctx x1 wheel-y d)
+      (draw-wheel ctx x2 wheel-y d))))
+
+(defn draw-bike [ctx canvas]
+  (draw-bike-frame ctx canvas draw-wheels))
+
+(defn get-ctx [canvas]
+  (.getContext canvas "2d"))
+
+(defn draw-scene [canvas]
+  (let [ctx (get-ctx canvas)]
+    (draw-bike ctx canvas)))
+
+;; (draw-scene (aget ($ "#canvas") 0))
 
 (jm/ready
  ;; comment this out in production
 
- (comment
-   (let [$canvas ($ "#canvas")
-         fit-canvas-fn #(do (fit-document $canvas)
-                            (draw-scene $canvas))]
-     (.resize ($ js/window) fit-canvas-fn)
-     (fit-canvas-fn)))
+ (comment)
+ (let [$canvas ($ "#canvas")
+       $header ($ "#header")
+       canvas  (aget $canvas 0)
+       header  (aget $header 0)
+       fit-canvas-fn #(do (fit $canvas $header)
+                          (draw-scene canvas))]
+   (.resize ($ js/window) fit-canvas-fn)
+   (fit-canvas-fn))
 
  (when (u/exists? "#map")
    (u/log "Initializing the map..")

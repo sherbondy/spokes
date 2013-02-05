@@ -20241,20 +20241,10 @@ spokes.main.log = function() {
   b.cljs$lang$arity$variadic = a;
   return b
 }();
-spokes.main.fit_document = function(a) {
+spokes.main.fit = function(a, b) {
   spokes.main.log.call(null, "resizing canvas");
-  var b = jayq.core.$.call(null, document), c = cljs.core.seq.call(null, cljs.core.PersistentVector.fromArray(["height", "width"], !0));
-  if(c) {
-    for(var d = cljs.core.first.call(null, c);;) {
-      if(a.attr(d, 0), a.attr(d, b.attr(d)), d = cljs.core.next.call(null, c)) {
-        c = d, d = cljs.core.first.call(null, c)
-      }else {
-        return null
-      }
-    }
-  }else {
-    return null
-  }
+  a.attr("width", b.width());
+  return a.attr("height", b.height())
 };
 spokes.main.bounding_box = function(a) {
   var b = a.offset(), c = a.height(), d = a.width(), a = b.top, b = b.left, d = b + d, c = a + c;
@@ -20299,9 +20289,56 @@ spokes.main.get_ctx_props = function get_ctx_props(b, c) {
     return cljs.core.PersistentVector.fromArray([c, b[spokes.main.camel_name.call(null, c)]], !0)
   }, c))
 };
-spokes.main.draw_scene = function() {
-  return null
+spokes.main.wh = function(a) {
+  return cljs.core.PersistentVector.fromArray([a.width, a.height], !0)
+};
+spokes.main.center_xy = function(a, b) {
+  var c = spokes.main.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.main.wh.call(null, b), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null);
+  return cljs.core.PersistentVector.fromArray([(f - d) / 2, (e - d) / 2, d, c], !0)
+};
+spokes.main.draw_bike_frame = function(a, b, c) {
+  var d = new Image;
+  d.onload = function() {
+    var e = spokes.main.center_xy.call(null, d, b), f = cljs.core.nth.call(null, e, 0, null), g = cljs.core.nth.call(null, e, 1, null), h = cljs.core.nth.call(null, e, 2, null), e = cljs.core.nth.call(null, e, 3, null);
+    a.drawImage(d, f, g);
+    spokes.main.log.call(null, "Drew bike frame");
+    return c.call(null, a, f, g, h, e)
+  };
+  return d.src = "/img/bike-frame.png"
+};
+spokes.main.draw_wheel = function(a, b, c, d) {
+  a.beginPath();
+  a.arc(b, c, d, 0, 2 * Math.PI, !0);
+  a.stroke();
+  return a.closePath()
+};
+spokes.main.draw_wheels = function(a, b, c, d, e) {
+  spokes.main.log.call(null, "drawing wheels now");
+  d = b + 10;
+  b += 350;
+  c = c + e + -45;
+  e = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width"], {"\ufdd0'line-width":20}));
+  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width"], {"\ufdd0'line-width":20}));
+  spokes.main.draw_wheel.call(null, a, d, c, 90);
+  spokes.main.draw_wheel.call(null, a, b, c, 90);
+  return spokes.main.set_ctx_props_BANG_.call(null, a, e)
+};
+spokes.main.draw_bike = function(a, b) {
+  return spokes.main.draw_bike_frame.call(null, a, b, spokes.main.draw_wheels)
+};
+spokes.main.get_ctx = function(a) {
+  return a.getContext("2d")
+};
+spokes.main.draw_scene = function(a) {
+  var b = spokes.main.get_ctx.call(null, a);
+  return spokes.main.draw_bike.call(null, b, a)
 };
 jayq.core.document_ready.call(null, function() {
+  var a = jayq.core.$.call(null, "#canvas"), b = jayq.core.$.call(null, "#header"), c = a[0], d = function() {
+    spokes.main.fit.call(null, a, b);
+    return spokes.main.draw_scene.call(null, c)
+  };
+  jayq.core.$.call(null, window).resize(d);
+  d.call(null);
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });

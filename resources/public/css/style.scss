@@ -28,7 +28,6 @@ $sky-blue: rgb(180,200,240);
 
 header {
     position: absolute;
-    z-index: 1;
     top: 0px;
     left: 0px;
     width:100%;
@@ -73,9 +72,7 @@ header {
 
 #canvas {
     position: absolute;
-    z-index: 0;
-    height: $header-height;
-    width: 100%;
+    z-index: 1;
     top: 0px;
     left: 0px;
     background-color: rgba(255,255,255,0);
@@ -193,7 +190,6 @@ h2 #radius {
     margin: $header-height auto 32px;
     background-color: rgba(255,255,255,0.5);
     position: relative;
-    z-index: 1;
 
     & p {
         margin-bottom: 16px;
