@@ -8,7 +8,7 @@
                  [compojure "1.1.3"]
                  [environ "0.3.0"]
                  [hiccup "1.0.2"]
-                 [ring/ring-jetty-adapter "1.1.0"]
+                 [http-kit "2.0.0-RC2"]
 
                  ;cljs
                  [prismatic/dommy "0.0.1"]

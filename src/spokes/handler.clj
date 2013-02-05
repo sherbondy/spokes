@@ -3,7 +3,7 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [environ.core :refer [env]]
-            [ring.adapter.jetty :as ring]
+            [org.httpkit.server :as http]
             [spokes.views :refer [home route]]))
 
 (def team
@@ -15,8 +15,7 @@
    {:name "Claire O'Connell"}
    {:name "Jeff Prouty"}
    {:name "Ethan Sherbondy"}
-   {:name "Manny Singh"}
-   {:name "Cathie Yun"}])
+   {:name "Manny Singh"}])
 
 (defroutes app-routes
   (GET "/" [] (home team))
@@ -30,8 +29,7 @@
 
 
 (defn start [port]
-  (ring/run-jetty (var app)
-                  {:port (or port 8000) :join? false}))
+  (http/run-server app {:port (or port 8000)}))
 
 (defn -main
   ([] (-main 8000))
@@ -46,6 +44,5 @@
 ;; (def app (-> app (reload/wrap-reload)))
 ;; (defonce server (start 8000))
 
-;; To stop the server, just do:
-;; (.stop server)
-;; (.start server)
+;; server returns a function that, when evaluated, stops the server:
+;; (server)

@@ -3,27 +3,9 @@
             [environ.core :refer [env]]
             [hiccup.core :refer [html]]
             [hiccup.page :refer [html5 include-css include-js]]
-            [spokes.gps :as gps])
+            [spokes.gps :as gps]
+            [spokes.util :as u])
   (:use [hiccup.def :only [defhtml]]))
-
-(defn font
-  ([name] (font name nil))
-  ([name weights] (font name weights []))
-  ([name weights styles]
-     (let [styled-weights 
-           (for [weight weights style (conj styles "")]
-             (str weight style))]
-       (str (str/replace name " " "+") 
-            (if weights
-              (str ":" (str/join "," styled-weights)))))))
-
-(defn fonts [& args]
-  (map #(apply font %) args))
-
-(defhtml font-link [& faces]
-  [:link {:rel "stylesheet" :type "text/css"
-          :href (str "http://fonts.googleapis.com/css?family="
-                     (str/join "|" (apply fonts faces)))}])
 
 (defn layout [& body]
   (html5
@@ -31,8 +13,8 @@
     [:meta {:charset "utf-8"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
 
-    (font-link ["Lato" [400 700] ["italic"]]
-               ["Signika" [400 600 700]])
+    (u/font-link ["Lato" [400 700] ["italic"]]
+                 ["Signika" [400 600 700]])
     (include-css "/css/style.css")
     (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
                 (str "//maps.googleapis.com/maps/api/js?key=" 
@@ -40,11 +22,6 @@
                 "/js/main.js")
    [:body
     body]]))
-
-(defn hyphenate [name]
-  (str/lower-case (-> name 
-                      (str/replace #"\s+" "-")
-                      (str/replace #"[\(\)]" ""))))
 
 (defn checkbox-div [name label & [value]]
   [:div
@@ -66,7 +43,7 @@
     [:h3 "Locations"]
     [:a.toggle {:href "#"} "Toggle All"]
     (for [symbol gps/wp-symbols]
-      (let [name (hyphenate symbol)]
+      (let [name (u/hyphenate symbol)]
         (checkbox-div name symbol symbol)))]
 
    [:div#content
@@ -121,10 +98,11 @@
         " through " [:time {:datetime "2013-08-30"} "August 30."]])
 
     (q "where" "are you going"
-       [:p "We'll be biking from San Francisco on the Western Express "
-        "trail, then taking the Trans America trail to Washington D.C. "
-        "Time allowing, we'll also try heading up the east coast "
-        "to get back to Cambridge, Massachusetts in time for the fall semester."]
+       [:p "We'll be biking from San Francisco on the Western Express 
+        trail, then taking the Trans America trail to Washington D.C.
+        Time allowing, we'll also try heading up the east coast 
+        to get back to Cambridge, Massachusetts in time for the 
+        fall semester."]
        [:p "Which means we'll get to explore, at a minimum, the following states:"]
 
        [:ol
@@ -144,5 +122,5 @@
         "You can definitely help by spreading the word! "
         "And joining the conversation. "
         "Follow our journey on the "
-        [:a.blog {:href "http://spokesmit.tumblr.com"} "blog"]]
+        [:a.blog {:href "http://blog.spokesamerica.org"} "blog"]]
        )]))
