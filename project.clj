@@ -4,6 +4,7 @@
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.clojure/data.zip "0.1.1"]
+                 [com.cemerick/piggieback "0.0.2"]
 
                  [compojure "1.1.3"]
                  [environ "0.3.0"]
@@ -16,7 +17,7 @@
 
   :plugins [[lein-ring "0.8.0"
              :exclusions [org.clojure/clojure]]
-            [lein-cljsbuild "0.2.10"
+            [lein-cljsbuild "0.3.0"
              :exclusions [org.clojure/clojure]]]
 
   :ring {:handler spokes.handler/app
@@ -32,9 +33,19 @@
 
   :hooks [leiningen.cljsbuild]
 
-  :cljsbuild
-  {:builds
-   [{:source-path "src-cljs"
+  ;; auto-add piggieback namespace to lein repl
+  :repl-options
+  {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+
+  :cljsbuild 
+  {
+   :repl-listen-port 9000
+   
+   :builds
+   [{:source-paths ["src-cljs"],
      :compiler
      {:output-to "resources/public/js/main.js"
-      :pretty-print true}}]})
+      :optimizations :simple
+      :pretty-print true}}]}
+
+  :main spokes.handler)

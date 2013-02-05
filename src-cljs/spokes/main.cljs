@@ -7,17 +7,29 @@
   (:require-macros [jayq.macros :as jm]
                    [spokes.canvas-macros :as cm]))
 
+;; Eval these (in clj land) for interactive development!
+
+;; for rhino (server-side js, mainly for testing):
+;; (cemerick.piggieback/cljs-repl)
+
+;; for browser repl:
+
+;;  (use '[cljs.repl.browser :only [repl-env]])
+;;  (def brepl (repl-env :port 9000))
+;;  (cemerick.piggieback/cljs-repl :repl-env (doto brepl cljs.repl/-setup))
+
+(repl/connect "http://localhost:9000/repl")
+
 (defn log [& messages]
   (.log js/console (apply str messages)))
 
-;; Tips:
+;; Tips (for the terminal):
 ;;> lein cljsbuild auto
 ;; To compile all cljs files into JavaScript
 
 ;;> lein trampoline cljsbuild repl-listen
-;; To start up an interactive cljs repl.
-;; (once the application is already compiled).
-;; Then, from Emacs: M-x nrepl, and specify port 9000.
+;; To start up an interactive cljs repl (once the script is compiled).
+;; But piggieback (nREPL) works better
 
 (defn fit-document [$elem]
   (log "resizing canvas")
@@ -69,14 +81,14 @@
 
 (jm/ready
  ;; comment this out in production
- ;; (repl/connect "http://localhost:9000/repl")
 
- (let [$canvas ($ "#canvas")
-       fit-canvas-fn #(do (fit-document $canvas)
-                          (draw-scene $canvas))]
-   (.resize ($ js/window) fit-canvas-fn)
-   (fit-canvas-fn))
+ (comment
+   (let [$canvas ($ "#canvas")
+         fit-canvas-fn #(do (fit-document $canvas)
+                            (draw-scene $canvas))]
+     (.resize ($ js/window) fit-canvas-fn)
+     (fit-canvas-fn)))
 
  (when (u/exists? "#map")
-   (u/log "initializing the map..")
+   (u/log "Initializing the map..")
    (sm/initialize)))

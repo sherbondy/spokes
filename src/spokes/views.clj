@@ -7,21 +7,24 @@
             [spokes.util :as u])
   (:use [hiccup.def :only [defhtml]]))
 
+(defn fname [person]
+  (first (str/split (:name person) #"\s")))
+
 (defn layout [& body]
   (html5
    [:head
-    [:meta {:charset "utf-8"}]
+    [:meta {:http-equiv "Content-Type" :content "text/html;charset=UTF-8"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
 
     (u/font-link ["Lato" [400 700] ["italic"]]
                  ["Signika" [400 600 700]])
-    (include-css "/css/style.css")
+    (include-css "/css/style.css")]
+
+   [:body body
     (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
                 (str "//maps.googleapis.com/maps/api/js?key=" 
                      (env :google-maps-key) "&sensor=false")
-                "/js/main.js")
-   [:body
-    body]]))
+                "/js/main.js")]))
 
 (defn checkbox-div [name label & [value]]
   [:div
@@ -83,12 +86,13 @@
 
    [:div#content
     (q "who" "are you"
-       [:p "We are " (count team) " undergraduates at MIT who are passionate "
-        "about education."]
+       [:p "We are " (count team) " undergraduates at MIT who are passionate
+          about education:"]
 
-       (comment [:ul
-                 (for [person team]
-                   [:li [:h5 (:name person)]])]))
+       [:ul#team
+        (for [person team]
+          (let [pfirst (fname person)]
+            [:li [:h5 [:a.pill-link {:href (str "#" pfirst)} pfirst]]]))])
 
     (q "what" "are you doing"
        [:p "We're biking across the United States."])
@@ -122,5 +126,5 @@
         "You can definitely help by spreading the word! "
         "And joining the conversation. "
         "Follow our journey on the "
-        [:a.blog {:href "http://blog.spokesamerica.org"} "blog"]]
+        [:a.pill-link {:href "http://blog.spokesamerica.org"} "blog"]]
        )]))

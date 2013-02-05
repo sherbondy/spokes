@@ -7,15 +7,15 @@
             [spokes.views :refer [home route]]))
 
 (def team
-  [{:name "Natasha Balwit"}
-   {:name "Turner Bohlen"}
-   {:name "Phillip Daniel"} 
-   {:name "Bruno Faviero"}
-   {:name "Nathan Kit Kennedy"}
+  [{:name "Bruno Faviero"}
    {:name "Claire O'Connell"}
-   {:name "Jeff Prouty"}
    {:name "Ethan Sherbondy"}
-   {:name "Manny Singh"}])
+   {:name "Jeff Prouty"}
+   {:name "Manny Singh"}
+   {:name "Natasha Balwit"}
+   {:name "Nathan Kit Kennedy"}
+   {:name "Phillip Daniel"}
+   {:name "Turner Bohlen"}])
 
 (defroutes app-routes
   (GET "/" [] (home team))
@@ -40,9 +40,11 @@
                :else port)))))
 
 ;; For interactive development, evaluate these:
-;; (require '[ring.middleware.reload :as reload])
-;; (def app (-> app (reload/wrap-reload)))
-;; (defonce server (start 8000))
-
+(comment
+  (do
+    (require '[ring.middleware.reload :as reload])
+    (def app (-> app (reload/wrap-reload)))
+    (defonce server (start 8000)))
+)
 ;; server returns a function that, when evaluated, stops the server:
 ;; (server)
