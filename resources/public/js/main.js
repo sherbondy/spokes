@@ -20300,9 +20300,9 @@ spokes.main.draw_bike_frame = function(a, b, c) {
   var d = new Image;
   d.onload = function() {
     var e = spokes.main.center_xy.call(null, d, b), f = cljs.core.nth.call(null, e, 0, null), g = cljs.core.nth.call(null, e, 1, null), h = cljs.core.nth.call(null, e, 2, null), e = cljs.core.nth.call(null, e, 3, null);
+    c.call(null, a, f, g, h, e);
     a.drawImage(d, f, g);
-    spokes.main.log.call(null, "Drew bike frame");
-    return c.call(null, a, f, g, h, e)
+    return spokes.main.log.call(null, "Drew bike frame")
   };
   return d.src = "/img/bike-frame.png"
 };
@@ -20310,6 +20310,7 @@ spokes.main.draw_wheel = function(a, b, c, d) {
   a.beginPath();
   a.arc(b, c, d, 0, 2 * Math.PI, !0);
   a.stroke();
+  a.fill();
   return a.closePath()
 };
 spokes.main.draw_wheels = function(a, b, c, d, e) {
@@ -20317,8 +20318,8 @@ spokes.main.draw_wheels = function(a, b, c, d, e) {
   d = b + 10;
   b += 350;
   c = c + e + -45;
-  e = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width"], {"\ufdd0'line-width":20}));
-  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width"], {"\ufdd0'line-width":20}));
+  e = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width", "\ufdd0'fill-style"], {"\ufdd0'line-width":20, "\ufdd0'fill-style":"rgb(255,255,255)"}));
+  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width", "\ufdd0'fill-style"], {"\ufdd0'line-width":20, "\ufdd0'fill-style":"rgb(255,255,255)"}));
   spokes.main.draw_wheel.call(null, a, d, c, 90);
   spokes.main.draw_wheel.call(null, a, b, c, 90);
   return spokes.main.set_ctx_props_BANG_.call(null, a, e)

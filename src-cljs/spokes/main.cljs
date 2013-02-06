@@ -95,16 +95,17 @@
     (set! (.-onload bike-img)
           (fn []
             (let [[x y w h] (center-xy bike-img canvas)]
+              (next-draw-fn ctx x y w h)
               (.drawImage ctx bike-img x y)
-              (log "Drew bike frame")
-              (next-draw-fn ctx x y w h))))
+              (log "Drew bike frame"))))
     (set! (.-src bike-img) "/img/bike-frame.png")))
 
 (defn draw-wheel [ctx x y d]
   (let [r (/ d 2)]
     (cm/with-path ctx
       (.arc ctx x y d 0 (* 2 Math/PI) true)
-      (.stroke ctx))))
+      (.stroke ctx)
+      (.fill ctx))))
 
 (defn draw-wheels [ctx x y w h]
   (log "drawing wheels now")
@@ -112,7 +113,7 @@
         x1 (+ x 10)
         x2 (+ x 350)
         wheel-y (+ y h (* -1 (/ d 2)))]
-    (cm/with-ctx-props ctx {:line-width 20}
+    (cm/with-ctx-props ctx {:line-width 20 :fill-style "rgb(255,255,255)"}
       (draw-wheel ctx x1 wheel-y d)
       (draw-wheel ctx x2 wheel-y d))))
 
