@@ -5,12 +5,15 @@ This is the website for our bicycling trip. I strive to document it and make it 
 ## Prerequisites
 
 You will need [Leiningen][1] 1.7.0 or above installed.
-For stylesheets, we're using SASS and [sass-twitter-bootstrap][2].
+For stylesheets, we're using SASS with [sass-twitter-bootstrap][2]
+and [Compass][3].
+
 Make sure to do `git submodule update --init` when you first clone
 the repository to grab all dependencies.
 
 [1]: https://github.com/technomancy/leiningen
 [2]: https://github.com/jlong/sass-twitter-bootstrap
+[3]: http://compass-style.org
 
 ## Running
 
@@ -22,7 +25,8 @@ To play around, do:
 
     lein repl
     
-Do `rake watch` while editing the `.scss` files to auto-compile them.
+Do `rake watch` from `resources/bootstrap` while editing 
+the `.scss` files to auto-compile them.
 
 ## License
 
@@ -62,10 +66,10 @@ Typefaces:
 
 Theme ideas:
   - Mountains, and a road running through the page, with animated bikes zipping by randomly.
-  - Sun is dominant on page. Position of sun matches actual time of day sunrise/set preditions based on where we are (Boston until the trip begins...)
+  - Sun is dominant on page. Position of sun and coloring of sky matches actual time of day sunrise/set preditions based on where we are (Boston until the trip begins...)
   - The WHEEL for "Who", with team members as the spokes :D
   
-Map:
+Map (the project within the project):
   - Show our current location
   - Start with sparsely populated map, but let visitors maximize the page
     to focus on it.
