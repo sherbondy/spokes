@@ -5,8 +5,12 @@ This is the website for our bicycling trip. I strive to document it and make it 
 ## Prerequisites
 
 You will need [Leiningen][1] 1.7.0 or above installed.
+For stylesheets, we're using SASS and [sass-twitter-bootstrap][2].
+Make sure to do `git submodule update --init` when you first clone
+the repository to grab all dependencies.
 
 [1]: https://github.com/technomancy/leiningen
+[2]: https://github.com/jlong/sass-twitter-bootstrap
 
 ## Running
 
@@ -16,7 +20,9 @@ To start a web server for the application, run:
 
 To play around, do:
 
-   lein repl
+    lein repl
+    
+Do `rake watch` while editing the `.scss` files to auto-compile them.
 
 ## License
 
@@ -30,14 +36,17 @@ Even maps should have static representations.
 Be responsive: look nice regardless of screen size.
 
 Goals:
+  - Single Page Site, should work well on mobile devices
   - Inform visitors about the trip and its purpose.
   - Tell them how they can:
     - interact with us (track our progress)
     - donate/sponsor?
+      - Have Donate button on the page (Stripe/PayPal?)
     - indicate if we can stay with them
     - polls for towns to visit on the way
     - signups for classes
     - teacher signup
+    - general contact form for teachers, students, sponsors...
 
 
 Setup:
@@ -58,11 +67,11 @@ Theme ideas:
   
 Map:
   - Show our current location
+  - Start with sparsely populated map, but let visitors maximize the page
+    to focus on it.
   - Store route offline using LocalStorage API
   - Filter by type of waypoint, e.g. Lodgings, Restrooms, Campgrounds
   - Show nearby waypoints based on current location
   - Filter by section of trail, e.g. Western Express
-
-Have MULTIPLE bikes, one for each question.
 
 Sponsors float around in the cloud.

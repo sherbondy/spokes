@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg3507"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="New document 18">
+  <defs
+     id="defs3509" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="339.28571"
+     inkscape:cy="548.57143"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1201"
+     inkscape:window-height="601"
+     inkscape:window-x="0"
+     inkscape:window-y="56"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3512">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       sodipodi:linespacing="125%"
+       id="text3890"
+       y="537.43188"
+       x="269.28162"
+       style="font-size:71.13011932px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Baumans;-inkscape-font-specification:Baumans"
+       xml:space="preserve"
+       inkscape:export-filename="/home/ethanis/code/spokes/resources/logo-square.png"
+       inkscape:export-xdpi="664.94232"
+       inkscape:export-ydpi="664.94232"><tspan
+         id="tspan3892"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Baumans;-inkscape-font-specification:Baumans">p</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3894"
+       y="537.43188"
+       x="316.41174"
+       style="font-size:71.13011932px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:baumans;-inkscape-font-specification:baumans"
+       xml:space="preserve"
+       inkscape:export-filename="/home/ethanis/code/spokes/resources/logo-square.png"
+       inkscape:export-xdpi="664.94232"
+       inkscape:export-ydpi="664.94232"><tspan
+         id="tspan3896"
+         style="font-family:baumans;-inkscape-font-specification:baumans">o</tspan></text>
+    <path
+       id="rect3012"
+       style="fill:#666666;fill-opacity:1;stroke:#666666;stroke-width:4.02338648;stroke-miterlimit:4;stroke-opacity:1"
+       d="m 296.94156,471.34923 c -5.92839,2.56123 -8.04658,6.97426 -11.13563,5.19263 -1.4339,-3.07502 0.34903,-6.76819 4.49321,-7.33412 3.53049,-0.48212 5.76187,0.17317 6.64242,2.14149 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccsc"
+       inkscape:export-filename="/home/ethanis/code/spokes/resources/logo-square.png"
+       inkscape:export-xdpi="664.94232"
+       inkscape:export-ydpi="664.94232" />
+    <path
+       style="fill:#666666;fill-opacity:1;stroke:#666666;stroke-width:1.15163255;stroke-opacity:1"
+       d="m 293.30812,471.59116 c 2.89175,0 5.23532,2.34472 5.23532,5.23417 0,2.89175 -2.34357,5.23532 -5.23532,5.23532 -2.8906,0 -5.23417,-2.34472 -5.23417,-5.23532 0,-2.88945 2.34357,-5.23417 5.23417,-5.23417 z"
+       id="path3091"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ethanis/code/spokes/resources/logo-square.png"
+       inkscape:export-xdpi="664.94232"
+       inkscape:export-ydpi="664.94232" />
+    <path
+       style="fill:#666666;fill-opacity:1;stroke:#666666;stroke-width:1.15163255;stroke-opacity:1"
+       d="m 320.98407,524.23674 c 0,2.16622 -1.75854,3.92476 -3.92706,3.92476 -2.16738,0 -3.74537,-0.97227 -4.26453,-3.07536 -1.78926,-8.49091 -5.13035,-21.47571 -4.37558,-23.02106 2.26279,-3.6222 5.10953,-8.12725 8.52078,-11.07815 0,0 -2.67319,-2.22002 -5.62572,-3.34102 -2.08399,-0.79124 -6.43215,-1.83012 -6.43215,-1.83012 l -0.85082,7.86123 c -5.86403,3.064 -8.57198,3.9938 -13.51135,6.01476 -4.77006,1.58755 -6.20096,-3.25234 -2.55105,-4.82016 4.35606,-2.33761 7.10814,-2.73545 10.98929,-5.34802 -0.70324,-10.28647 1.35748,-15.99911 9.26663,-14.41973 10.62425,3.49633 22.3499,5.2842 21.89634,14.37727 0.0739,5.21809 -5.85929,8.24869 -13.26227,16.60235 l 4.12864,18.15325 z"
+       id="path2992"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cscccscccccccccc"
+       inkscape:export-filename="/home/ethanis/code/spokes/resources/logo-square.png"
+       inkscape:export-xdpi="664.94232"
+       inkscape:export-ydpi="664.94232" />
+  </g>
+</svg>
