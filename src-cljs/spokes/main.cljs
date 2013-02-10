@@ -13,16 +13,14 @@
 ;; (cemerick.piggieback/cljs-repl)
 
 ;; for browser repl:
-
-;;  (use '[cljs.repl.browser :only [repl-env]])
-;;  (def brepl (repl-env :port 9000))
-;;  (cemerick.piggieback/cljs-repl :repl-env (doto brepl cljs.repl/-setup))
+(comment
+  (do
+    (use '[cljs.repl.browser :only [repl-env]])
+    (def brepl (repl-env :port 9000))
+    (cemerick.piggieback/cljs-repl :repl-env (doto brepl cljs.repl/-setup)))
+  )
 
 (repl/connect "http://localhost:9000/repl")
-
-(defn log [& messages]
-  (.log js/console (apply str messages)))
-
 
 ;; Tips (for the terminal):
 ;;> lein cljsbuild auto
@@ -33,7 +31,7 @@
 ;; But piggieback (nREPL) works better
 
 (defn fit [$elem $doc]
-  (log "resizing canvas")
+  (u/log "resizing canvas")
   (.attr $elem "width"  (.width $doc))
   (.attr $elem "height" (.height $doc)))
 
@@ -75,6 +73,19 @@
                          [prop (aget ctx (camel-name prop))])
                        props))))
 
+(def two-pi (* 2 Math/PI))
+
+;; normal dist probability function for clouds
+(defn pdf [x mean sigma]
+  (/ (Math/pow Math/E (/ (* -1 (Math/pow (- x mean) 2))
+                         (* 2  (Math/pow sigma 2))))
+     (* sigma (Math/sqrt two-pi))))
+
+;; for clouds, define 2 normal distributions
+;; with means at x = width/2
+;; and y = height
+;; sample randomly within boundaries to draw circles
+
 (defn wh [elem]
   [(.-width elem)
    (.-height elem)])
@@ -97,25 +108,27 @@
             (let [[x y w h] (center-xy bike-img canvas)]
               (next-draw-fn ctx x y w h)
               (.drawImage ctx bike-img x y)
-              (log "Drew bike frame"))))
+              (u/log "Drew bike frame"))))
     (set! (.-src bike-img) "/img/bike-frame.png")))
 
-(defn draw-wheel [ctx x y d]
-  (let [r (/ d 2)]
-    (cm/with-path ctx
-      (.arc ctx x y d 0 (* 2 Math/PI) true)
-      (.stroke ctx)
-      (.fill ctx))))
+(defn draw-circle [ctx x y r]
+  (.arc ctx x y (* r 2) 0 two-pi true))
+
+(defn draw-wheel [ctx x y r]
+  (cm/with-path ctx
+    (draw-circle ctx x y r)
+    (.stroke ctx)
+    (.fill ctx)))
 
 (defn draw-wheels [ctx x y w h]
-  (log "drawing wheels now")
-  (let [d  90
-        x1 (+ x 10)
-        x2 (+ x 350)
-        wheel-y (+ y h (* -1 (/ d 2)))]
+  (u/log "drawing wheels now")
+  (let [r       45
+        x1      (+ x 10)
+        x2      (+ x 350)
+        wheel-y (+ y h (* -1 r))]
     (cm/with-ctx-props ctx {:line-width 20 :fill-style "rgb(255,255,255)"}
-      (draw-wheel ctx x1 wheel-y d)
-      (draw-wheel ctx x2 wheel-y d))))
+      (draw-wheel ctx x1 wheel-y r)
+      (draw-wheel ctx x2 wheel-y r))))
 
 (defn draw-bike [ctx canvas]
   (draw-bike-frame ctx canvas draw-wheels))
@@ -129,10 +142,44 @@
 
 ;; (draw-scene (aget ($ "#canvas") 0))
 
-(jm/ready
- ;; comment this out in production
+(defn toggle-bio [e]
+  (this-as this
+           (let [$this ($ this)]
+             (.preventDefault e)
+             (jq/hide ($ "#bios div"))
+             (jq/show ($ (jq/attr $this "href")))
+             (.removeClass ($ "#team a") "active")
+             (.addClass $this "active"))))
 
- (comment)
+(defn take-n-rand-ints [n min-int max-int]
+  (take n (repeatedly #(+ min-int (rand-int max-int)))))
+
+(defn draw-cloud [canvas w h]
+  (let [ctx      (get-ctx canvas)
+        r        (/ (min w h) 20.0)
+        min-val  (* 2 r)
+        x-sigma  (/ w 2)
+        x-mean   (+ x-sigma min-val)
+        y-sigma  (/ h 4)
+        y-mean   (+ (* h 2/3) min-val)
+        xs-count w
+        ys-count h
+        x-cutoff (* 0.1 (/ x-sigma w))
+        y-cutoff (* 0.1 (/ y-sigma h))]
+    (cm/with-ctx-props ctx {:fill-style "rgba(255,255,255,0.5)"}
+      (doseq [x (range min-val (+ w (* 4 min-val)))
+              y (range min-val y)]
+        (let [xp    (pdf x x-mean x-sigma)
+              yp    (pdf y y-mean y-sigma)
+              draw? (and (< (rand x-cutoff) xp)
+                         (< (rand y-cutoff) yp))]
+          (if draw?
+            (cm/with-path ctx
+              (draw-circle ctx x y r)
+              (.fill ctx))))))
+    (u/log "done with cloud")))
+
+(jm/ready
  (let [$canvas ($ "#canvas")
        $header ($ "#header")
        canvas  (aget $canvas 0)
@@ -142,15 +189,12 @@
    (.resize ($ js/window) fit-canvas-fn)
    (fit-canvas-fn))
 
- (jq/on ($ "#team") :click "a" 
-        (fn [e]
-          (this-as this
-                   (let [$this ($ this)]
-                     (.preventDefault e)
-                     (jq/hide ($ "#bios div"))
-                     (jq/show ($ (jq/attr $this "href")))
-                     (.removeClass ($ "#team a") "active")
-                     (.addClass $this "active")))))
+ (jq/on ($ "#team") :click "a" toggle-bio)
+
+ (let [$logo-canvas ($ "#logo canvas")]
+   (draw-cloud (aget $logo-canvas 0)
+               (.width $logo-canvas)
+               (.height $logo-canvas)))
 
  (when (u/exists? "#map")
    (u/log "Initializing the map..")

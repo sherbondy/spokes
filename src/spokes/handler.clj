@@ -72,6 +72,6 @@
     (require '[ring.middleware.reload :as reload])
     (def app (-> app (reload/wrap-reload)))
     (defonce server (start 8000)))
-)
+  )
 ;; server returns a function that, when evaluated, stops the server:
 ;; (server)

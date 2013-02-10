@@ -127,7 +127,9 @@
    [:canvas#canvas]
 
    [:header#header
-    [:h1 "Spokes"]
+    [:div#logo 
+     [:h1 "Spokes"]
+     [:canvas]]
 
     [:ul#questions
      (for [question ["who", "what", "when", "where", "why", "how"]]

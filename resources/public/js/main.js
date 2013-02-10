@@ -14396,9 +14396,22 @@ spokes.util.location_hash = location.hash;
 spokes.util.wait = function(a, b) {
   return setTimeout(b, a)
 };
-spokes.util.log = function(a) {
-  return console.log(cljs.core.clj__GT_js.call(null, a))
-};
+spokes.util.log = function() {
+  var a = function(a) {
+    return console.log(cljs.core.apply.call(null, cljs.core.str, a))
+  }, b = function(b) {
+    var d = null;
+    goog.isDef(b) && (d = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0));
+    return a.call(this, d)
+  };
+  b.cljs$lang$maxFixedArity = 0;
+  b.cljs$lang$applyTo = function(b) {
+    b = cljs.core.seq(b);
+    return a(b)
+  };
+  b.cljs$lang$arity$variadic = a;
+  return b
+}();
 spokes.util.exists_QMARK_ = function(a) {
   return cljs.core.not_EQ_.call(null, jayq.core.$.call(null, a).length, 0)
 };
@@ -20225,24 +20238,8 @@ spokes.map.initialize = function() {
 };
 spokes.main = {};
 clojure.browser.repl.connect.call(null, "http://localhost:9000/repl");
-spokes.main.log = function() {
-  var a = function(a) {
-    return console.log(cljs.core.apply.call(null, cljs.core.str, a))
-  }, b = function(b) {
-    var d = null;
-    goog.isDef(b) && (d = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0));
-    return a.call(this, d)
-  };
-  b.cljs$lang$maxFixedArity = 0;
-  b.cljs$lang$applyTo = function(b) {
-    b = cljs.core.seq(b);
-    return a(b)
-  };
-  b.cljs$lang$arity$variadic = a;
-  return b
-}();
 spokes.main.fit = function(a, b) {
-  spokes.main.log.call(null, "resizing canvas");
+  spokes.util.log.call(null, "resizing canvas");
   a.attr("width", b.width());
   return a.attr("height", b.height())
 };
@@ -20289,6 +20286,10 @@ spokes.main.get_ctx_props = function get_ctx_props(b, c) {
     return cljs.core.PersistentVector.fromArray([c, b[spokes.main.camel_name.call(null, c)]], !0)
   }, c))
 };
+spokes.main.two_pi = 2 * Math.PI;
+spokes.main.pdf = function(a, b, c) {
+  return Math.pow.call(null, Math.E, -1 * Math.pow.call(null, a - b, 2) / (2 * Math.pow.call(null, c, 2))) / (c * Math.sqrt.call(null, spokes.main.two_pi))
+};
 spokes.main.wh = function(a) {
   return cljs.core.PersistentVector.fromArray([a.width, a.height], !0)
 };
@@ -20302,26 +20303,29 @@ spokes.main.draw_bike_frame = function(a, b, c) {
     var e = spokes.main.center_xy.call(null, d, b), f = cljs.core.nth.call(null, e, 0, null), g = cljs.core.nth.call(null, e, 1, null), h = cljs.core.nth.call(null, e, 2, null), e = cljs.core.nth.call(null, e, 3, null);
     c.call(null, a, f, g, h, e);
     a.drawImage(d, f, g);
-    return spokes.main.log.call(null, "Drew bike frame")
+    return spokes.util.log.call(null, "Drew bike frame")
   };
   return d.src = "/img/bike-frame.png"
 };
+spokes.main.draw_circle = function(a, b, c, d) {
+  return a.arc(b, c, 2 * d, 0, spokes.main.two_pi, !0)
+};
 spokes.main.draw_wheel = function(a, b, c, d) {
   a.beginPath();
-  a.arc(b, c, d, 0, 2 * Math.PI, !0);
+  spokes.main.draw_circle.call(null, a, b, c, d);
   a.stroke();
   a.fill();
   return a.closePath()
 };
 spokes.main.draw_wheels = function(a, b, c, d, e) {
-  spokes.main.log.call(null, "drawing wheels now");
+  spokes.util.log.call(null, "drawing wheels now");
   d = b + 10;
   b += 350;
   c = c + e + -45;
   e = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width", "\ufdd0'fill-style"], {"\ufdd0'line-width":20, "\ufdd0'fill-style":"rgb(255,255,255)"}));
   spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width", "\ufdd0'fill-style"], {"\ufdd0'line-width":20, "\ufdd0'fill-style":"rgb(255,255,255)"}));
-  spokes.main.draw_wheel.call(null, a, d, c, 90);
-  spokes.main.draw_wheel.call(null, a, b, c, 90);
+  spokes.main.draw_wheel.call(null, a, d, c, 45);
+  spokes.main.draw_wheel.call(null, a, b, c, 45);
   return spokes.main.set_ctx_props_BANG_.call(null, a, e)
 };
 spokes.main.draw_bike = function(a, b) {
@@ -20334,6 +20338,48 @@ spokes.main.draw_scene = function(a) {
   var b = spokes.main.get_ctx.call(null, a);
   return spokes.main.draw_bike.call(null, b, a)
 };
+spokes.main.toggle_bio = function(a) {
+  var b = jayq.core.$.call(null, this);
+  a.preventDefault();
+  jayq.core.hide.call(null, jayq.core.$.call(null, "#bios div"));
+  jayq.core.show.call(null, jayq.core.$.call(null, jayq.core.attr.call(null, b, "href")));
+  jayq.core.$.call(null, "#team a").removeClass("active");
+  return b.addClass("active")
+};
+spokes.main.take_n_rand_ints = function(a, b, c) {
+  return cljs.core.take.call(null, a, cljs.core.repeatedly.call(null, function() {
+    return b + cljs.core.rand_int.call(null, c)
+  }))
+};
+spokes.main.draw_cloud = function(a, b, c) {
+  var a = spokes.main.get_ctx.call(null, a), d = (b < c ? b : c) / 20, e = 2 * d, f = b / 2, g = f + e, h = c / 4, i = c / 2 + e, j = 0.1 * (f / b), k = 0.1 * (h / c), l = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.75)"}));
+  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.75)"}));
+  var m = cljs.core.seq.call(null, cljs.core.range.call(null, e, b + 4 * e));
+  if(m) {
+    for(b = cljs.core.first.call(null, m);;) {
+      var n = cljs.core.seq.call(null, cljs.core.range.call(null, e, c));
+      if(n) {
+        for(var o = cljs.core.first.call(null, n);;) {
+          var p = spokes.main.pdf.call(null, b, g, f), q = spokes.main.pdf.call(null, o, i, h);
+          q = (p = cljs.core.rand.call(null, j) < p) ? cljs.core.rand.call(null, k) < q : p;
+          cljs.core.truth_(q) && (q = a, q.beginPath(), spokes.main.draw_circle.call(null, a, b, o, d), a.fill(), q.closePath());
+          if(o = cljs.core.next.call(null, n)) {
+            n = o, o = cljs.core.first.call(null, n)
+          }else {
+            break
+          }
+        }
+      }
+      if(b = cljs.core.next.call(null, m)) {
+        m = b, b = cljs.core.first.call(null, m)
+      }else {
+        break
+      }
+    }
+  }
+  spokes.main.set_ctx_props_BANG_.call(null, a, l);
+  return spokes.util.log.call(null, "done with cloud")
+};
 jayq.core.document_ready.call(null, function() {
   var a = jayq.core.$.call(null, "#canvas"), b = jayq.core.$.call(null, "#header"), c = a[0], d = function() {
     spokes.main.fit.call(null, a, b);
@@ -20341,13 +20387,8 @@ jayq.core.document_ready.call(null, function() {
   };
   jayq.core.$.call(null, window).resize(d);
   d.call(null);
-  jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", function(a) {
-    var b = jayq.core.$.call(null, this);
-    a.preventDefault();
-    jayq.core.hide.call(null, jayq.core.$.call(null, "#bios div"));
-    jayq.core.show.call(null, jayq.core.$.call(null, jayq.core.attr.call(null, b, "href")));
-    jayq.core.$.call(null, "#team a").removeClass("active");
-    return b.addClass("active")
-  });
+  jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", spokes.main.toggle_bio);
+  d = jayq.core.$.call(null, "#logo canvas");
+  spokes.main.draw_cloud.call(null, d[0], d.width(), d.height());
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });
