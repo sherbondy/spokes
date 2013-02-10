@@ -20,7 +20,7 @@
     (cemerick.piggieback/cljs-repl :repl-env (doto brepl cljs.repl/-setup)))
   )
 
-(repl/connect "http://localhost:9000/repl")
+;; (repl/connect "http://localhost:9000/repl")
 
 ;; Tips (for the terminal):
 ;;> lein cljsbuild auto
@@ -101,16 +101,6 @@
      cw
      ch]))
 
-(defn draw-bike-frame [ctx canvas next-draw-fn]
-  (let [bike-img (js/Image.)]
-    (set! (.-onload bike-img)
-          (fn []
-            (let [[x y w h] (center-xy bike-img canvas)]
-              (next-draw-fn ctx x y w h)
-              (.drawImage ctx bike-img x y)
-              (u/log "Drew bike frame"))))
-    (set! (.-src bike-img) "/img/bike-frame.png")))
-
 (defn draw-circle [ctx x y r]
   (.arc ctx x y (* r 2) 0 two-pi true))
 
@@ -122,13 +112,25 @@
 
 (defn draw-wheels [ctx x y w h]
   (u/log "drawing wheels now")
-  (let [r       45
-        x1      (+ x 10)
-        x2      (+ x 350)
-        wheel-y (+ y h (* -1 r))]
+  (let [r        45
+        x-offset 10
+        x1       (+ x x-offset)
+        x2       (+ x w (* -1 x-offset))
+        wheel-y  (+ y h (* -1 r))]
     (cm/with-ctx-props ctx {:line-width 20 :fill-style "rgb(255,255,255)"}
       (draw-wheel ctx x1 wheel-y r)
       (draw-wheel ctx x2 wheel-y r))))
+
+(defn draw-bike-frame [ctx canvas pre-draw-fn]
+  (let [bike-img (js/Image.)]
+    (set! (.-onload bike-img)
+          (fn []
+            (let [[x y w h] (center-xy bike-img canvas)
+                  y (+ y 52)]
+              (pre-draw-fn ctx x y w h)
+              (.drawImage ctx bike-img x y)
+              (u/log "Drew bike frame"))))
+    (set! (.-src bike-img) "/img/bike-frame.png")))
 
 (defn draw-bike [ctx canvas]
   (draw-bike-frame ctx canvas draw-wheels))
@@ -151,17 +153,19 @@
              (.removeClass ($ "#team a") "active")
              (.addClass $this "active"))))
 
-(defn draw-cloud [canvas w h]
-  (let [ctx      (get-ctx canvas)
-        spacing  0.05
-        r        (* (min w h) spacing)
+(defn draw-cloud [$elem r]
+  (let [canvas   (aget $elem 0)
+        ctx      (get-ctx canvas)
+        w        (.width $elem)
+        h        (.height $elem)
         min-val  (* 2 r)
         x-sigma  (* w 0.5)
         x-mean   (+ x-sigma min-val)
         y-sigma  (* h 0.25)
         y-mean   (+ (* h 0.5) min-val)
-        x-cutoff (* spacing (/ x-sigma w) 3)
-        y-cutoff (* spacing (/ y-sigma h) 3)]
+        cutoff-m 0.15
+        x-cutoff (* cutoff-m (/ x-sigma w))
+        y-cutoff (* cutoff-m (/ y-sigma h))]
     (cm/with-ctx-props ctx {:fill-style "rgba(255,255,255,0.5)"}
       (doseq [x (range min-val (+ w (* 4 min-val)))
               y (range min-val h)]
@@ -169,11 +173,11 @@
               yp    (pdf y y-mean y-sigma)
               draw? (and (< (rand x-cutoff) xp)
                          (< (rand y-cutoff) yp))]
-          (if draw?
+          (when draw?
             (cm/with-path ctx
               (draw-circle ctx x y r)
               (.fill ctx))))))
-    (u/log "done with cloud")))
+    (u/log "done rendering cloud")))
 
 (jm/ready
  (let [$canvas ($ "#canvas")
@@ -188,9 +192,7 @@
  (jq/on ($ "#team") :click "a" toggle-bio)
 
  (let [$logo-canvas ($ "#logo canvas")]
-   (draw-cloud (aget $logo-canvas 0)
-               (.width $logo-canvas)
-               (.height $logo-canvas)))
+   (draw-cloud $logo-canvas 6))
 
  (when (u/exists? "#map")
    (u/log "Initializing the map..")

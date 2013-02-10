@@ -127,7 +127,7 @@
    [:canvas#canvas]
 
    [:header#header
-    [:div#logo 
+    [:div#logo.cloud
      [:h1 "Spokes"]
      [:canvas]]
 
@@ -144,6 +144,8 @@
              UC Berkeley who are passionate about education:"]
 
          [:div#bios
+          [:div
+           [:h3 "Click on a face for a brief bio."]]
           (for [person team]
             (let [lc-pfirst (str/lower-case (fname person))]
               [:div.hidden {:id lc-pfirst}
@@ -164,7 +166,15 @@
                [:h5 pfirst]]]))])
 
      (q "what" "are you doing"
-        [:p "We're biking across the United States."])
+        [:p "We're biking across the United States in partnership
+             with Teach for America as part of an effort to rethink
+             pubic education. As we go, we'll be stopping
+             at public schools throughout the country to hold "
+             [:em "\"learning festivals\""]
+             " geared towards middle-to-high-school students.
+             Each of us will be teaching a hands-on,
+             project-oriented class based around one of our passions."]
+        [:p "Below is a tenative list of the courses we'll be offering:"])
 
      (q "when" "is it"
         [:p "This summer, from " (time-elem start-date)
@@ -179,15 +189,17 @@
      (q "where" "are you going"
         [:p "We'll be biking from San Francisco to Washington D.C."]
         [:p "We're taking the Western Express trail, then
-             Trans America to Washington D.C."])
+             Trans America."])
 
      (q "why" "are you doing this"
         [:p "We're crazy."])
 
      (q "how" "can I help"
-        [:p "We are looking for sponsors. "
-         "And suggestions for towns to visit along the way. "
+        [:p "We are currently looking for sponsors. "
+         "If you're interested in getting in touch, please " 
+         [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
+
+        [:p
          "You can definitely help by spreading the word! "
-         "And joining the conversation. "
          "Follow our journey on the "
          [:a {:href "http://blog.spokesamerica.org"} "blog"] "."])]]))

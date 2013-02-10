@@ -1668,66 +1668,66 @@ cljs.core._invoke = function() {
       throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
     }
     return p.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
-  }, q = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+  }, r = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
     if(a ? a.cljs$core$IFn$_invoke$arity$16 : a) {
       return a.cljs$core$IFn$_invoke$arity$16(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p)
-    }
-    var q;
-    q = cljs.core._invoke[goog.typeOf(null == a ? null : a)];
-    if(!q && (q = cljs.core._invoke._, !q)) {
-      throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
-    }
-    return q.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p)
-  }, r = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
-    if(a ? a.cljs$core$IFn$_invoke$arity$17 : a) {
-      return a.cljs$core$IFn$_invoke$arity$17(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q)
-    }
-    var s;
-    s = cljs.core._invoke[goog.typeOf(null == a ? null : a)];
-    if(!s && (s = cljs.core._invoke._, !s)) {
-      throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
-    }
-    return s.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q)
-  }, t = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s) {
-    if(a ? a.cljs$core$IFn$_invoke$arity$18 : a) {
-      return a.cljs$core$IFn$_invoke$arity$18(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s)
     }
     var r;
     r = cljs.core._invoke[goog.typeOf(null == a ? null : a)];
     if(!r && (r = cljs.core._invoke._, !r)) {
       throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
     }
-    return r.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s)
-  }, s = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r) {
-    if(a ? a.cljs$core$IFn$_invoke$arity$19 : a) {
-      return a.cljs$core$IFn$_invoke$arity$19(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r)
+    return r.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p)
+  }, q = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r) {
+    if(a ? a.cljs$core$IFn$_invoke$arity$17 : a) {
+      return a.cljs$core$IFn$_invoke$arity$17(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r)
+    }
+    var q;
+    q = cljs.core._invoke[goog.typeOf(null == a ? null : a)];
+    if(!q && (q = cljs.core._invoke._, !q)) {
+      throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
+    }
+    return q.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r)
+  }, s = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q) {
+    if(a ? a.cljs$core$IFn$_invoke$arity$18 : a) {
+      return a.cljs$core$IFn$_invoke$arity$18(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q)
     }
     var t;
     t = cljs.core._invoke[goog.typeOf(null == a ? null : a)];
     if(!t && (t = cljs.core._invoke._, !t)) {
       throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
     }
-    return t.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r)
-  }, y = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r, t) {
+    return t.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q)
+  }, t = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t) {
+    if(a ? a.cljs$core$IFn$_invoke$arity$19 : a) {
+      return a.cljs$core$IFn$_invoke$arity$19(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t)
+    }
+    var s;
+    s = cljs.core._invoke[goog.typeOf(null == a ? null : a)];
+    if(!s && (s = cljs.core._invoke._, !s)) {
+      throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
+    }
+    return s.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t)
+  }, y = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t, s) {
     if(a ? a.cljs$core$IFn$_invoke$arity$20 : a) {
-      return a.cljs$core$IFn$_invoke$arity$20(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r, t)
+      return a.cljs$core$IFn$_invoke$arity$20(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t, s)
     }
     var y;
     y = cljs.core._invoke[goog.typeOf(null == a ? null : a)];
     if(!y && (y = cljs.core._invoke._, !y)) {
       throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
     }
-    return y.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r, t)
-  }, F = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r, t, y) {
+    return y.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t, s)
+  }, F = function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t, s, y) {
     if(a ? a.cljs$core$IFn$_invoke$arity$21 : a) {
-      return a.cljs$core$IFn$_invoke$arity$21(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r, t, y)
+      return a.cljs$core$IFn$_invoke$arity$21(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t, s, y)
     }
     var F;
     F = cljs.core._invoke[goog.typeOf(null == a ? null : a)];
     if(!F && (F = cljs.core._invoke._, !F)) {
       throw cljs.core.missing_protocol.call(null, "IFn.-invoke", a);
     }
-    return F.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, s, r, t, y)
+    return F.call(null, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, q, t, s, y)
   }, a = function(a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K, L, M, N, O, P) {
     switch(arguments.length) {
       case 1:
@@ -1761,13 +1761,13 @@ cljs.core._invoke = function() {
       case 15:
         return p.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J);
       case 16:
-        return q.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K);
+        return r.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K);
       case 17:
-        return r.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K, L);
+        return q.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K, L);
       case 18:
-        return t.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K, L, M);
+        return s.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K, L, M);
       case 19:
-        return s.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K, L, M, N);
+        return t.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K, L, M, N);
       case 20:
         return y.call(this, a, u, v, w, x, z, A, B, C, D, E, G, H, I, J, K, L, M, N, O);
       case 21:
@@ -1790,10 +1790,10 @@ cljs.core._invoke = function() {
   a.cljs$lang$arity$13 = n;
   a.cljs$lang$arity$14 = o;
   a.cljs$lang$arity$15 = p;
-  a.cljs$lang$arity$16 = q;
-  a.cljs$lang$arity$17 = r;
-  a.cljs$lang$arity$18 = t;
-  a.cljs$lang$arity$19 = s;
+  a.cljs$lang$arity$16 = r;
+  a.cljs$lang$arity$17 = q;
+  a.cljs$lang$arity$18 = s;
+  a.cljs$lang$arity$19 = t;
   a.cljs$lang$arity$20 = y;
   a.cljs$lang$arity$21 = F;
   return a
@@ -5595,35 +5595,35 @@ cljs.core.apply_to = function(a, b, c) {
   if(13 === b) {
     return a.cljs$lang$arity$13 ? a.cljs$lang$arity$13(c, d, e, f, g, a, h, i, j, k, l, m, n) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n)
   }
-  var o = cljs.core._first.call(null, p), q = cljs.core._rest.call(null, p);
+  var o = cljs.core._first.call(null, p), r = cljs.core._rest.call(null, p);
   if(14 === b) {
     return a.cljs$lang$arity$14 ? a.cljs$lang$arity$14(c, d, e, f, g, a, h, i, j, k, l, m, n, o) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o)
   }
-  var p = cljs.core._first.call(null, q), r = cljs.core._rest.call(null, q);
+  var p = cljs.core._first.call(null, r), q = cljs.core._rest.call(null, r);
   if(15 === b) {
     return a.cljs$lang$arity$15 ? a.cljs$lang$arity$15(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p)
   }
-  var q = cljs.core._first.call(null, r), t = cljs.core._rest.call(null, r);
+  var r = cljs.core._first.call(null, q), s = cljs.core._rest.call(null, q);
   if(16 === b) {
-    return a.cljs$lang$arity$16 ? a.cljs$lang$arity$16(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q)
+    return a.cljs$lang$arity$16 ? a.cljs$lang$arity$16(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r)
   }
-  var r = cljs.core._first.call(null, t), s = cljs.core._rest.call(null, t);
+  var q = cljs.core._first.call(null, s), t = cljs.core._rest.call(null, s);
   if(17 === b) {
-    return a.cljs$lang$arity$17 ? a.cljs$lang$arity$17(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q, r) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q, r)
+    return a.cljs$lang$arity$17 ? a.cljs$lang$arity$17(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r, q) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r, q)
   }
-  var t = cljs.core._first.call(null, s), y = cljs.core._rest.call(null, s);
+  var s = cljs.core._first.call(null, t), y = cljs.core._rest.call(null, t);
   if(18 === b) {
-    return a.cljs$lang$arity$18 ? a.cljs$lang$arity$18(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q, r, t) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q, r, t)
+    return a.cljs$lang$arity$18 ? a.cljs$lang$arity$18(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r, q, s) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r, q, s)
   }
-  s = cljs.core._first.call(null, y);
+  t = cljs.core._first.call(null, y);
   y = cljs.core._rest.call(null, y);
   if(19 === b) {
-    return a.cljs$lang$arity$19 ? a.cljs$lang$arity$19(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q, r, t, s) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q, r, t, s)
+    return a.cljs$lang$arity$19 ? a.cljs$lang$arity$19(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r, q, s, t) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r, q, s, t)
   }
   var F = cljs.core._first.call(null, y);
   cljs.core._rest.call(null, y);
   if(20 === b) {
-    return a.cljs$lang$arity$20 ? a.cljs$lang$arity$20(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q, r, t, s, F) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, q, r, t, s, F)
+    return a.cljs$lang$arity$20 ? a.cljs$lang$arity$20(c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r, q, s, t, F) : a.call(null, c, d, e, f, g, a, h, i, j, k, l, m, n, o, p, r, q, s, t, F)
   }
   throw Error("Only up to 20 arguments supported on functions");
 };
@@ -13250,9 +13250,9 @@ cljs.reader.parse_and_validate_timestamp = function() {
         return cljs.core._EQ_.call(null, a, "-") ? "-1" : "1"
       }], !0), d)), m = cljs.core.nth.call(null, l, 0, null);
       cljs.core.nth.call(null, m, 0, null);
-      var d = cljs.core.nth.call(null, m, 1, null), k = cljs.core.nth.call(null, m, 2, null), n = cljs.core.nth.call(null, m, 3, null), o = cljs.core.nth.call(null, m, 4, null), p = cljs.core.nth.call(null, m, 5, null), q = cljs.core.nth.call(null, m, 6, null), m = cljs.core.nth.call(null, m, 7, null), r = cljs.core.nth.call(null, l, 1, null), l = cljs.core.nth.call(null, r, 0, null), t = cljs.core.nth.call(null, r, 1, null), r = cljs.core.nth.call(null, r, 2, null);
+      var d = cljs.core.nth.call(null, m, 1, null), k = cljs.core.nth.call(null, m, 2, null), n = cljs.core.nth.call(null, m, 3, null), o = cljs.core.nth.call(null, m, 4, null), p = cljs.core.nth.call(null, m, 5, null), r = cljs.core.nth.call(null, m, 6, null), m = cljs.core.nth.call(null, m, 7, null), q = cljs.core.nth.call(null, l, 1, null), l = cljs.core.nth.call(null, q, 0, null), s = cljs.core.nth.call(null, q, 1, null), q = cljs.core.nth.call(null, q, 2, null);
       return cljs.core.PersistentVector.fromArray([cljs.core.not.call(null, c) ? 1970 : d, cljs.core.not.call(null, f) ? 1 : b.call(null, 1, k, 12, "timestamp month field must be in range 1..12"), cljs.core.not.call(null, g) ? 1 : b.call(null, 1, n, cljs.reader.days_in_month.call(null, k, cljs.reader.leap_year_QMARK_.call(null, d)), "timestamp day field must be in range 1..last day in month"), cljs.core.not.call(null, h) ? 0 : b.call(null, 0, o, 23, "timestamp hour field must be in range 0..23"), 
-      cljs.core.not.call(null, i) ? 0 : b.call(null, 0, p, 59, "timestamp minute field must be in range 0..59"), cljs.core.not.call(null, j) ? 0 : b.call(null, 0, q, cljs.core._EQ_.call(null, p, 59) ? 60 : 59, "timestamp second field must be in range 0..60"), cljs.core.not.call(null, e) ? 0 : b.call(null, 0, m, 999, "timestamp millisecond field must be in range 0..999"), l * (60 * t + r)], !0)
+      cljs.core.not.call(null, i) ? 0 : b.call(null, 0, p, 59, "timestamp minute field must be in range 0..59"), cljs.core.not.call(null, j) ? 0 : b.call(null, 0, r, cljs.core._EQ_.call(null, p, 59) ? 60 : 59, "timestamp second field must be in range 0..60"), cljs.core.not.call(null, e) ? 0 : b.call(null, 0, m, 999, "timestamp millisecond field must be in range 0..999"), l * (60 * s + q)], !0)
     }
     return null
   }
@@ -20237,7 +20237,6 @@ spokes.map.initialize = function() {
   return spokes.map.on_toggle_checkboxes.call(null, jayq.core.$.call(null, "#symbols"), spokes.map.symbol_inputs.call(null))
 };
 spokes.main = {};
-clojure.browser.repl.connect.call(null, "http://localhost:9000/repl");
 spokes.main.fit = function(a, b) {
   spokes.util.log.call(null, "resizing canvas");
   a.attr("width", b.width());
@@ -20297,16 +20296,6 @@ spokes.main.center_xy = function(a, b) {
   var c = spokes.main.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.main.wh.call(null, b), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null);
   return cljs.core.PersistentVector.fromArray([(f - d) / 2, (e - d) / 2, d, c], !0)
 };
-spokes.main.draw_bike_frame = function(a, b, c) {
-  var d = new Image;
-  d.onload = function() {
-    var e = spokes.main.center_xy.call(null, d, b), f = cljs.core.nth.call(null, e, 0, null), g = cljs.core.nth.call(null, e, 1, null), h = cljs.core.nth.call(null, e, 2, null), e = cljs.core.nth.call(null, e, 3, null);
-    c.call(null, a, f, g, h, e);
-    a.drawImage(d, f, g);
-    return spokes.util.log.call(null, "Drew bike frame")
-  };
-  return d.src = "/img/bike-frame.png"
-};
 spokes.main.draw_circle = function(a, b, c, d) {
   return a.arc(b, c, 2 * d, 0, spokes.main.two_pi, !0)
 };
@@ -20319,14 +20308,21 @@ spokes.main.draw_wheel = function(a, b, c, d) {
 };
 spokes.main.draw_wheels = function(a, b, c, d, e) {
   spokes.util.log.call(null, "drawing wheels now");
-  d = b + 10;
-  b += 350;
-  c = c + e + -45;
-  e = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width", "\ufdd0'fill-style"], {"\ufdd0'line-width":20, "\ufdd0'fill-style":"rgb(255,255,255)"}));
+  var f = b + 10, b = b + d + -10, c = c + e + -45, e = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width", "\ufdd0'fill-style"], {"\ufdd0'line-width":20, "\ufdd0'fill-style":"rgb(255,255,255)"}));
   spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'line-width", "\ufdd0'fill-style"], {"\ufdd0'line-width":20, "\ufdd0'fill-style":"rgb(255,255,255)"}));
-  spokes.main.draw_wheel.call(null, a, d, c, 45);
+  spokes.main.draw_wheel.call(null, a, f, c, 45);
   spokes.main.draw_wheel.call(null, a, b, c, 45);
   return spokes.main.set_ctx_props_BANG_.call(null, a, e)
+};
+spokes.main.draw_bike_frame = function(a, b, c) {
+  var d = new Image;
+  d.onload = function() {
+    var e = spokes.main.center_xy.call(null, d, b), f = cljs.core.nth.call(null, e, 0, null), g = cljs.core.nth.call(null, e, 1, null), h = cljs.core.nth.call(null, e, 2, null), e = cljs.core.nth.call(null, e, 3, null), g = g + 52;
+    c.call(null, a, f, g, h, e);
+    a.drawImage(d, f, g);
+    return spokes.util.log.call(null, "Drew bike frame")
+  };
+  return d.src = "/img/bike-frame.png"
 };
 spokes.main.draw_bike = function(a, b) {
   return spokes.main.draw_bike_frame.call(null, a, b, spokes.main.draw_wheels)
@@ -20346,34 +20342,34 @@ spokes.main.toggle_bio = function(a) {
   jayq.core.$.call(null, "#team a").removeClass("active");
   return b.addClass("active")
 };
-spokes.main.draw_cloud = function(a, b, c) {
-  var a = spokes.main.get_ctx.call(null, a), d = 0.05 * (b < c ? b : c), e = 2 * d, f = 0.5 * b, g = f + e, h = 0.25 * c, i = 0.5 * c + e, j = 3 * 0.05 * (f / b), k = 3 * 0.05 * (h / c), l = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.5)"}));
-  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.5)"}));
-  var m = cljs.core.seq.call(null, cljs.core.range.call(null, e, b + 4 * e));
-  if(m) {
-    for(b = cljs.core.first.call(null, m);;) {
-      var n = cljs.core.seq.call(null, cljs.core.range.call(null, e, c));
-      if(n) {
-        for(var o = cljs.core.first.call(null, n);;) {
-          var p = spokes.main.pdf.call(null, b, g, f), q = spokes.main.pdf.call(null, o, i, h);
-          q = (p = cljs.core.rand.call(null, j) < p) ? cljs.core.rand.call(null, k) < q : p;
-          cljs.core.truth_(q) && (q = a, q.beginPath(), spokes.main.draw_circle.call(null, a, b, o, d), a.fill(), q.closePath());
-          if(o = cljs.core.next.call(null, n)) {
-            n = o, o = cljs.core.first.call(null, n)
+spokes.main.draw_cloud = function(a, b) {
+  var c = spokes.main.get_ctx.call(null, a[0]), d = a.width(), e = a.height(), f = 2 * b, g = 0.5 * d, h = g + f, i = 0.25 * e, j = 0.5 * e + f, k = 0.15 * (g / d), l = 0.15 * (i / e), m = spokes.main.get_ctx_props.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.5)"}));
+  spokes.main.set_ctx_props_BANG_.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.5)"}));
+  var n = cljs.core.seq.call(null, cljs.core.range.call(null, f, d + 4 * f));
+  if(n) {
+    for(d = cljs.core.first.call(null, n);;) {
+      var o = cljs.core.seq.call(null, cljs.core.range.call(null, f, e));
+      if(o) {
+        for(var p = cljs.core.first.call(null, o);;) {
+          var r = spokes.main.pdf.call(null, d, h, g), q = spokes.main.pdf.call(null, p, j, i);
+          q = (r = cljs.core.rand.call(null, k) < r) ? cljs.core.rand.call(null, l) < q : r;
+          cljs.core.truth_(q) && (q = c, q.beginPath(), spokes.main.draw_circle.call(null, c, d, p, b), c.fill(), q.closePath());
+          if(p = cljs.core.next.call(null, o)) {
+            o = p, p = cljs.core.first.call(null, o)
           }else {
             break
           }
         }
       }
-      if(b = cljs.core.next.call(null, m)) {
-        m = b, b = cljs.core.first.call(null, m)
+      if(d = cljs.core.next.call(null, n)) {
+        n = d, d = cljs.core.first.call(null, n)
       }else {
         break
       }
     }
   }
-  spokes.main.set_ctx_props_BANG_.call(null, a, l);
-  return spokes.util.log.call(null, "done with cloud")
+  spokes.main.set_ctx_props_BANG_.call(null, c, m);
+  return spokes.util.log.call(null, "done rendering cloud")
 };
 jayq.core.document_ready.call(null, function() {
   var a = jayq.core.$.call(null, "#canvas"), b = jayq.core.$.call(null, "#header"), c = a[0], d = function() {
@@ -20384,6 +20380,6 @@ jayq.core.document_ready.call(null, function() {
   d.call(null);
   jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", spokes.main.toggle_bio);
   d = jayq.core.$.call(null, "#logo canvas");
-  spokes.main.draw_cloud.call(null, d[0], d.width(), d.height());
+  spokes.main.draw_cloud.call(null, d, 6);
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });
