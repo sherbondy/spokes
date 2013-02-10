@@ -6,10 +6,12 @@
                  [org.clojure/data.zip "0.1.1"]
                  [com.cemerick/piggieback "0.0.2"]
 
+                 [clj-time "0.4.4"]
                  [compojure "1.1.3"]
                  [environ "0.3.0"]
                  [hiccup "1.0.2"]
                  [http-kit "2.0.0-RC2"]
+                 [markdown-clj "0.9.19"]
 
                  ;cljs
                  [prismatic/dommy "0.0.1"]

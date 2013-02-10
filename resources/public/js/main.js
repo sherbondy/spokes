@@ -20341,5 +20341,13 @@ jayq.core.document_ready.call(null, function() {
   };
   jayq.core.$.call(null, window).resize(d);
   d.call(null);
+  jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", function(a) {
+    var b = jayq.core.$.call(null, this);
+    a.preventDefault();
+    jayq.core.hide.call(null, jayq.core.$.call(null, "#bios div"));
+    jayq.core.show.call(null, jayq.core.$.call(null, jayq.core.attr.call(null, b, "href")));
+    jayq.core.$.call(null, "#team a").removeClass("active");
+    return b.addClass("active")
+  });
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });

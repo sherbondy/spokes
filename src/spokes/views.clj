@@ -1,8 +1,11 @@
 (ns spokes.views
-  (:require [clojure.string :as str]
+  (:require [clj-time.core :as t]
+            [clj-time.format :as tf]
+            [clojure.string :as str]
             [environ.core :refer [env]]
             [hiccup.core :refer [html]]
             [hiccup.page :refer [html5 include-css include-js]]
+            [markdown.core :as md]
             [spokes.gps :as gps]
             [spokes.util :as u])
   (:use [hiccup.def :only [defhtml]]))
@@ -49,19 +52,20 @@
       (let [name (u/hyphenate symbol)]
         (checkbox-div name symbol symbol)))]
 
-   [:div#content
-    [:h1 "Our Route"]
-    [:p "GPS Data from " 
-     [:a {:href "https://www.adventurecycling.org"}
-      "Adventure Cycling"] "."]
+   [:div#content.row-fluid
+    [:div.span8
+     [:h1 "Our Route"]
+     [:p "GPS Data from " 
+      [:a {:href "https://www.adventurecycling.org"}
+       "Adventure Cycling"] "."]
 
-    [:h2 "Locations within a "
-     [:input {:type "text" :maxlength "2" :placeholder "10"
-              :id "radius" :name "radius"}]
-     " mile radius:"]
-    [:div#nearby]]
+     [:h2 "Locations within a "
+      [:input {:type "text" :maxlength "2" :placeholder "10"
+               :id "radius" :name "radius"}]
+      " mile radius:"]
+     [:div#nearby]]
 
-   [:script#gps-data {:type "text/edn"} gps/edn-data]))
+    [:script#gps-data {:type "text/edn"} gps/edn-data]]))
 
 
 (defn q [question title & body]
@@ -69,6 +73,54 @@
    [:h2 [:em (str/capitalize question)]
     (if title (str " " title "?"))]
    body])
+
+(def start-date    (t/date-time 2013 6 9))
+(def end-date      (t/date-time 2013 8 21))
+(def cal-interval  (t/interval (t/date-time 2013 6)
+                               (t/date-time 2013 9)))
+(def trip-interval (t/interval start-date (t/plus end-date (t/days 1))))
+(def month-fmt     (tf/formatter "MMMM"))
+(def p-fmt         (tf/formatter "MMMM d"))
+(def time-fmt      (tf/formatter "y-MM-dd"))
+(def weekdays ["Sun" "Mon" "Tue" "Wed" "Thu" "Fri" "Sat"])
+
+(defn weekday-offset
+  "Return values range 0-6 instead of 1-7"
+  [date]
+  (- (t/day-of-week date) 1))
+
+(defn calendar []
+  [:div.row-fluid
+   (for [i (range (t/in-months cal-interval))]
+     (let [month-start   (t/plus (t/start cal-interval) (t/months i))
+           next-month    (t/plus month-start (t/months 1))
+           month-str     (tf/unparse month-fmt month-start)
+           day-offset    (weekday-offset month-start)
+           days-in-month (t/in-days (t/interval month-start next-month))]
+       [:div.month.pull-left
+        [:h4 month-str]
+        [:table.calendar
+         [:thead
+          [:tr
+           (for [wd (range 7)]
+             [:td (nth weekdays wd)])]]
+         [:tbody
+          (for [w (range 6)]
+            [:tr
+             (for [d (range 7)]
+               (let [box-no     (+ d (* w 7))
+                     day        (- box-no day-offset)
+                     box-date   (t/plus month-start (t/days day))
+                     valid-day? (and (>= day 0) (< day days-in-month))
+                     trip-day?  (and valid-day? 
+                                     (t/within? trip-interval box-date))]
+                 [:td {:class (if trip-day? "trip")}
+                  (if valid-day?
+                    (inc day))]))])]]]))])
+
+(defhtml time-elem [date]
+  [:time {:datetime (tf/unparse time-fmt date)}
+   (tf/unparse p-fmt date)])
 
 (defn home [team]
   (layout
@@ -82,47 +134,58 @@
        [:li.question
         [:h4 [:a {:href (str "#" question)} question]]])]]
 
-   [:div#content
-    (q "who" "are you"
-       [:p "We are " (count team) " undergraduates at MIT who are passionate
-          about education:"]
+   [:div#content.row-fluid
+    [:div.span8
+     (q "who" "are you"
+        [:div.span7.offset0
+         [:p "We are " (count team) " college students from MIT and 
+             UC Berkeley who are passionate about education:"]
 
-       [:ul#team
-        (for [person team]
-          (let [pfirst (fname person)]
-            [:li [:h5 [:a.pill-link {:href (str "#" pfirst)} pfirst]]]))])
+         [:div#bios
+          (for [person team]
+            (let [lc-pfirst (str/lower-case (fname person))]
+              [:div.hidden {:id lc-pfirst}
+               [:h3 (:name person)
+                [:small.pull-right 
+                 (:school person) " Class of " (:grad-year person)]]
+               ]))]]
 
-    (q "what" "are you doing"
-       [:p "We're biking across the United States."])
+        [:ul#team.span5
+         (for [person team]
+           (let [pfirst    (fname person)
+                 lc-pfirst (str/lower-case pfirst)
+                 p-img     (str "/img/team/" lc-pfirst ".jpg")]
+             [:li
+              [:a {:href (str "#" lc-pfirst)}
+               [:img {:alt (:name person)
+                      :src p-img}]
+               [:h5 pfirst]]]))])
 
-    (q "when" nil
-       [:p "This summer, from " [:time {:datetime "2013-06-09"} "June 9"]
-        " through " [:time {:datetime "2013-08-30"} "August 30."]])
+     (q "what" "are you doing"
+        [:p "We're biking across the United States."])
 
-    (q "where" "are you going"
-       [:p "We'll be biking from San Francisco on the Western Express 
-        trail, then taking the Trans America trail to Washington D.C.
-        Time allowing, we'll also try heading up the east coast 
-        to get back to Cambridge, Massachusetts in time for the 
-        fall semester."]
-       [:p "Which means we'll get to explore, at a minimum, the following states:"]
+     (q "when" "is it"
+        [:p "This summer, from " (time-elem start-date)
+         " through " (time-elem end-date) "."]
 
-       [:ol
-        ;; these are made up
-        (for [[state eta] [["California" 0] ["Nevada" 5] ["Utah" 10]
-                           ["Colorado" 15] ["Kansas" 20] ["Missouri" 25]
-                           ["Ohio" 30] ["Kentucky" 35] ["Virginia" 40]
-                           ["Maryland" 45]]]
-          [:li state])])
+        [:p 
+         [:strong (t/in-days (t/interval (t/now) start-date))]
+         " more days until we get going."]
 
-    (q "why" "are you doing this"
-       [:p "We're crazy."])
+        (calendar))
 
-    (q "how" "can I help"
-       [:p "We are looking for sponsors. "
-        "And suggestions for towns to visit along the way. "
-        "You can definitely help by spreading the word! "
-        "And joining the conversation. "
-        "Follow our journey on the "
-        [:a.pill-link {:href "http://blog.spokesamerica.org"} "blog"]]
-       )]))
+     (q "where" "are you going"
+        [:p "We'll be biking from San Francisco to Washington D.C."]
+        [:p "We're taking the Western Express trail, then
+             Trans America to Washington D.C."])
+
+     (q "why" "are you doing this"
+        [:p "We're crazy."])
+
+     (q "how" "can I help"
+        [:p "We are looking for sponsors. "
+         "And suggestions for towns to visit along the way. "
+         "You can definitely help by spreading the word! "
+         "And joining the conversation. "
+         "Follow our journey on the "
+         [:a {:href "http://blog.spokesamerica.org"} "blog"] "."])]]))

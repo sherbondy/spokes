@@ -142,6 +142,16 @@
    (.resize ($ js/window) fit-canvas-fn)
    (fit-canvas-fn))
 
+ (jq/on ($ "#team") :click "a" 
+        (fn [e]
+          (this-as this
+                   (let [$this ($ this)]
+                     (.preventDefault e)
+                     (jq/hide ($ "#bios div"))
+                     (jq/show ($ (jq/attr $this "href")))
+                     (.removeClass ($ "#team a") "active")
+                     (.addClass $this "active")))))
+
  (when (u/exists? "#map")
    (u/log "Initializing the map..")
    (sm/initialize)))

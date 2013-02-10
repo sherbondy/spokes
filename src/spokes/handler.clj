@@ -7,15 +7,42 @@
             [spokes.views :refer [home route]]))
 
 (def team
-  [{:name "Bruno Faviero"}
-   {:name "Claire O'Connell"}
-   {:name "Ethan Sherbondy"}
-   {:name "Jeff Prouty"}
-   {:name "Manny Singh"}
-   {:name "Natasha Balwit"}
-   {:name "Nathan Kit Kennedy"}
-   {:name "Phillip Daniel"}
-   {:name "Turner Bohlen"}])
+  [{:name "Bruno Faviero"
+    :bio ""
+    :school "MIT"
+    :grad-year 2015}
+   {:name "Claire O'Connell"
+    :bio ""
+    :school "MIT"
+    :grad-year 2013}
+   {:name "Ethan Sherbondy"
+    :bio ""
+    :school "MIT"
+    :grad-year 2014}
+   {:name "Jeff Prouty"
+    :bio ""
+    :school "MIT"
+    :grad-year 2014}
+   {:name "Manny Singh"
+    :bio ""
+    :school "MIT"
+    :grad-year 2016}
+   {:name "Natasha Balwit"
+    :bio ""
+    :school "MIT"
+    :grad-year 2016}
+   {:name "Nathan Kit Kennedy"
+    :bio ""
+    :school "UC Berkeley"
+    :grad-year 2014}
+   {:name "Phillip Daniel"
+    :bio ""
+    :school "MIT"
+    :grad-year 2013}
+   {:name "Turner Bohlen"
+    :bio ""
+    :school "MIT"
+    :grad-year 2014}])
 
 (defroutes app-routes
   (GET "/" [] (home team))
