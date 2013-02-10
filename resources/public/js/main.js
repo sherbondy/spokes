@@ -20346,14 +20346,9 @@ spokes.main.toggle_bio = function(a) {
   jayq.core.$.call(null, "#team a").removeClass("active");
   return b.addClass("active")
 };
-spokes.main.take_n_rand_ints = function(a, b, c) {
-  return cljs.core.take.call(null, a, cljs.core.repeatedly.call(null, function() {
-    return b + cljs.core.rand_int.call(null, c)
-  }))
-};
 spokes.main.draw_cloud = function(a, b, c) {
-  var a = spokes.main.get_ctx.call(null, a), d = (b < c ? b : c) / 20, e = 2 * d, f = b / 2, g = f + e, h = c / 4, i = c / 2 + e, j = 0.1 * (f / b), k = 0.1 * (h / c), l = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.75)"}));
-  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.75)"}));
+  var a = spokes.main.get_ctx.call(null, a), d = 0.05 * (b < c ? b : c), e = 2 * d, f = 0.5 * b, g = f + e, h = 0.25 * c, i = 0.5 * c + e, j = 3 * 0.05 * (f / b), k = 3 * 0.05 * (h / c), l = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.5)"}));
+  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.5)"}));
   var m = cljs.core.seq.call(null, cljs.core.range.call(null, e, b + 4 * e));
   if(m) {
     for(b = cljs.core.first.call(null, m);;) {

@@ -151,24 +151,20 @@
              (.removeClass ($ "#team a") "active")
              (.addClass $this "active"))))
 
-(defn take-n-rand-ints [n min-int max-int]
-  (take n (repeatedly #(+ min-int (rand-int max-int)))))
-
 (defn draw-cloud [canvas w h]
   (let [ctx      (get-ctx canvas)
-        r        (/ (min w h) 20.0)
+        spacing  0.05
+        r        (* (min w h) spacing)
         min-val  (* 2 r)
-        x-sigma  (/ w 2)
+        x-sigma  (* w 0.5)
         x-mean   (+ x-sigma min-val)
-        y-sigma  (/ h 4)
-        y-mean   (+ (* h 2/3) min-val)
-        xs-count w
-        ys-count h
-        x-cutoff (* 0.1 (/ x-sigma w))
-        y-cutoff (* 0.1 (/ y-sigma h))]
+        y-sigma  (* h 0.25)
+        y-mean   (+ (* h 0.5) min-val)
+        x-cutoff (* spacing (/ x-sigma w) 3)
+        y-cutoff (* spacing (/ y-sigma h) 3)]
     (cm/with-ctx-props ctx {:fill-style "rgba(255,255,255,0.5)"}
       (doseq [x (range min-val (+ w (* 4 min-val)))
-              y (range min-val y)]
+              y (range min-val h)]
         (let [xp    (pdf x x-mean x-sigma)
               yp    (pdf y y-mean y-sigma)
               draw? (and (< (rand x-cutoff) xp)
