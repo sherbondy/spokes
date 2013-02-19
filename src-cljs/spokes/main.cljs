@@ -180,19 +180,21 @@
     (u/log "done rendering cloud")))
 
 (jm/ready
- (let [$canvas ($ "#canvas")
-       $header ($ "#header")
-       canvas  (aget $canvas 0)
-       header  (aget $header 0)
-       fit-canvas-fn #(do (fit $canvas $header)
-                          (draw-scene canvas))]
-   (.resize ($ js/window) fit-canvas-fn)
-   (fit-canvas-fn))
 
- (jq/on ($ "#team") :click "a" toggle-bio)
+ (when (u/exists? "#canvas")
+   (let [$canvas ($ "#canvas")
+         $header ($ "#header")
+         canvas  (aget $canvas 0)
+         header  (aget $header 0)]
+     fit-canvas-fn #(do (fit $canvas $header)
+                        (draw-scene canvas))
+     (.resize ($ js/window) fit-canvas-fn)
+     (fit-canvas-fn))
 
- (let [$logo-canvas ($ "#logo canvas")]
-   (draw-cloud $logo-canvas 6))
+   (jq/on ($ "#team") :click "a" toggle-bio)
+
+   (let [$logo-canvas ($ "#logo canvas")]
+     (draw-cloud $logo-canvas 6)))
 
  (when (u/exists? "#map")
    (u/log "Initializing the map..")
