@@ -22,6 +22,8 @@
             [lein-cljsbuild "0.3.0"
              :exclusions [org.clojure/clojure]]]
 
+  :jvm-opts ["-javaagent:newrelic/newrelic.jar"]
+
   :ring {:handler spokes.handler/app
          :auto-reload? true
          :port 8000}
