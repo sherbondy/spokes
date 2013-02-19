@@ -22,7 +22,11 @@
             [lein-cljsbuild "0.3.0"
              :exclusions [org.clojure/clojure]]]
 
-  :jvm-opts ["-javaagent:newrelic/newrelic.jar"]
+  :jvm-opts [~(str "-javaagent:"
+                   (if (System/getenv "ROOT_DIR")
+                     (System/getenv "ROOT_DIR")
+                     (System/getProperty "user.dir"))
+                   "/newrelic/newrelic.jar")]
 
   :ring {:handler spokes.handler/app
          :auto-reload? true
