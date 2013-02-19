@@ -1,3 +1,0 @@
-[submodule "resources/bootstrap"]
-	path = resources/bootstrap
-  url = https://github.com/sherbondy/sass-twitter-bootstrap.git
