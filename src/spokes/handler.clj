@@ -27,10 +27,6 @@
     :bio ""
     :school "MIT"
     :grad-year 2016}
-   {:name "Natasha Balwit"
-    :bio ""
-    :school "MIT"
-    :grad-year 2016}
    {:name "Nathan Kit Kennedy"
     :bio ""
     :school "UC Berkeley"

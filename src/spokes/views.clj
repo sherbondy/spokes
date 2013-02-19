@@ -17,6 +17,10 @@
   (html5
    [:head
     [:meta {:http-equiv "Content-Type" :content "text/html;charset=UTF-8"}]
+    [:meta {:name "viewport" 
+            :content "width=device-width,
+                      initial-scale=1.0,
+                      maximum-scale=1.0"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
 
     (u/font-link ["Lato" [400 700] ["italic"]]
@@ -139,7 +143,20 @@
    [:div#content.row-fluid
     [:div.span8
      (q "who" "are you"
-        [:div.span7.offset0
+        [:ul#team.span5.offset0
+         (map-indexed
+          (fn [idx person]
+            (let [pfirst    (fname person)
+                  lc-pfirst (str/lower-case pfirst)
+                  p-img     (str "/img/team/" lc-pfirst ".jpg")]
+              [:li
+               [:a {:href (str "#" lc-pfirst)}
+                [:img {:alt (:name person)
+                       :src p-img}]
+                [:h5 pfirst]]]))
+          team)]
+
+        [:div.span7
          [:p "We are " (count team) " college students from MIT and 
              UC Berkeley who are passionate about education:"]
 
@@ -152,18 +169,7 @@
                [:h3 (:name person)
                 [:small.pull-right 
                  (:school person) " Class of " (:grad-year person)]]
-               ]))]]
-
-        [:ul#team.span5
-         (for [person team]
-           (let [pfirst    (fname person)
-                 lc-pfirst (str/lower-case pfirst)
-                 p-img     (str "/img/team/" lc-pfirst ".jpg")]
-             [:li
-              [:a {:href (str "#" lc-pfirst)}
-               [:img {:alt (:name person)
-                      :src p-img}]
-               [:h5 pfirst]]]))])
+               ]))]])
 
      (q "what" "are you doing"
         [:p "We're biking across the United States in partnership

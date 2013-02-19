@@ -185,9 +185,9 @@
    (let [$canvas ($ "#canvas")
          $header ($ "#header")
          canvas  (aget $canvas 0)
-         header  (aget $header 0)]
-     fit-canvas-fn #(do (fit $canvas $header)
-                        (draw-scene canvas))
+         header  (aget $header 0)
+         fit-canvas-fn #(do (fit $canvas $header)
+                            (draw-scene canvas))]
      (.resize ($ js/window) fit-canvas-fn)
      (fit-canvas-fn))
 

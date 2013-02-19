@@ -70,6 +70,7 @@ Theme ideas:
   - The WHEEL for "Who", with team members as the spokes :D
   
 Map (the project within the project):
+  - Make map start as an image. Then, when the user clicks, it becomes interactive.
   - Show our current location
   - Start with sparsely populated map, but let visitors maximize the page
     to focus on it.

@@ -20373,14 +20373,15 @@ spokes.main.draw_cloud = function(a, b) {
 };
 jayq.core.document_ready.call(null, function() {
   if(cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#canvas"))) {
-    jayq.core.$.call(null, "#canvas");
-    jayq.core.$.call(null, "#header");
-    spokes.main.fit_canvas_fn;
-    jayq.core.$.call(null, window).resize(spokes.main.fit_canvas_fn);
-    spokes.main.fit_canvas_fn.call(null);
+    var a = jayq.core.$.call(null, "#canvas"), b = jayq.core.$.call(null, "#header"), c = a[0], d = function() {
+      spokes.main.fit.call(null, a, b);
+      return spokes.main.draw_scene.call(null, c)
+    };
+    jayq.core.$.call(null, window).resize(d);
+    d.call(null);
     jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", spokes.main.toggle_bio);
-    var a = jayq.core.$.call(null, "#logo canvas");
-    spokes.main.draw_cloud.call(null, a, 6)
+    d = jayq.core.$.call(null, "#logo canvas");
+    spokes.main.draw_cloud.call(null, d, 6)
   }
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });
