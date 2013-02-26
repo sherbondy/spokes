@@ -15,3 +15,10 @@
      (spokes.main/set-ctx-props! ~ctx ~prop-map)
      (do ~@body)
      (spokes.main/set-ctx-props! ~ctx starting-props#)))
+
+(defmacro with-translation [ctx x y & body]
+  `(do
+     (.save ~ctx)
+     (.translate ~ctx ~x ~y)
+     (do ~@body)
+     (.restore ~ctx)))

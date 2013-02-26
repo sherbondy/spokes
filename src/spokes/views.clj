@@ -173,14 +173,16 @@
 
      (q "what" "are you doing"
         [:p "We're biking across the United States in partnership
-             with Teach for America as part of an effort to rethink
-             pubic education. As we go, we'll be stopping
-             at public schools throughout the country to hold "
-             [:em "\"learning festivals\""]
-             " geared towards middle-to-high-school students.
-             Each of us will be teaching a hands-on,
-             project-oriented class based around one of our passions."]
-        [:p "Below is a tenative list of the courses we'll be offering:"])
+             with "
+         [:a {:href "http://teachforamerica.org"} "Teach for America"]
+         " as part of an effort to rethink
+          pubic education. As we go, we'll be stopping
+          at public schools throughout the country to hold "
+         [:em "learning festivals"]
+          " geared towards middle and high-school students.
+           Each of us will be teaching a hands-on,
+           project-oriented class based around one of our passions."]
+        [:p "Below is a list of the courses we'll be offering:"])
 
      (q "when" "is it"
         [:p "This summer, from " (time-elem start-date)

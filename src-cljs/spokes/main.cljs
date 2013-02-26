@@ -90,7 +90,7 @@
   [(.-width elem)
    (.-height elem)])
 
-(defn center-xy 
+(defn centered-xy 
   "Return (top left) x, y, width, and height of child centered inside parent.
    Does not actually relocate child."
   [child parent]
@@ -102,30 +102,41 @@
      ch]))
 
 (defn draw-circle [ctx x y r]
-  (.arc ctx x y (* r 2) 0 two-pi true))
+  (.arc ctx x y r 0 two-pi true))
 
-(defn draw-wheel [ctx x y r]
+(defn draw-wheel [ctx r n-spokes]
   (cm/with-path ctx
-    (draw-circle ctx x y r)
+    (draw-circle ctx 0 0 r)
     (.stroke ctx)
-    (.fill ctx)))
+    (.fill ctx)
+
+    (cm/with-ctx-props ctx {:line-width 8}
+      (dotimes [n n-spokes]
+        (let [angle (* 2 n (/ Math/PI n-spokes))]
+          (.moveTo ctx 0 0)
+          (.lineTo ctx 
+                   (* r (Math/sin angle))
+                   (* r (Math/cos angle)))
+          (.stroke ctx))))))
 
 (defn draw-wheels [ctx x y w h]
   (u/log "drawing wheels now")
-  (let [r        45
+  (let [r        90
         x-offset 10
         x1       (+ x x-offset)
         x2       (+ x w (* -1 x-offset))
-        wheel-y  (+ y h (* -1 r))]
+        wheel-y  (+ y h (* -0.5 r))]
     (cm/with-ctx-props ctx {:line-width 20 :fill-style "rgb(255,255,255)"}
-      (draw-wheel ctx x1 wheel-y r)
-      (draw-wheel ctx x2 wheel-y r))))
+      (cm/with-translation ctx x1 wheel-y
+        (draw-wheel ctx r 8))
+      (cm/with-translation ctx x2 wheel-y
+        (draw-wheel ctx r 8)))))
 
 (defn draw-bike-frame [ctx canvas pre-draw-fn]
   (let [bike-img (js/Image.)]
     (set! (.-onload bike-img)
           (fn []
-            (let [[x y w h] (center-xy bike-img canvas)
+            (let [[x y w h] (centered-xy bike-img canvas)
                   y (+ y 52)]
               (pre-draw-fn ctx x y w h)
               (.drawImage ctx bike-img x y)
@@ -179,8 +190,8 @@
               (.fill ctx))))))
     (u/log "done rendering cloud")))
 
-(jm/ready
 
+(jm/ready
  (when (u/exists? "#canvas")
    (let [$canvas ($ "#canvas")
          $header ($ "#header")

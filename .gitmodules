@@ -1,3 +1,6 @@
 [submodule "resources/bootstrap"]
 	path = resources/bootstrap
 	url = https://github.com/sherbondy/sass-twitter-bootstrap.git
+[submodule "comp/clojurescript"]
+	path = comp/clojurescript
+	url = git://github.com/clojure/clojurescript.git

@@ -36,7 +36,10 @@
   ;;:hooks [leiningen.cljsbuild]
 
   ;; for the cljs macros, add src-cljs
-  :source-paths ["src", "src-cljs"]
+  :source-paths ["src"
+                 "src-cljs"
+                 "comp/clojurescript/src/clj"
+                 "comp/clojurescript/src/cljs"]
 
   ;; auto-add piggieback namespace to lein repl
   :repl-options
