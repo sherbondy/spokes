@@ -22,10 +22,12 @@
                       initial-scale=1.0,
                       maximum-scale=1.0"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
+    
+   	[:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:8833/socket.io/lighttable/ws.js"}]
 
     (u/font-link ["Lato" [400 700] ["italic"]]
                  ["Signika" [400 600 700]])
-    (include-css "/css/style.css")]
+    (include-css "/css/style.css" "/css/live.css")]
 
    [:body body
     (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
