@@ -2717,17 +2717,17 @@ cljs.core.with_meta = void 0;
 cljs.core.IWithMeta["function"] = !0;
 cljs.core._with_meta["function"] = function(a, b) {
   return cljs.core.with_meta.call(null, function() {
-    void 0 === cljs.core.t3277 && (cljs.core.t3277 = {}, cljs.core.t3277 = function(a, b, e) {
+    void 0 === cljs.core.t13377 && (cljs.core.t13377 = {}, cljs.core.t13377 = function(a, b, e) {
       this.meta = a;
       this.f = b;
-      this.meta3278 = e;
+      this.meta13378 = e;
       this.cljs$lang$protocol_mask$partition1$ = 0;
       this.cljs$lang$protocol_mask$partition0$ = 393217
-    }, cljs.core.t3277.cljs$lang$type = !0, cljs.core.t3277.cljs$lang$ctorPrSeq = function() {
-      return cljs.core.list.call(null, "cljs.core/t3277")
-    }, cljs.core.t3277.cljs$lang$ctorPrWriter = function(a, b) {
-      return cljs.core._write.call(null, b, "cljs.core/t3277")
-    }, cljs.core.t3277.prototype.call = function() {
+    }, cljs.core.t13377.cljs$lang$type = !0, cljs.core.t13377.cljs$lang$ctorPrSeq = function() {
+      return cljs.core.list.call(null, "cljs.core/t13377")
+    }, cljs.core.t13377.cljs$lang$ctorPrWriter = function(a, b) {
+      return cljs.core._write.call(null, b, "cljs.core/t13377")
+    }, cljs.core.t13377.prototype.call = function() {
       var a = function(a, b) {
         return cljs.core.apply.call(null, a.f, b)
       }, b = function(b, d) {
@@ -2742,15 +2742,15 @@ cljs.core._with_meta["function"] = function(a, b) {
       };
       b.cljs$lang$arity$variadic = a;
       return b
-    }(), cljs.core.t3277.prototype.apply = function(a, b) {
+    }(), cljs.core.t13377.prototype.apply = function(a, b) {
       a = this;
       return a.call.apply(a, [a].concat(b.slice()))
-    }, cljs.core.t3277.prototype.cljs$core$Fn$ = !0, cljs.core.t3277.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-      return this.meta3278
-    }, cljs.core.t3277.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
-      return new cljs.core.t3277(this.meta, this.f, b)
+    }, cljs.core.t13377.prototype.cljs$core$Fn$ = !0, cljs.core.t13377.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+      return this.meta13378
+    }, cljs.core.t13377.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
+      return new cljs.core.t13377(this.meta, this.f, b)
     });
-    return new cljs.core.t3277(b, a, null)
+    return new cljs.core.t13377(b, a, null)
   }(), b)
 };
 cljs.core.IMeta["function"] = !0;
@@ -14629,6 +14629,21 @@ spokes.util.mapify_hash = function() {
   var a = spokes.util.location_hash.slice(1).split(/[=&]/);
   return spokes.util.hash_mapify_vector.call(null, a)
 };
+spokes.util.camel_name = function(a) {
+  a = cljs.core.name.call(null, a);
+  a = clojure.string.split.call(null, a, /\-/);
+  return cljs.core.apply.call(null, cljs.core.str, cljs.core.cons.call(null, cljs.core.first.call(null, a), cljs.core.map.call(null, clojure.string.capitalize, cljs.core.rest.call(null, a))))
+};
+spokes.util.now = function() {
+  return(new Date).getTime()
+};
+spokes.util.Tau = 2 * Math.PI;
+spokes.util.e = Math.E;
+spokes.util._PLUS_clamp = function(a, b, c) {
+  return cljs.core.mod.call(null, a + b, c)
+};
+spokes.util.cos = Math.cos;
+spokes.util.sin = Math.sin;
 goog.disposable = {};
 goog.disposable.IDisposable = function() {
 };
@@ -17229,6 +17244,55 @@ goog.net.XhrIo.prototype.formatMsg_ = function(a) {
 goog.debug.entryPointRegistry.register(function(a) {
   goog.net.XhrIo.prototype.onReadyStateChangeEntryPoint_ = a(goog.net.XhrIo.prototype.onReadyStateChangeEntryPoint_)
 });
+spokes.canvas = {};
+spokes.canvas.fit = function(a, b) {
+  a.attr("width", b.width());
+  return a.attr("height", b.height())
+};
+spokes.canvas.wh = function(a) {
+  return cljs.core.PersistentVector.fromArray([a.width, a.height], !0)
+};
+spokes.canvas.bounding_box = function(a) {
+  var b = a[0], a = a.offset(), b = spokes.canvas.wh.call(null, b), c = cljs.core.nth.call(null, b, 0, null), d = cljs.core.nth.call(null, b, 1, null), b = a.top, a = a.left, c = a + c, d = b + d;
+  return cljs.core.PersistentVector.fromArray([cljs.core.PersistentVector.fromArray([a, b], !0), cljs.core.PersistentVector.fromArray([c, b], !0), cljs.core.PersistentVector.fromArray([c, d], !0), cljs.core.PersistentVector.fromArray([a, d], !0)], !0)
+};
+spokes.canvas.tlbl = function(a) {
+  var b = spokes.canvas.bounding_box.call(null, a), a = cljs.core.nth.call(null, b, 0, null);
+  cljs.core.nth.call(null, b, 1, null);
+  cljs.core.nth.call(null, b, 2, null);
+  b = cljs.core.nth.call(null, b, 3, null);
+  return cljs.core.PersistentVector.fromArray([a, b], !0)
+};
+spokes.canvas.x_shift = function(a, b) {
+  var c = cljs.core.nth.call(null, b, 0, null), d = cljs.core.nth.call(null, b, 1, null);
+  return cljs.core.PersistentVector.fromArray([c + a, d], !0)
+};
+spokes.canvas.get_ctx = function(a) {
+  return a.getContext("2d")
+};
+spokes.canvas.set_ctx_props_BANG_ = function(a, b) {
+  for(var c = cljs.core.seq.call(null, b);;) {
+    if(c) {
+      var d = cljs.core.first.call(null, c), e = cljs.core.nth.call(null, d, 0, null), d = cljs.core.nth.call(null, d, 1, null);
+      a[spokes.util.camel_name.call(null, e)] = d;
+      c = cljs.core.next.call(null, c)
+    }else {
+      return null
+    }
+  }
+};
+spokes.canvas.get_ctx_props = function get_ctx_props(b, c) {
+  return cljs.core.map_QMARK_.call(null, c) ? get_ctx_props.call(null, b, cljs.core.keys.call(null, c)) : cljs.core.keyword_QMARK_.call(null, c) ? get_ctx_props.call(null, b, cljs.core.PersistentVector.fromArray([c], !0)) : cljs.core.into.call(null, cljs.core.ObjMap.EMPTY, cljs.core.map.call(null, function(c) {
+    return cljs.core.PersistentVector.fromArray([c, b[spokes.util.camel_name.call(null, c)]], !0)
+  }, c))
+};
+spokes.canvas.calc_center = function(a, b) {
+  var c = spokes.canvas.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.canvas.wh.call(null, b), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null);
+  return cljs.core.PersistentVector.fromArray([(f - d) / 2, (e - d) / 2, d, c], !0)
+};
+spokes.canvas.draw_circle = function(a, b, c, d) {
+  return a.arc(b, c, d, 0, spokes.util.Tau, !0)
+};
 clojure.browser = {};
 clojure.browser.event = {};
 clojure.browser.event.EventType = {};
@@ -20438,116 +20502,58 @@ spokes.map.initialize = function() {
   return spokes.map.on_toggle_checkboxes.call(null, jayq.core.$.call(null, "#symbols"), spokes.map.symbol_inputs.call(null))
 };
 spokes.main = {};
-spokes.main.now = function() {
-  return(new Date).getTime()
-};
 spokes.main.wheel_radius = 90;
 spokes.main.m_to_px = 150;
-spokes.main.time = cljs.core.atom.call(null, spokes.main.now.call(null));
+spokes.main.time = cljs.core.atom.call(null, spokes.util.now.call(null));
 spokes.main.ready_to_draw = cljs.core.atom.call(null, !1);
 spokes.main.wheel_rot = cljs.core.atom.call(null, 0);
-spokes.main.speed = 2E4 / 3600;
-spokes.main.two_pi = 2 * Math.PI;
-spokes.main.rad_per_ms = spokes.main.wheel_radius * spokes.main.speed / (1E3 * spokes.main.wheel_radius);
-spokes.main._PLUS_clamp = function(a, b, c) {
-  return cljs.core.mod.call(null, a + b, c)
-};
+spokes.main.bike_speed = 2E4 / 3600;
+spokes.main.rad_per_ms = spokes.main.wheel_radius * spokes.main.bike_speed / (1E3 * spokes.main.wheel_radius);
 cljs.core.add_watch.call(null, spokes.main.time, "\ufdd0:wheel-rotation", function(a, b, c, d) {
-  return cljs.core.swap_BANG_.call(null, spokes.main.wheel_rot, spokes.main._PLUS_clamp, (d - c) * spokes.main.rad_per_ms, spokes.main.two_pi)
+  return cljs.core.swap_BANG_.call(null, spokes.main.wheel_rot, spokes.util._PLUS_clamp, (d - c) * spokes.main.rad_per_ms, spokes.util.Tau)
 });
-spokes.main.fit = function(a, b) {
-  spokes.util.log.call(null, "resizing canvas");
-  a.attr("width", b.width());
-  return a.attr("height", b.height())
-};
-spokes.main.bounding_box = function(a) {
-  var b = a.offset(), c = a.height(), d = a.width(), a = b.top, b = b.left, d = b + d, c = a + c;
-  return cljs.core.PersistentVector.fromArray([cljs.core.PersistentVector.fromArray([b, a], !0), cljs.core.PersistentVector.fromArray([d, a], !0), cljs.core.PersistentVector.fromArray([d, c], !0), cljs.core.PersistentVector.fromArray([b, c], !0)], !0)
-};
-spokes.main.tlbl = function(a) {
-  var b = spokes.main.bounding_box.call(null, a), a = cljs.core.nth.call(null, b, 0, null);
-  cljs.core.nth.call(null, b, 1, null);
-  cljs.core.nth.call(null, b, 2, null);
-  b = cljs.core.nth.call(null, b, 3, null);
-  return cljs.core.PersistentVector.fromArray([a, b], !0)
-};
-spokes.main.x_shift = function(a, b) {
-  var c = cljs.core.nth.call(null, b, 0, null), d = cljs.core.nth.call(null, b, 1, null);
-  return cljs.core.PersistentVector.fromArray([c + a, d], !0)
-};
-spokes.main.camel_name = function(a) {
-  a = cljs.core.name.call(null, a);
-  a = clojure.string.split.call(null, a, /\-/);
-  return cljs.core.apply.call(null, cljs.core.str, cljs.core.cons.call(null, cljs.core.first.call(null, a), cljs.core.map.call(null, clojure.string.capitalize, cljs.core.rest.call(null, a))))
-};
-spokes.main.set_ctx_props_BANG_ = function(a, b) {
-  for(var c = cljs.core.seq.call(null, b);;) {
-    if(c) {
-      var d = cljs.core.first.call(null, c), e = cljs.core.nth.call(null, d, 0, null), d = cljs.core.nth.call(null, d, 1, null);
-      a[spokes.main.camel_name.call(null, e)] = d;
-      c = cljs.core.next.call(null, c)
-    }else {
-      return null
-    }
-  }
-};
-spokes.main.get_ctx_props = function get_ctx_props(b, c) {
-  return cljs.core.map_QMARK_.call(null, c) ? get_ctx_props.call(null, b, cljs.core.keys.call(null, c)) : cljs.core.keyword_QMARK_.call(null, c) ? get_ctx_props.call(null, b, cljs.core.PersistentVector.fromArray([c], !0)) : cljs.core.into.call(null, cljs.core.ObjMap.EMPTY, cljs.core.map.call(null, function(c) {
-    return cljs.core.PersistentVector.fromArray([c, b[spokes.main.camel_name.call(null, c)]], !0)
-  }, c))
-};
 spokes.main.pdf = function(a, b, c) {
-  return Math.pow.call(null, Math.E, -1 * Math.pow.call(null, a - b, 2) / (2 * Math.pow.call(null, c, 2))) / (c * Math.sqrt.call(null, spokes.main.two_pi))
-};
-spokes.main.wh = function(a) {
-  return cljs.core.PersistentVector.fromArray([a.width, a.height], !0)
-};
-spokes.main.centered_xy = function(a, b) {
-  var c = spokes.main.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.main.wh.call(null, b), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null);
-  return cljs.core.PersistentVector.fromArray([(f - d) / 2, (e - d) / 2, d, c], !0)
-};
-spokes.main.draw_circle = function(a, b, c, d) {
-  return a.arc(b, c, d, 0, spokes.main.two_pi, !0)
+  return Math.pow.call(null, spokes.util.e, -1 * Math.pow.call(null, a - b, 2) / (2 * Math.pow.call(null, c, 2))) / (c * Math.sqrt.call(null, spokes.util.Tau))
 };
 spokes.main.draw_wheel = function(a, b, c) {
-  a.beginPath();
-  spokes.main.draw_circle.call(null, a, 0, 0, b);
   a.clearRect(-1 * b, -1 * b, 2 * b, 2 * b);
+  a.beginPath();
+  spokes.canvas.draw_circle.call(null, a, 0, 0, b);
   a.stroke();
-  var d = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":8}));
-  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":8}));
+  var d = spokes.canvas.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":8}));
+  spokes.canvas.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":8}));
   for(var e = 0;;) {
     if(e < c) {
-      var f = 2 * e * (Math.PI / c);
+      var f = e * (spokes.util.Tau / c);
       a.moveTo(0, 0);
-      a.lineTo(b * Math.sin.call(null, f), b * Math.cos.call(null, f));
+      a.save();
+      a.rotate(f);
+      a.lineTo(0, b);
+      a.restore();
       a.stroke();
       e += 1
     }else {
       break
     }
   }
-  spokes.main.set_ctx_props_BANG_.call(null, a, d);
+  spokes.canvas.set_ctx_props_BANG_.call(null, a, d);
   return a.closePath()
 };
 spokes.main.draw_wheels = function(a, b, c) {
-  var d = spokes.main.wheel_radius, b = b + -10, c = c + -0.5 * d, e = cljs.core.deref.call(null, spokes.main.wheel_rot), f = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
-  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
+  var d = spokes.main.wheel_radius, b = b + -10, c = c + -0.5 * d, e = cljs.core.deref.call(null, spokes.main.wheel_rot), f = spokes.canvas.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
+  spokes.canvas.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
+  var g = 1 * spokes.util.cos.call(null, e), h = 1 * spokes.util.sin.call(null, e);
   a.save();
-  a.translate(10, c);
-  a.save();
-  a.rotate(e);
+  a.transform(g, h, -1 * h, g, 10, c);
   spokes.main.draw_wheel.call(null, a, d, 8);
   a.restore();
-  a.restore();
+  g = 1 * spokes.util.cos.call(null, e);
+  e = 1 * spokes.util.sin.call(null, e);
   a.save();
-  a.translate(b, c);
-  a.save();
-  a.rotate(e);
+  a.transform(g, e, -1 * e, g, b, c);
   spokes.main.draw_wheel.call(null, a, d, 8);
   a.restore();
-  a.restore();
-  return spokes.main.set_ctx_props_BANG_.call(null, a, f)
+  return spokes.canvas.set_ctx_props_BANG_.call(null, a, f)
 };
 spokes.main.bike_img = new Image;
 spokes.main.load_bike_img = function() {
@@ -20558,7 +20564,7 @@ spokes.main.draw_frame = function(a) {
   return a.drawImage(spokes.main.bike_img, 0, 0)
 };
 spokes.main.draw_bike = function(a, b) {
-  var c = spokes.main.centered_xy.call(null, spokes.main.bike_img, b), d = cljs.core.nth.call(null, c, 0, null), e = cljs.core.nth.call(null, c, 1, null), f = cljs.core.nth.call(null, c, 2, null), c = cljs.core.nth.call(null, c, 3, null), e = e + 52;
+  var c = spokes.canvas.calc_center.call(null, spokes.main.bike_img, b), d = cljs.core.nth.call(null, c, 0, null), e = cljs.core.nth.call(null, c, 1, null), f = cljs.core.nth.call(null, c, 2, null), c = cljs.core.nth.call(null, c, 3, null), e = e + 52;
   a.save();
   a.translate(d, e);
   a.clearRect(0, 0, f, c);
@@ -20566,12 +20572,9 @@ spokes.main.draw_bike = function(a, b) {
   spokes.main.draw_frame.call(null, a, f, c);
   return a.restore()
 };
-spokes.main.get_ctx = function(a) {
-  return a.getContext("2d")
-};
 spokes.main.draw_scene = function(a) {
   if(cljs.core.truth_(cljs.core.deref.call(null, spokes.main.ready_to_draw))) {
-    var b = spokes.main.get_ctx.call(null, a);
+    var b = spokes.canvas.get_ctx.call(null, a);
     return spokes.main.draw_bike.call(null, b, a)
   }
   return null
@@ -20585,15 +20588,15 @@ spokes.main.toggle_bio = function(a) {
   return b.addClass("active")
 };
 spokes.main.draw_cloud = function(a, b) {
-  var c = spokes.main.get_ctx.call(null, a[0]), d = a.width(), e = a.height(), f = 2 * b, g = 0.5 * d, h = g + f, i = 0.25 * e, j = 0.5 * e + f, k = 0.15 * (g / d), m = 0.15 * (i / e), l = spokes.main.get_ctx_props.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0:fill-style"], {"\ufdd0:fill-style":"rgba(255,255,255,0.5)"}));
-  spokes.main.set_ctx_props_BANG_.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0:fill-style"], {"\ufdd0:fill-style":"rgba(255,255,255,0.5)"}));
+  var c = spokes.canvas.get_ctx.call(null, a[0]), d = a.width(), e = a.height(), f = 2 * b, g = 0.5 * d, h = g + f, i = 0.25 * e, j = 0.5 * e + f, k = 0.15 * (g / d), m = 0.15 * (i / e), l = spokes.canvas.get_ctx_props.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0:fill-style"], {"\ufdd0:fill-style":"rgba(255,255,255,0.5)"}));
+  spokes.canvas.set_ctx_props_BANG_.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0:fill-style"], {"\ufdd0:fill-style":"rgba(255,255,255,0.5)"}));
   for(d = cljs.core.seq.call(null, cljs.core.range.call(null, f, d + 4 * f));;) {
     if(d) {
       for(var n = cljs.core.first.call(null, d), o = cljs.core.seq.call(null, cljs.core.range.call(null, f, e));;) {
         if(o) {
           var p = cljs.core.first.call(null, o), r = spokes.main.pdf.call(null, n, h, g), q = spokes.main.pdf.call(null, p, j, i);
           q = (r = cljs.core.rand.call(null, k) < r) ? cljs.core.rand.call(null, m) < q : r;
-          cljs.core.truth_(q) && (q = c, q.beginPath(), spokes.main.draw_circle.call(null, c, n, p, b), c.fill(), q.closePath());
+          cljs.core.truth_(q) && (q = c, q.beginPath(), spokes.canvas.draw_circle.call(null, c, n, p, b), c.fill(), q.closePath());
           o = cljs.core.next.call(null, o)
         }else {
           break
@@ -20604,13 +20607,13 @@ spokes.main.draw_cloud = function(a, b) {
       break
     }
   }
-  return spokes.main.set_ctx_props_BANG_.call(null, c, l)
+  return spokes.canvas.set_ctx_props_BANG_.call(null, c, l)
 };
 spokes.main.redraw_canvas_fn = function(a) {
   var b = a[0];
   return function d() {
     requestAnimationFrame(d);
-    cljs.core.reset_BANG_.call(null, spokes.main.time, spokes.main.now.call(null));
+    cljs.core.reset_BANG_.call(null, spokes.main.time, spokes.util.now.call(null));
     return spokes.main.draw_scene.call(null, b)
   }
 };
@@ -20618,7 +20621,7 @@ jayq.core.document_ready.call(null, function() {
   if(cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#canvas"))) {
     var a = jayq.core.$.call(null, "#canvas"), b = jayq.core.$.call(null, "#header"), c = a[0], d = spokes.main.redraw_canvas_fn.call(null, a), a = function(a, b) {
       return function() {
-        return spokes.main.fit.call(null, a, b)
+        return spokes.canvas.fit.call(null, a, b)
       }
     }(a, b, c, d);
     spokes.main.load_bike_img.call(null);
@@ -20627,7 +20630,7 @@ jayq.core.document_ready.call(null, function() {
     jayq.core.$.call(null, window).resize(a);
     jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0:click", "a", spokes.main.toggle_bio);
     d = jayq.core.$.call(null, "#logo canvas");
-    spokes.main.draw_cloud.call(null, d, 8)
+    spokes.main.draw_cloud.call(null, d, 7)
   }
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });

@@ -42,3 +42,31 @@
   (let [hash (.slice location-hash 1)
         split-hash (.split hash #"[=&]")]
     (hash-mapify-vector split-hash)))
+
+
+(defn camel-name
+  "Convert :fill-style to \"fillStyle\""
+  [kw]
+  (let [nom (name kw)
+        split-nom (str/split nom #"\-")]
+    (apply str (cons (first split-nom) 
+                     (map str/capitalize (rest split-nom))))))
+
+(defn now 
+  "return the current time in miliseconds"
+  []
+  (.getTime (js/Date.)))
+
+
+(def Tau (* 2 Math/PI))
+(def e Math/E)
+
+(defn +clamp
+  "Increment val by added, but clamp to
+   fall in the range [0-max]"
+  [val added max]
+  (let [new-val (+ val added)]
+    (mod new-val max)))
+
+(def cos Math/cos)
+(def sin Math/sin)
