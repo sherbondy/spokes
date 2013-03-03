@@ -5,6 +5,9 @@
 #bios a:active {
   top: 1px;
 }
+#bios p {
+  clear: both;
+}
 
 #slogan {
   position: absolute;

@@ -149,8 +149,9 @@
 
    [:div#content.row-fluid
     [:div.span8
+     
      (q "who" "are you"
-        [:ul#team.span5.offset0
+        [:ul#team.span3.offset0
          (map-indexed
           (fn [idx person]
             (let [pfirst    (fname person)
@@ -163,7 +164,7 @@
                 [:h5 pfirst]]]))
           team)]
 
-        [:div.span7
+        [:div.span9
          [:p "We are " (count team) " college students from MIT and 
              UC Berkeley who are passionate about education:"]
 
