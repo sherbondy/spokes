@@ -30,6 +30,37 @@
 ;; To start up an interactive cljs repl (once the script is compiled).
 ;; But piggieback (nREPL) works better
 
+(defn now []
+  (.getTime (js/Date.)))
+
+;; in pixels
+(def wheel-radius 90)
+;; typical bike wheel has a 0.6m radius 
+(def m-to-px (/ 90 0.6))
+(def time (atom (now)))
+;; cannot draw until we've loaded all resources
+(def ready-to-draw (atom false))
+;; wheel rotation in rads
+(def wheel-rot (atom 0))
+
+;; assume speed is 20 km / hour
+;; speed in m/s
+(def speed (/ (* 1000 20) (* 60 60)))
+(def two-pi (* 2 Math/PI))
+(def rad-per-ms (/ (* wheel-radius speed) 
+                   (* wheel-radius 1000)))
+
+(defn +clamp [val added max]
+  (let [new-val (+ val added)]
+    (mod new-val max)))
+
+(add-watch time :wheel-rotation 
+  (fn [k r ov nv]
+    ;; time delta in ms
+    (let [dt   (- nv ov)
+          drad (* dt rad-per-ms)]
+      (swap! wheel-rot +clamp drad two-pi))))
+
 (defn fit [$elem $doc]
   (u/log "resizing canvas")
   (.attr $elem "width"  (.width $doc))
@@ -73,8 +104,6 @@
                          [prop (aget ctx (camel-name prop))])
                        props))))
 
-(def two-pi (* 2 Math/PI))
-
 ;; normal dist probability function for clouds
 (defn pdf [x mean sigma]
   (/ (Math/pow Math/E (/ (* -1 (Math/pow (- x mean) 2))
@@ -84,7 +113,7 @@
 ;; for clouds, define 2 normal distributions
 ;; with means at x = width/2
 ;; and y = height
-;; sample randomly within boundaries to draw circles
+;; sample kandomly within boundaries to draw circles
 
 (defn wh [elem]
   [(.-width elem)
@@ -107,8 +136,8 @@
 (defn draw-wheel [ctx r n-spokes]
   (cm/with-path ctx
     (draw-circle ctx 0 0 r)
+    (.clearRect ctx (* -1 r) (* -1 r) (* 2 r) (* 2 r))
     (.stroke ctx)
-    (.fill ctx)
 
     (cm/with-ctx-props ctx {:line-width 8}
       (dotimes [n n-spokes]
@@ -119,41 +148,46 @@
                    (* r (Math/cos angle)))
           (.stroke ctx))))))
 
-(defn draw-wheels [ctx x y w h]
-  (u/log "drawing wheels now")
-  (let [r        90
+(defn draw-wheels [ctx w h]
+  (let [r        wheel-radius
         x-offset 10
-        x1       (+ x x-offset)
-        x2       (+ x w (* -1 x-offset))
-        wheel-y  (+ y h (* -0.5 r))]
-    (cm/with-ctx-props ctx {:line-width 20 :fill-style "rgb(255,255,255)"}
+        x1       x-offset
+        x2       (+ w (* -1 x-offset))
+        wheel-y  (+ h (* -0.5 r))
+        rotation @wheel-rot]
+    (cm/with-ctx-props ctx {:line-width 20}
       (cm/with-translation ctx x1 wheel-y
-        (draw-wheel ctx r 8))
+        (cm/with-rotation ctx rotation
+          (draw-wheel ctx r 8)))
       (cm/with-translation ctx x2 wheel-y
-        (draw-wheel ctx r 8)))))
+        (cm/with-rotation ctx rotation
+          (draw-wheel ctx r 8))))))
 
-(defn draw-bike-frame [ctx canvas pre-draw-fn]
-  (let [bike-img (js/Image.)]
-    (set! (.-onload bike-img)
-          (fn []
-            (let [[x y w h] (centered-xy bike-img canvas)
-                  y (+ y 52)]
-              (pre-draw-fn ctx x y w h)
-              (.drawImage ctx bike-img x y)
-              (u/log "Drew bike frame"))))
-    (set! (.-src bike-img) "/img/bike-frame.png")))
+(def bike-img (js/Image.))
+
+(defn load-bike-img []
+  (set! (.-src bike-img) "/img/bike-frame.png")
+  (set! (.-onload bike-img)
+        (reset! ready-to-draw true)))
+
+(defn draw-frame [ctx w h]
+  (.drawImage ctx bike-img 0 0))
 
 (defn draw-bike [ctx canvas]
-  (draw-bike-frame ctx canvas draw-wheels))
+  (let [[x y w h] (centered-xy bike-img canvas)
+        y (+ y 52)]
+    (cm/with-translation ctx x y
+      (.clearRect ctx 0 0 w h)
+      (draw-wheels ctx w h)
+      (draw-frame ctx w h))))
 
 (defn get-ctx [canvas]
   (.getContext canvas "2d"))
 
 (defn draw-scene [canvas]
-  (let [ctx (get-ctx canvas)]
-    (draw-bike ctx canvas)))
-
-;; (draw-scene (aget ($ "#canvas") 0))
+  (if @ready-to-draw
+    (let [ctx (get-ctx canvas)]
+      (draw-bike ctx canvas))))
 
 (defn toggle-bio [e]
   (this-as this
@@ -187,25 +221,32 @@
           (when draw?
             (cm/with-path ctx
               (draw-circle ctx x y r)
-              (.fill ctx))))))
-    (u/log "done rendering cloud")))
+              (.fill ctx))))))))
 
+(defn redraw-canvas-fn [$canvas]
+  (let [canvas (aget $canvas 0)]
+    (fn redraw []
+      (js/requestAnimationFrame redraw)
+      (reset! time (now))
+      (draw-scene canvas))))
 
 (jm/ready
- (when (u/exists? "#canvas")
-   (let [$canvas ($ "#canvas")
-         $header ($ "#header")
-         canvas  (aget $canvas 0)
-         header  (aget $header 0)
-         fit-canvas-fn #(do (fit $canvas $header)
-                            (draw-scene canvas))]
-     (.resize ($ js/window) fit-canvas-fn)
-     (fit-canvas-fn))
+  (when (u/exists? "#canvas")
+    (let [$canvas 	 ($ "#canvas")
+          $header   ($ "#header")
+          canvas 	 (aget $canvas 0)
+          redraw-fn (redraw-canvas-fn $canvas)
+          resize-fn #(fit $canvas $header)]
+      (load-bike-img)
+      (redraw-fn)
+      (resize-fn)
+      (.resize ($ js/window) resize-fn))
 
-   (jq/on ($ "#team") :click "a" toggle-bio)
-
-   (let [$logo-canvas ($ "#logo canvas")]
-     (draw-cloud $logo-canvas 6)))
+ (jq/on ($ "#team") :click "a" toggle-bio)
+        
+ ;; should NOT have separate canvas for logo
+ (let [$logo-canvas ($ "#logo canvas")]
+   (draw-cloud $logo-canvas 8)))   
 
  (when (u/exists? "#map")
    (u/log "Initializing the map..")

@@ -2717,17 +2717,17 @@ cljs.core.with_meta = void 0;
 cljs.core.IWithMeta["function"] = !0;
 cljs.core._with_meta["function"] = function(a, b) {
   return cljs.core.with_meta.call(null, function() {
-    void 0 === cljs.core.t3231 && (cljs.core.t3231 = {}, cljs.core.t3231 = function(a, b, e) {
+    void 0 === cljs.core.t3277 && (cljs.core.t3277 = {}, cljs.core.t3277 = function(a, b, e) {
       this.meta = a;
       this.f = b;
-      this.meta3232 = e;
+      this.meta3278 = e;
       this.cljs$lang$protocol_mask$partition1$ = 0;
       this.cljs$lang$protocol_mask$partition0$ = 393217
-    }, cljs.core.t3231.cljs$lang$type = !0, cljs.core.t3231.cljs$lang$ctorPrSeq = function() {
-      return cljs.core.list.call(null, "cljs.core/t3231")
-    }, cljs.core.t3231.cljs$lang$ctorPrWriter = function(a, b) {
-      return cljs.core._write.call(null, b, "cljs.core/t3231")
-    }, cljs.core.t3231.prototype.call = function() {
+    }, cljs.core.t3277.cljs$lang$type = !0, cljs.core.t3277.cljs$lang$ctorPrSeq = function() {
+      return cljs.core.list.call(null, "cljs.core/t3277")
+    }, cljs.core.t3277.cljs$lang$ctorPrWriter = function(a, b) {
+      return cljs.core._write.call(null, b, "cljs.core/t3277")
+    }, cljs.core.t3277.prototype.call = function() {
       var a = function(a, b) {
         return cljs.core.apply.call(null, a.f, b)
       }, b = function(b, d) {
@@ -2742,15 +2742,15 @@ cljs.core._with_meta["function"] = function(a, b) {
       };
       b.cljs$lang$arity$variadic = a;
       return b
-    }(), cljs.core.t3231.prototype.apply = function(a, b) {
+    }(), cljs.core.t3277.prototype.apply = function(a, b) {
       a = this;
       return a.call.apply(a, [a].concat(b.slice()))
-    }, cljs.core.t3231.prototype.cljs$core$Fn$ = !0, cljs.core.t3231.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-      return this.meta3232
-    }, cljs.core.t3231.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
-      return new cljs.core.t3231(this.meta, this.f, b)
+    }, cljs.core.t3277.prototype.cljs$core$Fn$ = !0, cljs.core.t3277.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+      return this.meta3278
+    }, cljs.core.t3277.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
+      return new cljs.core.t3277(this.meta, this.f, b)
     });
-    return new cljs.core.t3231(b, a, null)
+    return new cljs.core.t3277(b, a, null)
   }(), b)
 };
 cljs.core.IMeta["function"] = !0;
@@ -20438,6 +20438,23 @@ spokes.map.initialize = function() {
   return spokes.map.on_toggle_checkboxes.call(null, jayq.core.$.call(null, "#symbols"), spokes.map.symbol_inputs.call(null))
 };
 spokes.main = {};
+spokes.main.now = function() {
+  return(new Date).getTime()
+};
+spokes.main.wheel_radius = 90;
+spokes.main.m_to_px = 150;
+spokes.main.time = cljs.core.atom.call(null, spokes.main.now.call(null));
+spokes.main.ready_to_draw = cljs.core.atom.call(null, !1);
+spokes.main.wheel_rot = cljs.core.atom.call(null, 0);
+spokes.main.speed = 2E4 / 3600;
+spokes.main.two_pi = 2 * Math.PI;
+spokes.main.rad_per_ms = spokes.main.wheel_radius * spokes.main.speed / (1E3 * spokes.main.wheel_radius);
+spokes.main._PLUS_clamp = function(a, b, c) {
+  return cljs.core.mod.call(null, a + b, c)
+};
+cljs.core.add_watch.call(null, spokes.main.time, "\ufdd0:wheel-rotation", function(a, b, c, d) {
+  return cljs.core.swap_BANG_.call(null, spokes.main.wheel_rot, spokes.main._PLUS_clamp, (d - c) * spokes.main.rad_per_ms, spokes.main.two_pi)
+});
 spokes.main.fit = function(a, b) {
   spokes.util.log.call(null, "resizing canvas");
   a.attr("width", b.width());
@@ -20479,7 +20496,6 @@ spokes.main.get_ctx_props = function get_ctx_props(b, c) {
     return cljs.core.PersistentVector.fromArray([c, b[spokes.main.camel_name.call(null, c)]], !0)
   }, c))
 };
-spokes.main.two_pi = 2 * Math.PI;
 spokes.main.pdf = function(a, b, c) {
   return Math.pow.call(null, Math.E, -1 * Math.pow.call(null, a - b, 2) / (2 * Math.pow.call(null, c, 2))) / (c * Math.sqrt.call(null, spokes.main.two_pi))
 };
@@ -20496,8 +20512,8 @@ spokes.main.draw_circle = function(a, b, c, d) {
 spokes.main.draw_wheel = function(a, b, c) {
   a.beginPath();
   spokes.main.draw_circle.call(null, a, 0, 0, b);
+  a.clearRect(-1 * b, -1 * b, 2 * b, 2 * b);
   a.stroke();
-  a.fill();
   var d = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":8}));
   spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":8}));
   for(var e = 0;;) {
@@ -20514,39 +20530,51 @@ spokes.main.draw_wheel = function(a, b, c) {
   spokes.main.set_ctx_props_BANG_.call(null, a, d);
   return a.closePath()
 };
-spokes.main.draw_wheels = function(a, b, c, d, e) {
-  spokes.util.log.call(null, "drawing wheels now");
-  var f = b + 10, b = b + d + -10, c = c + e + -45, e = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width", "\ufdd0:fill-style"], {"\ufdd0:line-width":20, "\ufdd0:fill-style":"rgb(255,255,255)"}));
-  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width", "\ufdd0:fill-style"], {"\ufdd0:line-width":20, "\ufdd0:fill-style":"rgb(255,255,255)"}));
+spokes.main.draw_wheels = function(a, b, c) {
+  var d = spokes.main.wheel_radius, b = b + -10, c = c + -0.5 * d, e = cljs.core.deref.call(null, spokes.main.wheel_rot), f = spokes.main.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
+  spokes.main.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
   a.save();
-  a.translate(f, c);
-  spokes.main.draw_wheel.call(null, a, 90, 8);
+  a.translate(10, c);
+  a.save();
+  a.rotate(e);
+  spokes.main.draw_wheel.call(null, a, d, 8);
+  a.restore();
   a.restore();
   a.save();
   a.translate(b, c);
-  spokes.main.draw_wheel.call(null, a, 90, 8);
+  a.save();
+  a.rotate(e);
+  spokes.main.draw_wheel.call(null, a, d, 8);
   a.restore();
-  return spokes.main.set_ctx_props_BANG_.call(null, a, e)
+  a.restore();
+  return spokes.main.set_ctx_props_BANG_.call(null, a, f)
 };
-spokes.main.draw_bike_frame = function(a, b, c) {
-  var d = new Image;
-  d.onload = function() {
-    var e = spokes.main.centered_xy.call(null, d, b), f = cljs.core.nth.call(null, e, 0, null), g = cljs.core.nth.call(null, e, 1, null), h = cljs.core.nth.call(null, e, 2, null), e = cljs.core.nth.call(null, e, 3, null), g = g + 52;
-    c.call(null, a, f, g, h, e);
-    a.drawImage(d, f, g);
-    return spokes.util.log.call(null, "Drew bike frame")
-  };
-  return d.src = "/img/bike-frame.png"
+spokes.main.bike_img = new Image;
+spokes.main.load_bike_img = function() {
+  spokes.main.bike_img.src = "/img/bike-frame.png";
+  return spokes.main.bike_img.onload = cljs.core.reset_BANG_.call(null, spokes.main.ready_to_draw, !0)
+};
+spokes.main.draw_frame = function(a) {
+  return a.drawImage(spokes.main.bike_img, 0, 0)
 };
 spokes.main.draw_bike = function(a, b) {
-  return spokes.main.draw_bike_frame.call(null, a, b, spokes.main.draw_wheels)
+  var c = spokes.main.centered_xy.call(null, spokes.main.bike_img, b), d = cljs.core.nth.call(null, c, 0, null), e = cljs.core.nth.call(null, c, 1, null), f = cljs.core.nth.call(null, c, 2, null), c = cljs.core.nth.call(null, c, 3, null), e = e + 52;
+  a.save();
+  a.translate(d, e);
+  a.clearRect(0, 0, f, c);
+  spokes.main.draw_wheels.call(null, a, f, c);
+  spokes.main.draw_frame.call(null, a, f, c);
+  return a.restore()
 };
 spokes.main.get_ctx = function(a) {
   return a.getContext("2d")
 };
 spokes.main.draw_scene = function(a) {
-  var b = spokes.main.get_ctx.call(null, a);
-  return spokes.main.draw_bike.call(null, b, a)
+  if(cljs.core.truth_(cljs.core.deref.call(null, spokes.main.ready_to_draw))) {
+    var b = spokes.main.get_ctx.call(null, a);
+    return spokes.main.draw_bike.call(null, b, a)
+  }
+  return null
 };
 spokes.main.toggle_bio = function(a) {
   var b = jayq.core.$.call(null, this);
@@ -20576,22 +20604,30 @@ spokes.main.draw_cloud = function(a, b) {
       break
     }
   }
-  spokes.main.set_ctx_props_BANG_.call(null, c, l);
-  return spokes.util.log.call(null, "done rendering cloud")
+  return spokes.main.set_ctx_props_BANG_.call(null, c, l)
+};
+spokes.main.redraw_canvas_fn = function(a) {
+  var b = a[0];
+  return function d() {
+    requestAnimationFrame(d);
+    cljs.core.reset_BANG_.call(null, spokes.main.time, spokes.main.now.call(null));
+    return spokes.main.draw_scene.call(null, b)
+  }
 };
 jayq.core.document_ready.call(null, function() {
   if(cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#canvas"))) {
-    var a = jayq.core.$.call(null, "#canvas"), b = jayq.core.$.call(null, "#header"), a = function(a, b, e) {
+    var a = jayq.core.$.call(null, "#canvas"), b = jayq.core.$.call(null, "#header"), c = a[0], d = spokes.main.redraw_canvas_fn.call(null, a), a = function(a, b) {
       return function() {
-        spokes.main.fit.call(null, a, b);
-        return spokes.main.draw_scene.call(null, e)
+        return spokes.main.fit.call(null, a, b)
       }
-    }(a, b, a[0], b[0]);
-    jayq.core.$.call(null, window).resize(a);
+    }(a, b, c, d);
+    spokes.main.load_bike_img.call(null);
+    d.call(null);
     a.call(null);
+    jayq.core.$.call(null, window).resize(a);
     jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0:click", "a", spokes.main.toggle_bio);
-    a = jayq.core.$.call(null, "#logo canvas");
-    spokes.main.draw_cloud.call(null, a, 6)
+    d = jayq.core.$.call(null, "#logo canvas");
+    spokes.main.draw_cloud.call(null, d, 8)
   }
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });

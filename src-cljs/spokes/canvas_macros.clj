@@ -22,3 +22,10 @@
      (.translate ~ctx ~x ~y)
      (do ~@body)
      (.restore ~ctx)))
+
+(defmacro with-rotation [ctx rot & body]
+  `(do
+     (.save ~ctx)
+     (.rotate ~ctx ~rot)
+     (do ~@body)
+     (.restore ~ctx)))

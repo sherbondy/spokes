@@ -171,7 +171,7 @@
                [:h3 (:name person)
                 [:small.pull-right 
                  (:school person) " Class of " (:grad-year person)]]
-               ]))]])
+               	[:p (md/md-to-html-string (:bio person))]]))]])
 
      (q "what" "are you doing"
         [:p "We're biking across the United States in partnership
