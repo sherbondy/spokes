@@ -17286,10 +17286,25 @@ spokes.canvas.get_ctx_props = function get_ctx_props(b, c) {
     return cljs.core.PersistentVector.fromArray([c, b[spokes.util.camel_name.call(null, c)]], !0)
   }, c))
 };
-spokes.canvas.calc_center = function(a, b) {
-  var c = spokes.canvas.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.canvas.wh.call(null, b), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null);
-  return cljs.core.PersistentVector.fromArray([(f - d) / 2, (e - d) / 2, d, c], !0)
-};
+spokes.canvas.calc_center = function() {
+  var a = null, b = function(b, c) {
+    var f = spokes.canvas.wh.call(null, b), g = cljs.core.nth.call(null, f, 0, null), f = cljs.core.nth.call(null, f, 1, null), h = spokes.canvas.wh.call(null, c), i = cljs.core.nth.call(null, h, 0, null), h = cljs.core.nth.call(null, h, 1, null);
+    return a.call(null, g, f, i, h)
+  }, c = function(a, b, c, g) {
+    return cljs.core.PersistentVector.fromArray([(c - a) / 2, (g - a) / 2, a, b], !0)
+  }, a = function(a, e, f, g) {
+    switch(arguments.length) {
+      case 2:
+        return b.call(this, a, e);
+      case 4:
+        return c.call(this, a, e, f, g)
+    }
+    throw Error("Invalid arity: " + arguments.length);
+  };
+  a.cljs$lang$arity$2 = b;
+  a.cljs$lang$arity$4 = c;
+  return a
+}();
 spokes.canvas.draw_circle = function(a, b, c, d) {
   return a.arc(b, c, d, 0, spokes.util.Tau, !0)
 };
@@ -20516,7 +20531,6 @@ spokes.main.pdf = function(a, b, c) {
   return Math.pow.call(null, spokes.util.e, -1 * Math.pow.call(null, a - b, 2) / (2 * Math.pow.call(null, c, 2))) / (c * Math.sqrt.call(null, spokes.util.Tau))
 };
 spokes.main.draw_wheel = function(a, b, c) {
-  a.clearRect(-1 * b, -1 * b, 2 * b, 2 * b);
   a.beginPath();
   spokes.canvas.draw_circle.call(null, a, 0, 0, b);
   a.stroke();
@@ -20540,7 +20554,7 @@ spokes.main.draw_wheel = function(a, b, c) {
   return a.closePath()
 };
 spokes.main.draw_wheels = function(a, b, c) {
-  var d = spokes.main.wheel_radius, b = b + -10, c = c + -0.5 * d, e = cljs.core.deref.call(null, spokes.main.wheel_rot), f = spokes.canvas.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
+  var d = spokes.main.wheel_radius, b = b - 10, c = c - 0.5 * d, e = cljs.core.deref.call(null, spokes.main.wheel_rot), f = spokes.canvas.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
   spokes.canvas.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":20}));
   var g = 1 * spokes.util.cos.call(null, e), h = 1 * spokes.util.sin.call(null, e);
   a.save();
@@ -20563,19 +20577,66 @@ spokes.main.load_bike_img = function() {
 spokes.main.draw_frame = function(a) {
   return a.drawImage(spokes.main.bike_img, 0, 0)
 };
-spokes.main.draw_bike = function(a, b) {
-  var c = spokes.canvas.calc_center.call(null, spokes.main.bike_img, b), d = cljs.core.nth.call(null, c, 0, null), e = cljs.core.nth.call(null, c, 1, null), f = cljs.core.nth.call(null, c, 2, null), c = cljs.core.nth.call(null, c, 3, null), e = e + 52;
+spokes.main.draw_pedal = function(a, b, c) {
+  var b = 0.5 * b, d = spokes.canvas.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":c}));
+  spokes.canvas.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":c}));
+  a.moveTo(-1 * b, 0);
+  a.lineTo(b, 0);
+  return spokes.canvas.set_ctx_props_BANG_.call(null, a, d)
+};
+spokes.main.draw_crank = function(a, b, c, d, e) {
+  var f = cljs.core.deref.call(null, spokes.main.wheel_rot), g = -1 * f;
+  a.beginPath();
+  var h = spokes.canvas.get_ctx_props.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":b}));
+  spokes.canvas.set_ctx_props_BANG_.call(null, a, cljs.core.ObjMap.fromObject(["\ufdd0:line-width"], {"\ufdd0:line-width":b}));
+  var i = 1 * spokes.util.cos.call(null, f), f = 1 * spokes.util.sin.call(null, f);
   a.save();
-  a.translate(d, e);
-  a.clearRect(0, 0, f, c);
-  spokes.main.draw_wheels.call(null, a, f, c);
-  spokes.main.draw_frame.call(null, a, f, c);
+  a.transform(i, f, -1 * f, i, d, e);
+  d = 1 * spokes.util.cos.call(null, g);
+  e = 1 * spokes.util.sin.call(null, g);
+  a.save();
+  a.transform(d, e, -1 * e, d, 0, c);
+  spokes.main.draw_pedal.call(null, a, 40, b);
+  a.restore();
+  d = 1 * spokes.util.cos.call(null, g);
+  g = 1 * spokes.util.sin.call(null, g);
+  a.save();
+  a.transform(d, g, -1 * g, d, 0, -1 * c);
+  spokes.main.draw_pedal.call(null, a, 40, b);
+  a.restore();
+  a.moveTo(0, -1 * c);
+  a.lineTo(0, c);
+  a.stroke();
+  a.restore();
+  spokes.canvas.set_ctx_props_BANG_.call(null, a, h);
+  return a.closePath()
+};
+spokes.main.draw_pedals = function(a, b, c) {
+  return spokes.main.draw_crank.call(null, a, 20, 40, b / 2 - 15, c - 20)
+};
+spokes.main.draw_bike = function(a, b, c, d) {
+  b = cljs.core.rand_int.call(null, 2);
+  a.save();
+  a.translate(0, b);
+  spokes.main.draw_wheels.call(null, a, c, d);
+  spokes.main.draw_frame.call(null, a, c, d);
+  spokes.main.draw_pedals.call(null, a, c, d);
   return a.restore()
 };
 spokes.main.draw_scene = function(a) {
   if(cljs.core.truth_(cljs.core.deref.call(null, spokes.main.ready_to_draw))) {
-    var b = spokes.canvas.get_ctx.call(null, a);
-    return spokes.main.draw_bike.call(null, b, a)
+    var b = spokes.canvas.get_ctx.call(null, a), c = spokes.canvas.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.canvas.wh.call(null, spokes.main.bike_img), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), g = f / d, g = 1 > 0.4 / g ? 0.4 / g : 1, h = spokes.canvas.calc_center.call(null, g * f, g * e, d, c), i = cljs.core.nth.call(null, h, 0, null), j = cljs.core.nth.call(null, h, 1, null);
+    cljs.core.nth.call(null, h, 2, null);
+    cljs.core.nth.call(null, h, 3, null);
+    h = j + 50;
+    b.clearRect(0, 0, d, c);
+    b.save();
+    b.translate(i, h);
+    b.save();
+    b.scale(g, g);
+    spokes.main.draw_bike.call(null, b, a, f, e);
+    b.restore();
+    return b.restore()
   }
   return null
 };

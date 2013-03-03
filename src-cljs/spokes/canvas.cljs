@@ -47,13 +47,19 @@
 (defn calc-center
   "Return (top left) x, y, width, and height of child centered inside parent.
    Does not actually relocate child."
-  [child parent]
-  (let [[cw ch] (wh child)
-        [pw ph] (wh parent)]
+  ([cw ch pw ph]
     [(/ (- pw cw) 2)
      (/ (- ph cw) 2)
      cw
-     ch]))
+     ch])
+  
+  ([child parent]
+    (let [[cw ch] (wh child)
+          [pw ph] (wh parent)]
+      (calc-center cw ch pw ph))))
+  
+
+;; (calc-center 10 20 100 300)
 
 (defn draw-circle [ctx x y r]
   (.arc ctx x y r 0 Tau true))

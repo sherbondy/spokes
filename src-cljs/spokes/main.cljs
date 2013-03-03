@@ -50,7 +50,6 @@
 
 
 (defn draw-wheel [ctx r n-spokes]
-  (.clearRect ctx (* -1 r) (* -1 r) (* 2 r) (* 2 r))
   (cm/with-path ctx
     (c/draw-circle ctx 0 0 r)
     (.stroke ctx)
@@ -68,13 +67,13 @@
         n-spokes 8
         x-offset 10
         x1       x-offset
-        x2       (+ w (* -1 x-offset))
-        wheel-y  (+ h (* -0.5 r))
+        x2       (- w x-offset)
+        y        (- h (* 0.5 r))
         rotation @wheel-rot]
     (cm/with-ctx-props ctx {:line-width 20}
-      (cm/with-trans-rot-scale ctx [x1 wheel-y] rotation [1 1]
+      (cm/with-trans-rot-scale ctx [x1 y] rotation [1 1]
         (draw-wheel ctx r n-spokes))
-      (cm/with-trans-rot-scale ctx [x2 wheel-y] rotation [1 1]
+      (cm/with-trans-rot-scale ctx [x2 y] rotation [1 1]
         (draw-wheel ctx r n-spokes)))))
 
 (def bike-img (js/Image.))
@@ -87,19 +86,63 @@
 (defn draw-frame [ctx w h]
   (.drawImage ctx bike-img 0 0))
 
-(defn draw-bike [ctx canvas]
-  (let [[x y w h] (c/calc-center bike-img canvas)
-        y (+ y 52)]
-    (cm/with-translation ctx x y
-      (.clearRect ctx 0 0 w h)
-      (draw-wheels ctx w h)
-      (draw-frame ctx w h))))
+(defn draw-pedal [ctx pedal-w pedal-h]
+  (let [half-w (* pedal-w 0.5)]
+    (cm/with-ctx-props ctx {:line-width pedal-h}
+      (.moveTo ctx (* -1 half-w) 0)
+      (.lineTo ctx half-w 0))))
 
+(defn draw-crank [ctx crank-w crank-r x y]
+  (let [pedal-w 40
+        pedal-h crank-w
+        rot     @wheel-rot
+        neg-rot (* -1 rot)]
+    (cm/with-path ctx
+      (cm/with-ctx-props ctx {:line-width crank-w}
+        (cm/with-trans-rot-scale ctx [x y] rot [1 1]
+                                 
+          (cm/with-trans-rot-scale ctx 
+            [0 crank-r] neg-rot [1 1]
+            (draw-pedal ctx pedal-w pedal-h))
+                                 
+          (cm/with-trans-rot-scale ctx
+            [0 (* -1 crank-r)] neg-rot [1 1]
+            (draw-pedal ctx pedal-w pedal-h))
+                                 
+          (.moveTo ctx 0 (* -1 crank-r))
+          (.lineTo ctx 0 crank-r)
+          (.stroke ctx))))))
+
+(defn draw-pedals [ctx w h]
+  (let [crank-w 20
+        crank-r 40
+        x       (- (/ w 2) (* crank-w 0.75))
+        y       (- h (* 0.5 crank-r))]
+    (draw-crank ctx crank-w crank-r x y)))
+
+(defn draw-bike [ctx canvas w h]
+  (let [y (rand-int 2)]
+    (cm/with-translation ctx 0 y
+      (draw-wheels ctx w h)
+      (draw-frame ctx w h)
+      (draw-pedals ctx w h))))
 
 (defn draw-scene [canvas]
   (if @ready-to-draw
-    (let [ctx (c/get-ctx canvas)]
-      (draw-bike ctx canvas))))
+    (let [ctx         (c/get-ctx canvas)
+          [w h]       (c/wh canvas)
+          [bw bh]     (c/wh bike-img)
+          w-frac      (/ bw w)
+          max-w-frac  0.4
+          scale       (min (/ max-w-frac w-frac) 1)
+          scaled-bw   (* scale bw)
+          scaled-bh   (* scale bh)
+          [tx ty _ _] (c/calc-center scaled-bw scaled-bh w h)
+          ty          (+ ty 50)]
+      (.clearRect ctx 0 0 w h)
+      (cm/with-translation ctx tx ty
+        (cm/with-scale ctx scale scale
+          (draw-bike ctx canvas bw bh))))))
 
 (defn toggle-bio [e]
   (this-as this
