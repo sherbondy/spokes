@@ -2,19 +2,18 @@
   :description "Biking across the country to learn about education."
   :url "http://spokesamerica.org"
   :min-lein-version "2.0.0"
-  :dependencies [[org.clojure/clojure "1.4.0"]
+  :dependencies [[org.clojure/clojure "1.5.0"]
                  [org.clojure/data.zip "0.1.1"]
-                 [com.cemerick/piggieback "0.0.2"]
 
                  [clj-time "0.4.4"]
                  [compojure "1.1.3"]
                  [environ "0.3.0"]
                  [hiccup "1.0.2"]
-                 [http-kit "2.0.0-RC2"]
+                 [http-kit "2.0.0-RC4"]
                  [markdown-clj "0.9.19"]
 
                  ;cljs
-                 [prismatic/dommy "0.0.1"]
+                 [prismatic/dommy "0.0.2"]
                  [jayq "2.0.0"]]
 
   :plugins [[lein-ring "0.8.0"
@@ -40,10 +39,6 @@
                  "src-cljs"
                  "comp/clojurescript/src/clj"
                  "comp/clojurescript/src/cljs"]
-
-  ;; auto-add piggieback namespace to lein repl
-  :repl-options
-  {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
   :cljsbuild 
   {

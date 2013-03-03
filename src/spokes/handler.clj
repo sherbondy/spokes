@@ -29,11 +29,11 @@
                :else port)))))
 
 ;; For interactive development, evaluate these:
-(comment)
+(comment
   (do
     (require '[ring.middleware.reload :as reload])
     (def app (-> app (reload/wrap-reload)))
-    (defonce server (start 8000)))
+    (defonce server (start 8000))))
   
 ;; server returns a function that, when evaluated, stops the server:
 ;; (server)
