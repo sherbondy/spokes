@@ -208,12 +208,12 @@
 
      (q "why" "are you doing this"
         [:p "We are dedicated to revealing the exploratory, 
-         self-directed, boundless nature of learning to students 
-         across the US. Our mission comes from the simple idea 
-         that most learning you and I do over the course of our 
-         lifetimes happens outside a classroom and happens as a 
-         result of semi-random exploration on our part into topics 
-         that interest us."]
+         self-directed, and boundless nature of learning to students 
+         across the US. Our mission stems from the simple idea 
+         that most of the learning we do over the course of our 
+         lifetimes happens outside of a classroom as the
+         result of semi-random explorations into topics 
+         that genuinely interest us."]
        	[:p "We want to show this to high school students and give 
          them an opportunity to feel inspired and find something they love."])
 
