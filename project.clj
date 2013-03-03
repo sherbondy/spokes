@@ -36,9 +36,7 @@
 
   ;; for the cljs macros, add src-cljs
   :source-paths ["src"
-                 "src-cljs"
-                 "comp/clojurescript/src/clj"
-                 "comp/clojurescript/src/cljs"]
+                 "src-cljs"]
 
   :cljsbuild 
   {
