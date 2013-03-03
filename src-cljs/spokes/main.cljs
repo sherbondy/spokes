@@ -137,8 +137,8 @@
           scale       (min (/ max-w-frac w-frac) 1)
           scaled-bw   (* scale bw)
           scaled-bh   (* scale bh)
-          [tx ty _ _] (c/calc-center scaled-bw scaled-bh w h)
-          ty          (+ ty 50)]
+          [tx _ _ _]  (c/calc-center scaled-bw scaled-bh w h)
+          ty          (- h (* 1.22 scaled-bh))]
       (.clearRect ctx 0 0 w h)
       (cm/with-translation ctx tx ty
         (cm/with-scale ctx scale scale
@@ -163,7 +163,7 @@
         x-mean   (+ x-sigma min-val)
         y-sigma  (* h 0.25)
         y-mean   (+ (* h 0.5) min-val)
-        cutoff-m 0.15
+        cutoff-m 0.12
         x-cutoff (* cutoff-m (/ x-sigma w))
         y-cutoff (* cutoff-m (/ y-sigma h))]
     (cm/with-ctx-props ctx {:fill-style "rgba(255,255,255,0.5)"}

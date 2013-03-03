@@ -8,7 +8,8 @@
             [markdown.core :as md]
             [spokes.gps :as gps]
             [spokes.util :as u])
-  (:use [hiccup.def :only [defhtml]]))
+  (:use [hiccup.def :only [defhtml]]
+        [spokes.team :only [team]]))
 
 (defn fname [person]
   (first (str/split (:name person) #"\s")))
@@ -95,7 +96,7 @@
   [date]
   (- (t/day-of-week date) 1))
 
-(defn calendar []
+(defhtml calendar []
   [:div.row-fluid
    (for [i (range (t/in-months cal-interval))]
      (let [month-start   (t/plus (t/start cal-interval) (t/months i))
@@ -128,7 +129,7 @@
   [:time {:datetime (tf/unparse time-fmt date)}
    (tf/unparse p-fmt date)])
 
-(defn home [team]
+(defn home []
   (layout
    [:canvas#canvas]
 
@@ -136,11 +137,15 @@
     [:div#logo.cloud
      [:h1 "Spokes"]
      [:canvas]]
+    [:h2#slogan.span4 "Inspiring students to learn what they "
+     [:em"love"]]
 
     [:ul#questions
      (for [question ["who", "what", "when", "where", "why", "how"]]
        [:li.question
-        [:h4 [:a {:href (str "#" question)} question]]])]]
+        [:h4 [:a {:href (str "#" question)} question]]])
+     [:li.question
+      [:h4 [:a {:href "http://blog.spokesamerica.org"} "blog"]]]]]
 
    [:div#content.row-fluid
     [:div.span8
@@ -183,7 +188,7 @@
          [:em "learning festivals"]
           " geared towards middle and high-school students.
            Each of us will be teaching a hands-on,
-           project-oriented class based around one of our passions."]
+           project-oriented class based on one of our passions."]
         [:p "Below is a list of the courses we'll be offering:"])
 
      (q "when" "is it"
@@ -202,7 +207,15 @@
              Trans America."])
 
      (q "why" "are you doing this"
-        [:p "We're crazy."])
+        [:p "We are dedicated to revealing the exploratory, 
+         self-directed, boundless nature of learning to students 
+         across the US. Our mission comes from the simple idea 
+         that most learning you and I do over the course of our 
+         lifetimes happens outside a classroom and happens as a 
+         result of semi-random exploration on our part into topics 
+         that interest us."]
+       	[:p "We want to show this to high school students and give 
+         them an opportunity to feel inspired and find something they love."])
 
      (q "how" "can I help"
         [:p "We are currently looking for sponsors. "

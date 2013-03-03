@@ -2717,17 +2717,17 @@ cljs.core.with_meta = void 0;
 cljs.core.IWithMeta["function"] = !0;
 cljs.core._with_meta["function"] = function(a, b) {
   return cljs.core.with_meta.call(null, function() {
-    void 0 === cljs.core.t13377 && (cljs.core.t13377 = {}, cljs.core.t13377 = function(a, b, e) {
+    void 0 === cljs.core.t14102 && (cljs.core.t14102 = {}, cljs.core.t14102 = function(a, b, e) {
       this.meta = a;
       this.f = b;
-      this.meta13378 = e;
+      this.meta14103 = e;
       this.cljs$lang$protocol_mask$partition1$ = 0;
       this.cljs$lang$protocol_mask$partition0$ = 393217
-    }, cljs.core.t13377.cljs$lang$type = !0, cljs.core.t13377.cljs$lang$ctorPrSeq = function() {
-      return cljs.core.list.call(null, "cljs.core/t13377")
-    }, cljs.core.t13377.cljs$lang$ctorPrWriter = function(a, b) {
-      return cljs.core._write.call(null, b, "cljs.core/t13377")
-    }, cljs.core.t13377.prototype.call = function() {
+    }, cljs.core.t14102.cljs$lang$type = !0, cljs.core.t14102.cljs$lang$ctorPrSeq = function() {
+      return cljs.core.list.call(null, "cljs.core/t14102")
+    }, cljs.core.t14102.cljs$lang$ctorPrWriter = function(a, b) {
+      return cljs.core._write.call(null, b, "cljs.core/t14102")
+    }, cljs.core.t14102.prototype.call = function() {
       var a = function(a, b) {
         return cljs.core.apply.call(null, a.f, b)
       }, b = function(b, d) {
@@ -2742,15 +2742,15 @@ cljs.core._with_meta["function"] = function(a, b) {
       };
       b.cljs$lang$arity$variadic = a;
       return b
-    }(), cljs.core.t13377.prototype.apply = function(a, b) {
+    }(), cljs.core.t14102.prototype.apply = function(a, b) {
       a = this;
       return a.call.apply(a, [a].concat(b.slice()))
-    }, cljs.core.t13377.prototype.cljs$core$Fn$ = !0, cljs.core.t13377.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-      return this.meta13378
-    }, cljs.core.t13377.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
-      return new cljs.core.t13377(this.meta, this.f, b)
+    }, cljs.core.t14102.prototype.cljs$core$Fn$ = !0, cljs.core.t14102.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+      return this.meta14103
+    }, cljs.core.t14102.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(a, b) {
+      return new cljs.core.t14102(this.meta, this.f, b)
     });
-    return new cljs.core.t13377(b, a, null)
+    return new cljs.core.t14102(b, a, null)
   }(), b)
 };
 cljs.core.IMeta["function"] = !0;
@@ -20625,13 +20625,14 @@ spokes.main.draw_bike = function(a, b, c, d) {
 };
 spokes.main.draw_scene = function(a) {
   if(cljs.core.truth_(cljs.core.deref.call(null, spokes.main.ready_to_draw))) {
-    var b = spokes.canvas.get_ctx.call(null, a), c = spokes.canvas.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.canvas.wh.call(null, spokes.main.bike_img), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), g = f / d, g = 1 > 0.4 / g ? 0.4 / g : 1, h = spokes.canvas.calc_center.call(null, g * f, g * e, d, c), i = cljs.core.nth.call(null, h, 0, null), j = cljs.core.nth.call(null, h, 1, null);
-    cljs.core.nth.call(null, h, 2, null);
-    cljs.core.nth.call(null, h, 3, null);
-    h = j + 50;
+    var b = spokes.canvas.get_ctx.call(null, a), c = spokes.canvas.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.canvas.wh.call(null, spokes.main.bike_img), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), g = f / d, g = 1 > 0.4 / g ? 0.4 / g : 1, h = g * e, i = spokes.canvas.calc_center.call(null, g * f, h, d, c), j = cljs.core.nth.call(null, i, 0, null);
+    cljs.core.nth.call(null, i, 1, null);
+    cljs.core.nth.call(null, i, 2, null);
+    cljs.core.nth.call(null, i, 3, null);
+    h = c - 1.22 * h;
     b.clearRect(0, 0, d, c);
     b.save();
-    b.translate(i, h);
+    b.translate(j, h);
     b.save();
     b.scale(g, g);
     spokes.main.draw_bike.call(null, b, a, f, e);
@@ -20649,7 +20650,7 @@ spokes.main.toggle_bio = function(a) {
   return b.addClass("active")
 };
 spokes.main.draw_cloud = function(a, b) {
-  var c = spokes.canvas.get_ctx.call(null, a[0]), d = a.width(), e = a.height(), f = 2 * b, g = 0.5 * d, h = g + f, i = 0.25 * e, j = 0.5 * e + f, k = 0.15 * (g / d), m = 0.15 * (i / e), l = spokes.canvas.get_ctx_props.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0:fill-style"], {"\ufdd0:fill-style":"rgba(255,255,255,0.5)"}));
+  var c = spokes.canvas.get_ctx.call(null, a[0]), d = a.width(), e = a.height(), f = 2 * b, g = 0.5 * d, h = g + f, i = 0.25 * e, j = 0.5 * e + f, k = 0.12 * (g / d), m = 0.12 * (i / e), l = spokes.canvas.get_ctx_props.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0:fill-style"], {"\ufdd0:fill-style":"rgba(255,255,255,0.5)"}));
   spokes.canvas.set_ctx_props_BANG_.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0:fill-style"], {"\ufdd0:fill-style":"rgba(255,255,255,0.5)"}));
   for(d = cljs.core.seq.call(null, cljs.core.range.call(null, f, d + 4 * f));;) {
     if(d) {

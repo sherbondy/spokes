@@ -62,8 +62,10 @@
 ;; should probably maintain a sorted order by longitude
 (def fval (comp first vals))
 (def we (kw-routes :we (fn [m] (< (:lon (fval m)) -104))))
-(def ta (kw-routes :ta (fn [m] (> (:lon (fval m)) -105))))
-(def ac (kw-routes :ac (fn [m] (> (:lat (fval m)) 37))))
+(def ta (kw-routes :ta (fn [m] (and (> (:lon (fval m)) -105)
+                                    (< (:lon (fval m)) -78)))))
+(def ac (kw-routes :ac (fn [m] (and (> (:lat (fval m)) 37)
+                                    (< (:lat (fval m) 39))))))
 
 (def all-locations 
   (merge we ta ac))
@@ -83,7 +85,7 @@
 (defn spit-edn-data []
   (spit data-file edn-data))
 
-;; (spit-edn-data)
+(spit-edn-data)
 
 (defn slurp-edn-data []
   (slurp data-file))
