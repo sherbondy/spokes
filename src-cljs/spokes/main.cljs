@@ -13,6 +13,17 @@
 ;;> lein cljsbuild auto
 ;; To compile all cljs files into JavaScript
 
+(def sunset-ms
+  (let [now-date (js/Date.)]
+    (.setHours now-date 18 30 0 0)))
+
+(def sunrise-ms
+  (let [now-date (js/Date.)]
+    (.setHours now-date 5 55 0 0)))
+
+;; now figure out the sun angle based on the current time and lat/lng!
+;; http://www.pveducation.org/pvcdrom/properties-of-sunlight/suns-position
+
 ;; in pixels
 (def wheel-radius 90)
 ;; typical bike wheel has a 0.6m radius 

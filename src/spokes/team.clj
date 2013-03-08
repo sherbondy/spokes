@@ -1,7 +1,12 @@
 (ns spokes.team)
 
 (def team
-  [{:name "Bruno Faviero"
+  [{:name "Aakanksha Sarda"
+    :bio ""
+    :school "MIT"
+    :grad-year 2014}
+   
+   {:name "Bruno Faviero"
     :bio (str "I am a sophomore at MIT, but a lifelong underclassman. "
               "I love learning new things: writing techniques, sailing strategies, "
               "Ultimate throws, design concepts — anything interesting! I also love teaching, "
@@ -48,11 +53,6 @@
     :bio ""
     :school "MIT"
     :grad-year 2014}
-   
-   {:name "Manny Singh"
-    :bio ""
-    :school "MIT"
-    :grad-year 2016}
    
    {:name "Nathan Kit Kennedy"
     :bio ""

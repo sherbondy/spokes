@@ -34,6 +34,7 @@
     (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
                 (str "//maps.googleapis.com/maps/api/js?key=" 
                      (env :google-maps-key) "&sensor=false")
+                "/js/anim.js"
                 "/js/main.js")]))
 
 (defn checkbox-div [name label & [value]]
