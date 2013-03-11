@@ -4,11 +4,12 @@
             [compojure.route :as route]
             [environ.core :refer [env]]
             [org.httpkit.server :as http]
-            [spokes.views :refer [home route]]))
+            [spokes.views :refer [home route mentor]]))
 
 (defroutes app-routes
   (GET "/" [] (home))
   (GET "/route" [] (route))
+  (GET "/apply" [] (mentor))
   (route/resources "/")
   (route/not-found "Not Found"))
 
