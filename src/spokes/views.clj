@@ -24,18 +24,30 @@
                       maximum-scale=1.0"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
     
-   	[:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:8833/socket.io/lighttable/ws.js"}]
+    ;; [:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:8833/socket.io/lighttable/ws.js"}]
 
+    ;; be weary of the relative paths!
     (u/font-link ["Lato" [400 700] ["italic"]]
                  ["Signika" [400 600 700]])
     (include-css "/css/style.css" "/css/live.css")]
 
-   [:body body
-    (include-js "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
-                (str "//maps.googleapis.com/maps/api/js?key=" 
-                     (env :google-maps-key) "&sensor=false")
-                "/js/anim.js"
-                "/js/main.js")]))
+   [:body 
+    [:canvas#canvas]
+    [:header#header
+     [:div#logo.cloud
+      [:h1 "Spokes"]
+      [:canvas]]
+     [:h2#slogan.span4 "Inspiring students to learn what they "
+      [:em"love"]]]
+
+    body
+
+    (include-js 
+     "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+     (str "//maps.googleapis.com/maps/api/js?key=" 
+          (env :google-maps-key) "&sensor=false")
+     "/js/anim.js"
+     "/js/main.js")]))
 
 (defn checkbox-div [name label & [value]]
   [:div
@@ -132,21 +144,12 @@
 
 (defn home []
   (layout
-   [:canvas#canvas]
-
-   [:header#header
-    [:div#logo.cloud
-     [:h1 "Spokes"]
-     [:canvas]]
-    [:h2#slogan.span4 "Inspiring students to learn what they "
-     [:em"love"]]
-
-    [:ul#questions
-     (for [question ["who", "what", "when", "where", "why", "how"]]
-       [:li.question
-        [:h4 [:a {:href (str "#" question)} question]]])
-     [:li.question
-      [:h4 [:a {:href "http://blog.spokesamerica.org"} "blog"]]]]]
+   [:ul#questions
+    (for [question ["who", "what", "when", "where", "why", "how"]]
+      [:li.question
+       [:h4 [:a {:href (str "#" question)} question]]])
+    [:li.question
+     [:h4 [:a {:href "http://blog.spokesamerica.org"} "blog"]]]]
 
    [:div#content.row-fluid
     [:div.span8
@@ -228,3 +231,13 @@
          "You can definitely help by spreading the word! "
          "Follow our journey on the "
          [:a {:href "http://blog.spokesamerica.org"} "blog"] "."])]]))
+
+(defn error []
+  (layout
+   [:div#content.row-fluid
+    [:div.span8
+     [:div#who
+      [:h1 "Page not Found"]
+      [:p "Sorry, we couldn't find the page you were looking for."]
+      [:p "Try visiting "
+       [:a {:href "/"} "the home page"] "."]]]]))

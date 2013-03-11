@@ -70,7 +70,7 @@
    
    {:name "Phillip Daniel"
     :bio (str "I am a senior in the Mechanical Engineering department at MIT, "
-		    			"with aspirations of improving the world. I was raised in Durham, "
+              "with aspirations of improving the world. I was raised in Durham, "
               "North Carolina and I enjoy building things, learning about "
               "entrepreneurship in Boston's entrepreneurial ecosystem, biking, "
               "and playing my trombone. In the short term, I plan to attend graduate "

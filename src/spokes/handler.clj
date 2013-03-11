@@ -1,39 +1,41 @@
 (ns spokes.handler
-  (:use compojure.core)
-  (:require [compojure.handler :as handler]
-            [compojure.route :as route]
-            [environ.core :refer [env]]
+  (:use watchtower.core
+        compojure.core)
+  (:require [compojure.route :as route]
             [org.httpkit.server :as http]
-            [spokes.views :refer [home route]]))
+            [ring.middleware.reload :as reload]
+            [spokes.views :refer [error home route]]))
+
+(def all-routes 
+  [{:url "/index.html"
+    :html (home)}
+   {:url "/route.html"
+    :html (route)}
+   {:url "/error.html"
+    :html (error)}])
 
 (defroutes app-routes
-  (GET "/" [] (home))
-  (GET "/route" [] (route))
   (route/resources "/")
-  (route/not-found "Not Found"))
+  (route/not-found (error)))
 
-;; get rid of wrap-reload in production
-(def app
-  (-> (handler/site app-routes)))
+(def app (-> app-routes
+             (reload/wrap-reload)))
 
+;; emitting the static version of the site
+(def static-home "resources/public")
 
-(defn start [port]
-  (http/run-server app {:port (or port 8000)}))
+(defn emit-static-site []
+  (println "Emitting static site to: " static-home)
+  (doseq [{:keys [url html]} all-routes]
+    (spit (str static-home url) html)))
 
-(defn -main
-  ([] (-main 8000))
-  ([port]
-     (let [port (or (env :port) port)]
-       (start (cond 
-               (string? port) (Integer/parseInt port)
-               :else port)))))
+(defn -main [& args]
+  (emit-static-site)
+  (watcher ["src/"]
+           (rate 50)
+           (on-change #(emit-static-site)))
+  (http/run-server app {:port 8000})
+  (println "Awaiting changes..."))
 
-;; For interactive development, evaluate these:
-(comment
-  (do
-    (require '[ring.middleware.reload :as reload])
-    (def app (-> app (reload/wrap-reload)))
-    (defonce server (start 8000))))
-  
-;; server returns a function that, when evaluated, stops the server:
-;; (server)
+;; (-main)
+
