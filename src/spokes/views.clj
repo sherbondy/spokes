@@ -232,6 +232,7 @@
          "Follow our journey on the "
          [:a {:href "http://blog.spokesamerica.org"} "blog"] "."])]]))
 
+
 (defn error []
   (layout
    [:div#content.row-fluid
@@ -241,3 +242,14 @@
       [:p "Sorry, we couldn't find the page you were looking for."]
       [:p "Try visiting "
        [:a {:href "/"} "the home page"] "."]]]]))
+
+(defn mentor []
+  (layout
+    [:iframe#app {:src "https://docs.google.com/forms/d/1wr8j-tCvf4RuJnw16GR3GEj1v6E-LgpGB2d2Tz_f4N8/viewform?embedded=true" 
+                  :width "760" 
+                  :height "500"
+                  :frameborder "0"
+                  :marginheight "0"
+                  :marginwidth "0"} 
+     "Loading..." ]))
+
