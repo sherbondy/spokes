@@ -20720,6 +20720,11 @@ spokes.main.sunset_ms = function() {
 spokes.main.sunrise_ms = function() {
   return(new Date).setHours(5, 55, 0, 0)
 }();
+spokes.main.to_days = function(a) {
+  return Math.floor(a / 864E5)
+};
+spokes.main.start_date = (new Date(2013, 5, 9)).getTime();
+spokes.main.days_left = spokes.main.to_days.call(null, spokes.main.start_date - spokes.util.now.call(null));
 spokes.main.wheel_radius = 90;
 spokes.main.m_to_px = 150;
 spokes.main.time = cljs.core.atom.call(null, spokes.util.now.call(null));
@@ -20895,5 +20900,6 @@ jayq.core.document_ready.call(null, function() {
     c = jayq.core.$.call(null, "#logo canvas");
     spokes.main.draw_cloud.call(null, c, 7)
   }
+  cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#days-left")) && jayq.core.text.call(null, jayq.core.$.call(null, "#days-left"), spokes.main.days_left);
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });

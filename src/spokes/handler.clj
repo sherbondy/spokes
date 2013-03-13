@@ -16,7 +16,11 @@
    {:url "/error.html"
     :html (error)}])
 
-(def app (-> all-routes
+(defroutes static-routes
+  (route/resources "/")
+  (route/not-found (:html (last all-routes))))
+
+(def app (-> static-routes
              (reload/wrap-reload)))
 
 ;; emitting the static version of the site

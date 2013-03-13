@@ -24,7 +24,7 @@
                       maximum-scale=1.0"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
     
-    ;; [:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:8833/socket.io/lighttable/ws.js"}]
+    [:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:8833/socket.io/lighttable/ws.js"}]
 
     ;; be weary of the relative paths!
     (u/font-link ["Lato" [400 700] ["italic"]]
@@ -201,7 +201,7 @@
          " through " (time-elem end-date) "."]
 
         [:p 
-         [:strong (t/in-days (t/interval (t/now) start-date))]
+         [:strong#days-left (t/in-days (t/interval (t/now) start-date))]
          " more days until we get going."]
 
         (calendar))

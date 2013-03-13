@@ -23,6 +23,12 @@
 
 ;; now figure out the sun angle based on the current time and lat/lng!
 ;; http://www.pveducation.org/pvcdrom/properties-of-sunlight/suns-position
+(defn to-days [ms]
+  (js/Math.floor (/ ms (* 1000 60 60 24))))
+
+;; javascript's month is 0-indexed :(
+(def start-date (.getTime (js/Date. 2013 5 9)))
+(def days-left (to-days (- start-date (u/now))))
 
 ;; in pixels
 (def wheel-radius 90)
@@ -210,9 +216,12 @@
 
  (jq/on ($ "#team") :click "a" toggle-bio)
         
- ;; should NOT have separate canvas for logo
+ ;; @FIXME: should NOT have separate canvas for logo
  (let [$logo-canvas ($ "#logo canvas")]
    (draw-cloud $logo-canvas 7)))
+ 
+ (when (u/exists? "#days-left")
+   (jq/text ($ "#days-left") days-left))
 
  (when (u/exists? "#map")
    (u/log "Initializing the map..")

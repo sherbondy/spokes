@@ -59,7 +59,16 @@
     :grad-year 2014}
    
    {:name "Jeff Prouty"
-    :bio ""
+    :bio (str "I am a current junior at MIT majoring in physics.  "
+              "I was born in Atlanta, Georgia and moved to Charlotte, "
+              "North Carolina when I was nine.  I'm a runner (and now a biker!), "
+              "I play the guitar (and whatever else I can get my hands on), and "
+              "I enjoy creative writing and making electronic music.  "
+              "I also love teaching and taught an AP Physics course to local "
+              "high school students last year.  My career goals are pretty open "
+              "at this point, but my current plan is to study physics in "
+              "grad school.  When I figure out how the universe works "
+              "I'll let you know.")
     :school "MIT"
     :grad-year 2014}
    
