@@ -52,6 +52,7 @@
               "staring at right now. I am ceaselessly amazed by the power of "
               "the Internet and the World Wide Web to spread information and "
               "connect people.\n\n"
+              
               "I've been writing software since I was a wee lad, and I hope to "
               "share the wonders of programming with the world.")
     
@@ -73,7 +74,22 @@
     :grad-year 2014}
    
    {:name "Nathan Kit Kennedy"
-    :bio ""
+    :bio (str "I am a senior at UC Berkeley studying a passion of mine, "
+              "film. I have always been a story teller, whether it be "
+              "through a simple drawing of a cartoonish character, "
+              "a live performance on stage, or merely retelling a good "
+              "tale to a group of friends. The fantastic medium of film "
+              "combines every aspect of those forms of story telling, "
+              "allowing me to express myself fully. The other element "
+              "of film that I have fallen in love with is people. "
+              "This artform requires working with people, and lots "
+              "of em. Working with a group of enthusiastic individuals "
+              "towards a creative goal and witnessing the vision come "
+              "to life is a truly gratifying experience. \n\n"
+              
+              "That is why this trip is so important to me. It is an "
+              "incredible opportunity to work with a group of "
+              "incredible people in order to tell their story. ")
     :school "UC Berkeley"
     :grad-year 2014}
    
