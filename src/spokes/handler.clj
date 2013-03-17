@@ -35,6 +35,7 @@
   (emit-static-site)
   (watcher ["src/"]
            (rate 50)
+           (file-filter (extensions :clj))
            (on-change #(emit-static-site)))
   (http/run-server app {:port 8000})
   (println "Awaiting changes..."))
