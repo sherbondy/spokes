@@ -2,6 +2,7 @@
 /lib
 /classes
 /checkouts
+/components
 pom.xml
 *.class
 .lein*

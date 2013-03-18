@@ -5,15 +5,11 @@ This is the website for our bicycling trip. I strive to document it and make it 
 ## Prerequisites
 
 You will need [Leiningen][1] 1.7.0 or above installed.
-For stylesheets, we're using SASS with [sass-twitter-bootstrap][2]
-and [Compass][3].
-
-Make sure to do `git submodule update --init` when you first clone
-the repository to grab all dependencies.
+For stylesheets, we're using less with [twitter-bootstrap][2].
+Do `bower install` to install the client-side dependencies.
 
 [1]: https://github.com/technomancy/leiningen
-[2]: https://github.com/jlong/sass-twitter-bootstrap
-[3]: http://compass-style.org
+[2]: https://github.com/twitter/bootstrap
 
 ## Running
 
@@ -25,9 +21,6 @@ To play around, do:
 
     lein repl
     
-Do `rake watch` from `resources/bootstrap` while editing 
-the `.scss` files to auto-compile them.
-
 ## License
 
 Copyright © 2013 Ethan Sherbondy and the Spokes Team
