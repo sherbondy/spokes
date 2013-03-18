@@ -31,6 +31,8 @@
   (doseq [{:keys [url html]} all-routes]
     (spit (str static-home url) html)))
 
+(emit-static-site)
+
 (defn -main [& args]
   (emit-static-site)
   (watcher ["src/"]

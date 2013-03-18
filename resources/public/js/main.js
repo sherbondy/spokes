@@ -20852,8 +20852,8 @@ spokes.main.draw_scene = function(a) {
 spokes.main.toggle_bio = function(a) {
   var b = jayq.core.$.call(null, this);
   a.preventDefault();
-  jayq.core.hide.call(null, jayq.core.$.call(null, "#bios div"));
-  jayq.core.show.call(null, jayq.core.$.call(null, jayq.core.attr.call(null, b, "href")));
+  jayq.core.$.call(null, "#bios div").addClass("hidden");
+  jayq.core.$.call(null, jayq.core.attr.call(null, b, "href")).removeClass("hidden");
   jayq.core.$.call(null, "#team a").removeClass("active");
   return b.addClass("active")
 };

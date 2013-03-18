@@ -73,7 +73,6 @@
         (checkbox-div name symbol symbol)))]
 
    [:div#content.row-fluid
-    [:div.span8
      [:h1 "Our Route"]
      [:p "GPS Data from " 
       [:a {:href "https://www.adventurecycling.org"}
@@ -85,7 +84,7 @@
       " mile radius:"]
      [:div#nearby]]
 
-    [:script#gps-data {:type "text/edn"} gps/edn-data]]))
+    [:script#gps-data {:type "text/edn"} gps/edn-data]))
 
 
 (defn q [question title & body]
@@ -152,8 +151,6 @@
      [:h4 [:a {:href "http://blog.spokesamerica.org"} "blog"]]]]
 
    [:div#content.row-fluid
-    [:div.span8
-     
      (q "who" "are you"
         [:ul#team.span3.offset0
          (map-indexed
@@ -168,7 +165,7 @@
                 [:h5 pfirst]]]))
           team)]
 
-        [:div.span9
+        [:div.span8
          [:p "We are " (count team) " college students from MIT and 
              UC Berkeley who are passionate about education:"]
 
@@ -184,64 +181,68 @@
                	[:p (md/md-to-html-string (:bio person))]]))]])
 
      (q "what" "are you doing"
-        [:p "We're biking across the United States in partnership
-             with "
-         [:a {:href "http://teachforamerica.org"} "Teach for America"]
-         " as part of an effort to rethink
-          pubic education. As we go, we'll be stopping
-          at public schools throughout the country to hold "
-         [:em "learning festivals"]
-          " geared towards middle and high-school students.
-           Each of us will be teaching a hands-on,
-           project-oriented class based on one of our passions."]
-        [:p "Below is a list of the courses we'll be offering:"])
+        [:div.span8
+          [:p "We're biking across the United States in partnership
+               with "
+           [:a {:href "http://teachforamerica.org"} "Teach for America"]
+           " as part of an effort to rethink
+            pubic education. As we go, we'll be stopping
+            at public schools throughout the country to hold "
+           [:em "learning festivals"]
+            " geared towards middle and high-school students.
+             Each of us will be teaching a hands-on,
+             project-oriented class based on one of our passions."]
+          [:p "Below is a list of the courses we'll be offering:"]])
 
      (q "when" "is it"
-        [:p "This summer, from " (time-elem start-date)
-         " through " (time-elem end-date) "."]
-
-        [:p 
-         [:strong#days-left (t/in-days (t/interval (t/now) start-date))]
-         " more days until we get going."]
-
-        (calendar))
+        [:div.span9
+          [:p "This summer, from " (time-elem start-date)
+           " through " (time-elem end-date) "."]
+  
+          [:p 
+           [:strong#days-left (t/in-days (t/interval (t/now) start-date))]
+           " more days until we get going."]
+  
+          (calendar)])
 
      (q "where" "are you going"
-        [:p "We'll be biking from San Francisco to Washington D.C."]
-        [:p "We're taking the Western Express trail, then
-             Trans America."])
+        [:div.span8
+          [:p "We'll be biking from San Francisco to Washington D.C."]
+          [:p "We're taking the Western Express trail, then
+               Trans America."]])
 
      (q "why" "are you doing this"
-        [:p "We are dedicated to revealing the exploratory, 
-         self-directed, and boundless nature of learning to students 
-         across the US. Our mission stems from the simple idea 
-         that most of the learning we do over the course of our 
-         lifetimes happens outside of a classroom as the
-         result of semi-random explorations into topics 
-         that genuinely interest us."]
-       	[:p "We want to show this to high school students and give 
-         them an opportunity to feel inspired and find something they love."])
+        [:div.span8
+          [:p "We are dedicated to revealing the exploratory, 
+           self-directed, and boundless nature of learning to students 
+           across the US. Our mission stems from the simple idea 
+           that most of the learning we do over the course of our 
+           lifetimes happens outside of a classroom as the
+           result of semi-random explorations into topics 
+           that genuinely interest us."]
+          [:p "We want to show this to high school students and give 
+           them an opportunity to feel inspired and find something they love."]])
 
      (q "how" "can I help"
-        [:p "We are currently looking for sponsors. "
-         "If you're interested in getting in touch, please " 
-         [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
-
-        [:p
-         "You can definitely help by spreading the word! "
-         "Follow our journey on the "
-         [:a {:href "http://blog.spokesamerica.org"} "blog"] "."])]]))
-
+        [:div.span8
+          [:p "We are currently looking for sponsors. "
+           "If you're interested in getting in touch, please " 
+           [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
+  
+          [:p
+           "You can definitely help by spreading the word! "
+           "Follow our journey on the "
+           [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]])]))
+  
 
 (defn error []
   (layout
    [:div#content.row-fluid
-    [:div.span8
      [:div#who
       [:h1 "Page not Found"]
       [:p "Sorry, we couldn't find the page you were looking for."]
       [:p "Try visiting "
-       [:a {:href "/"} "the home page"] "."]]]]))
+       [:a {:href "/"} "the home page"] "."]]]))
 
 (defn mentor []
   (layout

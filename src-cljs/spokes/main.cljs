@@ -165,8 +165,8 @@
   (this-as this
     (let [$this ($ this)]
       (.preventDefault e)
-      (jq/hide ($ "#bios div"))
-      (jq/show ($ (jq/attr $this "href")))
+      (.addClass ($ "#bios div") "hidden")
+      (.removeClass ($ (jq/attr $this "href")) "hidden")
       (.removeClass ($ "#team a") "active")
       (.addClass $this "active"))))
 
