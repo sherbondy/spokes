@@ -24,7 +24,7 @@
                       maximum-scale=1.0"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
     
-    [:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:8833/socket.io/lighttable/ws.js"}]
+    [:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:52699/socket.io/lighttable/ws.js"}]
 
     ;; be weary of the relative paths!
     (u/font-link ["Lato" [400 700] ["italic"]]
@@ -37,8 +37,7 @@
      [:div#logo.cloud
       [:h1 "Spokes"]
       [:canvas]]
-     [:h2#slogan.span4 "Inspiring students to learn what they "
-      [:em"love"]]]
+     [:h3#slogan.span3 "Inspiring students to learn what they love"]]
 
     body
 
@@ -47,6 +46,7 @@
      (str "//maps.googleapis.com/maps/api/js?key=" 
           (env :google-maps-key) "&sensor=false")
      "/js/anim.js"
+     "/js/hashgrid.js"
      "/js/main.js")]))
 
 (defn checkbox-div [name label & [value]]
@@ -89,7 +89,7 @@
 
 (defn q [question title & body]
   [:div {:id question}
-   [:h2 [:em (str/capitalize question)]
+   [:h2.span8 [:em (str/capitalize question)]
     (if title (str " " title "?"))]
    body])
 
@@ -206,7 +206,7 @@
           (calendar)])
 
      (q "where" "are you going"
-        [:div.span8
+        [:div.span4.box
           [:p "We'll be biking from San Francisco to Washington D.C."]
           [:p "We're taking the Western Express trail, then
                Trans America."]])
