@@ -89,9 +89,10 @@
 
 (defn q [question title & body]
   [:div {:id question}
-   [:h2.span8 [:em (str/capitalize question)]
-    (if title (str " " title "?"))]
-   body])
+   [:div.content
+     [:h2.span8 [:em (str/capitalize question)]
+      (if title (str " " title "?"))]
+     body]])
 
 (def start-date    (t/date-time 2013 6 9))
 (def end-date      (t/date-time 2013 8 21))
