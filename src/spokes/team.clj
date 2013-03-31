@@ -53,6 +53,7 @@
               "the Internet and the World Wide Web to spread information and "
               "connect people.\n\n"
               
+              "I grew up surrounded by trees in Raleigh, North Carolina. "
               "I've been writing software since I was a wee lad, and I hope to "
               "share the wonders of programming with the world.")
     

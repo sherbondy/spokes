@@ -215,7 +215,7 @@
       (.resize ($ js/window) resize-fn))
 
  (jq/on ($ "#team") :click "a" toggle-bio)
-        
+    
  ;; @FIXME: should NOT have separate canvas for logo
  (let [$logo-canvas ($ "#logo canvas")]
    (draw-cloud $logo-canvas 7)))

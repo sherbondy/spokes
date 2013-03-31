@@ -9,7 +9,8 @@
             [spokes.gps :as gps]
             [spokes.util :as u])
   (:use [hiccup.def :only [defhtml]]
-        [spokes.team :only [team]]))
+        [spokes.team :only [team]]
+        [spokes.courses :only [courses]]))
 
 (defn fname [person]
   (first (str/split (:name person) #"\s")))
@@ -46,6 +47,7 @@
      (str "//maps.googleapis.com/maps/api/js?key=" 
           (env :google-maps-key) "&sensor=false")
      "/js/anim.js"
+     "/js/bootstrap.min.js"
      "/js/hashgrid.js"
      "/js/main.js")]))
 
@@ -86,14 +88,40 @@
 
     [:script#gps-data {:type "text/edn"} gps/edn-data]))
 
+;; bootstrap carousel markup
+(defn carousel [id items]
+  (let [hash-id (str "#" id)]
+    [:div.carousel.slide {:id id}
+      [:ol.carousel-indicators
+       (for [i (range (count items))]
+        [:li {:data-target hash-id :data-slide-to i
+              :class (when (= i 0) "active")}])]
+     
+      [:div.carousel-inner
+       (for [i (range (count items))]
+         (let [item (nth items i)]
+          [:div {:class (u/cond-class "item" [(= i 0) "active"])}
+           [:img {:src (:image item)}]
+           [:div.carousel-caption
+            [:h4 (:title item)]
+            [:div (md/md-to-html-string (:description item))]]]))]
+     
+      ;; nav
+      [:a.carousel-control.left 
+       {:href "#courses" :data-slide "prev"} "&lsaquo;"]
+      [:a.carousel-control.right
+       {:href "#courses" :data-slide "next"} "&rsaquo;"]]))
 
+;; main page section boilerplate 
+;; (generated for each question section)
 (defn q [question title & body]
   [:div {:id question}
    [:div.content
-     [:h2.span8 [:em (str/capitalize question)]
+     [:h2 [:em (str/capitalize question)]
       (if title (str " " title "?"))]
      body]])
 
+;; trip calendar markup
 (def start-date    (t/date-time 2013 6 9))
 (def end-date      (t/date-time 2013 8 21))
 (def cal-interval  (t/interval (t/date-time 2013 6)
@@ -117,7 +145,7 @@
            month-str     (tf/unparse month-fmt month-start)
            day-offset    (weekday-offset month-start)
            days-in-month (t/in-days (t/interval month-start next-month))]
-       [:div.month.pull-left
+       [:div.month.pull-left.span4
         [:h4 month-str]
         [:table.calendar
          [:thead
@@ -144,16 +172,20 @@
 
 (defn home []
   (layout
-   [:ul#questions
+   [:ul#navigation.nav.nav-tabs.nav-stacked
     (for [question ["who", "what", "when", "where", "why", "how"]]
       [:li.question
-       [:h4 [:a {:href (str "#" question)} question]]])
+       [:a {:href (str "#" question)} (str/capitalize question)]])
     [:li.question
-     [:h4 [:a {:href "http://blog.spokesamerica.org"} "blog"]]]]
+     [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]
 
    [:div#content.row-fluid
      (q "who" "are you"
-        [:ul#team.span3.offset0
+        [:div
+         [:p "We are " (count team) " college students from MIT and 
+             UC Berkeley who are passionate about education:"]]
+        
+        [:ul#team
          (map-indexed
           (fn [idx person]
             (let [pfirst    (fname person)
@@ -166,23 +198,19 @@
                 [:h5 pfirst]]]))
           team)]
 
-        [:div.span8
-         [:p "We are " (count team) " college students from MIT and 
-             UC Berkeley who are passionate about education:"]
-
-         [:div#bios
-          [:div
-           [:h3 "Click on a face for a brief bio."]]
-          (for [person team]
-            (let [lc-pfirst (str/lower-case (fname person))]
-              [:div.hidden {:id lc-pfirst}
-               [:h3 (:name person)
-                [:small.pull-right 
-                 (:school person) " Class of " (:grad-year person)]]
-               	[:p (md/md-to-html-string (:bio person))]]))]])
+       [:div#bios
+        [:div
+         [:h3 "Click on a face for a brief bio."]]
+        (for [person team]
+          (let [lc-pfirst (str/lower-case (fname person))]
+            [:div.hidden {:id lc-pfirst}
+             [:h3 (:name person)
+              [:small.pull-right 
+               (:school person) " Class of " (:grad-year person)]]
+              [:div (md/md-to-html-string (:bio person))]]))])
 
      (q "what" "are you doing"
-        [:div.span8
+        [:div
           [:p "We're biking across the United States in partnership
                with "
            [:a {:href "http://teachforamerica.org"} "Teach for America"]
@@ -193,10 +221,12 @@
             " geared towards middle and high-school students.
              Each of us will be teaching a hands-on,
              project-oriented class based on one of our passions."]
-          [:p "Below is a list of the courses we'll be offering:"]])
+          [:p "Below is a list of the courses we'll be offering:"]]
+
+        (carousel "courses" courses))
 
      (q "when" "is it"
-        [:div.span9
+        [:div
           [:p "This summer, from " (time-elem start-date)
            " through " (time-elem end-date) "."]
   
@@ -213,7 +243,7 @@
                Trans America."]])
 
      (q "why" "are you doing this"
-        [:div.span8
+        [:div
           [:p "We are dedicated to revealing the exploratory, 
            self-directed, and boundless nature of learning to students 
            across the US. Our mission stems from the simple idea 
@@ -225,7 +255,7 @@
            them an opportunity to feel inspired and find something they love."]])
 
      (q "how" "can I help"
-        [:div.span8
+        [:div
           [:p "We are currently looking for sponsors. "
            "If you're interested in getting in touch, please " 
            [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
