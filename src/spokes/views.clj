@@ -30,7 +30,8 @@
     ;; be weary of the relative paths!
     (u/font-link ["Lato" [400 700] ["italic"]]
                  ["Signika" [400 600 700]])
-    (include-css "/css/style.css" "/css/live.css")]
+    (include-css "/css/style.css" "/css/live.css"
+                 "/css/bootstrap-responsive.min.css")]
 
    [:body 
     [:canvas#canvas]
@@ -38,7 +39,7 @@
      [:div#logo.cloud
       [:h1 "Spokes"]
       [:canvas]]
-     [:h3#slogan.span3 "Inspiring students to learn what they love"]]
+     [:h4#slogan.span3 "Inspiring students to learn what they love"]]
 
     body
 
@@ -117,7 +118,7 @@
 (defn q [question title & body]
   [:div {:id question}
    [:div.content
-     [:h2 [:em (str/capitalize question)]
+     [:h3 [:em (str/capitalize question)]
       (if title (str " " title "?"))]
      body]])
 
@@ -172,20 +173,18 @@
 
 (defn home []
   (layout
-   [:div.navbar.navbar-fixed-top
-    [:div.container
-     [:a.navbar-toggle
-      {:data-toggle "collapse" :data-target "#navigation"}
-      (for [i (range 3)]
-        [:span.icon-bar])]
+   [:a.navbar-toggle
+    {:data-toggle "collapse" :data-target "#navigation"}
+    (for [i (range 3)]
+      [:span.icon-bar])]
      
      [:div#navigation.nav-collapse.collapse
       [:ul.nav
         (for [question ["who", "what", "when", "where", "why", "how"]]
-          [:li.question
+          [:li
            [:a {:href (str "#" question)} (str/capitalize question)]])
-        [:li.question
-         [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]]]]
+        [:li
+         [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]]
 
    [:div#content.row-fluid
      (q "who" "are you"
@@ -208,11 +207,11 @@
 
        [:div#bios
         [:div
-         [:h3 "Click on a face for a brief bio."]]
+         [:h4 "Click on a face for a brief bio."]]
         (for [person team]
           (let [lc-pfirst (str/lower-case (fname person))]
             [:div.hidden {:id lc-pfirst}
-             [:h3 (:name person)
+             [:h4 (:name person)
               [:small.pull-right 
                (:school person) " Class of " (:grad-year person)]]
               (md/md-to-html-string (:bio person))]))])
@@ -246,10 +245,11 @@
 
      [:div#map]
      (q "where" "are you going"
-        [:div.span4.box
-          [:p "We'll be biking from San Francisco to Washington D.C."]
-          [:p "We're taking the Western Express trail, then
-               Trans America."]])
+        [:div.row-fluid
+          [:div.span4.box
+            [:p "We'll be biking from San Francisco to Washington D.C."]
+            [:p "We're taking the Western Express trail, then
+                 Trans America."]]])
 
      (q "why" "are you doing this"
         [:div
