@@ -25,7 +25,7 @@
                       maximum-scale=1.0"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
     
-    [:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:52699/socket.io/lighttable/ws.js"}]
+    ;; [:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:52699/socket.io/lighttable/ws.js"}]
 
     ;; be weary of the relative paths!
     (u/font-link ["Lato" [400 700] ["italic"]]
