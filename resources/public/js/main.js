@@ -20476,7 +20476,7 @@ spokes.map.make_marker = function(a) {
 spokes.map.map_marker = function() {
   var a = function(a, b, e, f) {
     f = cljs.core.nth.call(null, f, 0, null);
-    return spokes.map.make_marker.call(null, cljs.core.merge.call(null, f, cljs.core.ObjMap.fromObject(["\ufdd0:position", "\ufdd0:map", "\ufdd0:title"], {"\ufdd0:position":b, "\ufdd0:map":a, "\ufdd0:title":e})))
+    return spokes.map.make_marker.call(null, cljs.core.merge.call(null, f, cljs.core.ObjMap.fromObject(["\ufdd0'position", "\ufdd0'map", "\ufdd0'title"], {"\ufdd0'position":b, "\ufdd0'map":a, "\ufdd0'title":e})))
   }, b = function(b, d, e, f) {
     var g = null;
     goog.isDef(f) && (g = cljs.core.array_seq(Array.prototype.slice.call(arguments, 3), 0));
@@ -20492,7 +20492,7 @@ spokes.map.map_marker = function() {
 }();
 spokes.map.geocoder = new google.maps.Geocoder;
 spokes.map.geocode = function(a, b) {
-  var c = cljs.core.clj__GT_js.call(null, cljs.core.ObjMap.fromObject(["\ufdd0:address"], {"\ufdd0:address":a}));
+  var c = cljs.core.clj__GT_js.call(null, cljs.core.ObjMap.fromObject(["\ufdd0'address"], {"\ufdd0'address":a}));
   return spokes.map.geocoder.geocode(c, b)
 };
 spokes.map.grab_coords = function(a) {
@@ -20504,13 +20504,13 @@ spokes.map.grab_coords = function(a) {
     return null
   }
 };
-spokes.map.default_options = cljs.core.clj__GT_js.call(null, cljs.core.ObjMap.fromObject(["\ufdd0:center", "\ufdd0:zoom", "\ufdd0:mapTypeId"], {"\ufdd0:center":new google.maps.LatLng(40, -95), "\ufdd0:zoom":4, "\ufdd0:mapTypeId":google.maps.MapTypeId.ROADMAP}));
+spokes.map.default_options = cljs.core.clj__GT_js.call(null, cljs.core.ObjMap.fromObject(["\ufdd0'center", "\ufdd0'zoom", "\ufdd0'mapTypeId", "\ufdd0'scrollwheel"], {"\ufdd0'center":new google.maps.LatLng(40, -95), "\ufdd0'zoom":4, "\ufdd0'mapTypeId":google.maps.MapTypeId.ROADMAP, "\ufdd0'scrollwheel":!1}));
 spokes.map.r_earth = 3959;
 spokes.map.law_of_cos = function(a, b, c, d) {
   return spokes.map.r_earth * Math.acos.call(null, Math.sin.call(null, a) * Math.sin.call(null, c) + Math.cos.call(null, a) * Math.cos.call(null, c) * Math.cos.call(null, d - b))
 };
 spokes.map.nearby_QMARK_ = function(a, b, c, d) {
-  return c > spokes.map.law_of_cos.call(null, a, b, (new cljs.core.Keyword("\ufdd0:lat-r")).call(null, d), (new cljs.core.Keyword("\ufdd0:lon-r")).call(null, d))
+  return c > spokes.map.law_of_cos.call(null, a, b, (new cljs.core.Keyword("\ufdd0'lat-r")).call(null, d), (new cljs.core.Keyword("\ufdd0'lon-r")).call(null, d))
 };
 spokes.map.gmap = cljs.core.atom.call(null, null);
 spokes.map.gps_response = cljs.core.atom.call(null, cljs.core.ObjMap.EMPTY);
@@ -20518,11 +20518,11 @@ spokes.map.markers = cljs.core.atom.call(null, cljs.core.ObjMap.EMPTY);
 spokes.map.symbols = cljs.core.atom.call(null, cljs.core.PersistentHashSet.EMPTY);
 spokes.map.trails = cljs.core.atom.call(null, cljs.core.PersistentHashSet.EMPTY);
 spokes.map.filtered_data = cljs.core.atom.call(null, cljs.core.PersistentHashSet.EMPTY);
-spokes.map.user_geo = cljs.core.atom.call(null, cljs.core.ObjMap.fromObject(["\ufdd0:lat", "\ufdd0:lng"], {"\ufdd0:lat":null, "\ufdd0:lng":null}));
+spokes.map.user_geo = cljs.core.atom.call(null, cljs.core.ObjMap.fromObject(["\ufdd0'lat", "\ufdd0'lng"], {"\ufdd0'lat":null, "\ufdd0'lng":null}));
 spokes.map.radius = cljs.core.atom.call(null, null);
 spokes.map.distances = cljs.core.atom.call(null, cljs.core.ObjMap.EMPTY);
 spokes.map.gps_data = function() {
-  return(new cljs.core.Keyword("\ufdd0:data")).call(null, cljs.core.deref.call(null, spokes.map.gps_response))
+  return(new cljs.core.Keyword("\ufdd0'data")).call(null, cljs.core.deref.call(null, spokes.map.gps_response))
 };
 spokes.map.all_locations = function() {
   return cljs.core.vals.call(null, spokes.map.gps_data.call(null))
@@ -20546,30 +20546,25 @@ spokes.map.icon_for_trail = function(a) {
   }()), cljs.core.str(".png")].join("")
 };
 spokes.map.marker_descr = function(a, b) {
-  return[cljs.core.str((new cljs.core.Keyword("\ufdd0:desc")).call(null, a)), cljs.core.str(" "), cljs.core.str(b), cljs.core.str(" #"), cljs.core.str((new cljs.core.Keyword("\ufdd0:sym")).call(null, a))].join("")
+  return[cljs.core.str((new cljs.core.Keyword("\ufdd0'desc")).call(null, a)), cljs.core.str(" "), cljs.core.str(b), cljs.core.str(" #"), cljs.core.str((new cljs.core.Keyword("\ufdd0'sym")).call(null, a))].join("")
 };
 spokes.map.make_spokes_marker = function(a) {
-  var a = spokes.map.gps_item.call(null, a), b = cljs.core.map.call(null, function(a) {
-    return function(b) {
-      return b.call(null, a)
-    }
-  }(a), cljs.core.PersistentVector.fromArray(["\ufdd0:lat", "\ufdd0:lon"], !0)), c = cljs.core.apply.call(null, spokes.map.lat_lng, b);
-  return spokes.map.map_marker.call(null, cljs.core.deref.call(null, spokes.map.gmap), c, spokes.map.marker_descr.call(null, a, b), cljs.core.ObjMap.fromObject(["\ufdd0:icon"], {"\ufdd0:icon":spokes.map.icon_for_trail.call(null, (new cljs.core.Keyword("\ufdd0:trail")).call(null, a))}))
+  var b = spokes.map.gps_item.call(null, a), a = cljs.core.map.call(null, function(a) {
+    return a.call(null, b)
+  }, cljs.core.PersistentVector.fromArray(["\ufdd0'lat", "\ufdd0'lon"], !0)), c = cljs.core.apply.call(null, spokes.map.lat_lng, a);
+  return spokes.map.map_marker.call(null, cljs.core.deref.call(null, spokes.map.gmap), c, spokes.map.marker_descr.call(null, b, a), cljs.core.ObjMap.fromObject(["\ufdd0'icon"], {"\ufdd0'icon":spokes.map.icon_for_trail.call(null, (new cljs.core.Keyword("\ufdd0'trail")).call(null, b))}))
 };
 spokes.map.float_str = function(a, b) {
   var c = clojure.string.split.call(null, "" + cljs.core.str(a), "."), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null);
   return[cljs.core.str(d), cljs.core.str("."), cljs.core.str(cljs.core.subs.call(null, c, 0, b))].join("")
 };
 spokes.map.nearby_template = function(a) {
-  return cljs.core.PersistentVector.fromArray(["\ufdd0:ol", function c(a) {
+  return cljs.core.PersistentVector.fromArray(["\ufdd0'ol", function c(a) {
     return new cljs.core.LazySeq(null, !1, function() {
       for(;;) {
-        if(cljs.core.seq.call(null, a)) {
-          var e = cljs.core.first.call(null, a);
-          return cljs.core.cons.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0:li", cljs.core.PersistentVector.fromArray(["\ufdd0:h4", [cljs.core.str((new cljs.core.Keyword("\ufdd0:desc")).call(null, e)), cljs.core.str(" ("), cljs.core.str(spokes.map.float_str.call(null, (new cljs.core.Keyword("\ufdd0:distance")).call(null, e), 2)), cljs.core.str(" mi)")].join("")], !0), cljs.core.PersistentVector.fromArray(["\ufdd0:div", cljs.core.PersistentVector.fromArray(["\ufdd0:strong", "Category:"], 
-          !0), " ", (new cljs.core.Keyword("\ufdd0:sym")).call(null, e)], !0), cljs.core.PersistentVector.fromArray(["\ufdd0:div", cljs.core.PersistentVector.fromArray(["\ufdd0:strong", "Geolocation:"], !0), " ", "" + cljs.core.str(cljs.core.PersistentVector.fromArray([(new cljs.core.Keyword("\ufdd0:lat")).call(null, e), (new cljs.core.Keyword("\ufdd0:lon")).call(null, e)], !0))], !0)], !0), c.call(null, cljs.core.rest.call(null, a)))
-        }
-        return null
+        var e = cljs.core.seq.call(null, a);
+        return e ? (e = cljs.core.first.call(null, e), cljs.core.cons.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0'li", cljs.core.PersistentVector.fromArray(["\ufdd0'h4", [cljs.core.str((new cljs.core.Keyword("\ufdd0'desc")).call(null, e)), cljs.core.str(" ("), cljs.core.str(spokes.map.float_str.call(null, (new cljs.core.Keyword("\ufdd0'distance")).call(null, e), 2)), cljs.core.str(" mi)")].join("")], !0), cljs.core.PersistentVector.fromArray(["\ufdd0'div", cljs.core.PersistentVector.fromArray(["\ufdd0'strong", 
+        "Category:"], !0), " ", (new cljs.core.Keyword("\ufdd0'sym")).call(null, e)], !0), cljs.core.PersistentVector.fromArray(["\ufdd0'div", cljs.core.PersistentVector.fromArray(["\ufdd0'strong", "Geolocation:"], !0), " ", "" + cljs.core.str(cljs.core.PersistentVector.fromArray([(new cljs.core.Keyword("\ufdd0'lat")).call(null, e), (new cljs.core.Keyword("\ufdd0'lon")).call(null, e)], !0))], !0)], !0), c.call(null, cljs.core.rest.call(null, a)))) : null
       }
     }, null)
   }.call(null, a)], !0)
@@ -20577,8 +20572,8 @@ spokes.map.nearby_template = function(a) {
 spokes.map.render_nearby = function(a) {
   var b = jayq.core.$.call(null, "#nearby"), c = cljs.core.count.call(null, a);
   return 100 > c ? (a = cljs.core.map.call(null, function(a) {
-    return cljs.core.assoc.call(null, cljs.core._lookup.call(null, spokes.map.gps_data.call(null), a, null), "\ufdd0:distance", cljs.core._lookup.call(null, cljs.core.deref.call(null, spokes.map.distances), a, null))
-  }, a), b.html(dommy.template.node.call(null, spokes.map.nearby_template.call(null, cljs.core.sort_by.call(null, "\ufdd0:distance", a))))) : b.html([cljs.core.str("Too many ("), cljs.core.str(c), cljs.core.str(") results to display. "), cljs.core.str("Please try a smaller radius.")].join(""))
+    return cljs.core.assoc.call(null, cljs.core._lookup.call(null, spokes.map.gps_data.call(null), a, null), "\ufdd0'distance", cljs.core._lookup.call(null, cljs.core.deref.call(null, spokes.map.distances), a, null))
+  }, a), b.html(dommy.template.node.call(null, spokes.map.nearby_template.call(null, cljs.core.sort_by.call(null, "\ufdd0'distance", a))))) : b.html([cljs.core.str("Too many ("), cljs.core.str(c), cljs.core.str(") results to display. "), cljs.core.str("Please try a smaller radius.")].join(""))
 };
 spokes.map.data_watcher = function(a, b, c, d) {
   for(a = cljs.core.seq.call(null, d);;) {
@@ -20599,19 +20594,20 @@ spokes.map.data_watcher = function(a, b, c, d) {
 };
 spokes.map.filter_fn = function(a) {
   var b = cljs.core.nth.call(null, a, 0, null), c = cljs.core.nth.call(null, a, 1, null), d = cljs.core.deref.call(null, spokes.map.trails), e = cljs.core.deref.call(null, spokes.map.symbols), a = cljs.core.deref.call(null, spokes.map.radius), f = cljs.core.deref.call(null, spokes.map.distances), g = cljs.core.some.call(null, cljs.core.true_QMARK_, cljs.core.map.call(null, cljs.core.nil_QMARK_, cljs.core.PersistentVector.fromArray([a, cljs.core.first.call(null, f)], !0)));
-  return(d = cljs.core.contains_QMARK_.call(null, d, (new cljs.core.Keyword("\ufdd0:trail")).call(null, c))) ? (c = cljs.core.contains_QMARK_.call(null, e, (new cljs.core.Keyword("\ufdd0:sym")).call(null, c))) ? cljs.core.truth_(g) ? !0 : a > b.call(null, f) : c : d
+  return(d = cljs.core.contains_QMARK_.call(null, d, (new cljs.core.Keyword("\ufdd0'trail")).call(null, c))) ? (c = cljs.core.contains_QMARK_.call(null, e, (new cljs.core.Keyword("\ufdd0'sym")).call(null, c))) ? cljs.core.truth_(g) ? !0 : a > b.call(null, f) : c : d
 };
 spokes.map.filter_watcher = function() {
   return cljs.core.reset_BANG_.call(null, spokes.map.filtered_data, cljs.core.set.call(null, cljs.core.map.call(null, cljs.core.first, cljs.core.filter.call(null, spokes.map.filter_fn, spokes.map.gps_data.call(null)))))
 };
 spokes.map.update_distances = function(a, b, c, d) {
-  var e = (new cljs.core.Keyword("\ufdd0:lat")).call(null, d), f = (new cljs.core.Keyword("\ufdd0:lon")).call(null, d);
+  var e = (new cljs.core.Keyword("\ufdd0'lat")).call(null, d), f = (new cljs.core.Keyword("\ufdd0'lon")).call(null, d);
   return cljs.core.reset_BANG_.call(null, spokes.map.distances, cljs.core.apply.call(null, cljs.core.merge, function h(a) {
     return new cljs.core.LazySeq(null, !1, function() {
       for(;;) {
-        if(cljs.core.seq.call(null, a)) {
-          var b = cljs.core.first.call(null, a), c = cljs.core.nth.call(null, b, 0, null), b = cljs.core.nth.call(null, b, 1, null);
-          return cljs.core.cons.call(null, cljs.core.PersistentArrayMap.fromArrays([c], [spokes.map.law_of_cos.call(null, e, f, (new cljs.core.Keyword("\ufdd0:lat-r")).call(null, b), (new cljs.core.Keyword("\ufdd0:lon-r")).call(null, b))]), h.call(null, cljs.core.rest.call(null, a)))
+        var b = cljs.core.seq.call(null, a);
+        if(b) {
+          var c = cljs.core.first.call(null, b), b = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null);
+          return cljs.core.cons.call(null, cljs.core.PersistentArrayMap.fromArrays([b], [spokes.map.law_of_cos.call(null, e, f, (new cljs.core.Keyword("\ufdd0'lat-r")).call(null, c), (new cljs.core.Keyword("\ufdd0'lon-r")).call(null, c))]), h.call(null, cljs.core.rest.call(null, a)))
         }
         return null
       }
@@ -20637,9 +20633,9 @@ spokes.map.init_data = function() {
   cljs.core.reset_BANG_.call(null, spokes.map.gps_response, cljs.reader.read_string.call(null, jayq.core.$.call(null, "#gps-data").text()));
   spokes.map.toggle_symbols.call(null);
   spokes.map.toggle_trails.call(null);
-  cljs.core.add_watch.call(null, spokes.map.filtered_data, "\ufdd0:data", spokes.map.data_watcher);
-  cljs.core.add_watch.call(null, spokes.map.user_geo, "\ufdd0:geo", spokes.map.update_distances);
-  for(var a = cljs.core.seq.call(null, cljs.core.ObjMap.fromObject(["\ufdd0:symbols", "\ufdd0:trails", "\ufdd0:radius", "\ufdd0:dists"], {"\ufdd0:symbols":spokes.map.symbols, "\ufdd0:trails":spokes.map.trails, "\ufdd0:radius":spokes.map.radius, "\ufdd0:dists":spokes.map.distances}));;) {
+  cljs.core.add_watch.call(null, spokes.map.filtered_data, "\ufdd0'data", spokes.map.data_watcher);
+  cljs.core.add_watch.call(null, spokes.map.user_geo, "\ufdd0'geo", spokes.map.update_distances);
+  for(var a = cljs.core.seq.call(null, cljs.core.ObjMap.fromObject(["\ufdd0'symbols", "\ufdd0'trails", "\ufdd0'radius", "\ufdd0'dists"], {"\ufdd0'symbols":spokes.map.symbols, "\ufdd0'trails":spokes.map.trails, "\ufdd0'radius":spokes.map.radius, "\ufdd0'dists":spokes.map.distances}));;) {
     if(a) {
       var b = cljs.core.first.call(null, a), c = cljs.core.nth.call(null, b, 0, null), b = cljs.core.nth.call(null, b, 1, null);
       cljs.core.add_watch.call(null, b, c, spokes.map.filter_watcher);
@@ -20651,8 +20647,9 @@ spokes.map.init_data = function() {
   cljs.core.reset_BANG_.call(null, spokes.map.markers, cljs.core.apply.call(null, cljs.core.merge, function e(a) {
     return new cljs.core.LazySeq(null, !1, function() {
       for(;;) {
-        if(cljs.core.seq.call(null, a)) {
-          var b = cljs.core.first.call(null, a), c = cljs.core.nth.call(null, b, 0, null);
+        var b = cljs.core.seq.call(null, a);
+        if(b) {
+          var b = cljs.core.first.call(null, b), c = cljs.core.nth.call(null, b, 0, null);
           cljs.core.nth.call(null, b, 1, null);
           return cljs.core.cons.call(null, cljs.core.PersistentArrayMap.fromArrays([c], [spokes.map.make_spokes_marker.call(null, c)]), e.call(null, cljs.core.rest.call(null, a)))
         }
@@ -20683,19 +20680,17 @@ spokes.map.get_user_location = function() {
   spokes.util.log.call(null, "getting location");
   return cljs.core.truth_(spokes.map.nav_geo) ? spokes.map.nav_geo.getCurrentPosition(function(a) {
     var b = a.coords, a = b.latitude, b = b.longitude;
-    cljs.core.reset_BANG_.call(null, spokes.map.user_geo, cljs.core.ObjMap.fromObject(["\ufdd0:lat", "\ufdd0:lon"], {"\ufdd0:lat":spokes.map.deg_to_rad.call(null, a), "\ufdd0:lon":spokes.map.deg_to_rad.call(null, b)}));
+    cljs.core.reset_BANG_.call(null, spokes.map.user_geo, cljs.core.ObjMap.fromObject(["\ufdd0'lat", "\ufdd0'lon"], {"\ufdd0'lat":spokes.map.deg_to_rad.call(null, a), "\ufdd0'lon":spokes.map.deg_to_rad.call(null, b)}));
     return spokes.map.map_marker.call(null, cljs.core.deref.call(null, spokes.map.gmap), spokes.map.lat_lng.call(null, a, b), "Your Current Location")
   }) : spokes.util.log.call(null, "geolocation not supported")
 };
 spokes.map.update_radius = function() {
-  var a = jayq.core.$.call(null, "#radius").val(), b = parseInt(a);
-  return cljs.core.truth_(function() {
-    var a = cljs.core.number_QMARK_.call(null, b);
-    return a ? 0 < b : a
-  }()) ? cljs.core.not_EQ_.call(null, b, cljs.core.deref.call(null, spokes.map.radius)) ? cljs.core.reset_BANG_.call(null, spokes.map.radius, b) : null : cljs.core.reset_BANG_.call(null, spokes.map.radius, null)
+  var a = jayq.core.$.call(null, "#radius").val(), a = parseInt(a);
+  var b = cljs.core.number_QMARK_.call(null, a);
+  return(b ? 0 < a : b) ? cljs.core.not_EQ_.call(null, a, cljs.core.deref.call(null, spokes.map.radius)) ? cljs.core.reset_BANG_.call(null, spokes.map.radius, a) : null : cljs.core.reset_BANG_.call(null, spokes.map.radius, null)
 };
 spokes.map.on_toggle_checkboxes = function(a, b) {
-  return jayq.core.on.call(null, a, "\ufdd0:click", ".toggle", function(a) {
+  return jayq.core.on.call(null, a, "\ufdd0'click", ".toggle", function(a) {
     a.preventDefault();
     b.prop("checked", function(a, b) {
       return cljs.core.not.call(null, b)
@@ -20705,11 +20700,10 @@ spokes.map.on_toggle_checkboxes = function(a, b) {
 };
 spokes.map.initialize = function() {
   spokes.map.init_map.call(null, jayq.core.$.call(null, "#map"));
-  spokes.map.init_data.call(null);
   spokes.map.get_user_location.call(null);
   spokes.map.trail_inputs.call(null).change(spokes.map.toggle_trails);
   spokes.map.symbol_inputs.call(null).change(spokes.map.toggle_symbols);
-  jayq.core.on.call(null, jayq.core.$.call(null, "#radius"), "\ufdd0:keyup", spokes.map.update_radius);
+  jayq.core.on.call(null, jayq.core.$.call(null, "#radius"), "\ufdd0'keyup", spokes.map.update_radius);
   spokes.map.on_toggle_checkboxes.call(null, jayq.core.$.call(null, "#trails"), spokes.map.trail_inputs.call(null));
   return spokes.map.on_toggle_checkboxes.call(null, jayq.core.$.call(null, "#symbols"), spokes.map.symbol_inputs.call(null))
 };

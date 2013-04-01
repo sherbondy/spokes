@@ -172,12 +172,20 @@
 
 (defn home []
   (layout
-   [:ul#navigation.nav.nav-tabs.nav-stacked
-    (for [question ["who", "what", "when", "where", "why", "how"]]
-      [:li.question
-       [:a {:href (str "#" question)} (str/capitalize question)]])
-    [:li.question
-     [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]
+   [:div.navbar.navbar-fixed-top
+    [:div.container
+     [:a.navbar-toggle
+      {:data-toggle "collapse" :data-target "#navigation"}
+      (for [i (range 3)]
+        [:span.icon-bar])]
+     
+     [:div#navigation.nav-collapse.collapse
+      [:ul.nav
+        (for [question ["who", "what", "when", "where", "why", "how"]]
+          [:li.question
+           [:a {:href (str "#" question)} (str/capitalize question)]])
+        [:li.question
+         [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]]]]
 
    [:div#content.row-fluid
      (q "who" "are you"
@@ -207,7 +215,7 @@
              [:h3 (:name person)
               [:small.pull-right 
                (:school person) " Class of " (:grad-year person)]]
-              [:div (md/md-to-html-string (:bio person))]]))])
+              (md/md-to-html-string (:bio person))]))])
 
      (q "what" "are you doing"
         [:div
@@ -236,6 +244,7 @@
   
           (calendar)])
 
+     [:div#map]
      (q "where" "are you going"
         [:div.span4.box
           [:p "We'll be biking from San Francisco to Washington D.C."]

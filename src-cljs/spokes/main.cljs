@@ -222,7 +222,7 @@
  
  (when (u/exists? "#days-left")
    (jq/text ($ "#days-left") days-left))
-
+ 
  (when (u/exists? "#map")
    (u/log "Initializing the map..")
    (sm/initialize)))

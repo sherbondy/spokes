@@ -46,8 +46,8 @@
 (def default-options 
   (clj->js {:center (google.maps.LatLng. 40 -95)
             :zoom 4
-            :mapTypeId google.maps.MapTypeId.ROADMAP}))
-
+            :mapTypeId google.maps.MapTypeId.ROADMAP
+            :scrollwheel false}))
 
 
 ;; in mi
@@ -243,7 +243,7 @@
 
 (defn initialize []
   (init-map ($ "#map"))
-  (init-data)
+  ;; (init-data)
 
   (get-user-location)
 
