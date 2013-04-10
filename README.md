@@ -49,8 +49,11 @@ Goals:
 Setup:
   - Simple Compojure server. Could honestly just generate
     static pages for most of the site.
-  - SASS (SCSS) for stylesheet sanity.
+  - Less.js (bootstrap) for stylesheet sanity, see: `/resources/boostrap/less/spokes.less`.
+  - To compile the css, do: `make bootstrap` from inside the bootstrap directory. Or [`watch make bootstap`][3] if you're feeling fancy.
   - Hiccup for templates. Would be happy to try Enlive too.
+
+[3]: https://github.com/visionmedia/watch
 
 Typefaces:
   - A nice cursive script for the logo?
