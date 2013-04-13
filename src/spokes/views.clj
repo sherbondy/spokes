@@ -228,7 +228,7 @@
             " geared towards middle and high-school students.
              Each of us will be teaching a hands-on,
              project-oriented class based on one of our passions."]
-          [:p "Below is a list of the courses we'll be offering:"]]
+          [:p "Here are the courses we'll be offering:"]]
 
         (carousel "courses" courses))
 
