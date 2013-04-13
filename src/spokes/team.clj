@@ -74,6 +74,24 @@
     :school "MIT"
     :grad-year 2014}
    
+   {:name "Kaitlyn Bailey",
+    :bio (str "Hailing from the suburbs of Chicago, I am now a junior "
+              "at MIT studying Mechanical Engineering, with interests "
+              "in Product Design and Comparative Media Studies. I've "
+              "always been curious about how things work around me and "
+              "love searching for the answers. Another love of mine is "
+              "dance. Teaching my choreography and seeing the end product "
+              "on stage has been extremely gratifying, and I'm convinced "
+              "dancing here at MIT is what's keeping me sane. I also "
+              "coordinate an incoming freshmen orientation program which "
+              "serves as an introduction to product design. Mentoring for "
+              "that program and structuring its educational material has been "
+              "a fun and rewarding challenge. I cannot wait to extend what "
+              "I've learned to the kids we reach through Spokes.")
+    :school "MIT",
+    :grad-year 2014
+    }
+   
    {:name "Nathan Kit Kennedy"
     :bio (str "I am a senior at UC Berkeley studying a passion of mine, "
               "film. I have always been a story teller, whether it be "

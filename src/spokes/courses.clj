@@ -20,15 +20,15 @@
     (str
       "Through assembling the Helios heliostat, students will "
       "learn the following fundamental engineering skills: \n\n"
-      "- *Mechanical Engineering*: They will learn how to build "
+      "* __Mechanical Engineering__: They will learn how to build "
       "mechanical assembly's, the importance of tensioning and "
       "aligning belts in a drive train, how to create and use a "
       "press fit, how to couple servo motors to spur gears, and "
       "how to use foam core as a structural material.\n"
-      "- *Computer Science*: They will learn how to implement a "
+      "* __Computer Science__: They will learn how to implement a "
       "microcontroller (Arduino), and the basics of editing an "
       "Arduino program.\n"
-      "- *Electrical Engineering*: They will learn how to solder "
+      "* __Electrical Engineering__: They will learn how to solder "
       "components together.")
     :image "/img/courses/heliostat.jpg"
    },
