@@ -239,15 +239,13 @@
         [:div
           [:p "This summer, from " (time-elem start-date)
            " through " (time-elem end-date) "."]
-  
-          [:p 
+          (calendar)
+          [:h4 
            [:strong#days-left (t/in-days (t/interval (t/now) start-date))]
-           " more days until we get going."]
-  
-          (calendar)])
+           " more days until we get going."]])
 
-     [:div#map]
      (q "where" "are you going"
+        [:div#map]
         [:div.row-fluid
           [:div.span4.box
             [:p "We'll be biking from San Francisco to Washington D.C."]
