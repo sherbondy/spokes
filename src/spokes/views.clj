@@ -15,6 +15,8 @@
 (defn fname [person]
   (first (str/split (:name person) #"\s")))
 
+
+;; the base template for all of the other pages
 (defn layout [& body]
   (html5
    [:head
@@ -34,7 +36,6 @@
                  "/css/bootstrap-responsive.min.css")]
 
    [:body 
-    [:canvas#canvas]
     [:header#header
      [:div#logo.cloud
       [:h1 "Spokes"]
@@ -173,6 +174,8 @@
 
 (defn home []
   (layout
+   [:canvas#canvas]
+   
    [:a.navbar-toggle
     {:data-toggle "collapse" :data-target "#navigation"}
     (for [i (range 3)]
@@ -286,11 +289,6 @@
 
 (defn mentor []
   (layout
-    [:iframe#app {:src "https://docs.google.com/forms/d/1wr8j-tCvf4RuJnw16GR3GEj1v6E-LgpGB2d2Tz_f4N8/viewform?embedded=true" 
-                  :width "760" 
-                  :height "500"
-                  :frameborder "0"
-                  :marginheight "0"
-                  :marginwidth "0"} 
+    [:iframe#app {:src "https://docs.google.com/forms/d/1wr8j-tCvf4RuJnw16GR3GEj1v6E-LgpGB2d2Tz_f4N8/viewform?embedded=true"}
      "Loading..." ]))
 

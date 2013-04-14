@@ -212,14 +212,14 @@
       (load-bike-img)
       (redraw-fn)
       (resize-fn)
-      (.resize ($ js/window) resize-fn))
+      (.resize ($ js/window) resize-fn)))
 
  (jq/on ($ "#team") :click "a" toggle-bio)
-    
- ;; @FIXME: should NOT have separate canvas for logo
- (let [$logo-canvas ($ "#logo canvas")]
-   (draw-cloud $logo-canvas 7)))
  
+ (when (u/exists? "#logo")
+   (let [$logo-canvas ($ "#logo canvas")]
+     (draw-cloud $logo-canvas 7)))
+    
  (when (u/exists? "#days-left")
    (jq/text ($ "#days-left") days-left))
  

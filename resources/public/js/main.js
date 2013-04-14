@@ -20889,11 +20889,10 @@ jayq.core.document_ready.call(null, function() {
     spokes.main.load_bike_img.call(null);
     c.call(null);
     d.call(null);
-    jayq.core.$.call(null, window).resize(d);
-    jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", spokes.main.toggle_bio);
-    c = jayq.core.$.call(null, "#logo canvas");
-    spokes.main.draw_cloud.call(null, c, 7)
+    jayq.core.$.call(null, window).resize(d)
   }
+  jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", spokes.main.toggle_bio);
+  cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#logo")) && (c = jayq.core.$.call(null, "#logo canvas"), spokes.main.draw_cloud.call(null, c, 7));
   cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#days-left")) && jayq.core.text.call(null, jayq.core.$.call(null, "#days-left"), spokes.main.days_left);
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
 });
