@@ -57,6 +57,6 @@
        "your friends?\n"
      "3. __Breaking It Down__: How do you take a huge idea and break "
        "it down into easy-to-handle steps?")
-    :image "/img/courses/everest.jpg"}
+    :image "/img/courses/mountains.jpg"}
    
    ])

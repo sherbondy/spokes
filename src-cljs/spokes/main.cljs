@@ -137,12 +137,35 @@
         y       (- h (* 0.5 crank-r))]
     (draw-crank ctx crank-w crank-r x y)))
 
-(defn draw-bike [ctx canvas w h]
+(defn draw-bike [ctx w h]
   (let [y (rand-int 2)]
     (cm/with-translation ctx 0 y
       (draw-wheels ctx w h)
       (draw-frame ctx w h)
       (draw-pedals ctx w h))))
+
+(defn rand-y []
+  (- (rand-int 320) 50))
+
+(def hill-points
+  (for [i (range 10)]
+    (let [start (* 400 i)]
+      [start         (rand-y)
+       (+ start 200) (rand-y)
+       (+ start 300) (rand-y)])))
+
+(defn bezier-curve [ctx x0 y0 x1 y1 x2 y2]
+  (.bezierCurveTo ctx x0 y0 x1 y1 x2 y2))
+
+(defn draw-hills [ctx]
+  (.save ctx)
+    (aset ctx "fillStyle" "rgba(0,100,0,1)")
+    (cm/with-path ctx
+      (.moveTo ctx 0 320)
+      (doseq [coords hill-points]
+        (apply bezier-curve (cons ctx coords)))
+      (.fill ctx))
+  (.restore ctx))
 
 (defn draw-scene [canvas]
   (if @ready-to-draw
@@ -157,9 +180,10 @@
           [tx _ _ _]  (c/calc-center scaled-bw scaled-bh w h)
           ty          (- h (* 1.22 scaled-bh))]
       (.clearRect ctx 0 0 w h)
+      (draw-hills ctx)
       (cm/with-translation ctx tx ty
         (cm/with-scale ctx scale scale
-          (draw-bike ctx canvas bw bh))))))
+          (draw-bike ctx bw bh))))))
 
 (defn toggle-bio [e]
   (this-as this
@@ -203,10 +227,10 @@
       (draw-scene canvas))))
 
 (jm/ready
-  (when (u/exists? "#canvas")
-    (let [$canvas 	 ($ "#canvas")
+  (when (u/exists?  "#canvas")
+    (let [$canvas   ($ "#canvas")
           $header   ($ "#header")
-          canvas 	 (aget $canvas 0)
+          canvas 	  (aget $canvas 0)
           redraw-fn (redraw-canvas-fn $canvas)
           resize-fn #(c/fit $canvas $header)]
       (load-bike-img)
@@ -224,5 +248,4 @@
    (jq/text ($ "#days-left") days-left))
  
  (when (u/exists? "#map")
-   (u/log "Initializing the map..")
    (sm/initialize)))

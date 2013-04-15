@@ -85,7 +85,7 @@
 (defn spit-edn-data []
   (spit data-file edn-data))
 
-(spit-edn-data)
+;; (spit-edn-data)
 
 (defn slurp-edn-data []
   (slurp data-file))

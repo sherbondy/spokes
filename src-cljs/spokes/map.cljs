@@ -208,7 +208,8 @@
 
 (defn init-map [$elem & [opts]]
   (reset! gmap (google.maps.Map. (aget $elem 0)
-                                 (or opts default-options))))
+                                 (or opts default-options)))
+  (init-data))
 
 (defn get-user-location []
   (u/log "getting location")
@@ -243,7 +244,6 @@
 
 (defn initialize []
   (init-map ($ "#map"))
-  ;; (init-data)
 
   (get-user-location)
 
@@ -253,4 +253,5 @@
   (jq/on ($ "#radius") :keyup update-radius)
 
   (on-toggle-checkboxes ($ "#trails") (trail-inputs))
-  (on-toggle-checkboxes ($ "#symbols") (symbol-inputs)))
+  (on-toggle-checkboxes ($ "#symbols") (symbol-inputs))
+  (u/log "done initializing"))

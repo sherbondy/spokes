@@ -15,6 +15,11 @@
 (defn fname [person]
   (first (str/split (:name person) #"\s")))
 
+(defhtml lt-script [port]
+  [:script {:type "text/javascript" :id "lt_ws" 
+            :src (str "http://localhost:"
+                      port
+                      "/socket.io/lighttable/ws.js")}])
 
 ;; the base template for all of the other pages
 (defn layout [& body]
@@ -26,8 +31,7 @@
                       initial-scale=1.0,
                       maximum-scale=1.0"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
-    
-    ;; [:script {:type "text/javascript" :id "lt_ws" :src "http://localhost:52699/socket.io/lighttable/ws.js"}]
+    (lt-script 36099)
 
     ;; be weary of the relative paths!
     (u/font-link ["Lato" [400 700] ["italic"]]
@@ -225,7 +229,7 @@
                with "
            [:a {:href "http://teachforamerica.org"} "Teach for America"]
            " as part of an effort to rethink
-            pubic education. As we go, we'll be stopping
+            public education. As we go, we'll be stopping
             at public schools throughout the country to hold "
            [:em "learning festivals"]
             " geared towards middle and high-school students.
@@ -273,7 +277,10 @@
           [:p
            "You can definitely help by spreading the word! "
            "Follow our journey on the "
-           [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]])]))
+           [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]])
+    
+    ;; map data
+    [:script#gps-data {:type "text/edn"} gps/edn-data]]))
   
 
 (defn error []

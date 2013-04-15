@@ -20662,7 +20662,8 @@ spokes.map.init_data = function() {
 spokes.map.init_map = function() {
   var a = function(a, b) {
     var e = cljs.core.nth.call(null, b, 0, null);
-    return cljs.core.reset_BANG_.call(null, spokes.map.gmap, new google.maps.Map(a[0], cljs.core.truth_(e) ? e : spokes.map.default_options))
+    cljs.core.reset_BANG_.call(null, spokes.map.gmap, new google.maps.Map(a[0], cljs.core.truth_(e) ? e : spokes.map.default_options));
+    return spokes.map.init_data.call(null)
   }, b = function(b, d) {
     var e = null;
     goog.isDef(d) && (e = cljs.core.array_seq(Array.prototype.slice.call(arguments, 1), 0));
@@ -20705,7 +20706,8 @@ spokes.map.initialize = function() {
   spokes.map.symbol_inputs.call(null).change(spokes.map.toggle_symbols);
   jayq.core.on.call(null, jayq.core.$.call(null, "#radius"), "\ufdd0'keyup", spokes.map.update_radius);
   spokes.map.on_toggle_checkboxes.call(null, jayq.core.$.call(null, "#trails"), spokes.map.trail_inputs.call(null));
-  return spokes.map.on_toggle_checkboxes.call(null, jayq.core.$.call(null, "#symbols"), spokes.map.symbol_inputs.call(null))
+  spokes.map.on_toggle_checkboxes.call(null, jayq.core.$.call(null, "#symbols"), spokes.map.symbol_inputs.call(null));
+  return spokes.util.log.call(null, "done initializing")
 };
 spokes.main = {};
 spokes.main.sunset_ms = function() {
@@ -20816,28 +20818,70 @@ spokes.main.draw_crank = function(a, b, c, d, e) {
 spokes.main.draw_pedals = function(a, b, c) {
   return spokes.main.draw_crank.call(null, a, 20, 40, b / 2 - 15, c - 20)
 };
-spokes.main.draw_bike = function(a, b, c, d) {
-  b = cljs.core.rand_int.call(null, 2);
+spokes.main.draw_bike = function(a, b, c) {
+  var d = cljs.core.rand_int.call(null, 2);
   a.save();
-  a.translate(0, b);
-  spokes.main.draw_wheels.call(null, a, c, d);
-  spokes.main.draw_frame.call(null, a, c, d);
-  spokes.main.draw_pedals.call(null, a, c, d);
+  a.translate(0, d);
+  spokes.main.draw_wheels.call(null, a, b, c);
+  spokes.main.draw_frame.call(null, a, b, c);
+  spokes.main.draw_pedals.call(null, a, b, c);
+  return a.restore()
+};
+spokes.main.rand_y = function() {
+  return cljs.core.rand_int.call(null, 320) - 50
+};
+spokes.main.hill_points = function() {
+  return function b(c) {
+    return new cljs.core.LazySeq(null, !1, function() {
+      for(;;) {
+        var d = cljs.core.seq.call(null, c);
+        if(d) {
+          var e = cljs.core.first.call(null, d);
+          return cljs.core.cons.call(null, function() {
+            var b = 400 * e;
+            return cljs.core.PersistentVector.fromArray([b, spokes.main.rand_y.call(null), b + 200, spokes.main.rand_y.call(null), b + 300, spokes.main.rand_y.call(null)], !0)
+          }(), b.call(null, cljs.core.rest.call(null, c)))
+        }
+        return null
+      }
+    }, null)
+  }.call(null, cljs.core.range.call(null, 10))
+}();
+spokes.main.bezier_curve = function(a, b, c, d, e, f, g) {
+  return a.bezierCurveTo(b, c, d, e, f, g)
+};
+spokes.main.draw_hills = function(a) {
+  a.save();
+  a.fillStyle = "rgba(0,100,0,1)";
+  a.beginPath();
+  a.moveTo(0, 320);
+  for(var b = cljs.core.seq.call(null, spokes.main.hill_points);;) {
+    if(b) {
+      var c = cljs.core.first.call(null, b);
+      cljs.core.apply.call(null, spokes.main.bezier_curve_to, cljs.core.cons.call(null, a, c));
+      b = cljs.core.next.call(null, b)
+    }else {
+      break
+    }
+  }
+  a.fill();
+  a.closePath();
   return a.restore()
 };
 spokes.main.draw_scene = function(a) {
   if(cljs.core.truth_(cljs.core.deref.call(null, spokes.main.ready_to_draw))) {
-    var b = spokes.canvas.get_ctx.call(null, a), c = spokes.canvas.wh.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = spokes.canvas.wh.call(null, spokes.main.bike_img), f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), g = f / d, g = 1 > 0.4 / g ? 0.4 / g : 1, h = g * e, i = spokes.canvas.calc_center.call(null, g * f, h, d, c), j = cljs.core.nth.call(null, i, 0, null);
-    cljs.core.nth.call(null, i, 1, null);
-    cljs.core.nth.call(null, i, 2, null);
-    cljs.core.nth.call(null, i, 3, null);
-    h = c - 1.22 * h;
-    b.clearRect(0, 0, d, c);
+    var b = spokes.canvas.get_ctx.call(null, a), c = spokes.canvas.wh.call(null, a), a = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), d = spokes.canvas.wh.call(null, spokes.main.bike_img), e = cljs.core.nth.call(null, d, 0, null), d = cljs.core.nth.call(null, d, 1, null), f = e / a, f = 1 > 0.4 / f ? 0.4 / f : 1, g = f * d, h = spokes.canvas.calc_center.call(null, f * e, g, a, c), i = cljs.core.nth.call(null, h, 0, null);
+    cljs.core.nth.call(null, h, 1, null);
+    cljs.core.nth.call(null, h, 2, null);
+    cljs.core.nth.call(null, h, 3, null);
+    g = c - 1.22 * g;
+    b.clearRect(0, 0, a, c);
+    spokes.main.draw_hills.call(null, b);
     b.save();
-    b.translate(j, h);
+    b.translate(i, g);
     b.save();
-    b.scale(g, g);
-    spokes.main.draw_bike.call(null, b, a, f, e);
+    b.scale(f, f);
+    spokes.main.draw_bike.call(null, b, e, d);
     b.restore();
     return b.restore()
   }
@@ -20894,5 +20938,5 @@ jayq.core.document_ready.call(null, function() {
   jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", spokes.main.toggle_bio);
   cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#logo")) && (c = jayq.core.$.call(null, "#logo canvas"), spokes.main.draw_cloud.call(null, c, 7));
   cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#days-left")) && jayq.core.text.call(null, jayq.core.$.call(null, "#days-left"), spokes.main.days_left);
-  return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? (spokes.util.log.call(null, "Initializing the map.."), spokes.map.initialize.call(null)) : null
+  return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? spokes.map.initialize.call(null) : null
 });
