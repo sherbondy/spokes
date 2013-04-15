@@ -20850,24 +20850,6 @@ spokes.main.hill_points = function() {
 spokes.main.bezier_curve = function(a, b, c, d, e, f, g) {
   return a.bezierCurveTo(b, c, d, e, f, g)
 };
-spokes.main.draw_hills = function(a) {
-  a.save();
-  a.fillStyle = "rgba(0,100,0,1)";
-  a.beginPath();
-  a.moveTo(0, 320);
-  for(var b = cljs.core.seq.call(null, spokes.main.hill_points);;) {
-    if(b) {
-      var c = cljs.core.first.call(null, b);
-      cljs.core.apply.call(null, spokes.main.bezier_curve_to, cljs.core.cons.call(null, a, c));
-      b = cljs.core.next.call(null, b)
-    }else {
-      break
-    }
-  }
-  a.fill();
-  a.closePath();
-  return a.restore()
-};
 spokes.main.draw_scene = function(a) {
   if(cljs.core.truth_(cljs.core.deref.call(null, spokes.main.ready_to_draw))) {
     var b = spokes.canvas.get_ctx.call(null, a), c = spokes.canvas.wh.call(null, a), a = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), d = spokes.canvas.wh.call(null, spokes.main.bike_img), e = cljs.core.nth.call(null, d, 0, null), d = cljs.core.nth.call(null, d, 1, null), f = e / a, f = 1 > 0.4 / f ? 0.4 / f : 1, g = f * d, h = spokes.canvas.calc_center.call(null, f * e, g, a, c), i = cljs.core.nth.call(null, h, 0, null);
@@ -20876,7 +20858,6 @@ spokes.main.draw_scene = function(a) {
     cljs.core.nth.call(null, h, 3, null);
     g = c - 1.22 * g;
     b.clearRect(0, 0, a, c);
-    spokes.main.draw_hills.call(null, b);
     b.save();
     b.translate(i, g);
     b.save();

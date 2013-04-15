@@ -157,6 +157,7 @@
 (defn bezier-curve [ctx x0 y0 x1 y1 x2 y2]
   (.bezierCurveTo ctx x0 y0 x1 y1 x2 y2))
 
+(comment
 (defn draw-hills [ctx]
   (.save ctx)
     (aset ctx "fillStyle" "rgba(0,100,0,1)")
@@ -165,7 +166,7 @@
       (doseq [coords hill-points]
         (apply bezier-curve (cons ctx coords)))
       (.fill ctx))
-  (.restore ctx))
+  (.restore ctx)))
 
 (defn draw-scene [canvas]
   (if @ready-to-draw
@@ -180,7 +181,7 @@
           [tx _ _ _]  (c/calc-center scaled-bw scaled-bh w h)
           ty          (- h (* 1.22 scaled-bh))]
       (.clearRect ctx 0 0 w h)
-      (draw-hills ctx)
+      ;;(draw-hills ctx)
       (cm/with-translation ctx tx ty
         (cm/with-scale ctx scale scale
           (draw-bike ctx bw bh))))))
