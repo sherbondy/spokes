@@ -191,7 +191,7 @@
           [:li
            [:a {:href (str "#" question)} (str/capitalize question)]])
         [:li
-         [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]]
+         [:a {:href "http://blog.spokesamerica.org"} "Blog!"]]]]
 
    [:div#content.row-fluid
      (q "who" "are you"
