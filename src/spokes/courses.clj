@@ -40,7 +40,7 @@
     :image "/img/courses/heliostat.jpg"
    },
    
-   {:title "Achieving Your Dreams"
+   {:title "Pursuing your Passion"
     :description
     (str
      "After having heard about neuroscience, computer science, "
