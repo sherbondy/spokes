@@ -24,6 +24,10 @@ body {
   background: #fff;
 }
 
+#cards li:hover {
+  -webkit-transform: rotate(5deg) translateX(30);
+}
+
 #indiegogo {
   z-index: 4;
 }
