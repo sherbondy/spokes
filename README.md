@@ -15,12 +15,12 @@ Do `bower install` to install the client-side dependencies.
 
 To start a web server for the application, run:
 
-    lein ring server
+    lein run
 
 To play around, do:
 
     lein repl
-    
+
 ## License
 
 Copyright © 2013 Ethan Sherbondy and the Spokes Team
@@ -64,7 +64,7 @@ Theme ideas:
   - Mountains, and a road running through the page, with animated bikes zipping by randomly.
   - Sun is dominant on page. Position of sun and coloring of sky matches actual time of day sunrise/set preditions based on where we are (Boston until the trip begins...)
   - The WHEEL for "Who", with team members as the spokes :D
-  
+
 Map (the project within the project):
   - Make map start as an image. Then, when the user clicks, it becomes interactive.
   - Show our current location
