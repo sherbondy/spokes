@@ -39,12 +39,13 @@
   (html5
    [:head
     [:meta {:http-equiv "Content-Type" :content "text/html;charset=UTF-8"}]
-    [:meta {:name "viewport" 
-            :content "width=device-width,
-                      initial-scale=1.0,
-                      maximum-scale=1.0"}]
+    (comment
+      [:meta {:name "viewport" 
+              :content "width=device-width,
+                        initial-scale=1.0,
+                        maximum-scale=1.0"}])
     [:title "Spokes: Biking Across America,Summer 2013"]
-    (lt-script 36099)
+    ;;(lt-script 36099)
     
     [:link {:rel "shortcut icon" :href "img/spokes_logo_green.png"}]
 
@@ -258,8 +259,8 @@
 
 (defn error []
   (layout
-   [:div#content.row-fluid
-     [:div#who
+   [:div#who.row-fluid
+     [:div.righty
       [:h1 "Page not Found"]
       [:p "Sorry, we couldn't find the page you were looking for."]
       [:p "Try visiting "
