@@ -8,41 +8,83 @@ body {
     font-family: 'Neo Sans', Lato;
 }
 
+a {
+    text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+}
+
 /* style the numbers */
 #cards {
     color: #333;
-    width: 480px;
-    margin: 0 auto;
+    width: 520px;
+    margin: auto;
+    position: relative;
 }
 
-#cards .card {
+.card {
     width: 480px;
     height: 240px;
     box-shadow: 0px 4px 16px #000;
     padding: 8px 20px;
     position: absolute;
     background: #fff;
+    margin: none;
 }
 
-#cards li:hover {
-    -webkit-transform: rotate(5deg) translateX(30);
+.card:hover {
+    /*-webkit-transform: rotate(5deg);*/
+    /*-webkit-transform: translateX(30);*/
 }
 
 #indiegogo {
-    z-index: 4;
+    z-index: 10;
+    left: 0px;
+    top: 0px;
 }
 #start {
-    z-index: 3;
+    z-index: 9;
+    left: 4px;
+    top: 2px
 }
-#share {
-    z-index: 2;
+#twitter {
+    z-index: 8;
+    left: 8px;
+    top: 4px
+}
+#facebook {
+    z-index: 7;
+    left: 12px;
+    top: 6px;
 }
 #mail {
-    z-index: 1;
+    z-index: 6;
+    left: 16px;
+    top: 8px;
+}
+
+#thanks {
+    margin: auto;
+    padding-top: 100px;
 }
 
 #cards h2 {
     color: #000;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 30px;
+}
+
+.again {
+    position: absolute;
+    right: 20px;
+    bottom: 8px;
+}
+
+.again:hover {
+    text-decoration: underline;
 }
 /*
  * Mailchimp film editing
