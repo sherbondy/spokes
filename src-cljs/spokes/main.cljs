@@ -240,10 +240,11 @@
       (.resize ($ js/window) resize-fn)))
 
  (jq/on ($ "#team") :click "a" toggle-bio)
- 
+
+(comment
  (when (u/exists? "#logo")
    (let [$logo-canvas ($ "#logo canvas")]
-     (draw-cloud $logo-canvas 7)))
+     (draw-cloud $logo-canvas 7))))
     
  (when (u/exists? "#days-left")
    (jq/text ($ "#days-left") days-left))

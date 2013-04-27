@@ -21,6 +21,19 @@
                       port
                       "/socket.io/lighttable/ws.js")}])
 
+(def start-date    (t/date-time 2013 6 9))
+(def end-date      (t/date-time 2013 8 21))
+(def cal-interval  (t/interval (t/date-time 2013 6)
+                               (t/date-time 2013 9)))
+(def trip-interval (t/interval start-date (t/plus end-date (t/days 1))))
+(def month-fmt     (tf/formatter "MMMM"))
+(def p-fmt         (tf/formatter "MMMM d"))
+(def time-fmt      (tf/formatter "y-MM-dd"))
+
+(defhtml time-elem [date]
+  [:time {:datetime (tf/unparse time-fmt date)}
+   (tf/unparse p-fmt date)])
+
 ;; the base template for all of the other pages
 (defn layout [& body]
   (html5
@@ -41,10 +54,10 @@
 
    [:body 
     [:header#header
-     [:div#logo.cloud
+     [:img#logo {:src "/img/spokes_logo_vector_white.png"}]
+     [:div.center
       [:h1 "Spokes"]
-      [:canvas]]
-     [:h4#slogan.span3 "Inspiring students to learn what they love"]]
+      [:h2#slogan "Inspiring students to learn what they love"]]]
 
     body
 
@@ -118,99 +131,34 @@
       [:a.carousel-control.right
        {:href "#courses" :data-slide "next"} "&rsaquo;"]]))
 
-;; main page section boilerplate 
-;; (generated for each question section)
-(defn q [question title & body]
-  [:div {:id question}
-   [:div.content
-     [:h3 [:em (str/capitalize question)]
-      (if title (str " " title "?"))]
-     body]])
-
-;; trip calendar markup
-(def start-date    (t/date-time 2013 6 9))
-(def end-date      (t/date-time 2013 8 21))
-(def cal-interval  (t/interval (t/date-time 2013 6)
-                               (t/date-time 2013 9)))
-(def trip-interval (t/interval start-date (t/plus end-date (t/days 1))))
-(def month-fmt     (tf/formatter "MMMM"))
-(def p-fmt         (tf/formatter "MMMM d"))
-(def time-fmt      (tf/formatter "y-MM-dd"))
-(def weekdays ["Sun" "Mon" "Tue" "Wed" "Thu" "Fri" "Sat"])
-
-(defn weekday-offset
-  "Return values range 0-6 instead of 1-7"
-  [date]
-  (- (t/day-of-week date) 1))
-
-(defhtml calendar []
-  [:div.row-fluid
-   (for [i (range (t/in-months cal-interval))]
-     (let [month-start   (t/plus (t/start cal-interval) (t/months i))
-           next-month    (t/plus month-start (t/months 1))
-           month-str     (tf/unparse month-fmt month-start)
-           day-offset    (weekday-offset month-start)
-           days-in-month (t/in-days (t/interval month-start next-month))]
-       [:div.month.pull-left.span4
-        [:h4 month-str]
-        [:table.calendar
-         [:thead
-          [:tr
-           (for [wd (range 7)]
-             [:td (nth weekdays wd)])]]
-         [:tbody
-          (for [w (range 6)]
-            [:tr
-             (for [d (range 7)]
-               (let [box-no     (+ d (* w 7))
-                     day        (- box-no day-offset)
-                     box-date   (t/plus month-start (t/days day))
-                     valid-day? (and (>= day 0) (< day days-in-month))
-                     trip-day?  (and valid-day? 
-                                     (t/within? trip-interval box-date))]
-                 [:td {:class (if trip-day? "trip")}
-                  (if valid-day?
-                    (inc day))]))])]]]))])
-
-(defhtml time-elem [date]
-  [:time {:datetime (tf/unparse time-fmt date)}
-   (tf/unparse p-fmt date)])
 
 (defn home []
   (layout
-   [:canvas#canvas]
    
    [:a.navbar-toggle
     {:data-toggle "collapse" :data-target "#navigation"}
     (for [i (range 3)]
       [:span.icon-bar])]
      
-     [:div#navigation.nav-collapse.collapse
-      [:ul.nav
-        (for [question ["who", "what", "when", "where", "why", "how"]]
-          [:li
-           [:a {:href (str "#" question)} (str/capitalize question)]])
-        [:li
-         [:a {:href "http://blog.spokesamerica.org"} "Blog!"]]]]
 
    [:div#content.row-fluid
-     (q "who" "are you"
-        [:div
-         [:p "We are " (count team) " college students from MIT and 
-             UC Berkeley who are passionate about education:"]]
-        
-        [:ul#team
-         (map-indexed
-          (fn [idx person]
-            (let [pfirst    (fname person)
-                  lc-pfirst (str/lower-case pfirst)
-                  p-img     (str "/img/team/" lc-pfirst ".jpg")]
-              [:li
-               [:a {:href (str "#" lc-pfirst)}
-                [:img {:alt (:name person)
-                       :src p-img}]
-                [:h5 pfirst]]]))
-          team)]
+    [:div#who
+      [:div
+       [:p "We are " (count team) " college students from MIT and 
+           UC Berkeley who are passionate about education:"]]
+      
+      [:ul#team
+       (map-indexed
+        (fn [idx person]
+          (let [pfirst    (fname person)
+                lc-pfirst (str/lower-case pfirst)
+                p-img     (str "/img/team/" lc-pfirst ".jpg")]
+            [:li
+             [:a {:href (str "#" lc-pfirst)}
+              [:img {:alt (:name person)
+                     :src p-img}]
+              [:h5 pfirst]]]))
+        team)]
 
        [:div#bios
         [:div
@@ -221,9 +169,9 @@
              [:h4 (:name person)
               [:small.pull-right 
                (:school person) " Class of " (:grad-year person)]]
-              (md/md-to-html-string (:bio person))]))])
+              (md/md-to-html-string (:bio person))]))]]
 
-     (q "what" "are you doing"
+     [:div#what
         [:div
           [:p "We're biking across the United States in partnership
                with "
@@ -237,47 +185,46 @@
              project-oriented class based on one of our passions."]
           [:p "Here are the courses we'll be offering:"]]
 
-        (carousel "courses" courses))
+        (carousel "courses" courses)]
 
-     (q "when" "is it"
-        [:div
-          [:p "This summer, from " (time-elem start-date)
-           " through " (time-elem end-date) "."]
-          (calendar)
-          [:h4 
-           [:strong#days-left (t/in-days (t/interval (t/now) start-date))]
-           " more days until we get going."]])
+    [:div#when
+      [:div
+        [:p "This summer, from " (time-elem start-date)
+         " through " (time-elem end-date) "."]
+        [:h4 
+         [:strong#days-left (t/in-days (t/interval (t/now) start-date))]
+         " more days until we get going."]]]
 
-     (q "where" "are you going"
-        [:div#map]
-        [:div.row-fluid
-          [:div.span4.box
-            [:p "We'll be biking from San Francisco to Washington D.C."]
-            [:p "We're taking the Western Express trail, then
-                 Trans America."]]])
+    [:div#where
+      [:div#map]
+      [:div.row-fluid
+        [:div.span4.box
+          [:p "We'll be biking from San Francisco to Washington D.C."]
+          [:p "We're taking the Western Express trail, then
+               Trans America."]]]]
 
-     (q "why" "are you doing this"
-        [:div
-          [:p "We are dedicated to revealing the exploratory, 
-           self-directed, and boundless nature of learning to students 
-           across the US. Our mission stems from the simple idea 
-           that most of the learning we do over the course of our 
-           lifetimes happens outside of a classroom as the
-           result of semi-random explorations into topics 
-           that genuinely interest us."]
-          [:p "We want to show this to high school students and give 
-           them an opportunity to feel inspired and find something they love."]])
+    [:div#why
+      [:div
+        [:p "We are dedicated to revealing the exploratory, 
+         self-directed, and boundless nature of learning to students 
+         across the US. Our mission stems from the simple idea 
+         that most of the learning we do over the course of our 
+         lifetimes happens outside of a classroom as the
+         result of semi-random explorations into topics 
+         that genuinely interest us."]
+        [:p "We want to show this to high school students and give 
+         them an opportunity to feel inspired and find something they love."]]]
 
-     (q "how" "can I help"
-        [:div
-          [:p "We are currently looking for sponsors. "
-           "If you're interested in getting in touch, please " 
-           [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
-  
-          [:p
-           "You can definitely help by spreading the word! "
-           "Follow our journey on the "
-           [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]])
+     [:div#how
+      [:div
+        [:p "We are currently looking for sponsors. "
+         "If you're interested in getting in touch, please " 
+         [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
+
+        [:p
+         "You can definitely help by spreading the word! "
+         "Follow our journey on the "
+         [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]]]
     
     ;; map data
     [:script#gps-data {:type "text/edn"} gps/edn-data]]))
