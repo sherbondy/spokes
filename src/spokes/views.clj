@@ -203,10 +203,8 @@
         [:p "We'll be biking from San Francisco to Washington D.C."]]]]
   
   [:div#who
-    [:div
-     [:p "We are " (count team) " college students from MIT and 
-         UC Berkeley who are passionate about education:"]]
-      
+    [:div.righty
+     [:h2 "Meet Our Team"]
       [:ul#team
        (map-indexed
         (fn [idx person]
@@ -216,20 +214,22 @@
             [:li
              [:a {:href (str "#" lc-pfirst)}
               [:img {:alt (:name person)
-                     :src p-img}]
-              [:h5 pfirst]]]))
+                     :src p-img}]]]))
         team)]
 
        [:div#bios
         [:div
-         [:h4 "Click on a face for a brief bio."]]
+         [:h3 "Click on a face for a brief bio"]
+         [:p "We are " (count team) " college students from MIT and 
+             UC Berkeley who are passionate about education:"]]
         (for [person team]
           (let [lc-pfirst (str/lower-case (fname person))]
             [:div.hidden {:id lc-pfirst}
-             [:h4 (:name person)
-              [:small.pull-right 
+             [:h3 (:name person)
+              [:small.pull-right
                (:school person) " Class of " (:grad-year person)]]
-              (md/md-to-html-string (:bio person))]))]
+             
+              (md/md-to-html-string (:bio person))]))]]]
 
      [:div#how
       [:div
@@ -243,7 +243,7 @@
          [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]]]
     
     ;; map data
-    [:script#gps-data {:type "text/edn"} gps/edn-data]]))
+    [:script#gps-data {:type "text/edn"} gps/edn-data]))
   
 
 (defn error []
