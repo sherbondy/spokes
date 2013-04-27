@@ -159,6 +159,9 @@
         " geared towards middle and high-school students.
          Each of us will be teaching a hands-on,
          project-oriented class based on one of our passions."]]]
+   
+   [:div#video
+    [:a#play.center {:href "#"}]]
      
    [:div#content.row-fluid
     [:div#who
