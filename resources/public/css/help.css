@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Neo Sans';
+  font-family: 'Neo Sans', Lato;
 }
 
 /* style the numbers */
@@ -13,12 +13,56 @@ body {
   color: #ccc;
 }
 
-#cards li {
+#cards .card {
   background: url('/img/notecard.jpg');
+  height: 280px;
 }
 
 #cards h2 {
   color: #000;
   width: 480px;
-  height: 280px;
+}
+
+/*
+ * Mailchimp film editing
+ */
+
+#mc-embed-signup{
+
+}
+
+#mc-embedded-subscribe-form {
+
+}
+
+.mc-field-group {
+
+}
+
+#mce-email {
+
+}
+
+.input-group {
+
+}
+
+.input-group ul {
+
+}
+
+.input-group li {
+
+}
+#mce-responses {
+
+}
+#mce-error-response {
+
+}
+#mce-success-responses {
+
+}
+#mc-embedded-subscribe {
+
 }
