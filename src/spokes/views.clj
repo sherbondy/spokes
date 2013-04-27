@@ -47,17 +47,23 @@
     (lt-script 36099)
 
     ;; be weary of the relative paths!
-    (u/font-link ["Lato" [400 700] ["italic"]]
-                 ["Signika" [400 600 700]])
     (include-css "/css/style.css" "/css/live.css"
                  "/css/bootstrap-responsive.min.css")]
 
-   [:body 
-    [:header#header
-     [:img#logo {:src "/img/spokes_logo_vector_white.png"}]
-     [:div.center
-      [:h1 "Spokes"]
-      [:h2#slogan "Inspiring students to learn what they love"]]]
+   [:body
+    [:div#title
+      [:header#header
+       [:img#logo {:src "/img/spokes_logo_vector_white.png"}]
+       [:div.center
+        [:h1 "Spokes"]
+        [:h2#slogan "Inspiring students to learn what they love"]]]
+      
+      [:ul#social
+       [:li.facebook [:a {:href "#"}]]
+       ;; use blog instead of rss
+       [:li.blog [:a {:href "http://blog.spokesamerica.org"}]]
+       [:li.twitter [:a {:href "http://twitter.com/spokesamerica"}]]
+       [:li.vimeo [:a {:href "http://vimeo.com/spokesamerica"}]]]]
 
     body
 
@@ -134,13 +140,26 @@
 
 (defn home []
   (layout
-   
-   [:a.navbar-toggle
-    {:data-toggle "collapse" :data-target "#navigation"}
-    (for [i (range 3)]
-      [:span.icon-bar])]
+  
+   (comment
+     [:a.navbar-toggle
+      {:data-toggle "collapse" :data-target "#navigation"}
+      (for [i (range 3)]
+        [:span.icon-bar])])
      
-
+   [:div#what
+    [:div.center
+      [:p "We're biking across the United States in partnership
+           with "
+       [:a {:href "http://teachforamerica.org"} "Teach for America"]
+       " as part of an effort to rethink
+        public education. As we go, we'll be stopping
+        at public schools throughout the country to hold "
+       [:em "learning festivals"]
+        " geared towards middle and high-school students.
+         Each of us will be teaching a hands-on,
+         project-oriented class based on one of our passions."]]]
+     
    [:div#content.row-fluid
     [:div#who
       [:div
@@ -171,21 +190,8 @@
                (:school person) " Class of " (:grad-year person)]]
               (md/md-to-html-string (:bio person))]))]]
 
-     [:div#what
-        [:div
-          [:p "We're biking across the United States in partnership
-               with "
-           [:a {:href "http://teachforamerica.org"} "Teach for America"]
-           " as part of an effort to rethink
-            public education. As we go, we'll be stopping
-            at public schools throughout the country to hold "
-           [:em "learning festivals"]
-            " geared towards middle and high-school students.
-             Each of us will be teaching a hands-on,
-             project-oriented class based on one of our passions."]
-          [:p "Here are the courses we'll be offering:"]]
 
-        (carousel "courses" courses)]
+    [:div#classes (carousel "courses" courses)]
 
     [:div#when
       [:div
