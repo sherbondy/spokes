@@ -20917,6 +20917,11 @@ jayq.core.document_ready.call(null, function() {
     jayq.core.$.call(null, window).resize(d)
   }
   jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", spokes.main.toggle_bio);
+  var e = jayq.core.$.call(null, window);
+  e.scroll(function() {
+    var a = e.scrollTop(), b = jayq.core.$.call(null, "#video").offset().top, c = jayq.core.$.call(null, "#fixed");
+    return a > b ? c.addClass("visible") : c.removeClass("visible")
+  });
   cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#days-left")) && jayq.core.text.call(null, jayq.core.$.call(null, "#days-left"), spokes.main.days_left);
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? spokes.map.initialize.call(null) : null
 });

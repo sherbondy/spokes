@@ -240,7 +240,17 @@
       (.resize ($ js/window) resize-fn)))
 
  (jq/on ($ "#team") :click "a" toggle-bio)
-
+ 
+ (let [$window ($ js/window)]
+   (.scroll $window
+     (fn []
+       (let [scroll-y (.scrollTop $window)
+             vid-y    (.-top (.offset ($ "#video")))
+             $fixed   ($ "#fixed")]
+         (if (> scroll-y vid-y)
+           (.addClass $fixed "visible")
+           (.removeClass $fixed "visible"))))))
+  
 (comment
  (when (u/exists? "#logo")
    (let [$logo-canvas ($ "#logo canvas")]

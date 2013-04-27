@@ -60,17 +60,18 @@
         [:h1 "Spokes"]
         [:h2#slogan "Inspiring students to learn what they love"]]]]
       
-    [:ul#social
-     [:li.facebook [:a {:href "#"}]]
-     ;; use blog instead of rss
-     [:li.blog [:a {:href "http://blog.spokesamerica.org"}]]
-     [:li.twitter [:a {:href "http://twitter.com/spokesamerica"}]]
-     [:li.vimeo [:a {:href "http://vimeo.com/spokesamerica"}]]]
-    
-    [:h2#fixed-title 
-     [:img.logo {:src "/img/spokes_logo_white.png" 
-                 :width "64px" :height "64px"}]
-     "Spokes"]
+    [:div#fixed
+      [:ul#social
+       [:li.facebook [:a {:href "#"}]]
+       ;; use blog instead of rss
+       [:li.blog [:a {:href "http://blog.spokesamerica.org"}]]
+       [:li.twitter [:a {:href "http://twitter.com/spokesamerica"}]]
+       [:li.vimeo [:a {:href "http://vimeo.com/spokesamerica"}]]]
+      
+      [:h2#fixed-title 
+       [:img.logo {:src "/img/spokes_logo_white.png" 
+                   :width "64px" :height "64px"}]
+       "Spokes"]]
 
     body
 
