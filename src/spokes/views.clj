@@ -53,17 +53,22 @@
    [:body
     [:div#title
       [:header#header
-       [:img#logo {:src "/img/spokes_logo_vector_white.png"}]
+       [:img#logo {:src "/img/spokes_logo_white.png"}]
        [:div.center
         [:h1 "Spokes"]
-        [:h2#slogan "Inspiring students to learn what they love"]]]
+        [:h2#slogan "Inspiring students to learn what they love"]]]]
       
-      [:ul#social
-       [:li.facebook [:a {:href "#"}]]
-       ;; use blog instead of rss
-       [:li.blog [:a {:href "http://blog.spokesamerica.org"}]]
-       [:li.twitter [:a {:href "http://twitter.com/spokesamerica"}]]
-       [:li.vimeo [:a {:href "http://vimeo.com/spokesamerica"}]]]]
+    [:ul#social
+     [:li.facebook [:a {:href "#"}]]
+     ;; use blog instead of rss
+     [:li.blog [:a {:href "http://blog.spokesamerica.org"}]]
+     [:li.twitter [:a {:href "http://twitter.com/spokesamerica"}]]
+     [:li.vimeo [:a {:href "http://vimeo.com/spokesamerica"}]]]
+    
+    [:h2#fixed-title 
+     [:img.logo {:src "/img/spokes_logo_white.png" 
+                 :width "64px" :height "64px"}]
+     "Spokes"]
 
     body
 
@@ -161,13 +166,46 @@
          project-oriented class based on one of our passions."]]]
    
    [:div#video
-    [:a#play.center {:href "#"}]]
-     
-   [:div#content.row-fluid
-    [:div#who
-      [:div
-       [:p "We are " (count team) " college students from MIT and 
-           UC Berkeley who are passionate about education:"]]
+    [:a#play.center {:href "#"}]
+    [:div.explanation
+     [:p "Watch our Indiegogo video to learn more about "
+      [:strong "Spokes"] "."]]]
+    
+   [:div#classes
+    [:div.righty
+      [:h2 "Our Classes"]
+      (carousel "courses" courses)]]
+   
+  [:div#why
+    [:div.righty
+      [:h2 "Our Motivation"]
+      [:p "We are dedicated to revealing the exploratory, 
+       self-directed, and boundless nature of learning to students 
+       across the US. Our mission stems from the simple idea 
+       that most of the learning we do over the course of our 
+       lifetimes happens outside of a classroom as the
+       result of semi-random explorations into topics 
+       that genuinely interest us."]
+      [:p "We want to show this to high school students and give 
+       them an opportunity to feel inspired and find something they love."]]]
+   
+  [:div#where
+    [:div#map]
+   
+    [:div#countdown
+     [:h2#days-left (t/in-days (t/interval (t/now) start-date))]
+     [:h4 "more days"]]
+   
+    [:div.row-fluid
+      [:div.span4.box
+        [:h4 "From " (time-elem start-date)
+             " through " (time-elem end-date)]
+        [:p "We'll be biking from San Francisco to Washington D.C."]]]]
+  
+  [:div#who
+    [:div
+     [:p "We are " (count team) " college students from MIT and 
+         UC Berkeley who are passionate about education:"]]
       
       [:ul#team
        (map-indexed
@@ -191,38 +229,7 @@
              [:h4 (:name person)
               [:small.pull-right 
                (:school person) " Class of " (:grad-year person)]]
-              (md/md-to-html-string (:bio person))]))]]
-
-
-    [:div#classes (carousel "courses" courses)]
-
-    [:div#when
-      [:div
-        [:p "This summer, from " (time-elem start-date)
-         " through " (time-elem end-date) "."]
-        [:h4 
-         [:strong#days-left (t/in-days (t/interval (t/now) start-date))]
-         " more days until we get going."]]]
-
-    [:div#where
-      [:div#map]
-      [:div.row-fluid
-        [:div.span4.box
-          [:p "We'll be biking from San Francisco to Washington D.C."]
-          [:p "We're taking the Western Express trail, then
-               Trans America."]]]]
-
-    [:div#why
-      [:div
-        [:p "We are dedicated to revealing the exploratory, 
-         self-directed, and boundless nature of learning to students 
-         across the US. Our mission stems from the simple idea 
-         that most of the learning we do over the course of our 
-         lifetimes happens outside of a classroom as the
-         result of semi-random explorations into topics 
-         that genuinely interest us."]
-        [:p "We want to show this to high school students and give 
-         them an opportunity to feel inspired and find something they love."]]]
+              (md/md-to-html-string (:bio person))]))]
 
      [:div#how
       [:div
