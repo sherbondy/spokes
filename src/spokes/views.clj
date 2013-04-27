@@ -45,6 +45,8 @@
                       maximum-scale=1.0"}]
     [:title "Spokes: Biking Across America,Summer 2013"]
     (lt-script 36099)
+    
+    [:link {:rel "shortcut icon" :href "img/spokes_logo_green.png"}]
 
     ;; be weary of the relative paths!
     (include-css "/css/style.css" "/css/live.css"
@@ -221,7 +223,7 @@
         [:div
          [:h3 "Click on a face for a brief bio"]
          [:p "We are " (count team) " college students from MIT and 
-             UC Berkeley who are passionate about education:"]]
+             UC Berkeley who are passionate about education."]]
         (for [person team]
           (let [lc-pfirst (str/lower-case (fname person))]
             [:div.hidden {:id lc-pfirst}
@@ -231,16 +233,23 @@
              
               (md/md-to-html-string (:bio person))]))]]]
 
-     [:div#how
-      [:div
-        [:p "We are currently looking for sponsors. "
-         "If you're interested in getting in touch, please " 
-         [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
-
-        [:p
-         "You can definitely help by spreading the word! "
-         "Follow our journey on the "
-         [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]]]
+     [:div#help
+      [:div#explain-social
+       [:p "Follow the trip through social media."]]
+      
+      [:img#logo-bottom {:src "/img/spokes_logo_green.png" 
+                         :width "300px" :height "300px"}]
+      
+      [:div.righty
+       [:h2 "Help " [:em "Spokes!"]]
+       [:p "We are currently looking for sponsors. "
+        "If you're interested in getting in touch, please " 
+        [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
+  
+       [:p
+        "You can definitely help by spreading the word! "
+        "Follow our journey on the "
+        [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]]]
     
     ;; map data
     [:script#gps-data {:type "text/edn"} gps/edn-data]))
