@@ -18,8 +18,26 @@
       "abstract fractal-like patterns using a clever technique called "
       "L-systems. Everyone will have a chance to create their own "
       "computer-generated works of art inspired by life.")
-    :image "/img/courses/abop.jpg"
-   },
+    :image "/img/courses/abop.jpg"},
+
+   {:title "EyeWire: A game to map the brain"
+    :description
+    (str
+     "EyeWire is a puzzle-meets-coloring book online game that enables "
+     "its players to contribute to the brain mapping initiative, which was "
+     "announced by President Obama in March. Developed in part by one "
+     "of the Spokes teachers in the Seung Lab at MIT, the game teaches "
+     "its players how to trace the \"branches\" of neurons through 3D "
+     "reconstructions of brain tissue. To do this task, players \"spot check\" "
+     "computer algorithms, with the ultimate goal of obtaining a connectivity "
+     "map with synaptic-scale resolution of the \"connectome.\"\n\n"
+     
+     "In the class, everyone will have a chance to build part of a "
+     "never-before-been-seen neuron, and will get to build part of the "
+     "brain in LEGOs! For more information, check out: "
+     "[EyeWire.org](http://eyewire.org) and the "
+     "[Connectome TEDTalk](http://www.ted.com/talks/sebastian_seung.html)")
+    :image "/img/courses/eyewire.jpg"}
    
    {:title "The Heliostat"
     :description 
@@ -37,8 +55,17 @@
         "Arduino program.\n"
       "* __Electrical Engineering__: They will learn how to solder "
         "components together.")
-    :image "/img/courses/heliostat.jpg"
-   },
+    :image "/img/courses/heliostat.jpg"},
+
+   {:title "How to Build Tasty Foods: Inside, for free!"
+    :description
+    (str
+      "Don't you wish you know how to make your own delicious food? " 
+      "With a few old plastic gutters, a handful of plant seeds and a "
+      "bit of daily care, you will grow your own veggies in no-time! "
+      "Add in a few quick and easy recipes, and you will be the most "
+      "popular chef in your high school - period.")
+    :image "/img/courses/garden.jpg"},
 
    {:title "The Science of Music",
     :description
@@ -50,8 +77,7 @@
       "Come learn about the math, physics, and psychology "
       "behind the music we love and how to take a scientific "
       "approach to solving its mysteries."),
-    :image "/img/courses/music.jpg"
-   },
+    :image "/img/courses/music.jpg"},
    
    {:title "Pursuing your Passion"
     :description
@@ -71,5 +97,4 @@
      "3. __Breaking It Down__: How do you take a huge idea and break "
        "it down into easy-to-handle steps?")
     :image "/img/courses/mountains.jpg"}
-   
    ])
