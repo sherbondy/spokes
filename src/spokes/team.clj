@@ -124,6 +124,17 @@
               "design firm and live like a normal person, sleeping 8 hours every day.")
     :school "MIT"
     :grad-year 2013}
+
+   {:name "Titiaan Palazzi",
+    :bio (str
+           "I joined the group as I realized there was not a single European on the team. Someone had to bring the experience of biking through the Alps!\n\n"
+
+           "I am a mechanical engineering graduate student and team builder. I want to use the power of computers to develop solutions that delight people and make our physical environments richer.\n\n"
+
+           "I love to campaign for big ideas. I previously built teams for [Cool Schools](http://www.coolschools.nl) (an organization to crowdfund solar on school); [Kairos Society the Netherlands](http://www.kairossociety.nl) (the Dutch hub of a worldwide network of young entrepreneurs) and Bodega Ksi (a student-led catering company).\n\n"
+
+           "I am at my best when asking questions, bringing people together, designing solutions to complex technical problems, building partnerships, motivating people and articulating value propositions - for small groups or large crowds.")
+    :school "former MIT ESD scholar"}
    
    {:name "Turner Bohlen"
     :bio (str "I am a junior at MIT majoring in Physics, and pursuing interests in "

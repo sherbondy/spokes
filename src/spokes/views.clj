@@ -231,7 +231,9 @@
             [:div.hidden {:id lc-pfirst}
              [:h3 (:name person)
               [:small.pull-right
-               (:school person) " Class of " (:grad-year person)]]
+               (:school person) 
+               (when (:grad-year person)
+                 (str " Class of " (:grad-year person)))]]
              
               (md/md-to-html-string (:bio person))]))]]]
 
