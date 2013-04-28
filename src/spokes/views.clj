@@ -158,11 +158,11 @@
      
    [:div#what
     [:div.center
-      [:p "We're biking across the United States in partnership
+      [:p "We're biking across the United States in collaboration
            with "
        [:a {:href "http://teachforamerica.org"} "Teach for America"]
        " as part of an effort to rethink
-        public education. As we go, we'll be stopping
+        education. As we go, we'll be stopping
         at public schools throughout the country to hold "
        [:em "learning festivals"]
         " geared towards middle and high-school students.

@@ -39,6 +39,19 @@
         "components together.")
     :image "/img/courses/heliostat.jpg"
    },
+
+   {:title "The Science of Music",
+    :description
+    (str
+      "Music has been called the universal language. "
+      "In some sense its building blocks of rhythm, harmony, "
+      "and melody arise from the nature of the human mind.  "
+      "But there are still a lot of unanswered questions!  "
+      "Come learn about the math, physics, and psychology "
+      "behind the music we love and how to take a scientific "
+      "approach to solving its mysteries."),
+    :image "/img/courses/music.jpg"
+   },
    
    {:title "Pursuing your Passion"
     :description
