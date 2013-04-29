@@ -1,27 +1,103 @@
 @font-face
 {
     font-family: 'Neo Sans';
-    src: url('/font/neo-sans.ttf');
+    src: url('/font/NeoSans.otf');
+}
+@font-face
+{
+    font-family: 'Neo Sans Italic';
+    src: url('/font/NeoSans-Italic.otf');
 }
 
 body {
     font-family: 'Neo Sans', Lato;
+    color: #7cc21a;
+    /*background: url("/img/spread/spokes_home.jpg") center no-repeat;*/
+    margin: 0;
+    padding: 0;
+    position: fixed;
+}
+
+
+#bg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    min-height: 100%;
+    min-width: 100%;
+
+    z-index: -1;
+}
+
+#logo-wrap {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+}
+
+#logo {
+    position: absolute;
+    display: block;
+    width: 44px;
+    height: 44px;
+    left: 0px;
+    top: 0px;
+}
+
+
+#logo-text {
+    position: absolute;
+    display: block;
+    font-size: 24px;
+    color: white;
+    line-height: 24px;
+    top: 12px;
+    left: 52px;
 }
 
 a {
     text-decoration: none;
+    color: #7cc21a;
+}
+
+a:hover {
+    color: #5c8f0f;
+}
+
+a:active {
+    color: #4f9208;
 }
 
 h1 {
     text-align: center;
+    color: black;
+}
+
+p {
+    color: black;
+    font-size: 16px;
+    width: 440px;
+    display: block;
+    margin-left: 40px;
+}
+
+#wrap {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: #7cc21a;
+    height: 420px;
+    margin: auto;
+    margin-top: 240px;
 }
 
 /* style the numbers */
 #cards {
-    color: #333;
     width: 520px;
     margin: auto;
     position: relative;
+    vertical-align: middle;
 }
 
 .card {
@@ -34,64 +110,103 @@ h1 {
     margin: none;
 }
 
-.card:hover {
-    /*-webkit-transform: rotate(5deg);*/
-    /*-webkit-transform: translateX(30);*/
+#info {
+    z-index: 11;
+    left: 0px;
+    top: 0px;
+    background-color: white;
 }
 
 #indiegogo {
     z-index: 10;
     left: 0px;
     top: 0px;
+    background: url("/img/5.png") center;
 }
 #start {
     z-index: 9;
     left: 4px;
-    top: 2px
+    top: 2px;
+    background: url("/img/4.png") center;
 }
 #twitter {
     z-index: 8;
     left: 8px;
-    top: 4px
+    top: 4px;
+    background: url("/img/3.png") center;
 }
 #facebook {
     z-index: 7;
     left: 12px;
     top: 6px;
+    background: url("/img/2.png") center;
 }
 #mail {
     z-index: 6;
     left: 16px;
     top: 8px;
+    background: url("/img/1.png") center;
+    text-align: center;
+    font-size: 16px;
 }
+
+#mail-header {
+    font-size: 35px;
+    color: #7cc21a;
+    display: inline-block;
+    /*margin-top: 8px;*/
+}
+
+#cards h2 {
+    text-align: center;
+    font-size: 35px;
+    display: inline-block;
+    margin-top: 102px;
+}
+#info h2 {
+    margin-top: 70px;
+}
+
+#indiegogo h2 {
+
+}
+
+#vote h2 {
+    margin-top: 70px;
+}
+
+#facebook h2 {
+    margin-top: 70px;
+}
+
+
+
 
 #thanks {
     margin: auto;
     padding-top: 100px;
 }
 
-#cards h2 {
-    color: #000;
-    text-align: center;
-    margin-top: 100px;
-    font-size: 30px;
-}
-
 .again {
     position: absolute;
     right: 20px;
     bottom: 8px;
+    font-size: 24px;
+    color: #f9bf49;
+    font-family: "Neo Sans Italic";
 }
 
 .again:hover {
-    text-decoration: underline;
+    color: #b99f30;
 }
 /*
  * Mailchimp film editing
  */
 
 #mc-embed-signup{
-
+    margin-top: 20px;
+    text-align: left;
+    margin-left: 40px;
 }
 
 #mc-embedded-subscribe-form {
@@ -107,11 +222,13 @@ h1 {
 }
 
 .input-group {
-
+    margin-top: 15px;
 }
 
 .input-group ul {
-
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .input-group li {
@@ -126,6 +243,56 @@ h1 {
 #mce-success-responses {
 
 }
+#interest-label {
+    display: block;
+    margin-top: 15px;
+    height: 20px;
+    line-height: 20px;
+}
+#email-label {
+    height: 20px;
+    display: block;
+    line-height: 20px;
+}
+#column1 {
+    float: left;
+    clear: left;
+    width: 190px;
+    text-align: right;
+    color: black;
+}
+#column2 {
+    float: left;
+    clear: right;
+    width: 190px;
+    margin-left: 20px;
+    color: black;
+}
+.email {
+    height: 14px;
+    margin: 0px;
+    width: 184px;
+}
+.clear {
+    width: 480px;
+    text-align: center;
+}
 #mc-embedded-subscribe {
-
+    font-family: "Neo Sans Italic";
+    display: block;
+    color: #7cc21a;
+    font-size: 24px;
+    position: absolute;
+    -webkit-appearnce: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    position: absolute;
+    right: 20px;
+    bottom: 8px;
+}
+#mc-embedded-subscribe:hover {
+    color: #5c8f0f;
+}
+#mc-embedded-subscribe:active {
+    color: #4f9208;
 }
