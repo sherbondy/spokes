@@ -32,7 +32,7 @@
 
 ;; in pixels
 (def wheel-radius 90)
-;; typical bike wheel has a 0.6m radius 
+;; typical bike wheel has a 0.6m radius
 (def m-to-px (/ 90 0.6))
 (def time (atom (u/now)))
 ;; cannot draw until we've loaded all resources
@@ -43,10 +43,10 @@
 ;; assume speed is 20 km / hour
 ;; speed in m/s
 (def bike-speed (/ (* 1000 20) (* 60 60)))
-(def rad-per-ms (/ (* wheel-radius bike-speed) 
+(def rad-per-ms (/ (* wheel-radius bike-speed)
                    (* wheel-radius 1000)))
 
-(add-watch time :wheel-rotation 
+(add-watch time :wheel-rotation
   (fn [k r ov nv]
     ;; time delta in ms
     (let [dt   (- nv ov)
@@ -117,15 +117,15 @@
     (cm/with-path ctx
       (cm/with-ctx-props ctx {:line-width crank-w}
         (cm/with-trans-rot-scale ctx [x y] rot [1 1]
-                                 
-          (cm/with-trans-rot-scale ctx 
+
+          (cm/with-trans-rot-scale ctx
             [0 crank-r] neg-rot [1 1]
             (draw-pedal ctx pedal-w pedal-h))
-                                 
+
           (cm/with-trans-rot-scale ctx
             [0 (* -1 crank-r)] neg-rot [1 1]
             (draw-pedal ctx pedal-w pedal-h))
-                                 
+
           (.moveTo ctx 0 (* -1 crank-r))
           (.lineTo ctx 0 crank-r)
           (.stroke ctx))))))
@@ -240,7 +240,12 @@
       (.resize ($ js/window) resize-fn)))
 
  (jq/on ($ "#team") :click "a" toggle-bio)
- 
+
+ (jq/on ($ "#play") :click
+        (fn [e]
+          (.preventDefault e)
+          (js/alert "The video will be up in a few days!")))
+
  (let [$window ($ js/window)]
    (.scroll $window
      (fn []
@@ -250,14 +255,14 @@
          (if (> scroll-y vid-y)
            (.addClass $fixed "visible")
            (.removeClass $fixed "visible"))))))
-  
+
 (comment
  (when (u/exists? "#logo")
    (let [$logo-canvas ($ "#logo canvas")]
      (draw-cloud $logo-canvas 7))))
-    
+
  (when (u/exists? "#days-left")
    (jq/text ($ "#days-left") days-left))
- 
+
  (when (u/exists? "#map")
    (sm/initialize)))

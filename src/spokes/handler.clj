@@ -6,7 +6,7 @@
             [ring.middleware.reload :as reload]
             [spokes.views :refer [error home mentor route]]))
 
-(def all-routes 
+(def all-routes
   [{:url "/index.html"
     :html (home)}
    {:url "/route.html"

@@ -14,7 +14,7 @@
               "in large technical communities.")
     :school "MIT"
     :grad-year 2014}
-   
+
    {:name "Bruno Faviero"
     :bio (str "I am a sophomore at MIT, but a lifelong underclassman. "
               "I love learning new things: writing techniques, sailing strategies, "
@@ -30,7 +30,7 @@
               "In the spare time I don't have, I enjoy sailing, running, scuba diving, photographing, and other sundry activities.")
     :school "MIT"
     :grad-year 2015}
-   
+
    {:name "Claire O'Connell"
     :bio (str "Claire is a graduating junior at MIT studying Brain & Cognitive Science. "
               "She was born in England, lived in France until the age of 8 when she moved "
@@ -45,21 +45,21 @@
               "And she loves smiley faces. A lot. :)")
     :school "MIT"
     :grad-year 2013}
-   
+
    {:name "Ethan Sherbondy"
     :bio (str "I'm a Junior studying Computer Science at MIT. I love plants, "
               "honeybees, and computer graphics. I made the website that you're "
               "staring at right now. I am ceaselessly amazed by the power of "
               "the Internet and the World Wide Web to spread information and "
               "connect people.\n\n"
-              
+
               "I grew up surrounded by trees in Raleigh, North Carolina. "
               "I've been writing software since I was a wee lad, and I hope to "
               "share the wonders of programming with the world.")
-    
+
     :school "MIT"
     :grad-year 2014}
-   
+
    {:name "Jeff Prouty"
     :bio (str "I am a current junior at MIT majoring in physics.  "
               "I was born in Atlanta, Georgia and moved to Charlotte, "
@@ -73,7 +73,7 @@
               "I'll let you know.")
     :school "MIT"
     :grad-year 2014}
-   
+
    {:name "Kaitlyn Bailey",
     :bio (str "Hailing from the suburbs of Chicago, I am now a junior "
               "at MIT studying Mechanical Engineering, with interests "
@@ -91,7 +91,7 @@
     :school "MIT",
     :grad-year 2014
     }
-   
+
    {:name "Nathan Kit Kennedy"
     :bio (str "I am a senior at UC Berkeley studying a passion of mine, "
               "film. I have always been a story teller, whether it be "
@@ -105,13 +105,13 @@
               "of em. Working with a group of enthusiastic individuals "
               "towards a creative goal and witnessing the vision come "
               "to life is a truly gratifying experience. \n\n"
-              
+
               "That is why this trip is so important to me. It is an "
               "incredible opportunity to work with a group of "
               "incredible people in order to tell their story. ")
     :school "UC Berkeley"
     :grad-year 2014}
-   
+
    {:name "Phillip Daniel"
     :bio (str "I am a senior in the Mechanical Engineering department at MIT, "
               "with aspirations of improving the world. I was raised in Durham, "
@@ -135,11 +135,11 @@
 
            "I am at my best when asking questions, bringing people together, designing solutions to complex technical problems, building partnerships, motivating people and articulating value propositions - for small groups or large crowds.")
     :school "former MIT ESD scholar"}
-   
+
    {:name "Turner Bohlen"
     :bio (str "I am a junior at MIT majoring in Physics, and pursuing interests in "
               "Computer Science and Cognitive Science. I have lived in towns all along "
-              "cthe east coast, but think of myself as having grown up in Southborough, MA. "
+              "the east coast, but think of myself as having grown up in Southborough, MA. "
               "Now, Washington, DC, where my parents recently moved, is home. I have had "
               "more hobbies and interests than I can count, but have more recently focused "
               "on entrepreneurship, innovation, and education. I directed the wonderful "

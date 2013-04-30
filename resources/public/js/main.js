@@ -20917,6 +20917,10 @@ jayq.core.document_ready.call(null, function() {
     jayq.core.$.call(null, window).resize(d)
   }
   jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0'click", "a", spokes.main.toggle_bio);
+  jayq.core.on.call(null, jayq.core.$.call(null, "#play"), "\ufdd0'click", function(a) {
+    a.preventDefault();
+    return alert("The video will be up in a few days!")
+  });
   var e = jayq.core.$.call(null, window);
   e.scroll(function() {
     var a = e.scrollTop(), b = jayq.core.$.call(null, "#video").offset().top, c = jayq.core.$.call(null, "#fixed");

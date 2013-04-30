@@ -16,7 +16,7 @@
   (first (str/split (:name person) #"\s")))
 
 (defhtml lt-script [port]
-  [:script {:type "text/javascript" :id "lt_ws" 
+  [:script {:type "text/javascript" :id "lt_ws"
             :src (str "http://localhost:"
                       port
                       "/socket.io/lighttable/ws.js")}])
@@ -40,13 +40,13 @@
    [:head
     [:meta {:http-equiv "Content-Type" :content "text/html;charset=UTF-8"}]
     (comment
-      [:meta {:name "viewport" 
+      [:meta {:name "viewport"
               :content "width=device-width,
                         initial-scale=1.0,
                         maximum-scale=1.0"}])
     [:title "Spokes: Biking Across America,Summer 2013"]
     ;;(lt-script 36099)
-    
+
     [:link {:rel "shortcut icon" :href "img/spokes_logo_green.png"}]
 
     ;; be weary of the relative paths!
@@ -60,7 +60,7 @@
        [:div.center
         [:h1 "Spokes"]
         [:h2#slogan "Inspiring students to learn what they love"]]]]
-      
+
     [:div#fixed
       [:ul#social
        [:li.facebook [:a {:href "#"}]]
@@ -68,17 +68,17 @@
        [:li.blog [:a {:href "http://blog.spokesamerica.org"}]]
        [:li.twitter [:a {:href "http://twitter.com/spokesamerica"}]]
        [:li.vimeo [:a {:href "http://vimeo.com/spokesamerica"}]]]
-      
-      [:h2#fixed-title 
-       [:img.logo {:src "/img/spokes_logo_white.png" 
+
+      [:h2#fixed-title
+       [:img.logo {:src "/img/spokes_logo_white.png"
                    :width "64px" :height "64px"}]
        "Spokes"]]
 
     body
 
-    (include-js 
+    (include-js
      "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
-     (str "//maps.googleapis.com/maps/api/js?key=" 
+     (str "//maps.googleapis.com/maps/api/js?key="
           (env :google-maps-key) "&sensor=false")
      "/js/anim.js"
      "/js/bootstrap.min.js"
@@ -110,7 +110,7 @@
 
    [:div#content.row-fluid
      [:h1 "Our Route"]
-     [:p "GPS Data from " 
+     [:p "GPS Data from "
       [:a {:href "https://www.adventurecycling.org"}
        "Adventure Cycling"] "."]
 
@@ -130,7 +130,7 @@
        (for [i (range (count items))]
         [:li {:data-target hash-id :data-slide-to i
               :class (when (= i 0) "active")}])]
-     
+
       [:div.carousel-inner
        (for [i (range (count items))]
          (let [item (nth items i)]
@@ -139,9 +139,9 @@
            [:div.carousel-caption
             [:h4 (:title item)]
             [:div (md/md-to-html-string (:description item))]]]))]
-     
+
       ;; nav
-      [:a.carousel-control.left 
+      [:a.carousel-control.left
        {:href "#courses" :data-slide "prev"} "&lsaquo;"]
       [:a.carousel-control.right
        {:href "#courses" :data-slide "next"} "&rsaquo;"]]))
@@ -149,13 +149,13 @@
 
 (defn home []
   (layout
-  
+
    (comment
      [:a.navbar-toggle
       {:data-toggle "collapse" :data-target "#navigation"}
       (for [i (range 3)]
         [:span.icon-bar])])
-     
+
    [:div#what
     [:div.center
       [:p "We're biking across the United States in collaboration
@@ -168,44 +168,44 @@
         " geared towards middle and high-school students.
          Each of us will be teaching a hands-on,
          project-oriented class based on one of our passions."]]]
-   
+
    [:div#video
     [:a#play.center {:href "#"}]
     [:div.explanation
      [:p "Watch our Indiegogo video to learn more about "
       [:strong "Spokes"] "."]]]
-    
+
    [:div#classes
     [:div.righty
       [:h2 "Our Classes"]
       (carousel "courses" courses)]]
-   
+
   [:div#why
     [:div.righty
       [:h2 "Our Motivation"]
-      [:p "We are dedicated to revealing the exploratory, 
-       self-directed, and boundless nature of learning to students 
-       across the US. Our mission stems from the simple idea 
-       that most of the learning we do over the course of our 
+      [:p "We are dedicated to revealing the exploratory,
+       self-directed, and boundless nature of learning to students
+       across the US. Our mission stems from the simple idea
+       that most of the learning we do over the course of our
        lifetimes happens outside of a classroom as the
-       result of semi-random explorations into topics 
+       result of semi-random explorations into topics
        that genuinely interest us."]
-      [:p "We want to show this to high school students and give 
+      [:p "We want to show this to high school students and give
        them an opportunity to feel inspired and find something they love."]]]
-   
+
   [:div#where
     [:div#map]
-   
+
     [:div#countdown
      [:h2#days-left (t/in-days (t/interval (t/now) start-date))]
      [:h4 "more days"]]
-   
+
     [:div.row-fluid
       [:div.span4.box
         [:h4 "From " (time-elem start-date)
              " through " (time-elem end-date)]
         [:p "We'll be biking from San Francisco to Washington D.C."]]]]
-  
+
   [:div#who
     [:div.righty
      [:h2 "Meet Our Team"]
@@ -224,40 +224,40 @@
        [:div#bios
         [:div
          [:h3 "Click on a face for a brief bio"]
-         [:p "We are " (count team) " college students from MIT and 
+         [:p "We are " (count team) " college students from MIT and
              UC Berkeley who are passionate about education."]]
         (for [person team]
           (let [lc-pfirst (str/lower-case (fname person))]
             [:div.hidden {:id lc-pfirst}
              [:h3 (:name person)
               [:small.pull-right
-               (:school person) 
+               (:school person)
                (when (:grad-year person)
                  (str " Class of " (:grad-year person)))]]
-             
+
               (md/md-to-html-string (:bio person))]))]]]
 
      [:div#help
       [:div#explain-social
        [:p "Follow the trip through social media."]]
-      
-      [:img#logo-bottom {:src "/img/spokes_logo_green.png" 
+
+      [:img#logo-bottom {:src "/img/spokes_logo_green.png"
                          :width "300px" :height "300px"}]
-      
+
       [:div.righty
        [:h2 "Help " [:em "Spokes!"]]
        [:p "We are currently looking for sponsors. "
-        "If you're interested in getting in touch, please " 
+        "If you're interested in getting in touch, please "
         [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
-  
+
        [:p
         "You can definitely help by spreading the word! "
         "Follow our journey on the "
         [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]]]
-    
+
     ;; map data
     [:script#gps-data {:type "text/edn"} gps/edn-data]))
-  
+
 
 (defn error []
   (layout
