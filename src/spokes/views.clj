@@ -63,7 +63,7 @@
 
     [:div#fixed
       [:ul#social
-       [:li.facebook [:a {:href "#"}]]
+       [:li.facebook [:a {:href "https://www.facebook.com/spokesamerica"}]]
        ;; use blog instead of rss
        [:li.blog [:a {:href "http://blog.spokesamerica.org"}]]
        [:li.twitter [:a {:href "http://twitter.com/spokesamerica"}]]
