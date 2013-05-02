@@ -172,7 +172,7 @@
    [:div#video
     [:a#play.center {:href "#"}]
     [:div.explanation
-     [:p "Watch our Indiegogo video to learn more about "
+     [:p "Watch our Kickstarter video to learn more about "
       [:strong "Spokes"] "."]]]
 
    [:div#classes
