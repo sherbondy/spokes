@@ -21,8 +21,8 @@
                       port
                       "/socket.io/lighttable/ws.js")}])
 
-(def start-date    (t/date-time 2013 6 9))
-(def end-date      (t/date-time 2013 8 21))
+(def start-date    (t/date-time 2013 6 11))
+(def end-date      (t/date-time 2013 8 27))
 (def cal-interval  (t/interval (t/date-time 2013 6)
                                (t/date-time 2013 9)))
 (def trip-interval (t/interval start-date (t/plus end-date (t/days 1))))
