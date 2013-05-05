@@ -34,6 +34,16 @@
   [:time {:datetime (tf/unparse time-fmt date)}
    (tf/unparse p-fmt date)])
 
+(defhtml analytics-script []
+  [:script
+  "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-673233-16', 'spokesamerica.org');
+  ga('send', 'pageview');"])
+
 ;; the base template for all of the other pages
 (defn layout [& body]
   (html5
@@ -51,7 +61,9 @@
 
     ;; be weary of the relative paths!
     (include-css "/css/style.css" "/css/live.css"
-                 "/css/bootstrap-responsive.min.css")]
+                 "/css/bootstrap-responsive.min.css")
+
+    (analytics-script)]
 
    [:body
     [:div#title
@@ -150,11 +162,13 @@
 (defn home []
   (layout
 
-   (comment
-     [:a.navbar-toggle
-      {:data-toggle "collapse" :data-target "#navigation"}
-      (for [i (range 3)]
-        [:span.icon-bar])])
+   [:ul#nav
+    [:li [:a {:href "#video"} "Kickstarter"]]
+    [:li [:a {:href "#classes"} "Classes"]]
+    [:li [:a {:href "#where"} "Route"]]
+    [:li [:a {:href "#who"} "Team"]]
+    [:li [:a {:href "#help"} "Help"]]
+    [:li [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]
 
    [:div#what
     [:div.center
@@ -253,7 +267,12 @@
        [:p
         "You can definitely help by spreading the word! "
         "Follow our journey on the "
-        [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]]]
+        [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]
+
+       [:p
+        "If you're interested in mentoring students to "
+        "help them achieve their goals, then fill out our "
+        [:a {:href "/apply.html"} "mentorship application"] "."]]]
 
     ;; map data
     [:script#gps-data {:type "text/edn"} gps/edn-data]))
@@ -270,6 +289,7 @@
 
 (defn mentor []
   (layout
-    [:iframe#app {:src "https://docs.google.com/forms/d/1wr8j-tCvf4RuJnw16GR3GEj1v6E-LgpGB2d2Tz_f4N8/viewform?embedded=true"}
-     "Loading..." ]))
+    [:div#mentor
+      [:iframe#app {:src "https://docs.google.com/forms/d/1wr8j-tCvf4RuJnw16GR3GEj1v6E-LgpGB2d2Tz_f4N8/viewform?embedded=true"}
+       "Loading..." ]]))
 
