@@ -13,6 +13,8 @@
 ;;> lein cljsbuild auto
 ;; To compile all cljs files into JavaScript
 
+;; CURRENTLY NOT USING THIS CODE
+
 (def sunset-ms
   (let [now-date (js/Date.)]
     (.setHours now-date 18 30 0 0)))
@@ -158,15 +160,15 @@
   (.bezierCurveTo ctx x0 y0 x1 y1 x2 y2))
 
 (comment
-(defn draw-hills [ctx]
-  (.save ctx)
-    (aset ctx "fillStyle" "rgba(0,100,0,1)")
-    (cm/with-path ctx
-      (.moveTo ctx 0 320)
-      (doseq [coords hill-points]
-        (apply bezier-curve (cons ctx coords)))
-      (.fill ctx))
-  (.restore ctx)))
+  (defn draw-hills [ctx]
+    (.save ctx)
+      (aset ctx "fillStyle" "rgba(0,100,0,1)")
+      (cm/with-path ctx
+        (.moveTo ctx 0 320)
+        (doseq [coords hill-points]
+          (apply bezier-curve (cons ctx coords)))
+        (.fill ctx))
+    (.restore ctx)))
 
 (defn draw-scene [canvas]
   (if @ready-to-draw
@@ -185,15 +187,6 @@
       (cm/with-translation ctx tx ty
         (cm/with-scale ctx scale scale
           (draw-bike ctx bw bh))))))
-
-(defn toggle-bio [e]
-  (this-as this
-    (let [$this ($ this)]
-      (.preventDefault e)
-      (.addClass ($ "#bios div") "hidden")
-      (.removeClass ($ (jq/attr $this "href")) "hidden")
-      (.removeClass ($ "#team a") "active")
-      (.addClass $this "active"))))
 
 (defn draw-cloud [$elem r]
   (let [canvas   (aget $elem 0)
@@ -227,6 +220,20 @@
       (reset! time (u/now))
       (draw-scene canvas))))
 
+
+
+;; WHAT'S ACTUALLY IN USE RIGHT NOW IS BELOW:
+
+
+(defn toggle-bio [e]
+  (this-as this
+    (let [$this ($ this)]
+      (.preventDefault e)
+      (.addClass ($ "#bios div") "hidden")
+      (.removeClass ($ (jq/attr $this "href")) "hidden")
+      (.removeClass ($ "#team a") "active")
+      (.addClass $this "active"))))
+
 (jm/ready
   (when (u/exists?  "#canvas")
     (let [$canvas   ($ "#canvas")
@@ -246,15 +253,16 @@
           (.preventDefault e)
           (js/alert "The video will be up in a few days!")))
 
- (let [$window ($ js/window)]
-   (.scroll $window
-     (fn []
-       (let [scroll-y (.scrollTop $window)
-             vid-y    (.-top (.offset ($ "#video")))
-             $fixed   ($ "#fixed")]
-         (if (> scroll-y vid-y)
-           (.addClass $fixed "visible")
-           (.removeClass $fixed "visible"))))))
+ (when (u/exists? "#video")
+   (let [$window ($ js/window)]
+     (.scroll $window
+       (fn []
+         (let [scroll-y (.scrollTop $window)
+               vid-y    (.-top (.offset ($ "#video")))
+               $fixed   ($ "#fixed")]
+           (if (> scroll-y vid-y)
+             (.addClass $fixed "visible")
+             (.removeClass $fixed "visible")))))))
 
 (comment
  (when (u/exists? "#logo")

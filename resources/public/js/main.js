@@ -20868,14 +20868,6 @@ spokes.main.draw_scene = function(a) {
   }
   return null
 };
-spokes.main.toggle_bio = function(a) {
-  var b = jayq.core.$.call(null, this);
-  a.preventDefault();
-  jayq.core.$.call(null, "#bios div").addClass("hidden");
-  jayq.core.$.call(null, jayq.core.attr.call(null, b, "href")).removeClass("hidden");
-  jayq.core.$.call(null, "#team a").removeClass("active");
-  return b.addClass("active")
-};
 spokes.main.draw_cloud = function(a, b) {
   var c = spokes.canvas.get_ctx.call(null, a[0]), d = a.width(), e = a.height(), f = 2 * b, g = 0.5 * d, h = g + f, i = 0.25 * e, j = 0.5 * e + f, l = 0.12 * (g / d), m = 0.12 * (i / e), k = spokes.canvas.get_ctx_props.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.5)"}));
   spokes.canvas.set_ctx_props_BANG_.call(null, c, cljs.core.ObjMap.fromObject(["\ufdd0'fill-style"], {"\ufdd0'fill-style":"rgba(255,255,255,0.5)"}));
@@ -20906,6 +20898,14 @@ spokes.main.redraw_canvas_fn = function(a) {
     return spokes.main.draw_scene.call(null, b)
   }
 };
+spokes.main.toggle_bio = function(a) {
+  var b = jayq.core.$.call(null, this);
+  a.preventDefault();
+  jayq.core.$.call(null, "#bios div").addClass("hidden");
+  jayq.core.$.call(null, jayq.core.attr.call(null, b, "href")).removeClass("hidden");
+  jayq.core.$.call(null, "#team a").removeClass("active");
+  return b.addClass("active")
+};
 jayq.core.document_ready.call(null, function() {
   if(cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#canvas"))) {
     var a = jayq.core.$.call(null, "#canvas"), b = jayq.core.$.call(null, "#header"), c = spokes.main.redraw_canvas_fn.call(null, a), d = function() {
@@ -20921,11 +20921,13 @@ jayq.core.document_ready.call(null, function() {
     a.preventDefault();
     return alert("The video will be up in a few days!")
   });
-  var e = jayq.core.$.call(null, window);
-  e.scroll(function() {
-    var a = e.scrollTop(), b = jayq.core.$.call(null, "#video").offset().top, c = jayq.core.$.call(null, "#fixed");
-    return a > b ? c.addClass("visible") : c.removeClass("visible")
-  });
+  if(cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#video"))) {
+    var e = jayq.core.$.call(null, window);
+    e.scroll(function() {
+      var a = e.scrollTop(), b = jayq.core.$.call(null, "#video").offset().top, c = jayq.core.$.call(null, "#fixed");
+      return a > b ? c.addClass("visible") : c.removeClass("visible")
+    })
+  }
   cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#days-left")) && jayq.core.text.call(null, jayq.core.$.call(null, "#days-left"), spokes.main.days_left);
   return cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#map")) ? spokes.map.initialize.call(null) : null
 });
