@@ -13,7 +13,7 @@
 (defn bounding-box [$elem]
   (let [elem     (aget $elem 0)
         offset   (.offset $elem)
-        [width 
+        [width
          height] (wh elem)
         top      (.-top offset)
         left     (.-left offset)
@@ -40,7 +40,7 @@
   (cond
    (map? props)     (get-ctx-props ctx (keys props))
    (keyword? props) (get-ctx-props ctx [props])
-   :else (into {} (map (fn [prop] 
+   :else (into {} (map (fn [prop]
                          [prop (aget ctx (u/camel-name prop))])
                        props))))
 
@@ -52,12 +52,12 @@
      (/ (- ph cw) 2)
      cw
      ch])
-  
+
   ([child parent]
     (let [[cw ch] (wh child)
           [pw ph] (wh parent)]
       (calc-center cw ch pw ph))))
-  
+
 
 ;; (calc-center 10 20 100 300)
 
