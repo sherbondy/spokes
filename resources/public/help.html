@@ -9,14 +9,14 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script type='text/javascript' src='/js/help.js'></script>
         <script src="/js/mailchimp.js" type="text/javascript" charset="utf-8"></script>
-        <script type='text/javascript' id='lt_ws' 
+        <script type='text/javascript' id='lt_ws'
 src='http://localhost:37049/socket.io/lighttable/ws.js'></script>
         <script type="text/javascript" src="/js/hashgrid.js"></script>
     </head>
     <body>
         <img src="/img/spread/spokes_home.jpg" id="bg" alt="" />
         <div id="logo-wrap">
-            <img src="/img/spokes_logo_vector_white.png" id="logo" alt="" />
+            <img src="/img/spokes_logo_white.png" id="logo" alt="" />
             <span id="logo-text">Spokes</span>
         </div>
         <div id="wrap">
@@ -39,7 +39,7 @@ src='http://localhost:37049/socket.io/lighttable/ws.js'></script>
                     <span class="again">Help Again!</span>
                 </div>
                 <div class="card" id="facebook">
-                    <h2><a target="_blank" href="">Let your Facebook friends know</a></h2>
+                    <h2><a target="_blank" href="#" onclick="postToFeed();">Let your Facebook friends know</a></h2>
                     <span class="again">Help Again!</span>
                 </div>
                 <div class="card" id="mail">
@@ -85,5 +85,33 @@ src='http://localhost:37049/socket.io/lighttable/ws.js'></script>
                 <p>Thanks for helping kids around the world find a passion. We'll keep you up to date about our successes and our discoveries.</p>
             </div>
         </div>
+
+        <div id='fb-root'></div>
+        <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
+
+        <script>
+          FB.init({appId: "375288389255266", status: true, cookie: true});
+
+          function postToFeed() {
+
+            // calling the API ...
+            var obj = {
+              method: 'feed',
+              redirect_uri: 'http://www.spokesamerica.org/help.html',
+              link: 'http://www.spokesamerica.org',
+              picture: 'http://www.spokesamerica.org/img/spokes_logo_green.png',
+              name: 'Spokes! Biking Across America Summer 2013',
+              caption: '8 Students, 4000 miles, this summer',
+              description: "We're biking across the United States this summer to share our passion for learning. Support the project on Kickstarter."
+            };
+
+            function callback(response) {
+              console.log("Post ID: " + response['post_id']);
+            }
+
+            FB.ui(obj, callback);
+          }
+
+        </script>
     </body>
 </html>
