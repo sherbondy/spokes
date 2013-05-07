@@ -17,7 +17,6 @@ body {
     position: fixed;
 }
 
-
 #bg {
     position: fixed;
     bottom: 0;
@@ -91,7 +90,6 @@ p {
     margin-top: 240px;
 }
 
-/* style the numbers */
 #cards {
     width: 520px;
     margin: auto;
@@ -113,38 +111,38 @@ p {
     z-index: 11;
     left: 0px;
     top: 0px;
-    background-color: white;
+    background: #fff;
 }
 
 #indiegogo {
     z-index: 10;
     left: 0px;
     top: 0px;
-    background: url("/img/5.png") center;
+    background: #fff url("/img/5.png") center;
 }
 #start {
     z-index: 9;
     left: 4px;
     top: 2px;
-    background: url("/img/4.png") center;
+    background: #fff url("/img/4.png") center;
 }
 #twitter {
     z-index: 8;
     left: 8px;
     top: 4px;
-    background: url("/img/3.png") center;
+    background: #fff url("/img/3.png") center;
 }
 #facebook {
     z-index: 7;
     left: 12px;
     top: 6px;
-    background: url("/img/2.png") center;
+    background: #fff url("/img/2.png") center;
 }
 #mail {
     z-index: 6;
     left: 16px;
     top: 8px;
-    background: url("/img/1.png") center;
+    background: #fff url("/img/1.png") center;
     text-align: center;
     font-size: 16px;
 }
@@ -198,9 +196,7 @@ p {
 .again:hover {
     color: #b99f30;
 }
-/*
- * Mailchimp film editing
- */
+
 
 #mc-embed-signup{
     margin-top: 20px;
