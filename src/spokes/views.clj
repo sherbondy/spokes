@@ -294,3 +294,5 @@
       [:iframe#app {:src "https://docs.google.com/forms/d/1wr8j-tCvf4RuJnw16GR3GEj1v6E-LgpGB2d2Tz_f4N8/viewform?embedded=true"}
        "Loading..." ]]))
 
+(defhtml channel []
+  [:script {:src "//connect.facebook.net/en_US/all.js"}])

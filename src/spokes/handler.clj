@@ -4,7 +4,7 @@
   (:require [compojure.route :as route]
             [org.httpkit.server :as http]
             [ring.middleware.reload :as reload]
-            [spokes.views :refer [error home mentor route]]))
+            [spokes.views :refer [channel error home mentor route]]))
 
 (def all-routes
   [{:url "/index.html"
@@ -13,6 +13,8 @@
     :html (route)}
    {:url "/apply.html"
     :html (mentor)}
+   {:url "/channel.html"
+    :html (channel)}
    {:url "/error.html"
     :html (error)}])
 
