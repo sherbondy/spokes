@@ -12,7 +12,6 @@
 body {
     font-family: 'Neo Sans', Lato;
     color: #7cc21a;
-    /*background: url("/img/spread/spokes_home.jpg") center no-repeat;*/
     margin: 0;
     padding: 0;
     position: fixed;
@@ -283,7 +282,7 @@ p {
     color: #7cc21a;
     font-size: 24px;
     position: absolute;
-    -webkit-appearnce: none;
+    -webkit-appearance: none;
     border: none;
     background-color: rgba(255, 255, 255, 0);
     position: absolute;
