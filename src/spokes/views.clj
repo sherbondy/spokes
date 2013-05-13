@@ -283,9 +283,9 @@
         [:a#tfa.pull-right {:href "http://www.teachforamerica.org"} 
          [:img {:src "/img/sponsors/logo_2.png"}]]]
        [:div.row-fluid
-        [:a#north-face.pull-left {:href "http://www.thenorthface.com"} 
+        [:a#north-face.pull-left {:href "http://www.freeflowbikes.com"} 
          [:img {:src "/img/sponsors/logo_3.png"}]]
-        [:a#free-flow.pull-right {:href "http://www.freeflowbikes.com"} 
+        [:a#free-flow.pull-right {:href "http://www.thenorthface.com"} 
          [:img {:src "/img/sponsors/logo_4.png"}]]]]
       ]
 
