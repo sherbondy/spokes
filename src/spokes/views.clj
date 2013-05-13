@@ -179,13 +179,13 @@
         education. As we go, we'll be stopping
         at public schools throughout the country to hold "
        [:em "learning festivals"]
-        " geared towards middle and high-school students.
+        " geared towards high school students.
          Each of us will be teaching a hands-on,
          project-oriented class based on one of our passions."]]]
 
    [:div#video
     [:a#play.center {:href "#"}]
-    [:div.explanation
+    [:div#explanation
      [:p "Watch our Kickstarter video to learn more about "
       [:strong "Spokes"] "."]]]
 
@@ -255,7 +255,7 @@
       [:div#explain-social
        [:p "Follow the trip through social media."]]
 
-      [:img#logo-bottom {:src "/img/spokes_logo_green.png"
+      [:img#logo-bottom {:src "/img/spokes_logo_white.png"
                          :width "300px" :height "300px"}]
 
       [:div.righty
@@ -273,6 +273,21 @@
         "If you're interested in mentoring students to "
         "help them achieve their goals, then fill out our "
         [:a {:href "/apply.html"} "mentorship application"] "."]]]
+
+     [:div#sponsors
+      [:div.righty
+       [:h2 "our sponsors"]
+       [:div.row-fluid
+        [:a#draper.pull-left {:href "http://www.draper.com"} 
+         [:img {:src "/img/sponsors/logo_1.png"}]]
+        [:a#tfa.pull-right {:href "http://www.teachforamerica.org"} 
+         [:img {:src "/img/sponsors/logo_2.png"}]]]
+       [:div.row-fluid
+        [:a#north-face.pull-left {:href "http://www.thenorthface.com"} 
+         [:img {:src "/img/sponsors/logo_3.png"}]]
+        [:a#free-flow.pull-right {:href "http://www.freeflowbikes.com"} 
+         [:img {:src "/img/sponsors/logo_4.png"}]]]]
+      ]
 
     ;; map data
     [:script#gps-data {:type "text/edn"} gps/edn-data]))
