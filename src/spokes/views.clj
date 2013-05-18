@@ -278,16 +278,11 @@
       [:div.righty
        [:h2 "our sponsors"]
        [:div.row-fluid
-        [:a#draper.pull-left {:href "http://www.draper.com"} 
+        [:a#draper.pull-left {:href "http://www.draper.com"}
          [:img {:src "/img/sponsors/logo_1.png"}]]
-        [:a#tfa.pull-right {:href "http://www.teachforamerica.org"} 
+        [:a#tfa.pull-right {:href "http://www.teachforamerica.org"}
          [:img {:src "/img/sponsors/logo_2.png"}]]]
-       [:div.row-fluid
-        [:a#north-face.pull-left {:href "http://www.freeflowbikes.com"} 
-         [:img {:src "/img/sponsors/logo_3.png"}]]
-        [:a#free-flow.pull-right {:href "http://www.thenorthface.com"} 
-         [:img {:src "/img/sponsors/logo_4.png"}]]]]
-      ]
+      ]]
 
     ;; map data
     [:script#gps-data {:type "text/edn"} gps/edn-data]))
