@@ -63,8 +63,10 @@
 ;; should probably maintain a sorted order by longitude
 (def fval (comp first vals))
 (def we (kw-routes :we (fn [m] (< (:lon (fval m)) -104))))
+
 (def ta (kw-routes :ta (fn [m] (and (> (:lon (fval m)) -105)
-                                    (< (:lon (fval m)) -78)))))
+                                    (< (:lon (fval m)) -79)))))
+
 (def ac (kw-routes :ac (fn [m] (and (> (:lat (fval m)) 37)
                                     (< (:lat (fval m) 39))))))
 
@@ -81,16 +83,16 @@
    :trails  trail-list
    :data    all-locations})
 
-(def data-file "resources/public/route-data.edn")
-(def json-file "resources/public/route-data.json")
+(defn data-file [fmt]
+  (str "resources/public/route-data." fmt))
 
 (defn spit-edn-data []
-  (spit data-file edn-data))
+  (spit (data-file "edn") edn-data))
 
 (defn spit-json-data []
-  (spit json-file (json/write-str edn-data)))
+  (spit (data-file "json") (json/write-str edn-data)))
 
-;; (spit-edn-data)
+;;(spit-edn-data)
 ;; (spit-json-data)
 
 (defn slurp-edn-data []

@@ -26,8 +26,9 @@
     (let [$this ($ this)]
       (.preventDefault e)
       (.addClass ($ "#bios div") "hidden")
-      (.removeClass ($ (jq/attr $this "href")) "hidden")
       (.removeClass ($ "#team a") "active")
+
+      (.removeClass ($ (jq/attr $this "href")) "hidden")
       (.addClass $this "active"))))
 
 (jm/ready
@@ -39,6 +40,7 @@
           (.preventDefault e)
           (js/alert "The video will be up in a few days!")))
 
+ ;; show #fixed once we scroll past #video
  (when (u/exists? "#video")
    (let [$window ($ js/window)]
      (.scroll $window
