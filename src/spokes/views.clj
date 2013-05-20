@@ -170,6 +170,7 @@
     [:li [:a {:href "#who"} "Team"]]
     [:li [:a {:href "#help"} "Help"]]
     [:li [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]
+    [:li [:a {:href "request-spokes.html"} "Invite Us"]]
 
    [:div#what
     [:div.center
