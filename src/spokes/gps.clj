@@ -1,6 +1,7 @@
 (ns spokes.gps
   (:use [clojure.data.zip.xml :only [attr seq-test text text= xml->]])
-  (:require [clojure.string :as str]
+  (:require [clojure.data.json :as json]
+            [clojure.string :as str]
             [clojure.xml :as xml]
             [clojure.zip :as zip]))
 
@@ -67,7 +68,7 @@
 (def ac (kw-routes :ac (fn [m] (and (> (:lat (fval m)) 37)
                                     (< (:lat (fval m) 39))))))
 
-(def all-locations 
+(def all-locations
   (merge we ta ac))
 ;; (map? all-locations)
 ;; (count all-locations)
@@ -81,11 +82,16 @@
    :data    all-locations})
 
 (def data-file "resources/public/route-data.edn")
+(def json-file "resources/public/route-data.json")
 
 (defn spit-edn-data []
   (spit data-file edn-data))
 
+(defn spit-json-data []
+  (spit json-file (json/write-str edn-data)))
+
 ;; (spit-edn-data)
+;; (spit-json-data)
 
 (defn slurp-edn-data []
   (slurp data-file))

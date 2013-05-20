@@ -2,7 +2,8 @@
   :description "Biking across the country to learn about education."
   :url "http://spokesamerica.org"
   :min-lein-version "2.0.0"
-  :dependencies [[org.clojure/clojure "1.5.0"]
+  :dependencies [[org.clojure/clojure "1.5.1"]
+                 [org.clojure/data.json "0.2.2"]
                  [org.clojure/data.zip "0.1.1"]
 
                  [compojure "1.1.5"]
@@ -21,8 +22,7 @@
 
   :plugins [[lein-ring "0.8.0"
              :exclusions [org.clojure/clojure]]
-            [lein-cljsbuild "0.3.0"
-             :exclusions [org.clojure/clojure]]]
+            [lein-cljsbuild "0.3.2"]]
 
   :ring {:handler spokes.handler/app
          :auto-reload? true
@@ -39,10 +39,10 @@
   :source-paths ["src"
                  "src-cljs"]
 
-  :cljsbuild 
+  :cljsbuild
   {
    :repl-listen-port 9000
-   
+
    :builds
    [{:source-paths ["src-cljs"],
      :compiler

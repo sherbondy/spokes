@@ -82,9 +82,10 @@
        [:li.vimeo [:a {:href "http://vimeo.com/spokesamerica"}]]]
 
       [:h2#fixed-title
-       [:img.logo {:src "/img/spokes_logo_white.png"
-                   :width "64px" :height "64px"}]
-       "Spokes"]]
+       [:a {:href "#"}
+         [:img.logo {:src "/img/spokes_logo_white.png"
+                     :width "64px" :height "64px"}]
+         "Spokes"]]]
 
     body
 
