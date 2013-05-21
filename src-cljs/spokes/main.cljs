@@ -17,7 +17,7 @@
   (js/Math.floor (/ ms (* 1000 60 60 24))))
 
 ;; javascript's month is 0-indexed :(
-(def start-date (.getTime (js/Date. 2013 5 10)))
+(def start-date (.getTime (js/Date. 2013 5 11)))
 (def days-left (to-days (- start-date (u/now))))
 
 

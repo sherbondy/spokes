@@ -9,6 +9,9 @@
 ;; for every request. Do it once, then grab pre-processed
 ;; version.
 
+;; maybe determine the curvature of the map and determine
+;; the subset whose tangents are representative of the whole
+
 ;; [trail count] pairs
 (def trails {:we 4 :ta 12 :ac 7})
 
@@ -62,26 +65,35 @@
 
 ;; should probably maintain a sorted order by longitude
 (def fval (comp first vals))
+
 (def we (kw-routes :we (fn [m] (< (:lon (fval m)) -104))))
 
 (def ta (kw-routes :ta (fn [m] (and (> (:lon (fval m)) -105)
-                                    (< (:lon (fval m)) -79)))))
+                                    (< (:lon (fval m)) -77.6)))))
 
-(def ac (kw-routes :ac (fn [m] (and (> (:lat (fval m)) 37)
-                                    (< (:lat (fval m) 39))))))
+(def ac (kw-routes :ac (fn [m] (and (> (:lat (fval m)) 38)
+                                    (< (:lat (fval m)) 38.9)))))
 
-(def all-locations
+(defn all-locations []
   (merge we ta ac))
-;; (map? all-locations)
-;; (count all-locations)
 
-(def wp-symbols (set (map :sym (vals all-locations))))
+(first (all-locations))
+
+;; filter to only the waypoints
+(defn waypoints []
+  (into {}
+        (filter (fn [[k v]] (= (:sym v) "Waypoint"))
+          (all-locations))))
+
+;; (count (all-locations))
+
+(def wp-symbols (set (map :sym (vals (all-locations)))))
 ;; #{"Waypoint" "Movie Theater" "Bike Trail" "Campground" "Park" "Information" "Summit" "Shopping Center" "Gas Station" "Restroom" "Museum" "City (Small)" "Triangle, Blue" "Convenience Store" "Scenic Area" "Library" "Lodging" "Post Office" "Restaurant"}
 
 (def edn-data
   {:symbols wp-symbols
    :trails  trail-list
-   :data    all-locations})
+   :data    (waypoints)})
 
 (defn data-file [fmt]
   (str "resources/public/route-data." fmt))
@@ -92,7 +104,7 @@
 (defn spit-json-data []
   (spit (data-file "json") (json/write-str edn-data)))
 
-;;(spit-edn-data)
+(spit-edn-data)
 ;; (spit-json-data)
 
 (defn slurp-edn-data []
