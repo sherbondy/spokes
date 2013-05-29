@@ -168,9 +168,10 @@
     [:li [:a {:href "#classes"} "Classes"]]
     [:li [:a {:href "#where"} "Route"]]
     [:li [:a {:href "#who"} "Team"]]
-    [:li [:a {:href "#help"} "Help"]]
-    [:li [:a {:href "http://blog.spokesamerica.org"} "Blog"]]]
-    [:li [:a {:href "request-spokes.html"} "Invite Us"]]
+    ;[:li [:a {:href "#help"} "Help"]]
+    [:li [:a {:href "http://blog.spokesamerica.org"} "Blog"]]
+    [:li [:a {:href "request-spokes.html"} "Request a Festival"]]
+    [:li [:a {:href "apply.html"} "Mentor for Spokes"]]]
 
    [:div#what
     [:div.center
