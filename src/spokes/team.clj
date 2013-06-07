@@ -1,21 +1,7 @@
 (ns spokes.team)
 
 (def team
-  [{:name "Aakanksha Sarda"
-    :bio (str "I grew up in Mumbai, India and moved to MIT at age 18, trying to declare a major "
-              "in Course 0 (everything!). I eventually settled on Electrical Engineering and Computer Science "
-              "(Course 6), exploring my interests in signal processing, machine learning and data structures, "
-              "and trying to apply them to problems in linguistics, physics, and imaging (right now I'm working "
-              "on algorithms to automatically take the blur out of your photographs!). Every few months I become "
-              "mildly obsessed with something new, ranging from making documentaries to engineering biological "
-              "circuits. I love being in an environment where I can always find someone to teach me all about "
-              "whatever arbitrary thing happens to pique my curiosity, and am very excited about Spokes as a way "
-              "to give students a taste of that intense intellectual environment and connect them to mentors "
-              "in large technical communities.")
-    :school "MIT"
-    :grad-year 2014}
-
-   {:name "Bruno Faviero"
+  [{:name "Bruno Faviero"
     :bio (str "I am a sophomore at MIT, but a lifelong underclassman. "
               "I love learning new things: writing techniques, sailing strategies, "
               "Ultimate throws, design concepts — anything interesting! I also love teaching, "
@@ -110,7 +96,7 @@
               "incredible opportunity to work with a group of "
               "incredible people in order to tell their story. ")
     :school "UC Berkeley"
-    :grad-year 2014}
+    :grad-year 2013}
 
    {:name "Phillip Daniel"
     :bio (str "I am a senior in the Mechanical Engineering department at MIT, "

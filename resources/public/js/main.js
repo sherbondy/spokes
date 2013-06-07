@@ -3389,22 +3389,22 @@ cljs.core.with_meta = function with_meta(b, c) {
   var d = cljs.core.fn_QMARK_.call(null, b);
   d && (d = b ? ((d = b.cljs$lang$protocol_mask$partition0$ & 262144) ? d : b.cljs$core$IWithMeta$) || (b.cljs$lang$protocol_mask$partition0$ ? 0 : cljs.core.type_satisfies_.call(null, cljs.core.IWithMeta, b)) : cljs.core.type_satisfies_.call(null, cljs.core.IWithMeta, b), d = !d);
   return d ? with_meta.call(null, function() {
-    if(void 0 === cljs.core.t4113) {
-      cljs.core.t4113 = {};
-      cljs.core.t4113 = function(b, c, d, e) {
+    if(void 0 === cljs.core.t4007) {
+      cljs.core.t4007 = {};
+      cljs.core.t4007 = function(b, c, d, e) {
         this.meta = b;
         this.o = c;
         this.with_meta = d;
-        this.meta4114 = e;
+        this.meta4008 = e;
         this.cljs$lang$protocol_mask$partition1$ = 0;
         this.cljs$lang$protocol_mask$partition0$ = 393217
       };
-      cljs.core.t4113.cljs$lang$type = !0;
-      cljs.core.t4113.cljs$lang$ctorStr = "cljs.core/t4113";
-      cljs.core.t4113.cljs$lang$ctorPrWriter = function(b, c) {
-        return cljs.core._write.call(null, c, "cljs.core/t4113")
+      cljs.core.t4007.cljs$lang$type = !0;
+      cljs.core.t4007.cljs$lang$ctorStr = "cljs.core/t4007";
+      cljs.core.t4007.cljs$lang$ctorPrWriter = function(b, c) {
+        return cljs.core._write.call(null, c, "cljs.core/t4007")
       };
-      var d = cljs.core.t4113.prototype, f = function(b, c) {
+      var d = cljs.core.t4007.prototype, f = function(b, c) {
         return cljs.core.apply.call(null, b.o, c)
       }, g = function(b, c) {
         var b = this, d = null;
@@ -3418,19 +3418,19 @@ cljs.core.with_meta = function with_meta(b, c) {
       };
       g.cljs$core$IFn$_invoke$arity$variadic = f;
       d.call = g;
-      cljs.core.t4113.prototype.apply = function(b, c) {
+      cljs.core.t4007.prototype.apply = function(b, c) {
         b = this;
         return b.call.apply(b, [b].concat(c.slice()))
       };
-      cljs.core.t4113.prototype.cljs$core$Fn$ = !0;
-      cljs.core.t4113.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-        return this.meta4114
+      cljs.core.t4007.prototype.cljs$core$Fn$ = !0;
+      cljs.core.t4007.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+        return this.meta4008
       };
-      cljs.core.t4113.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
-        return new cljs.core.t4113(this.meta, this.o, this.with_meta, c)
+      cljs.core.t4007.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
+        return new cljs.core.t4007(this.meta, this.o, this.with_meta, c)
       }
     }
-    return new cljs.core.t4113(c, b, with_meta, null)
+    return new cljs.core.t4007(c, b, with_meta, null)
   }(), c) : cljs.core._with_meta.call(null, b, c)
 };
 cljs.core.meta = function(a) {
@@ -20682,9 +20682,9 @@ spokes.map.initialize = function() {
 };
 spokes.main = {};
 spokes.main.to_days = function(a) {
-  return Math.floor(a / 864E5)
+  return Math.ceil(a / 864E5)
 };
-spokes.main.start_date = (new Date(2013, 5, 10)).getTime();
+spokes.main.start_date = (new Date(2013, 5, 11)).getTime();
 spokes.main.days_left = spokes.main.to_days.call(null, spokes.main.start_date - spokes.util.now.call(null));
 spokes.main.toggle_bio = function(a) {
   var b = jayq.core.$.call(null, this);

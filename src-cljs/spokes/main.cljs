@@ -14,7 +14,7 @@
 ;; To compile all cljs files into JavaScript
 
 (defn to-days [ms]
-  (js/Math.floor (/ ms (* 1000 60 60 24))))
+  (js/Math.ceil (/ ms (* 1000 60 60 24))))
 
 ;; javascript's month is 0-indexed :(
 (def start-date (.getTime (js/Date. 2013 5 11)))
