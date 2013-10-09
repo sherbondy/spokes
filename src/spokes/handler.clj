@@ -44,5 +44,4 @@
   (http/run-server app {:port 8000})
   (println "Awaiting changes..."))
 
-;; (-main)
-
+(-main)

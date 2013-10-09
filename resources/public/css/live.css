@@ -1,0 +1,26 @@
+#video-player .modal-body {
+  padding: 0px;
+}
+
+#sponsors a {
+  margin-right: 32px;
+}
+
+#sponsors img {
+  max-height: 160px;
+  width: auto;
+}
+
+#nav {
+  width: 960px;
+  left: 50%;
+  margin-left: -480px;
+}
+
+#nav a {
+  line-height: 1.25;
+}
+
+#where .box {
+  right: 0px;
+}

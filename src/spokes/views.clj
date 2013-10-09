@@ -22,7 +22,7 @@
                       "/socket.io/lighttable/ws.js")}])
 
 (def start-date    (t/date-time 2013 6 11))
-(def end-date      (t/date-time 2013 8 27))
+(def end-date      (t/date-time 2013 8 23))
 (def cal-interval  (t/interval (t/date-time 2013 6)
                                (t/date-time 2013 9)))
 (def trip-interval (t/interval start-date (t/plus end-date (t/days 1))))
@@ -79,7 +79,7 @@
        ;; use blog instead of rss
        [:li.blog [:a {:href "http://blog.spokesamerica.org"}]]
        [:li.twitter [:a {:href "http://twitter.com/spokesamerica"}]]
-       [:li.vimeo [:a {:href "http://vimeo.com/spokesamerica"}]]]
+       [:li.vimeo [:a {:href "http://www.youtube.com/channel/UCskqZMUSuapGJgFeCcNAS4g"}]]]
 
       [:h2#fixed-title
        [:a {:href "#"}
@@ -164,32 +164,39 @@
   (layout
 
    [:ul#nav
-    [:li [:a {:href "#video"} "Kickstarter"]]
+    [:li [:a {:href "#video"} "Video"]]
     [:li [:a {:href "#classes"} "Classes"]]
     [:li [:a {:href "#where"} "Route"]]
     [:li [:a {:href "#who"} "Team"]]
-    ;[:li [:a {:href "#help"} "Help"]]
+    [:li [:a {:href "#help"} "Help"]]
+    [:li [:a {:href "#sponsors"} "Sponsors"]]
     [:li [:a {:href "http://blog.spokesamerica.org"} "Blog"]]
-    [:li [:a {:href "request-spokes.html"} "Request a Festival"]]
-    [:li [:a {:href "apply.html"} "Mentor for Spokes"]]]
+    [:li [:a {:href "apply.html"} "Become a Mentor"]]]
 
    [:div#what
     [:div.center
-      [:p "We're biking across the United States in collaboration
+      [:p "In the summer of 2013, a team of 8 biked across the United States in collaboration
            with "
        [:a {:href "http://teachforamerica.org"} "Teach for America"]
        " as part of an effort to rethink
-        education. As we go, we'll be stopping
-        at public schools throughout the country to hold "
+        education. As we went, we stopped in 10
+        public schools throughout the country to hold "
        [:em "learning festivals"]
-        " geared towards high school students.
-         Each of us will be teaching a hands-on,
-         project-oriented class based on one of our passions."]]]
+         ". At each school, we taught hands-on,
+         project-oriented classes based on our passions."]]]
+
+   [:div#video-player.modal.hide.fade
+    [:div.modal-body
+     [:iframe {:width "560" :height "315"
+               :src "http://www.youtube.com/embed/AA2T2Lf7u3A"
+               :allowfullscreen true
+               :frameborder 0
+               :autoplay true}]]]
 
    [:div#video
-    [:a#play.center {:href "#"}]
+    [:a#play.center {:href "#video-player" :role "button" :data-toggle "modal"}]
     [:div#explanation
-     [:p "Watch our Kickstarter video to learn more about "
+     [:p "Watch a brief video to learn more about "
       [:strong "Spokes"] "."]]]
 
    [:div#classes
@@ -213,15 +220,11 @@
   [:div#where
     [:div#map]
 
-    [:div#countdown
-     [:h2#days-left (t/in-days (t/interval (t/now) start-date))]
-     [:h4 "more days"]]
-
     [:div.row-fluid
       [:div.span4.box
         [:h4 "From " (time-elem start-date)
              " through " (time-elem end-date)]
-        [:p "We'll be biking from San Francisco to Washington D.C."]]]]
+        [:p "We biked from San Francisco to Washington D.C."]]]]
 
   [:div#who
     [:div.righty
@@ -254,38 +257,48 @@
 
               (md/md-to-html-string (:bio person))]))]]]
 
-     [:div#help
-      [:div#explain-social
-       [:p "Follow the trip through social media."]]
+   [:div#help
+    [:div#explain-social
+     [:p "Follow the trip through social media."]]
 
-      [:img#logo-bottom {:src "/img/spokes_logo_white.png"
-                         :width "300px" :height "300px"}]
+    [:img#logo-bottom {:src "/img/spokes_logo_white.png"
+                       :width "300px" :height "300px"}]
 
-      [:div.righty
-       [:h2 "Help " [:em "Spokes!"]]
-       [:p "We are currently looking for sponsors. "
-        "If you're interested in getting in touch, please "
-        [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
+    [:div.righty
+     [:h2 "Help " [:em "Spokes!"]]
+     [:p "We are currently looking for sponsors for next year's trip (Summer 2014). "
+      "If you're interested in getting in touch, please "
+      [:a {:href "mailto:spokes@mit.edu"} "email us"] "."]
 
-       [:p
-        "You can definitely help by spreading the word! "
-        "Follow our journey on the "
-        [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]
+     [:p
+      "You can definitely help by spreading the word! "
+      "Follow our journey on the "
+      [:a {:href "http://blog.spokesamerica.org"} "blog"] "."]
 
-       [:p
-        "If you're interested in mentoring students to "
-        "help them achieve their goals, then fill out our "
-        [:a {:href "/apply.html"} "mentorship application"] "."]]]
+     [:p
+      "If you're interested in mentoring students to "
+      "help them achieve their goals, then fill out our "
+      [:a {:href "/apply.html"} "mentorship application"] "."]]]
 
-     [:div#sponsors
-      [:div.righty
-       [:h2 "our sponsors"]
-       [:div.row-fluid
-        [:a#draper.pull-left {:href "http://www.draper.com"}
-         [:img {:src "/img/sponsors/logo_1.png"}]]
-        [:a#tfa.pull-right {:href "http://www.teachforamerica.org"}
-         [:img {:src "/img/sponsors/logo_2.png"}]]]
-      ]]
+   [:div#sponsors
+    [:div.righty
+     [:h2 "our sponsors"]
+     [:div.row-fluid
+      [:a#draper.pull-left {:href "http://www.draper.com"}
+       [:img {:src "/img/sponsors/draper.png" :alt "Draper Labs"}]]
+      [:a#tfa.pull-left {:href "http://www.teachforamerica.org"}
+       [:img {:src "/img/sponsors/tfa.png" :alt "Teach For America"}]]]
+      [:a#edx.pull-left {:href "http://www.edx.org"}
+       [:img {:src "/img/sponsors/edx.png" :alt "edX"}]]
+      [:a#startlabs.pull-left {:href "http://www.startlabs.org"}
+       [:img {:src "/img/sponsors/startlabs.png" :alt "StartLabs"}]]
+      [:a#ace.pull-left {:href "http://wwww.acemetal.com"}
+       [:img {:src "/img/sponsors/ace.png" :alt "Ace Metal Crafts"}]]
+      [:a#fidelity.pull-left {:href "http://www.fidelity.com"}
+       [:img {:src "/img/sponsors/fidelity.jpg" :alt "Fidelity"}]]
+      [:a#due.pull-left {:href "https://due.mit.edu"}
+       [:img {:src "/img/sponsors/due.jpg" :alt "MIT Office of the Dean for Undergraduate Education"}]]
+     ]]
 
     ;; map data
     [:script#gps-data {:type "text/edn"} gps/edn-data]))

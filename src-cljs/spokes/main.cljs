@@ -35,11 +35,6 @@
 
  (jq/on ($ "#team") :click "a" toggle-bio)
 
- (jq/on ($ "#play") :click
-        (fn [e]
-          (.preventDefault e)
-          (js/alert "The video will be up in a few days!")))
-
  ;; show #fixed once we scroll past #video
  (when (u/exists? "#video")
    (let [$window ($ js/window)]

@@ -358,6 +358,13 @@ goog.base = function(a, b, c) {
 goog.scope = function(a) {
   a.call(goog.global)
 };
+goog.debug = {};
+goog.debug.Error = function(a) {
+  Error.captureStackTrace ? Error.captureStackTrace(this, goog.debug.Error) : this.stack = Error().stack || "";
+  a && (this.message = String(a))
+};
+goog.inherits(goog.debug.Error, Error);
+goog.debug.Error.prototype.name = "CustomError";
 goog.string = {};
 goog.string.Unicode = {NBSP:"\u00a0"};
 goog.string.startsWith = function(a, b) {
@@ -687,13 +694,6 @@ goog.string.parseInt = function(a) {
   isFinite(a) && (a = String(a));
   return goog.isString(a) ? /^\s*-?0x/i.test(a) ? parseInt(a, 16) : parseInt(a, 10) : NaN
 };
-goog.debug = {};
-goog.debug.Error = function(a) {
-  Error.captureStackTrace ? Error.captureStackTrace(this, goog.debug.Error) : this.stack = Error().stack || "";
-  a && (this.message = String(a))
-};
-goog.inherits(goog.debug.Error, Error);
-goog.debug.Error.prototype.name = "CustomError";
 goog.asserts = {};
 goog.asserts.ENABLE_ASSERTS = goog.DEBUG;
 goog.asserts.AssertionError = function(a, b) {
@@ -20696,10 +20696,6 @@ spokes.main.toggle_bio = function(a) {
 };
 jayq.core.document_ready.call(null, function() {
   jayq.core.on.call(null, jayq.core.$.call(null, "#team"), "\ufdd0:click", "a", spokes.main.toggle_bio);
-  jayq.core.on.call(null, jayq.core.$.call(null, "#play"), "\ufdd0:click", function(a) {
-    a.preventDefault();
-    return alert("The video will be up in a few days!")
-  });
   if(cljs.core.truth_(spokes.util.exists_QMARK_.call(null, "#video"))) {
     var a = jayq.core.$.call(null, window);
     a.scroll(function() {

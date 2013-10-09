@@ -1,23 +1,7 @@
 (ns spokes.team)
 
 (def team
-  [{:name "Bruno Faviero"
-    :bio (str "I am a sophomore at MIT, but a lifelong underclassman. "
-              "I love learning new things: writing techniques, sailing strategies, "
-              "Ultimate throws, design concepts — anything interesting! I also love teaching, "
-              "and currently tutor Algorithms and TA a public speaking class. Lately, "
-              "I've enjoyed learning about Computer Science (my major) and design — two subjects "
-              "I am very passionate about! I am excited about Spokes because I want to help get "
-              "kids motivated to learn and do things, because I believe there is so much unlocked "
-              "potential in everyone that could be easily brought out with engaging ..."
-              "I was born in Brazil, moved to Florida at 7, and moved to MIT at 18. "
-              "I'm currently a News Editor at [The Tech](http://tech.mit.edu) "
-              "and Director of [StartLabs](http://www.startlabs.org). "
-              "In the spare time I don't have, I enjoy sailing, running, scuba diving, photographing, and other sundry activities.")
-    :school "MIT"
-    :grad-year 2015}
-
-   {:name "Claire O'Connell"
+  [{:name "Claire O'Connell"
     :bio (str "Claire is a graduating junior at MIT studying Brain & Cognitive Science. "
               "She was born in England, lived in France until the age of 8 when she moved "
               "to Palo Alto, CA, where she lived until leaving for MIT . She is a dual citizen "
