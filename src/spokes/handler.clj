@@ -31,7 +31,8 @@
 (defn emit-static-site []
   (println "Emitting static site to: " static-home)
   (doseq [{:keys [url html]} all-routes]
-    (spit (str static-home url) html)))
+    (spit (str static-home url) html))
+  (println "done"))
 
 (emit-static-site)
 

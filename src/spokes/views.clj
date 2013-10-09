@@ -188,7 +188,7 @@
    [:div#video-player.modal.hide.fade
     [:div.modal-body
      [:iframe {:width "560" :height "315"
-               :src "http://www.youtube.com/embed/AA2T2Lf7u3A"
+               :src "http://www.youtube.com/embed/dBeGeGkyA8s"
                :allowfullscreen true
                :frameborder 0
                :autoplay true}]]]
