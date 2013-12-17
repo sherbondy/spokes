@@ -29,7 +29,7 @@ Copyright © 2013 Ethan Sherbondy and the Spokes Team
 
 The site is currently hosted statically on S3.
 I've been using s3cmd to sync things.
-Here's the command I made up:
+Here's the command I made up (change ~/code/ to wherever you have the site stored on your computer):
 
     s3cmd sync --acl-public --recursive --guess-mime-type ~/code/spokes/resources/public/* s3://www.spokesamerica.org/
 

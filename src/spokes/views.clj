@@ -232,13 +232,13 @@
       [:ul#team
        (map-indexed
         (fn [idx person]
-          (let [pfirst    (fname person)
-                lc-pfirst (str/lower-case pfirst)
-                p-img     (str "/img/team/" lc-pfirst ".jpg")]
+          (let [person-first    (fname person)
+                lower-person-first (str/lower-case person-first)
+                person-img     (str "/img/team/" lower-person-first ".jpg")]
             [:li
-             [:a {:href (str "#" lc-pfirst)}
+             [:a {:href (str "#" lower-person-first)}
               [:img {:alt (:name person)
-                     :src p-img}]]]))
+                     :src person-img}]]]))
         team)]
 
        [:div#bios

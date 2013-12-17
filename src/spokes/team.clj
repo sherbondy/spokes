@@ -1,11 +1,12 @@
 (ns spokes.team)
 
 (def team
-  [{:name "Evan Gastman"
-    :bio (str "I am a social 2016!"
-          )
-    :school "Harvard"
-    :grad-year 2017}
+  [
+;;    {:name "Evan Gastman"
+;;     :bio (str "I am a social 2016!"
+;;           )
+;;     :school "Harvard"
+;;     :grad-year 2017}
 
    {:name "Claire O'Connell"
     :bio (str "Claire is a graduating junior at MIT studying Brain & Cognitive Science. "
