@@ -25,6 +25,14 @@ To play around, do:
 
 Copyright © 2013 Ethan Sherbondy and the Spokes Team
 
+## Uploading the Site to Amazon
+
+The site is currently hosted statically on S3.
+I've been using s3cmd to sync things.
+Here's the command I made up:
+
+    s3cmd sync --acl-public --recursive --guess-mime-type ~/code/spokes/resources/public/* s3://www.spokesamerica.org/
+
 
 ## Meditations and Contemplations
 

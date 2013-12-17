@@ -34,7 +34,7 @@
     (spit (str static-home url) html))
   (println "done"))
 
-(emit-static-site)
+;; (emit-static-site)
 
 (defn -main [& args]
   (emit-static-site)
@@ -45,4 +45,4 @@
   (http/run-server app {:port 8000})
   (println "Awaiting changes..."))
 
-(-main)
+;; (-main)

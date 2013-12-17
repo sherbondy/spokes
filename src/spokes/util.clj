@@ -6,10 +6,10 @@
   ([name] (font name nil))
   ([name weights] (font name weights []))
   ([name weights styles]
-     (let [styled-weights 
+     (let [styled-weights
            (for [weight weights style (conj styles "")]
              (str weight style))]
-       (str (str/replace name " " "+") 
+       (str (str/replace name " " "+")
             (if weights
               (str ":" (str/join "," styled-weights)))))))
 
@@ -22,11 +22,11 @@
                      (str/join "|" (apply fonts faces)))}])
 
 (defn hyphenate [name]
-  (str/lower-case (-> name 
+  (str/lower-case (-> name
                       (str/replace #"\s+" "-")
                       (str/replace #"[\(\)]" ""))))
 
-(defn cond-class 
+(defn cond-class
   "Returns a string of class names separated by spaces.
    default is returned regardless of the conditions.
    Conditions is a sequence of [condition value] pairs,

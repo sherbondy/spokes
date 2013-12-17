@@ -8,16 +8,16 @@
 (def courses
   [
    {:title "The Algorithmic Beauty of Plants"
-    :description 
+    :description
     (str
-      "Do you like computers, plants, or art? "
-      "How about the intersection of all three?\n\n"
-     
-      "In this course, we explore the recursive structure of plants "
-      "and learn how to make pretty pictures of trees, flowers, and "
-      "abstract fractal-like patterns using a clever technique called "
-      "L-systems. Everyone will have a chance to create their own "
-      "computer-generated works of art inspired by life.")
+     "Do you like computers, plants, or art? "
+     "How about the intersection of all three?\n\n"
+
+     "In this course, we explore the recursive structure of plants "
+     "and learn how to make pretty pictures of trees, flowers, and "
+     "abstract fractal-like patterns using a clever technique called "
+     "L-systems. Everyone will have a chance to create their own "
+     "computer-generated works of art inspired by life.")
     :image "/img/courses/abop.jpg"},
 
    {:title "EyeWire: A game to map the brain"
@@ -31,20 +31,20 @@
      "reconstructions of brain tissue. To do this task, players \"spot check\" "
      "computer algorithms, with the ultimate goal of obtaining a connectivity "
      "map with synaptic-scale resolution of the \"connectome.\"\n\n"
-     
+
      "In the class, everyone will have a chance to build part of a "
      "never-before-been-seen neuron, and will get to build part of the "
      "brain in LEGOs! For more information, check out: "
      "[EyeWire.org](http://eyewire.org) and the "
      "[Connectome TEDTalk](http://www.ted.com/talks/sebastian_seung.html)")
     :image "/img/courses/eyewire.jpg"}
-   
+
    {:title "The Heliostat"
-    :description 
+    :description
     (str
       "Through assembling the Helios heliostat, students will "
       "learn the following fundamental engineering skills: \n\n"
-     
+
       "* __Mechanical Engineering__: They will learn how to build "
         "mechanical assembly's, the importance of tensioning and "
         "aligning belts in a drive train, how to create and use a "
@@ -60,7 +60,7 @@
    {:title "How to Build Tasty Foods: Inside, for free!"
     :description
     (str
-      "Don't you wish you know how to make your own delicious food? " 
+      "Don't you wish you know how to make your own delicious food? "
       "With a few old plastic gutters, a handful of plant seeds and a "
       "bit of daily care, you will grow your own veggies in no-time! "
       "Add in a few quick and easy recipes, and you will be the most "
@@ -78,7 +78,7 @@
       "behind the music we love and how to take a scientific "
       "approach to solving its mysteries."),
     :image "/img/courses/music.jpg"},
-   
+
    {:title "Pursuing your Passion"
     :description
     (str
@@ -86,7 +86,7 @@
      "mechanical engineering, music, and more, we hope that your "
      "brain will be buzzing with cool projects you could work on. "
      "The best way to learn, after all, is by doing something you love.\n\n"
-     
+
      "Over the course of a few hours, we'll go over three key steps "
      "to starting your project:\n"
 
