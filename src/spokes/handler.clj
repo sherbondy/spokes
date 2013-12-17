@@ -38,10 +38,10 @@
 
 (defn -main [& args]
   (emit-static-site)
-  (watcher ["src/"]
+  (watcher ["src/spokes/"]
            (rate 50)
            (file-filter (extensions :clj))
-           (on-change #(emit-static-site)))
+           (on-change emit-static-site))
   (http/run-server app {:port 8000})
   (println "Awaiting changes..."))
 

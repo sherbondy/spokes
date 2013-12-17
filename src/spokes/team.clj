@@ -1,7 +1,13 @@
 (ns spokes.team)
 
 (def team
-  [{:name "Claire O'Connell"
+  [{:name "Evan Gastman"
+    :bio (str "I am a social 2016!"
+          )
+    :school "Harvard"
+    :grad-year 2017}
+
+   {:name "Claire O'Connell"
     :bio (str "Claire is a graduating junior at MIT studying Brain & Cognitive Science. "
               "She was born in England, lived in France until the age of 8 when she moved "
               "to Palo Alto, CA, where she lived until leaving for MIT . She is a dual citizen "
