@@ -3,24 +3,28 @@
         compojure.core)
   (:require [compojure.route :as route]
             [org.httpkit.server :as http]
+            [clojure.tools.namespace.repl :as ns]
             [ring.middleware.reload :as reload]
-            [spokes.views :refer [channel error home mentor route]]))
+            [spokes.team :as t]
+            [spokes.views :as v]))
+
+(def stop-server-fn (atom nil))
 
 (def all-routes
   [{:url "/index.html"
-    :html (home)}
+    :html-fn v/home}
    {:url "/route.html"
-    :html (route)}
+    :html-fn v/route}
    {:url "/apply.html"
-    :html (mentor)}
+    :html-fn v/mentor}
    {:url "/channel.html"
-    :html (channel)}
+    :html-fn v/channel}
    {:url "/error.html"
-    :html (error)}])
+    :html-fn v/error}])
 
 (defroutes static-routes
   (route/resources "/")
-  (route/not-found (:html (last all-routes))))
+  (route/not-found ((:html-fn (last all-routes)))))
 
 (def app (-> static-routes
              (reload/wrap-reload)))
@@ -30,19 +34,40 @@
 
 (defn emit-static-site []
   (println "Emitting static site to: " static-home)
-  (doseq [{:keys [url html]} all-routes]
-    (spit (str static-home url) html))
+  (println (first t/team))
+  (doseq [{:keys [url html-fn]} all-routes]
+    (spit (str static-home url)
+          (html-fn)))
   (println "done"))
 
-;; (emit-static-site)
+(declare start)
+(declare stop)
 
-(defn -main [& args]
-  (emit-static-site)
-  (watcher ["src/spokes/"]
+(defn refresh-and-restart []
+  (stop)
+  (println "Refreshing clojure source files...")
+  (ns/refresh :after 'spokes.handler/start))
+
+(defn watch-for-changes []
+  (println "Awaiting changes...")
+  (watcher ["src/"]
            (rate 50)
            (file-filter (extensions :clj))
-           (on-change emit-static-site))
-  (http/run-server app {:port 8000})
-  (println "Awaiting changes..."))
+           (on-change refresh-and-restart)))
+
+(defn start []
+  (emit-static-site)
+  (reset! stop-server-fn
+          (http/run-server app {:port 8000}))
+  (watch-for-changes))
+
+(defn stop []
+  (println "Stopping the server...")
+  (@stop-server-fn))
+
+;;(refresh-and-restart)
+
+(defn -main [& args]
+  (start))
 
 ;; (-main)

@@ -21,6 +21,9 @@ To play around, do:
 
     lein repl
 
+To reload the site after making changes, do (from inside the repl):
+    (refresh-and-restart)
+
 ## License
 
 Copyright © 2013 Ethan Sherbondy and the Spokes Team
@@ -28,10 +31,12 @@ Copyright © 2013 Ethan Sherbondy and the Spokes Team
 ## Uploading the Site to Amazon
 
 The site is currently hosted statically on S3.
-I've been using s3cmd to sync things.
+I've been using [s3cmd][3] to sync things.
 Here's the command I made up (change ~/code/ to wherever you have the site stored on your computer):
 
     s3cmd sync --acl-public --recursive --guess-mime-type ~/code/spokes/resources/public/* s3://www.spokesamerica.org/
+
+[3]: http://s3tools.org/s3cmd
 
 
 ## Meditations and Contemplations
@@ -58,10 +63,10 @@ Setup:
   - Simple Compojure server. Could honestly just generate
     static pages for most of the site.
   - Less.js (bootstrap) for stylesheet sanity, see: `/resources/boostrap/less/spokes.less`.
-  - To compile the css, do: `make bootstrap` from inside the bootstrap directory. Or [`watch make bootstap`][3] if you're feeling fancy.
+  - To compile the css, do: `make bootstrap` from inside the bootstrap directory. Or [`watch make bootstap`][4] if you're feeling fancy.
   - Hiccup for templates. Would be happy to try Enlive too.
 
-[3]: https://github.com/visionmedia/watch
+[4]: https://github.com/visionmedia/watch
 
 Typefaces:
   - A nice cursive script for the logo?

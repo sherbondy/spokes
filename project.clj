@@ -5,6 +5,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/data.json "0.2.2"]
                  [org.clojure/data.zip "0.1.1"]
+                 [org.clojure/tools.namespace "0.2.4"]
 
                  [compojure "1.1.5"]
                  [clj-time "0.4.4"]
