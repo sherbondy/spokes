@@ -8,27 +8,18 @@
    ;;  :school "Harvard"
    ;;  :grad-year 2017}
 
-   {:name "Claire O'Connell"
-    :bio (str "Claire is a graduating junior at MIT studying Brain & Cognitive Science. "
-              "She was born in England, lived in France until the age of 8 when she moved "
-              "to Palo Alto, CA, where she lived until leaving for MIT . She is a dual citizen "
-              "of the UK and Canada, and now calls her \"home-base\" Shanghai, China, where "
-              "her parents moved in 2010. She is currently working as the director of educational "
-              "outreach at [EyeWire](http://eyewire.org), a citizen science initiative that she cofounded during January of 2011. "
-              "In her spare time, she loves running with her teammates on the MIT cross country "
-              "and track teams, competing in the 3k steeplechase, and traveling absolutely anywhere! "
-              "She believes that there is a profound connection between education and cognition, "
-              "and aims to spend her life discovering that connection and using it to change global education. "
-              "And she loves smiley faces. A lot. :)")
-    :school "MIT"
-    :grad-year 2013}
+   {:name "Evan Gastman"
+    :bio (str "I am a freshman at Harvard studying Computer Science. "
+              "Bragging rights: Covered over 30,000 km of ground travel across China, Laos, Cambodia, "
+              "Thailand and India this past year."
+              "Beliefs: There is virtually nothing that is impossible.")
+    :school "Harvard"
+    :grad-year 2017}
 
-   {:name "Ethan Sherbondy"
-    :bio (str "I'm a Junior studying Computer Science at MIT. I love plants, "
-              "honeybees, and computer graphics. I made the website that you're "
-              "staring at right now. I am ceaselessly amazed by the power of "
-              "the Internet and the World Wide Web to spread information and "
-              "connect people.\n\n"
+   {:name "Sam Green"
+    :bio (str "I am a freshman studying Computer Science at Harvard."
+              "Bragging rights: headed the Philippian, a paper #2 only to the Exonian."" honeybees, and computer graphics. I made the website that you're "
+              "I'm planning on doing big things.\n\n"
 
               "I grew up surrounded by trees in Raleigh, North Carolina. "
               "I've been writing software since I was a wee lad, and I hope to "
